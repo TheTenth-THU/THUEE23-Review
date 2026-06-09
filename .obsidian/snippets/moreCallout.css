@@ -1,0 +1,73 @@
+.callout {
+    --callout-radius: 2px;
+    --link-color: color-mix(in srgb, rgb(var(--callout-color)) 80%, black 20%);
+    --link-color-hover: color-mix(in srgb, rgb(var(--callout-color)) 80%, white 20%);
+    --link-external-color: color-mix(in srgb, rgb(var(--callout-color)) 80%, black 20%);
+    --link-external-color-hover: color-mix(in srgb, rgb(var(--callout-color)) 80%, white 20%);
+    --bold-color:rgb(var(--callout-color));
+    border-left: solid 4px rgb(var(--callout-color));
+}
+.callout {
+    padding: 0;
+    background-color:var(--admonition-bg-color);
+}
+
+.callout[data-callout] {
+    --callout-type: attr(data-callout);
+}
+.callout[data-callout="definition"], .callout[data-callout="def."] {
+    --callout-type: "def.";
+    --callout-color: 51, 153, 199;
+    --callout-icon: variable;
+}
+.callout[data-callout="theorem"], .callout[data-callout="thm."] {
+    --callout-type: "thm.";
+    --callout-color: 217, 51, 120;
+    --callout-icon: square-equal;
+}
+.callout[data-callout="algorithm"], .callout[data-callout="algo."] {
+    --callout-type: "algo.";
+    --callout-color: 116, 199, 216;
+    --callout-icon: cpu;
+}
+.callout[data-callout="words"] {
+    --callout-color: 179, 208, 12;
+    --callout-icon: book-a;
+}
+.callout[data-callout="example"], .callout[data-callout="e.g."] {
+    --callout-type: "e.g.";
+}
+
+.callout .callout-title {
+    padding: 6px;
+    background-color: rgba(var(--callout-color), 0.25);
+    font-weight: 1000;
+}
+.callout .callout-title .callout-title-inner::before {
+    content: var(--callout-type);
+    margin-right: 0.5rem;
+    font-family: "Script MT";
+    font-weight: 100;
+    text-transform: capitalize;
+    /* text-decoration-line: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px; */
+}
+
+.callout-content {
+    padding: 5px 15px;
+}
+.callout .callout-content {
+    background-color: rgba(var(--callout-color), 0.1);
+}
+
+
+.callout mjx-mstyle[style="border: 1.5px solid initial;"] {
+    background-color: color-mix(in srgb, rgb(var(--callout-color)) 10%, rgba(255, 255, 255, 0) 90%);
+    border: 1.5px solid rgb(var(--callout-color)) !important;
+    color: rgb(var(--callout-color));
+}
+
+.callout thead tr > th {
+    background-color: color-mix(in srgb, rgb(var(--callout-color)) 10%, rgba(255, 255, 255, 0) 90%) !important;
+}

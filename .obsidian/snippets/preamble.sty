@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%% 分式 %%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\frac}[2]{\mathchoice{\genfrac{}{}{}{1}{\displaystyle #1}{\displaystyle #2}}{\genfrac{}{}{}{1}{\textstyle #1}{\textstyle #2}}{\genfrac{}{}{}{2}{\scriptstyle #1}{\scriptstyle #2}}{\genfrac{}{}{}{3}{\scriptscriptstyle #1}{\scriptscriptstyle #2}}}
+\renewcommand{\dfrac}[2]{\genfrac{}{}{}{1}{\textstyle #1}{\textstyle #2}}
+\renewcommand{\tfrac}[2]{\genfrac{}{}{}{2}{\scriptstyle #1}{\scriptstyle #2}}
+\renewcommand{\binom}[2]{\genfrac(){0pt}{1}{\textstyle #1}{\textstyle #2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 微积分符号 %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\Dif}{\mathop{}\!\mathrm{D}}
+\newcommand{\dint}{{\displaystyle\int}}
+\renewcommand{\binom}[2]{\left(\begin{array}{c}#1 \\ #2\end{array}\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% 向量符号 %%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{physics}
+\usepackage{dutchcal}   % 引入小写花体字母
+% \newcommand{\v}[1]{\va*{#1}}
+\newcommand{\v}[1]{\vec{\boldsymbol{#1}}}
+% \newcommand{\v}[1]{{\boldsymbol{#1}}}
+% \newcommand{\v}[1]{\overrightarrow{#1}}
+% \renewcommand{\vu}[1]{\vu*{#1}}
+\renewcommand{\vu}[1]{\hat{\boldsymbol{#1}}}
+% \newcommand{\vu}[1]{\hat{\boldsymbol{#1}}}
+\newcommand{\vr}{\v{r}}
+\newcommand{\vv}{\v{v}}
+\newcommand{\vs}[1]{\v{\mathcal{#1}}}
+\newcommand{\vsr}[1]{\v{\mathscr{#1}}}
+\newcommand{\sr}{\mathscr{r}}
+\newcommand{\t}[1]{\tilde{#1}}
+\newcommand{\cpq}[1]{\t{#1}}
+\newcommand{\cpv}[1]{\t{\v{#1}}}
+\renewcommand{\bra}[1]{\left\langle #1 \right|}
+\renewcommand{\ket}[1]{\left| #1 \right\rangle}
+\newcommand{\braket}[1]{\left\langle #1 \right\rangle}
+\newcommand{\idots}{.\!{}^{\,\displaystyle{}.}\!{}^{\,\displaystyle{}^{\displaystyle{}.}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% 字形标记 %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rmu}[1]{\mathop{}\!\mathrm{#1}}
+\newcommand{\I}{\mathbb{i}}
+\newcommand{\J}{\mathbb{j}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\dj}{\mathop{}\!\unicode{273}}  
+\newcommand{\dbar}{\dj}
+\renewcommand{\Re}{\mathop{}\!\mathrm{Re}}
+\renewcommand{\Im}{\mathop{}\!\mathrm{Im}}
+\renewcommand{\mid}[1][]{\mathop{#1|}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% 箭头符号 %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% 文本标记 %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mark}[1]{\bbox[5pt, border:1.5px solid]{#1}}
+\newcommand{\Sa}{\mathop{\mathrm{Sa}}\nolimits}
+\newcommand{\sinc}{\mathop{\mathrm{sinc}}\nolimits}
+\newcommand{\sgn}{\mathop{\mathrm{sgn}}\nolimits}
+\newcommand{\tr}{\mathop{\mathrm{tr}}\nolimits}
+\newcommand{\const}{\mathop{\mathrm{const}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% 关系符号 %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\join}{\mathop{\Join}\limits}
+\newcommand{\ojoin}{\mathop{\mathrm{⟗}}\limits}
+\newcommand{\fojoin}{\ojoin}
+\newcommand{\lojoin}{\mathop{\mathrm{⟕}}\limits}
+\newcommand{\rojoin}{\mathop{\mathrm{⟖}}\limits}
+

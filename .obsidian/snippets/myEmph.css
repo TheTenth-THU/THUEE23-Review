@@ -1,0 +1,314 @@
+body {
+    --bold-color:var(--color-accent);
+    --bold-weight:700;
+    --h1-weight:700;
+    --h2-weight:700;
+    --h3-weight:700;
+    --h4-weight:700;
+    --h5-weight:700;
+    --h6-weight:700;
+    --h1-color:var(--color-accent);
+    --h2-color:var(--color-accent);
+    --h3-color:var(--color-orange);
+    --h4-color:var(--color-purple);
+    --h5-color:var(--color-yellow);
+    --h6-color:var(--color-green);
+    --h1-line-height: 1.2;
+    --h2-line-height: 1.2;
+    --h3-line-height: 1.2;
+    --h4-line-height: 1.2;
+    --h5-line-height: var(--line-height-normal);
+    --h6-line-height: var(--line-height-normal);
+    --h1-size: 2em;
+    --h2-size: 1.6em;
+    --h3-size: 1.25em;
+    --h4-size: 1.15em;
+    --h5-size: 1.1em;
+    --h6-size: 1.1em;
+    --table-header-size: 0.9em;
+    --table-text-size: 0.9em;
+    --link-decoration: underline;
+    --link-color: color-mix(in srgb, var(--color-accent) 80%, black 20%);
+    --link-external-decoration: underline;
+    --link-external-color: color-mix(in srgb, var(--color-accent) 80%, black 20%);
+    --callout-default: 12, 181, 79;
+    --p-spacing: 0.15rem !important;
+    --p-parskip: 0.5rem;
+    --dialog-width: 1000px;
+    text-autospace: normal;
+}
+
+/* body {
+    --font-text-override: "CMU Serif", "HarmonyOS Sans Condensed", "EB Garamond", "思源宋体 CN", "HarmonyOS Sans SC"; 
+    --font-print-override: "CMU Serif", "HarmonyOS Sans Condensed", "EB Garamond", "思源宋体 CN", "HarmonyOS Sans SC"; 
+    --font-monospace-override: Iosevka, 霞鹜新晰黑; 
+} */
+
+mjx-c.TEX-T {
+    font-family: var(--font-monospace);
+}
+
+div.cm-line span.cm-strong {
+	color: var(--bold-color) !important;
+	font-weight: var(--bold-weight)!important;
+}
+div p strong {
+	color: var(--bold-color) !important;
+	font-weight: var(--bold-weight)!important;
+}
+
+/* .markdown-source-view.mod-cm6 .cm-content > .internal-embed.image-embed{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    &:hover::after {
+        content: attr(alt);
+        font-size: 0.8em;
+        display: block;
+        position: absolute;
+        background-color: var(--background-primary);
+        border: 1px solid var(--color-base-30);
+        border-radius: var(--size-2-2);
+        padding: 0.5em;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+} */
+
+/* .markdown-preview-view.mod-cm6 > .internal-embed.image-embed{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+} */
+
+/* .internal-embed.image-embed{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+} */
+
+img {
+    border-radius: 10px 0 10px 0;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+}
+
+.theme-dark img {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.image-captions-enabled .image-embed[alt]::after {
+    content: "Fig. " attr(alt) !important;
+}
+
+
+.markdown-source-view.mod-cm6 .cm-lineNumbers .cm-gutterElement.cm-active {
+    color: var(--color-accent) !important; /* 高亮行号 */
+    font-size: 14px; /* 光标所在行行号字号 */
+    font-weight: bold; /* 光标所在行行号 */
+    border-left: 2px solid var(--color-accent); /* 添加竖线 */
+    background-color: color-mix(in srgb, var(--color-accent) 15%, var(--background-primary) 85%)
+}
+.markdown-source-view.mod-cm6 .cm-line.cm-active {
+    background-color: color-mix(in srgb, var(--color-accent) 15%, var(--background-primary) 85%)
+}
+
+
+div.el-h1:has(> h1) {
+    margin-top: 28px !important;
+}
+
+div.el-h2:has(> h2)::before {
+    content: "◤";
+    margin: 0 0.2em 0 0;
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+    color: var(--h2-color);
+}
+div.el-h2:has(> h2) {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+}
+
+div.el-h3:has(> h3)::before {
+    content: "■ ";
+    margin: 0 0.5em 0 0;
+    font-size: var(--h3-size);
+    font-weight: var(--h3-weight);
+    color: var(--h3-color);
+}
+div.el-h3:has(> h3) {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-top: 0.3rem;
+}
+
+div.el-h4:has(> h4)::before {
+    content: "▶ ";
+    margin: 0 0.5em 0 0;
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    color: var(--h4-color);
+}
+div.el-h4:has(> h4) {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-top: 0.2rem;
+}
+
+.callout {
+    margin: 0.4rem 0 !important;
+    --p-parskip: 0.25rem;
+}
+.callout-content {
+    padding: 10px 10px !important;
+}
+.callout-content hr {
+    margin: .75em 0 !important;
+}
+.callout-content p {
+    margin: var(--p-parskip) 0 !important;
+}
+.callout-content ol, .callout-content ul {
+    margin-top: calc(var(--list-spacing) - var(--p-parskip)) !important;
+    margin-bottom: var(--p-parskip) !important;
+}
+.math-block > mjx-container {
+    margin: 0.2rem 0 !important;
+    padding: 0.2rem 0 !important;
+}
+
+thead tr > th {
+    background-color: color-mix(in srgb, var(--color-accent) 20%, rgba(255, 255, 255, 0) 80%) !important;
+    vertical-align: bottom;
+}
+thead tr > th .table-cell-wrapper {
+    align-content: end;
+}
+tbody tr > td {
+    vertical-align: middle;
+}
+tbody tr > td .table-cell-wrapper {
+    align-content: center;
+}
+
+.markdown-source-view p, .markdown-preview-view p {
+    margin: var(--p-parskip) 0;
+}
+.markdown-source-view :not(li) > ol:not(:first-child), 
+.markdown-preview-view :not(li) > ol:not(:first-child),
+.markdown-source-view :not(li) > ul:not(:first-child), 
+.markdown-preview-view :not(li) > ul:not(:first-child) {
+    margin-top: calc(var(--list-spacing) - var(--p-parskip)) !important;
+    margin-bottom: var(--p-parskip) !important;
+}
+.markdown-source-view li p, .markdown-preview-view li p,
+.markdown-source-view ol:first-child, .markdown-preview-view ol:first-child,
+.markdown-source-view ul:first-child, .markdown-preview-view ul:first-child {
+    margin: 0 !important;
+}
+
+.markdown-source-view ol > li, .markdown-preview-view ol > li, 
+.markdown-source-view ul > li, .markdown-preview-view ul > li {
+    margin-left: 2em !important;
+}
+.markdown-source-view ol, .markdown-preview-view ol {
+    list-style-position: inside;
+}
+.markdown-source-view ol > li, .markdown-preview-view ol > li {
+    list-style-type: decimal;
+    text-indent: -1em;
+}
+.markdown-source-view ol > li::marker, .markdown-preview-view ol > li::marker {
+    font-weight: var(--bold-weight);
+    color: var(--bold-color);
+}
+
+a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.05em;
+}
+.cm-s-obsidian span.cm-hmd-internal-link:hover {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.05em;
+}
+
+mjx-mstyle[style="border: 1.5px solid initial;"] {
+    background-color: color-mix(in srgb, var(--color-accent) 20%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 5px;
+    border: 1.5px solid var(--color-accent) !important;
+    color: var(--color-accent);
+}
+
+mjx-mstyle[style="border: 1.5px solid initial;"] > mjx-mpadded > mjx-block {
+    width: auto !important;
+    padding-right: 1em;
+}
+
+div.math-block mjx-mstyle:first-child[style="border: 1.5px solid initial;"] > mjx-mpadded > mjx-block {
+    width: auto !important;
+    padding-left: 1em;
+    padding-right: 2em;
+}
+
+.tab-list.svelte-1v1mbat {
+    flex-wrap: nowrap;
+    display: flex;
+}
+
+button {
+    margin: 2pt 0pt;
+    padding: 4pt 8pt;
+    font-family: var(--font-text);
+}
+.ͼ1 button.cm-button, .ͼ2 button.cm-button, 
+.ͼ1.ͼ2 button.cm-button {
+    color: var(--text-color);
+    font-size: var(--font-ui-small);
+    border-radius: var(--button-radius);
+    padding: var(--size-4-1) var(--size-4-3);
+    background-color: var(--interactive-normal) !important;
+    background-image: none !important;
+}
+.ͼ1 .cm-panel.cm-search label {
+    display: inline-flex;
+    align-items: center;
+}
+
+div.svelte-u6nqd > span {
+    display: inline-flex;
+    align-items: center;
+}
+select.svelte-1hf8c86.svelte-1hf8c86 {
+    font-size: var(--vault-profile-font-size) !important;
+    font-weight: var(--bold-weight) !important;
+    margin-bottom: 5pt;
+}
+
+.cm-tooltip-cursor.cm-tooltip.cm-tooltip-below:has(> mjx-container[display="true"]) {
+    visibility: hidden;
+}
+
+.markdown-rendered pre {
+    margin: var(--p-parskip) 0em !important;
+}
+
+mjx-merror[data-mjx-error]::before {
+    content: attr(data-mjx-error);
+    color: var(--color-red);
+    background-color: var(--background-secondary) !important;
+    font-size: 1em;
+    font-family: var(--font-monospace);
+    font-weight: bold;
+    font-style: italic;
+    display: block;
+    margin: 1rem;
+}
+
+mjx-merror[data-mjx-error] mjx-mtext {
+    display: none !important;
+}

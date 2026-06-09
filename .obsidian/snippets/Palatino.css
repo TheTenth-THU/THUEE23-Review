@@ -1,0 +1,61 @@
+/* TeX Gyre Pagella Math */
+
+mjx-mn.mjx-n, mjx-mi.mjx-n, mjx-mtext.mjx-n {
+    font-family: "TeX Gyre Pagella Math", "Palatino Linotype", MJXZERO, MJXTEX !important;
+    margin-top: -0.35em;
+}
+
+mjx-utext {
+    font-family: var(--font-text-override) !important;
+}
+
+mjx-mtext mjx-c::before {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    margin-left: 0rem !important;
+    margin-right: 0rem !important;
+    font-family: var(--font-text-override) !important;
+    width: auto !important;
+}
+mjx-mtext mjx-c.mjx-c20::before {
+    width: 0.16rem !important;
+}
+
+mjx-mi.mjx-var {
+    font-family: "TeX Gyre Pagella Math", MJXZERO, MJXTEX !important;
+    margin-top: -0.35em;
+}
+
+mjx-mi.mjx-i mjx-c.TEX-I::before {
+    font-style: italic !important;
+    font-family: "Palatino Linotype", "TeX Gyre Pagella Math", MJXZERO, MJXTEX !important;
+    margin-top: -0.35em;
+}
+
+mjx-mi.mjx-b mjx-c.TEX-B::before {
+    font-weight: bold !important;
+    font-family: "Palatino Linotype", "TeX Gyre Pagella Math", MJXZERO, MJXTEX !important;
+    margin-top: -0.35em;
+}
+
+mjx-mi.mjx-b.mjx-i mjx-c.TEX-BI::before {
+    font-style: italic !important;
+    font-weight: bold !important;
+    font-family: "Palatino Linotype", "TeX Gyre Pagella Math", MJXZERO, MJXTEX !important;
+    margin-top: -0.35em;
+}
+
+mjx-mi.mjx-sc.mjx-i mjx-c.TEX-SC {
+    /* font-weight: bold; */
+    font-family: "Lucida Calligraphy" !important;
+}
+
+mjx-mtext.mjx-i mjx-c.TEX-I::before {
+    font-style: italic !important;
+    margin-top: -0.35em;
+}
+
+mjx-mtext.mjx-b mjx-c.TEX-B::before {
+    font-weight: bold !important;
+    margin-top: -0.35em;
+}
