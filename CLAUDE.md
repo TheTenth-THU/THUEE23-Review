@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. 
 
 ## 项目概述
 
@@ -164,10 +164,11 @@ $$
 ### 标点与语言
 
 - 中文文档使用全角标点：`，` `。` `：` `；` `、`
-- 并列中文项用顿号 `、`，不用逗号
 - 英文文档使用英文标点，即使括号内夹杂中文
+- 公式前后与中文之间至少一个空格，而英文与中文之间可不留空格（渲染结果会自动留空），但加粗块另论：
+  - 正例：「$\mathcal{F}(\cdot)$ 称为 **Fourier变换**，由Fourier于1822年提出。」
+  - 反例：「$\mathcal{F}(\cdot)$称为**Fourier 变换**，由 Fourier 于 1822年 提出。」（必要的空格被省略，导致渲染后词语粘连）
 - 避免口语化感叹词、主观评价、emoji
-- 中文文档中括号内的简短英文不加额外空格：`Fourier 变换（FT）`
 
 ### 章节结构惯例
 
