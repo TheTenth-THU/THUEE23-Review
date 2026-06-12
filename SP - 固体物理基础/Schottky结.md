@@ -21,7 +21,7 @@
 > $$
 > 半导体侧的**内建电势**（能带弯曲量）为 $V_{\mathrm{bi}} = W_{\mathrm{m}} - W_{\mathrm{s}} = \phi_{\mathrm{Bn}} - (E_{\mathrm{c}} - E_{\mathrm{F}})$。
 
-对于 _p_ 型半导体，势垒高度为 $\phi_{\mathrm{Bp}} = E_{\mathrm{g}} / q + \chi - W_{\mathrm{m}}$，方向与 _n_ 型相反。
+对于 _p_ 型半导体，势垒高度为 $\phi_{\mathrm{Bp}} = E_{\mathrm{g}} + \chi - W_{\mathrm{m}}$（单位为能量），方向与 _n_ 型相反。
 
 ### 耗尽层特性
 
