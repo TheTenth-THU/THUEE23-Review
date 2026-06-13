@@ -225,5 +225,5 @@ $$
 
 - LaTeX 公式在 Markdown 中的正确性需在 Obsidian 中验证，不能仅靠源码检查
 - 各课程的原始 PDF 教材、讲义等存放在 `raw/` 子目录下，可通过 pdf-mcp 工具直接阅读
-- `.tex` 文件中的 tikz 绘图无法直接转换为 Markdown，需截图后放入 `res/`
+- `.tex` 文件中的 tikz 绘图可直接转换为 Markdown `tikz` 代码块
 - 在编辑 `.md` 文件时，避免使用 Obsidian 不支持的 LaTeX 包（如 `nicematrix`、`tcolorbox` 等）
