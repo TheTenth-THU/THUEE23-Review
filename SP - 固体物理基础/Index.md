@@ -16,7 +16,8 @@ longform:
       - 固体间接触的电特性
     - 固体的热特性
     - 固体的磁特性
-  ignoredFiles: []
+  ignoredFiles:
+    - 
 ---
 
 ## 课程内容
