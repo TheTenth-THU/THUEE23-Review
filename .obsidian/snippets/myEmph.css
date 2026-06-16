@@ -83,11 +83,12 @@ div p strong {
     align-items: center !important;
 } */
 
-/* .internal-embed.image-embed{
+.internal-embed.image-embed{
+    width: 100% !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-} */
+}
 
 img {
     border-radius: 10px 0 10px 0;
