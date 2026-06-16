@@ -1,0 +1,3196 @@
+\documentclass[10pt, a4paper, oneside, fontset=none]{ctexart}
+%调用宏包
+\usepackage{amsmath, amsthm, amssymb, graphicx, mathrsfs}
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]{hyperref}
+\usepackage{color, framed, geometry, tcolorbox, nicematrix}
+\tcbuselibrary{breakable}%box跨页
+\tcbuselibrary{skins}%box跨页不留边
+\usepackage{makecell, booktabs}
+\usepackage[labelfont={bf}]{caption}
+\usepackage{multicol}
+\usepackage{extarrows}
+\usepackage{yhmath}
+\usepackage[text=\includegraphics{C:/Users/16870/.vscode/LaTeX_Application/tex/23Au/图标简稿.png},angle=0]{draftwatermark}%水印
+%\usepackage{tikz}
+%基本字体设置
+\setCJKmainfont{方正书宋_GBK}[BoldFont={思源宋体 CN Bold}, ItalicFont=方正楷体_GBK, BoldItalicFont={思源宋体 CN Bold}]
+\setCJKsansfont{方正黑体_GBK}[BoldFont={方正黑体_GBK}, ItalicFont={方正颜真卿楷书 简繁}]
+\setCJKmonofont{思源宋体 CN}
+%附加字体设置
+\newCJKfontfamily{\kaico}{可口可乐在乎体 楷体}
+\newCJKfontfamily{\kai}{方正楷体_GBK}[BoldFont={汉仪润圆-75W}, ItalicFont={方正清刻本悦宋 简繁}, BoldItalicFont={方正颜真卿楷书 简繁}]
+\newCJKfontfamily{\yan}{方正清刻本悦宋 简繁}[ItalicFont={方正颜真卿楷书 简繁}]
+\newCJKfontfamily{\xiu}{方正宋刻本秀楷_GBK}[ItalicFont={方正宋刻本秀楷_GBK}, BoldFont={方正颜真卿楷书 简繁}]
+\newCJKfontfamily{\run}{汉仪润圆-45W}[BoldFont=汉仪润圆-75W, ItalicFont={汉仪润圆-45W}]
+\newCJKfontfamily{\wen}{汉仪文黑-45W ExtraLight}[BoldFont={汉仪文黑-75W Bold}, ItalicFont={汉仪文黑-85W Heavy}]
+%文档格式
+\geometry{left=2.54cm, right=2.54cm, top=3.18cm, bottom=3.18cm}
+\linespread{1.4}
+\newcommand{\Section}[1]{ \refstepcounter{section} \section*{*\thesection\texorpdfstring{\quad}{} #1} \addcontentsline{toc}{section}{\makebox[0pt][r]{*}\thesection\texorpdfstring{\quad}{} #1} }
+\newcommand{\Subsection}[1]{ \refstepcounter{subsection} \subsection*{*\thesubsection\texorpdfstring{\quad}{} #1} \addcontentsline{toc}{subsection}{\makebox[0pt][r]{*}\thesubsection\texorpdfstring{\quad}{} #1} }
+\newcommand{\Subsubsection}[1]{ \refstepcounter{subsubsection} \subsubsection*{*\thesubsubsection\texorpdfstring{\quad}{} #1} \addcontentsline{toc}{subsubsection}{\makebox[0pt][r]{*}\thesubsubsection\texorpdfstring{\quad}{} #1} }
+%定理环境
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[subsection]
+\newtheorem{definition}{定义}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{proposition}[theorem]{命题}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{例}
+\newtheorem{circum}[theorem]{情形}
+
+\newenvironment{proofs}[1][\small\proofname]{\begin{pf}[breakable, enhanced jigsaw]\begin{proof}[#1]\small\kai}{\end{proof}\end{pf}}
+\newenvironment{solution}{\begin{proofs}[\small\textit{\yan 解}]\small\renewcommand{\qedsymbol}{$\circledS$}}{\end{proofs}}
+\renewcommand{\proofname}{\yan{证明}}
+%颜色命名
+\definecolor{meihong}{rgb}{0.85,0.2,0.47}
+\definecolor{bali}{rgb}{0.2,0.6,0.78}
+\definecolor{qinglv}{rgb}{0,0.35,0.32}
+%box环境
+\newtcolorbox[use counter=definition,number within=section]{defi}[2][]{colback=bali!5!white,colframe=bali!75!black,fonttitle=\sffamily\wen\bfseries,title=重要定义~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=theorem,number within=subsection]{theo}[2][]{colback=meihong!5!white,colframe=meihong!75!black,fonttitle=\sffamily\wen\bfseries,fontupper=\run,title=重要定理~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=definition,number within=section]{defil}[2][]{colback=bali!5!white,colframe=bali!75!black,fonttitle=\sffamily\wen\bfseries,label=#2,title=重要定义~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=theorem,number within=subsection]{theol}[2][]{colback=meihong!5!white,colframe=meihong!75!black,fonttitle=\sffamily\wen\bfseries,fontupper=\run,label=#2,title=重要定理~\thetcbcounter. #2,#1}
+\newtcolorbox[auto counter,number within=section]{note}[2][]{colback=qinglv!5!white,colframe=qinglv!75!black,fonttitle=\sffamily\wen\bfseries,title=注~\thetcbcounter. #2,#1}
+\newtcolorbox{prenote}[2][]{colback=qinglv!5!white,colframe=qinglv!75!black,fonttitle=\bfseries,title=#2,#1}
+\newtcolorbox{pf}[1][]{colback=black!5!white,colframe=white!75!black,#1}
+%\newcommand{\mybox}[1]{\tikz[baseline=(MeNode.base)]{\node[rounded corners, fill=gray!20](MeNode){#1};}}
+
+%定义格式记号
+\newcommand{\hang}[1][1em]{\hangafter 1 \hangindent #1 \noindent}
+\newcommand{\com}[1][0.3]{,\hskip0.8em\hskip-#1em}
+\newcommand{\btheo}{\begin{theo}}
+\newcommand{\etheo}{\end{theo}}
+\newcommand{\den}[2][]{\begin{defi}{#1}\kai #2\end{defi}}
+\newcommand{\din}[2][]{\begin{theo}{#1}\run #2\end{theo}}
+\newcommand{\de}[2][]{\begin{defil}{#1}\kai #2\end{defil}}
+\newcommand{\di}[2][]{\begin{theol}{#1}\run #2\end{theol}}
+\newcommand{\dep}[3][]{\begin{defi}{#1\page{#2}}\kai #3\end{defi}}
+\newcommand{\dip}[3][]{\begin{theo}{#1\page{#2}}\run #3\end{theo}}
+\newcommand{\zhu}[2][]{\begin{note}{#1}\xiu #2\end{note}}
+\newcommand{\colors}[1]{\color{#1!75!black}}
+\newcommand{\tboba}[1]{\textbf{\kai\color{bali!75!black}#1}}
+\newcommand{\mboba}[1]{\kai\boldsymbol{\color{bali!75!black}#1}}
+\newcommand{\tbome}[1]{\textbf{\run\color{meihong!75!black}#1}}
+\newcommand{\mbome}[1]{\run\boldsymbol{\color{meihong!75!black}#1}}
+%定义算符
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dint}[1][]{\displaystyle{\int #1}}
+\newcommand{\page}[1]{\hfill P$_\text{#1}$}
+%标题、作者、日期
+\title
+{
+	\textbf{高等微积分（1）}\textit{知识与方法}
+}
+\author{\zihao{5} T$^\text{T}$T整理自{\kai 邹文明}老师课堂\com {\kai 层筱缱琅}审定}
+\date{\zihao{5}\kai \today}
+%----------------------------------------------------------
+\begin{document}
+
+\maketitle
+\begin{multicols}{2}
+	\begin{flushleft}
+		\tableofcontents
+	\end{flushleft}
+\end{multicols}
+
+\begin{prenote}{\xiu \zihao{-4} 期末复习特别注意}
+	\hang \textbf{常见初等函数的导数表}\com 见于第~\pageref{Tab:1}~页表~\ref{Tab:1}；
+
+	\hang \textbf{常见函数的不定积分表}\com 见于第~\pageref{Tab:2}~页表~\ref{Tab:2}；
+
+	\hang \textbf{不定积分的换元法与分部积分法}\com 以及衍生出的一些特殊类型不定积分的求法\com 见于第~\pageref{不定积分的换元法与分部积分法1}—\pageref{不定积分的换元法与分部积分法2}~页；对应地\com \textbf{定积分的换元法与分部积分法}和\textbf{Newton-Leibniz公式}\com 以及衍生出的各种特殊定积分的求法\com 见于第~\pageref{微积分基本定理}—\pageref{定积分的分部与换元积分}~页；
+
+	\hang \textbf{积分形式的各不等式}\com 如三角不等式、Cauchy不等式、H\"older不等式、Minkowski不等式等\com 以及它们在放缩中的应用\com 见于第~\pageref{绝对值三角不等式的推广}~页等；
+
+	\hang \textbf{变限积分定义的函数求导法则}及其应用\com 见于第~\pageref{变限积分定义的函数求导}~页定理~\ref{变限积分定义的函数求导}；
+
+	\hang \textbf{定积分在几何与物理情景下的应用}\com 见于第~\pageref{定积分的应用1}—\pageref{定积分的应用2}~页；
+
+	\hang \textbf{所学范围内可解的各常微分方程的解法}\com 见于第~\pageref{常微分方程}—\pageref{所学}~页；
+\end{prenote}
+\begin{prenote}{\xiu \centering 勘误链接}
+	\begin{center}
+		\includegraphics[width=4cm]{TTT_ AdvancedCalculus(1)_QRCode.png}
+	\end{center}
+\end{prenote}
+%----------------------------------------------------------
+\newpage
+\section{数列极限}
+\subsection{数列极限的计算方法}
+\subsubsection{定义法}
+\dep[数列极限]{9}{
+	设$\{a_n\}$为一个数列\com 如果对$a\in \mathbb{R}_\infty$\com $\forall \varepsilon >0$\com $\exists N \in \mathbb{N}^*$\com 使得$\forall n>N$\com 都有$|a_n-a|<\varepsilon$\com 则称$\boldsymbol{\colors{bali}\lim\limits_{n\rightarrow \infty}a_n}=a$为$\{a_n\}$在$n \to \infty$时的\tboba{极限}。
+}
+用定义证明数列极限\com 关键是在固定$\varepsilon$时找到适当的$N$。当证明了一些简单的数列极限之后\com 就可以以其为桥梁\textsf{放缩}证明更复杂一些的数列极限。
+
+\begin{example}
+	求$\lim\limits_{n\to \infty} \dfrac{n^5}{2^n}$。
+\end{example}
+\begin{solution}
+	由$2^n=\sum\limits_{i=0}^{n}\binom{n}{i}$\com 在$n>6$时有$2^n>\binom{n}{6}$\com 即有
+	$$\frac{n^5}{2^n}<\frac{n^5}{~\dfrac{n(n-1)(n-2)(n-3)(n-4)(n-5)}{6!}~}<\frac{n^46!}{(n-5)^5}$$
+	当$n>10$时\com 进一步有$n-5>\dfrac{n}{2}$\com 有
+	\begin{equation*}
+		\frac{n^5}{2^n}<\frac{n^4 6!}{(n-5)^5}<\frac{n^4 6!~2^5}{n^5}=\frac{6!~2^5}{n}\qedhere
+	\end{equation*}
+\end{solution}
+
+\subsubsection{四则运算}
+在有意义的前提下\com 极限运算对四则运算均是可分配的。这种情况比较平凡\com 估计不会单独出现在考题中。
+\begin{example}\label{四则运算法则应用典例错解}
+	设$f$在$x=0$处可导\com $a_n\rightarrow 0^-\com b_n\rightarrow 0^+(n\rightarrow 0)$\com 求证：
+	$$\lim_{n\rightarrow \infty} \frac{f(b_n)-f(a_n)}{b_n-a_n}=f'(0)$$
+\end{example}
+\begin{proofs}[\yan 错证]
+	%\renewcommand{\qedsymbol}{$\circledS$}
+	由题\com 有
+	$$\lim_{n\rightarrow \infty} \frac{f(b_n)-f(0)}{b_n-0}=f'_+(0)=f'(0)$$
+	$$\lim_{n\rightarrow \infty} \frac{f(a_n)-f(0)}{a_n-0}=f'_-(0)=f'(0)$$
+	则
+	$$\lim_{n\rightarrow \infty} (f(b_n)-f(0))=f'(0)\lim_{n\rightarrow \infty}{b_n}$$
+	$$\lim_{n\rightarrow \infty} (f(a_n)-f(0))=f'(0)\lim_{n\rightarrow \infty}{a_n}$$
+	进而两式相减有
+	$$\lim_{n\rightarrow \infty} (f(b_n)-f(a_n))=f'(0)\lim_{n\rightarrow \infty}{(b_n-a_n)}$$
+	于是
+	\begin{equation*}
+		\lim_{n\rightarrow \infty} \frac{f(b_n)-f(a_n)}{b_n-a_n}=f'(0) \qedhere
+	\end{equation*}
+\end{proofs}
+
+这里出错的原因在于等式两边同乘同除了0（$\displaystyle{\lim_{n\rightarrow \infty}{a_n}=\lim_{n\rightarrow \infty}{b_n}=\lim_{n\rightarrow \infty}{(b_n-a_n)}=0}$）\com 导致等式已无意义。正确的做法见例~\ref{四则运算法则应用典例正解}。
+
+\subsubsection{定理证明}
+\dip[数列夹逼原理]{18}{
+	设$\{a_n\}$、$\{b_n\}$、$\{c_n\}$为数列\com 则$$
+	\left.
+	\begin{array}{l}
+		\text{\tbome{夹条件}：} a_n\le b_n \le c_n \\
+		\text{\tbome{逼条件}：} \lim\limits_{n\rightarrow \infty}a_n=\lim\limits_{n\rightarrow \infty}c_n=a\in \mathbb{R}_{\pm\infty}
+	\end{array}\right\}
+	\Rightarrow \lim_{n\rightarrow \infty}b_n=a$$
+}
+
+\dip[数列单调有界收敛定理]{26}{
+	单调递增（减）且有上（下）界的数列的极限一定存在且有限。
+}
+
+\dip[区间套定理]{28}{
+	设$I_n=[a_n\com b_n]$为一系列闭区间\com 且有$\forall n \in \mathbb{N}^*$\com $I_{n+1}\subset I_n$。如果这一系列闭区间的长度满足$\lim_{n\rightarrow\infty}|b_n-a_n|=0$\com 则他们的公共部分$\bigcup_{n=1}^\infty [a_n\com b_n]=\{c\}$\com 且$$\lim_{n\rightarrow \infty}{a_n}=\lim_{n\rightarrow \infty}{b_n}=c$$其中$c$为实数。
+}
+
+由夹逼定理可知\com 事实上\com 对任意满足$\alpha_n\in I_n$的数列$\{\alpha_n\}$\com 都有$\displaystyle{\lim_{n\rightarrow \infty}{\alpha_n}=c}$。
+
+\di[确界原理]{
+	非空的有上（下）界数集必有上（下）确界。
+}
+以上的单调有界收敛定理、区间套定理和确界原理可以相互循环论证\com 其中任一都可作为实数连续性的公理。
+\din[列紧性定理\textmd{（Bolzano-Weierstrass定理\com 波尔查诺—魏尔施特拉斯定理）}]{
+	有界数列必有收敛子列。
+}
+这个定理常用于引出某个数列极限的可能值\com 在下面定理的证明（教材P$_{37}$）中即是如此。
+\di[Cauchy收敛准则]{
+	数列收敛的充要条件是其为\textup{Cauchy}列。
+}
+其中\com Cauchy列的定义为：
+\de[Cauchy列]{
+	设$\{a_n\}$为一个实数列\com 如果$\forall \varepsilon >0$\com $\exists N \in \mathbb{N}^*$\com 使得$\forall m\com n>N$\com 都有$|a_m-a_n|<\varepsilon$\com 则称$\{a_n\}$为一个~\tboba{\textup{Cauchy}列}。
+}
+\noindent 这个定义等价于
+\den[Cauchy列]{
+	设$\{a_n\}$为一个实数列\com 如果$\forall \varepsilon >0$\com $\exists N \in \mathbb{N}^*$\com 使得$\forall n>N$\com $\forall p\in \mathbb{N}^*$\com 都有$|a_{n+p}-a_n|<\varepsilon$\com 则称$\{a_n\}$为一个~\tboba{\textup{Cauchy}列}。
+}
+\noindent 这两种定义都可以用于证明数列的收敛性\com 后者更为常用。
+\begin{example}
+	（{\kai 期中}）设数列$\{a_n\}$有递推公式$a_{n+1}=f(a_n)$\com $n \in \mathbb{N}^*$\com 其中$f$可导且存在$L\in(0\com 1)$使得$|f'(x)|\le L$\com 证明：$\{a_n\}$收敛。
+\end{example}
+\begin{proofs}
+	题目只要证明收敛\com 且不能简单地看出数列的极限\com 又没有单调性\com 故考虑用Cauchy收敛准则。
+	
+	\qquad 由Lagrange中值定理\com $\forall n \in \mathbb{N}^*$\com $\exists \xi_n \in \big( \min\{a_n\com a_{n+1}\}\com \max\{a_n\com a_{n+1}\}\big)$\com 使得
+	$$|a_{n+1}-a_n|=|f(a_n)-f(a_{n-1})|=|f'(\xi_n)(a_{n}-a_{n-1})|\le L|a_{n}-a_{n-1}|$$
+	则归纳可证$$|a_{n+1}-a_n|\le L^{n-1}|a_{2}-a_{1}|$$
+	又知其中$L\in(0\com 1)$\com 于是
+	\begin{align*}
+		|a_{n+p}-a_n|&=\left| \sum_{i=1}^{p}(a_{n+i}-a_{n+i-1}) \right|
+		\le \sum_{i=1}^{p}|a_{n+i}-a_{n+i-1}|
+		\le \sum_{i=1}^{p}L^{n+i-2}|a_{2}-a_{1}| \\
+		&= |a_{2}-a_{1}|\sum_{i=1}^{p}L^{n+i-2}
+		=|a_{2}-a_{1}|\frac{L^{n-1}(1-L^p)}{1-L} < |a_{2}-a_{1}|\frac{L^{n-1}}{1-L}
+	\end{align*}
+	
+	\qquad 故$\forall \varepsilon >0$\com 可取$ N= \left[ \log_L \dfrac{\varepsilon(1-L)}{|a_{2}-a_{1}|}\right]+2$\com 使得$\forall n>N>\log_L \dfrac{\varepsilon(1-L)}{|a_{2}-a_{1}|}+1$\com $\forall p\in \mathbb{N}^*$\com 都有$|a_{n+p}-a_n|< |a_{2}-a_{1}|\dfrac{L^{n-1}}{1-L}<\varepsilon$\com 于是数列$\{a_n\}$为Cauchy列\com 则$\{a_n\}$收敛。
+\end{proofs}
+
+{   \color[gray]{0.6}
+	\begin{definition}
+		设$A\subseteq \mathbb{R}$\com $\mathscr{I}_\Lambda=\{I_\lambda\}$是一个开区间族\com 其中$\lambda \in \Lambda \subseteq \mathbb{R}$（$\Lambda$称为指标集）。如果$A \subset \displaystyle{\bigcup_{\lambda \in \Lambda}I_\lambda}$\com 则称$\mathscr{I}_\Lambda$是$A$的一个\textbf{开覆盖}。\page{41}
+	\end{definition}
+	$\mathscr{I}_\Lambda=\{I_\lambda\}$是$A$的一个开覆盖\com 当且仅当$\forall a\in A$\com $\exists \lambda(a)\in \Lambda$\com 使得$a \in I_{\lambda(a)}$。
+	\begin{theorem}
+		\textbf{有限覆盖定理}\textup{（Heine-Borel定理\com 海涅—博雷尔定理}）　如果闭区间$I$有一个开覆盖$\mathscr{I}$\com 则一定可以从$\mathscr{I}$中选出有限个开区间\com 这有限个开区间所成的族仍是$I$的开覆盖。\page{41}
+	\end{theorem}
+	自定理1.1.4至1.1.10的六条定理均是实数连续性的等价表述。
+}
+
+\din[Stolz定理\textmd{（$\frac{*}{\infty}$型）}\page{49}]{
+	若$\displaystyle{\lim_{n\rightarrow\infty}\frac{a_n-a_{n-1}}{b_n-b_{n-1}}=A\in \R_{\pm \infty}}$\com 且其中$\{b_n\}$严格递增\com $\displaystyle{\lim_{n\rightarrow\infty}b_n=+\infty}$\com 则$\displaystyle{\lim_{n\rightarrow\infty}\frac{a_n}{b_n}=A}$。
+}
+\din[Stolz定理\textmd{（$\frac{0}{0}$型）}]{
+	若$\displaystyle{\lim_{n\rightarrow\infty}\frac{a_n-a_{n-1}}{b_n-b_{n-1}}=A\in \R_{\pm \infty}}$,~且其中$\{b_n\}$严格递减,~$\displaystyle{\lim_{n\rightarrow\infty}a_n=\lim_{n\rightarrow\infty}b_n=0}$,~则$\displaystyle{\lim_{n\rightarrow\infty}\frac{a_n}{b_n}=A}$。
+}
+Stolz定理常用于处理分子为无穷级数的分式极限。
+\begin{example}
+	（{\kai 期中}）设$x_1>0$\com 且$\forall n \ge 1$\com $x_{n+1}=\ln (x_n +1)$\com 求$\lim\limits_{n\to \infty}nx_n$。
+\end{example}
+\begin{solution}
+	易求得$\lim\limits_{n\to \infty}x_n = 0$\com 因而所求极限为$\infty \cdot 0$型\com 考虑化为$\frac{0}{~\frac{1}{\infty}~}=\frac{0}{0}$型或$\frac{\infty}{~\frac{1}{0}~}=\frac{\infty}{\infty}$型应用\textup{Stolz}定理。由于知道$x_n$的性质\com 即考虑消去$n$。
+	\begin{align*}
+		\lim_{n\to \infty}nx_n = \lim_{n\to \infty}\frac{n}{~\dfrac{1}{x_n}~}
+		\xlongequal{\textup{Stolz}} \lim_{n\to \infty}\frac{(n+1)-n}{\dfrac{1}{x_{n+1}}-\dfrac{1}{x_{n}}}
+		=\lim_{n\to \infty}\frac{x_{n+1}x_{n}}{x_{n}-x_{n+1}}
+		=\lim_{n\to \infty}\frac{x_{n}\ln (x_n +1)}{x_{n}-\ln (x_n +1)}
+	\end{align*}
+	于是考虑函数$f(x)=\dfrac{x\ln (x+1)}{x-\ln (x+1)}$\com 由Heine归结定理知
+	\begin{align*}
+		\lim_{n\to \infty}nx_n &=\lim_{x\to 0}f(x)
+		\xlongequal{\ln (x+1) \sim x} \lim_{x\to 0}\frac{x^2}{x-\ln (x+1)}
+		\xlongequal{\textup{L'Hospital}}\lim_{x\to 0}\frac{2x}{1-\frac{1}{x+1}}\\
+		&=\lim_{x\to 0} \frac{2x(x+1)}{(x+1)-1}
+		=2 \qedhere
+	\end{align*}
+\end{solution}
+\begin{example}
+	设$0<x_1<\pi$\com 且$\forall n \ge 1$\com $x_{n+1}=\sin x_n$。若$n\to \infty$时$x_n \sim \sqrt{\dfrac{C}{n}}$\com 求正常数$C$。
+\end{example}
+\begin{solution}
+	同上有$\lim\limits_{n\to \infty}x_n = 0$。找$x_n \sim \sqrt{\dfrac{C}{n}}$\com 即找$\lim\limits_{n \to \infty} x_n^2 n = C$。
+	\begin{align*}
+		C = \lim\limits_{n \to \infty} x_n^2 n 
+		&= \lim\limits_{n \to \infty} \frac{n}{~\frac{1}{x_n^2}~}
+		\xlongequal{\textup{Stolz}} \lim\limits_{n \to \infty} \frac{(n+1)-n}{\frac{1}{x_{n+1}^2}-\frac{1}{x_n^2}}
+		=\lim\limits_{n \to \infty} \frac{x_{n+1}^2 x_n^2}{x_n^2 - x_{n+1}^2}\\
+		&=\lim\limits_{n \to \infty} \frac{x_n^2\sin^2 x_n}{x_n^2 - \sin^2 x_n}
+		\xlongequal{\textup{Heine}} \lim_{x \to 0}\frac{x^2\sin^2 x}{x^2 - \sin^2 x}
+		\xlongequal{x \sim \sin x} \lim_{x \to 0}\frac{x^4}{x^2 - \sin^2 x}\displaybreak\\
+		&\xlongequal{\textup{Maclaurin}} \lim_{x \to 0}\frac{x^4}{x^2 - \left(x-\frac{1}{3}x^3+o(x^4) \right)^2}\\
+		&= \lim_{x \to 0}\frac{x^4}{x^2 - \left(x^2 - \frac{2}{3}x^4 + \frac{1}{9}x^6 + 2xo(x^4) -\frac{2}{3}x^3o(x^4) + o(x^4)^2\right)}\\
+		&= \lim_{x \to 0}\frac{1}{\frac{2}{3} - \frac{1}{9}x^2 - \frac{2o(x^4)}{x^3} +\frac{2o(x^4)}{3x} - \frac{o(x^4)^2}{x^4}} = \frac{3}{2} \qedhere
+	\end{align*}
+\end{solution}
+\subsection{收敛数列的性质}
+\dip[Heine归结定理]{75}{
+	函数$f$在$x_0$处有极限$F$\com 当且仅当对任意数列$\{x_n\}$\com 若$\forall n \in \mathbb{N}^*$都有$x_n \neq x_0$\com 且$\lim\limits_{n \to \infty} x_n = x_0$\com 则$\lim\limits_{n \to \infty}f(x_n)=F$。
+}
+\zhu[判断数列发散的方法]{
+	（1）数列无界；\\
+	（2）$\forall a \in \R$\com $\exists \varepsilon_0>0$\com $\forall N\in \mathbb{N}^*$\com $\exists n > N$\com 使得$|a_n-a|\ge \varepsilon_0$；\\
+	（3）数列有一个发散子列\com 或有两个不收敛于同一极限的子列；\\
+	（4）不满足 Cauchy收敛准则。
+}
+\begin{example}
+	令$S_n=\sum\limits_{i=1}^n \dfrac{1}{i^p}$\com 其中$p \in \R$\com 证明：
+	$\lim\limits_{n\to \infty}S_n \left\{ \begin{array}{ll}
+		=+\infty\com & p<1\com \\ <+\infty\com & p \ge 1
+	\end{array}\right.$。
+\end{example}
+
+
+
+%----------------------------------------------------------
+\newpage
+\section{函数的连续性}
+\subsection{函数}
+
+\de[满射、单射、双射]{
+	设$f: A\rightarrow B$。\\
+	（1）如果$f(A)=B$\com 则称$f$是由$A$到$B$的一个\textbf{\color{bali!75!black}满射}；\\
+	（2）如果$\forall x\com y \in A$\com 当$x\neq y$时都有$f(x) \neq f(y)$\com 则称$f$是由$A$到$B$的一个\textbf{\color{bali!75!black}单射}；\\
+	（3）如果$f$既是单射又是满射\com 则称$f$是由$A$到$B$的一个\textbf{\color{bali!75!black}双射}。
+}
+\de[函数的运算]{
+	设$f: A\rightarrow B$\com $g: X\rightarrow Y$\com 函数的运算定义如下：
+
+	\hang[2em]（1）若$A\cap X\neq \varnothing$\com 在$A\cap X$上可以定义$f$与$g$的四则运算：\\
+	\indent \textbf{\color{bali!75!black}和（差）函数}为$(f\pm g)(x)=f(x)\pm g(x)$；\\
+	\indent \textbf{\color{bali!75!black}积函数}为$(fg)(x)=f(x)g(x)$；\\
+	\indent 当$g(x)\neq 0$时\com \textbf{\color{bali!75!black}商函数}为$\displaystyle{\left(\frac{f}{g}\right)(x)=\frac{f(x)}{g(x)}}$。
+
+	（2）若$f$为双射\com $f$的\textbf{\color{bali!75!black}反函数}为$f^{-1}:B\rightarrow A\textup{\com }f(x)\mapsto x$。
+
+	（3）若$B \cap X \neq \varnothing$\com 在$f^{-1}(B \cap X)=\left\{x\in A \middle| f(x)\in B \cap X \right\}$上可以定义$g$与$f$的\textbf{\color{bali!75!black}复合}为$g\circ f(x)=g(f(x))$。
+}
+\de[双曲函数]{
+	借助$\mathrm{e}^x$\com 类比三角函数（又称\textbf{圆函数}）可以定义计算更简便的\textbf{\color{bali!75!black}双曲函数}：\\
+	\indent \textbf{\color{bali!75!black}双曲正弦}函数为$\sinh x=\frac{1}{2}(\mathrm{e}^x-\mathrm{e}^{-x})$\com 
+	\textbf{\color{bali!75!black}双曲余弦}函数为$\cosh x=\frac{1}{2}(\mathrm{e}^x+\mathrm{e}^{-x})$。\\
+	\indent 类比三角函数之间的关系\com 定义\textbf{\color{bali!75!black}双曲正切}函数为$\displaystyle{\tanh x=\frac{\sinh x}{\cosh x}=\frac{\mathrm{e}^x-\mathrm{e}^{-x}}{\mathrm{e}^x+\mathrm{e}^{-x}}}$。
+}
+
+\subsection{函数极限的计算方法}
+\subsubsection{定义法}
+\de[极限点]{
+	设$X$为非空数集\com $x_0\in\mathbb{R}_\infty$\com 如果$\forall \varepsilon>0$\com $\mathring{B}_X(x_0\com \varepsilon)\neq \varnothing$\com 则称点$x_0$为$X$的\textbf{\color{bali!75!black}极限点}。
+}
+\de[函数极限]{
+	设$X$为非空数集\com $x_0\in\mathbb{R}_\infty$为$X$的极限点\com $a\in \mathbb{R}_\infty$\com $f:X\rightarrow \mathbb{R}$为函数。若$\forall \varepsilon >  0$\com $\exists \delta>0$\com 使得$\forall x\in \mathring{B}_X(x_0\com \delta)$\com $f(x)\in B(a\com \varepsilon)$\com 那么称当$x$在$X$内趋近$x_0$时\com $f(x)$趋近到$a$（或以$a$为\textbf{\color{bali!75!black}极限}）\com 并将$a$记为$\boldsymbol{\color{bali!75!black} \lim\limits_{X\ni x\rightarrow x_0}f(x)}$\com 简记为$\boldsymbol{\color{bali!75!black} \lim\limits_{x\rightarrow x_0}f(x)}$。
+}
+函数的极限按照$x_0$和$a$的状态可分为$6\times 4 = 24$种过程\com 这些过程有相似但不完全一致的规律\com 需要小心。
+
+\subsubsection{运算法则}
+在有意义的前提下\com 极限运算对四则运算均是可分配的。这种情况比较平凡\com 估计不会单独出现在考题中。
+\di[复合函数的极限法则]{
+	设$X\com Y$为非空数集\com $x_0$为$X$的极限点而$y_0\in \mathbb{R}\cup\{\infty\com \pm\infty\}$\com 并且函数$f:X\rightarrow \mathbb{R}$\com $g:Y\rightarrow\mathbb{R}$满足：\\
+	（1）{\color{meihong!75!black} $\forall x\in X\backslash\{x_0\}$\com 均有$f(x)\in Y\backslash\{y_0\}$；}\\
+	（2）$\lim\limits_{X\ni x\rightarrow x_0}f(x)=y_0$\com $\lim\limits_{Y\ni y\rightarrow y_0}g(y)=a$。\\则我们有$\lim\limits_{X\ni x\rightarrow x_0}g(f(x))=a$。
+}
+特别注意标红部分\com $f(x)$不能取到其极限\com 因为$g$在$f(x)$的极限处不一定有定义\com 如下面例子。
+\begin{example}
+	\renewcommand{\qedsymbol}{$\circledS$}
+	定义函数
+	$$f(x)=\left\{\begin{NiceArray}{ll}
+		0\text{\com }  &x=0\text{\com }\\
+		1\text{\com }  &x\neq 0
+	\end{NiceArray}\right.\text{\com } g(x)=\left\{\begin{NiceArray}{ll}
+		\dfrac{1}{q}\text{\com }   &x=\dfrac{p}{q}\text{\com }p\in \mathbb{Z}\text{\com }q\in\mathbb{N}^*\text{\com }(p\com q)=1\text{\com }\\
+		0\text{\com }  &x \in \mathbb{R}\text{\textbackslash} \mathbb{Q}
+	\end{NiceArray}\right.$$
+	则$\lim\limits_{x\rightarrow 0}g(x)=0$\com $\lim\limits_{x\rightarrow 0}f(x)=1$\com 应有$\lim\limits_{x\rightarrow 0}f(g(x))=1$。但事实上$f(g(x))=\left\{\begin{NiceArray}{ll}
+		1\text{\com }  &x \in \mathbb{Q} \text{\com }\\
+		0\text{\com }  &x \in \mathbb{R}\text{\textbackslash} \mathbb{Q}
+	\end{NiceArray}\right.=D(x)$为Dirichlet函数\com 处处没有极限。\qed
+\end{example}
+\di[幂指函数的极限法则]{
+	设$X$是非空数集\com $x_0$为$X$的极限点\com 函数$u:X\rightarrow \mathbb{R}_+$、$v:X\rightarrow \mathbb{R}$\com 且$\lim\limits_{x\rightarrow x_0}u(x)=u_0>0$\com $\lim\limits_{x\rightarrow x_0}v(x)=v_0$\com 则$$\lim\limits_{x\rightarrow x_0}u(x)^{v(x)}=u_0^{v_0}$$
+}
+\zhu[$\boldsymbol{1^\infty}$型极限的计算 \page{103}]{
+	若在某一极限过程（以$x\to x_0$代表）下\com 有$\lim\limits_{x \to x_0}u(x)=1$\com $\lim\limits_{x \to x_0}v(x)=\infty$\com 
+	则极限$\lim\limits_{x \to x_0}u(x)^{v(x)}$存在且有限当且仅当$\lim\limits_{x \to x_0}(u(x)-1)v(x)$存在且有限；
+	此时\com $$\lim\limits_{x \to x_0}u(x)^{v(x)}=\lim\limits_{x \to x_0}\left[(1+u(x)-1)^\frac{1}{u(x)-1}\right]^{(u(x)-1)v(x)}=\e^{\lim\limits_{x \to x_0}(u(x)-1)v(x)}$$
+}
+\newpage
+\begin{example}
+	（{\kai 期中}）计算$\lim\limits_{n \to \infty} \left(\cos \dfrac{2023}{n}+2\sin \dfrac{2023}{n} \right)^n$。
+\end{example}
+\begin{solution}
+	注意到$\cos \dfrac{2023}{n}+2\sin \dfrac{2023}{n}-1 \to 1$\com 则
+	\begin{align*}
+		&\lim\limits_{n \to \infty} \left(\cos \frac{2023}{n}+2\sin \frac{2023}{n} \right)^n\\
+		&=\lim\limits_{n \to \infty} \left(1+\cos \frac{2023}{n}+2\sin \frac{2023}{n} -1 \right)^{ \frac{1}{\cos \frac{2023}{n}+2\sin \frac{2023}{n} -1} \left( \cos \frac{2023}{n}+2\sin \frac{2023}{n} -1 \right)n }\\
+		&=\lim\limits_{n \to \infty} \exp \left[ \left( \cos \frac{2023}{n}+2\sin \frac{2023}{n} -1 \right)n \right]\\
+		&=\exp \left[ \lim\limits_{n \to \infty} \left( \cos \frac{2023}{n}+2\sin \frac{2023}{n} -1 \right)n \right] 
+	\end{align*}
+	由Heine归结定理知\com 
+	\begin{align*}
+		\lim\limits_{n \to \infty} \left( \cos \frac{2023}{n}+2\sin \frac{2023}{n} -1 \right)n 
+		&= \lim\limits_{x \to 0} \frac{\cos 2023x +2\sin 2023x -1}{x} \\
+		&= \lim\limits_{x \to 0} \frac{\cos 2023x -1}{x} + \lim\limits_{x \to 0}\frac{2\sin 2023x}{x}\\
+		&= \lim\limits_{x \to 0} \frac{2\times2023x}{x}=4046
+	\end{align*}
+	故$\lim\limits_{n \to \infty} \left(\cos \dfrac{2023}{n}+2\sin \dfrac{2023}{n} \right)^n = \e^{4046}$。
+\end{solution}
+
+\subsubsection{数列方法}
+\din[Heine归结定理\page{75}]{
+	函数$f$在$x_0$处有极限$F$的充要条件是对任意一个收敛于$x_0$的数列$\{x_n\}$（$x_n \neq x_0$）\com 数列$\{f(x_n)\}$都有极限$F$。
+}
+在以函数极限为中心的范畴内\com 这个定理的使用是两方面的。用于求一个函数的极限时\com 首先说明函数的极限存在\com 然后只需找满足Heine归结定理的一个数列$\{x_n\}$即可；用于说明函数的极限不存在时\com 只需找两个收敛于$x_0$的数列$\{x_n\}$（$x_n \neq x_0$）\com 求出其对应$\{f(x_n)\}$极限不相等（或不存在）即可。
+\subsubsection{定理证明}
+
+\di[函数夹逼定理]{
+	设函数$f$、$g$、$h$在$x_0$的去心领域内有定义\com 则$$
+	\begin{cases}
+		\text{夹条件：} \exists \delta >0\text{\com }\forall x \in \mathring{B}(x_0\com \delta)\text{\com }f(x)\le g(x) \le h(x) \\
+		\text{逼条件：} \lim\limits_{x\rightarrow x_0}f(x)=\lim\limits_{x\rightarrow x_0}h(x)=a\in \mathbb{R}_{\pm\infty}
+	\end{cases}
+	\Rightarrow \lim\limits_{x\rightarrow x_0}g(x)=a$$
+}
+
+\di[函数单调有界收敛定理]{
+	单调递增（减）且有上（下）界的函数的极限一定存在且有限。
+}
+
+\subsubsection{等价无穷小}
+\de[无穷小量]{
+	设$\lim\limits_{X\ni x\rightarrow x_0}\alpha(x)=\lim\limits_{X\ni x\rightarrow x_0}\beta(x)=0$\com 另外我们还假设$\beta(x)\neq 0$。
+
+	\hang[2em]（1）如果$\lim\limits_{X\ni x\rightarrow x_0}\displaystyle{\frac{\alpha(x)}{\beta(x)}}=0$\com 那么称$X\ni x\rightarrow x_0$时\com $\alpha(x)$是$\beta(x)$的\textbf{\color{bali!75!black}高阶无穷小量}\com 记作$$\alpha(x)=o(\beta(x))\quad (X\ni x\rightarrow x_0)$$
+	特别地\com 规定$\beta (x)=1$时\com 即为$\lim\limits_{X\ni x\rightarrow x_0}\alpha(x)=0$\com 此时$\alpha(x)=o(1)\quad (X\ni x\rightarrow x_0)$的记法表示$\alpha(x)$是\textbf{\color{bali!75!black}无穷小量}。
+
+	\hang[2em]（2）如果$\lim\limits_{X\ni x\rightarrow x_0}\displaystyle{\frac{\alpha(x)}{\beta(x)}}=c\neq 0$\com 称$X\ni x\rightarrow x_0$时\com $\alpha(x)$与$\beta(x)$为同阶无穷小量。\\
+	特别地\com 如果$c=1$\com 即$\lim\limits_{X\ni x\rightarrow x_0}\displaystyle{\frac{\alpha(x)}{\beta(x)}}=1$\com 那么称$X\ni x\rightarrow x_0$时\com $\alpha(x)$与$\beta(x)$为\textbf{\color{bali!75!black}等价无穷小量}\com 记作$$\alpha(x)\sim \beta(x)\quad (X\ni x\rightarrow x_0)$$
+	如果$\beta(x)=(x-x_0)^r$\com 其中$x_0\in\mathbb{R}$\com $r\in\mathbb{N}^{*}$\com 则$\lim\limits_{X\ni x\rightarrow x_0}\displaystyle{\frac{\alpha(x)}{(x-x_0)^r}}=c\neq 0$\com 则称$X\ni x\rightarrow x_0$时\com $\alpha(x)$为$\boldsymbol{\color{bali!75!black}r~}$\textbf{\color{bali!75!black}阶无穷小量}。当~$r>0$~不为整数时也可类似定义\com 但此时只能考虑右极限。
+}
+$x\rightarrow 0$时\com 常用的等价无穷小有：
+\di[0处的常用等价无穷小]{
+\begin{equation*}
+	\begin{aligned}
+		&x\sim \sin x \sim \tan x \sim \arcsin x\\
+		&1-\cos x \sim \frac{x^2}{2}\qquad \sin x - x \sim -\frac{x^3}{6}\\
+		&\mathrm{e}^x-1\sim x \sim \ln (1+x)
+		\qquad a^x-1 \sim x \ln a\\
+		&(1+x)^\alpha-1\sim \alpha x\\
+	\end{aligned}
+\end{equation*}
+}
+需要注意\com 等价无穷小的替换只适用于乘除的情况。在加减的情况中\com 推荐将$f(x) \sim g(x) \sim x ~(x \rightarrow 0)$写作$f(x) - g(x) = o(x)~( x \rightarrow 0)$。
+\begin{example}
+	计算：$\lim\limits_{x\rightarrow 0}\displaystyle{\frac{\mathrm{e}^x+\mathrm{e}^{-x}-2}{x^2}}$。
+\end{example}
+\begin{proofs}[\yan 错解]
+	\renewcommand{\qedsymbol}{$\circledS$}
+	$\displaystyle{
+		\lim\limits_{x\rightarrow 0}\frac{\mathrm{e}^x+\mathrm{e}^{-x}-2}{x^2}=\lim\limits_{x\rightarrow 0}\frac{\mathrm{e}^x-1+\mathrm{e}^{-x}-1}{x^2}=\lim\limits_{x\rightarrow 0}\frac{x+(-x)}{x^2}=0
+	}$。
+\end{proofs}
+\begin{proofs}[\yan 解]
+	\renewcommand{\qedsymbol}{$\circledS$}
+	注意到$\mathrm{e}^x+\mathrm{e}^{-x}-2=\left(\mathrm{e}^\frac{x}{2}-\mathrm{e}^{-\frac{x}{2}}\right)^2$\com 则
+	\begin{equation*}
+		\begin{aligned}
+		\lim\limits_{x\rightarrow 0}\frac{\mathrm{e}^x+\mathrm{e}^{-x}-2}{x^2}
+		&=\lim\limits_{x\rightarrow 0}\frac{\left(\mathrm{e}^\frac{x}{2}-\mathrm{e}^{-\frac{x}{2}}\right)^2}{x^2}
+		=\lim\limits_{x\rightarrow 0}\left(\frac{\mathrm{e}^\frac{x}{2}-\mathrm{e}^{-\frac{x}{2}}}{x}\right)^2
+		=\lim\limits_{x\rightarrow 0}\left(\frac{\mathrm{e}^\frac{x}{2}-1-\mathrm{e}^{-\frac{x}{2}}+1}{x}\right)^2\\
+		&=\lim\limits_{x\rightarrow 0}\left(\frac{\frac{x}{2}+o(x)-\left(-\frac{x}{2}\right)-o(x)}{x}\right)^2
+		=\lim\limits_{x\rightarrow 0}\left(\frac{x+o(x)}{x}\right)^2
+		=1
+		\end{aligned}
+	\end{equation*}
+	即$\lim\limits_{x\rightarrow 0}\displaystyle{\frac{\mathrm{e}^x+\mathrm{e}^{-x}-2}{x^2}}=1$。
+\end{proofs}
+\zhu[等价无穷小应用中的添项拆项]{
+	基本思路是猜测需要用到的等价无穷小公式\com 然后针对性地构造其形式。
+	\begin{example}
+		\begin{equation*}
+			\begin{aligned}
+				\lim_{x\rightarrow 0}\frac{1-\prod\limits_{i=1}^n \cos ix}{x^2}
+				&=\lim_{x\rightarrow 0}\frac{1{\colors{qinglv}-\cos x+\cos x}-\prod\limits_{i=1}^n \cos ix}{x^2}\\
+				&=\lim_{x\rightarrow 0}\left[\frac{1-\cos x}{x^2}+\frac{\cos x\left(1-\prod\limits_{i=2}^n \cos ix\right)}{x^2}\right]\\
+				&=\lim_{x\rightarrow 0}\left(\frac{1}{2}+\frac{1-\prod\limits_{i=2}^n \cos ix}{x^2}\right)\\
+				&=\lim_{x\rightarrow 0}\left[\frac{1}{2}+\frac{1-\cos 2x}{x^2}+\frac{\cos 2x\left(1-\prod\limits_{i=3}^n \cos ix\right)}{x^2}\right]\\
+				&=\lim_{x\rightarrow 0}\left(\frac{1}{2}+\frac{1}{2}\times2^2+\frac{1-\prod\limits_{i=3}^n \cos ix}{x^2}\right)\\
+				&=\cdots=\frac{1^2+2^2+\cdots+n^2}{2}=\frac{n(n+1)(2n+1)}{12}
+			\end{aligned}
+		\end{equation*}
+	\end{example}
+}
+\subsection{连续函数}
+\subsubsection{点连续}
+\de[连续]{
+	设$X$为数集\com $x_0\in X$\com $f:X\rightarrow\mathbb{R}$为函数\com 若$\forall \varepsilon>0$\com $\exists \delta>0$\com 使得$\forall x\in X$\com 当$|x-x_0|<\delta$时\com 均有$|f(x)-f(x_0)|<\varepsilon$\com 则称$f$在点$x_0$处\textbf{\color{bali!75!black}连续}。\\
+	若$f$在$X$的每点连续\com 则称$f$为$X$上的\textbf{\color{bali!75!black}连续函数}。所有这样连续函数的集合记为$\mathscr{C}(X)$。特别地\com 所有在闭区间$[a\com[0.5] b]$上连续的函数组成的集合记为$\mathscr{C}[a\com[0.5] b]$\com 所有在开区间$(a\com[0.5] b)$上连续的函数组成的集合记为$\mathscr{C}(a\com[0.5] b)$。
+}
+若不考虑不连续的定义域\com 连续函数的定义实际上陈述的是
+$$\lim_{x\to x_0}f(x)=f(x_0)=f\left(\lim_{x\to x_0}x\right)$$
+即对于连续函数而言\com 求极限与求函数值的运算可以交换。
+\di[连续函数的介值定理]{
+	如果~$f\in \mathscr{C}[a\com[0.5] b]$\com 那么对于介于~$f(a)\com f(b)$~之间的任意的实数~$\mu$\com 均存在~$\xi\in [a\com[0.5] b]$~使得~$f(\xi)=\mu$。
+}
+\begin{corollary}
+	\textbf{零点存在定理}\quad 若函数~$f\in\mathscr{C}[a\com[0.5] b]$~使得
+	$f(a)f(b)\le 0$\com 
+	则~$\exists \xi\in [a\com[0.5] b]$~使得~$f(\xi)=0$。
+\end{corollary}
+\begin{corollary}
+	假设函数~$f\in\mathscr{C}(a\com[0.5] b)$~使得~$\lim\limits_{x\rightarrow a^{+}} f(x)=c_1$\com $\lim\limits_{x\rightarrow b^{-}} f(x)=c_2$\com 其中~$c_1\com c_2$~不相等并且不一定有限。如果~$\mu\in\mathbb{R}$~严格介于~$c_1\com c_2$~之间\com 则$\exists \xi\in(a\com[0.5] b)$~使得~$\mu=f(\xi)$。
+\end{corollary}
+
+\subsubsection{一致连续}
+\de[一致连续]{
+	设$X$为一个区间\com $f:X\rightarrow\mathbb{R}$为函数。若$\forall \varepsilon>0$\com $\exists \delta>0$\com 使得$\forall x_1\com x_2\in X$\com 当$|x_1-x_2|<\delta$时\com 均有$|f(x_1)-f(x_2)|<\varepsilon$\com 则称$f$在$X$上\textbf{\color{bali!75!black}一致连续}。
+}
+$f$在$X$上\textbf{非一致连续}\com 当且仅当$\exists \varepsilon_0>0$\com $\forall \delta>0$\com 都$\exists x_1\com x_2\in X$\com 虽有$|x_1-x_2|<\delta$\com 但有$|f(x_1)-f(x_2)|\ge \varepsilon_0$；亦可写作$\exists \varepsilon_0>0$\com $\forall n \in \mathbb{N}^*$\com 都$\exists x_n\com \tilde{x}_n\in X$\com 虽有$|x_n-\tilde{x} _n|<\dfrac{1}{n}$\com 但有$|f(x_n)-f(\tilde{x} _n)|\ge \varepsilon_0$。
+
+由此易推（取$x_n=\dfrac{1}{2n\pi}$\com $\tilde{x}_n=\dfrac{1}{2n\pi+\frac{\pi}{2}}$）\com $f(x)=\sin \dfrac{1}{x}$在$(0\com 1)$上尽管连续\com 但不一致连续。
+\di[一致连续的等价定义]{
+	$f(x)$在$X$上一致连续\com 当且仅当$\forall \{x_n\}\com \{y_n\} \subseteq X $\com $\lim\limits_{x \rightarrow + \infty } (x_n- y_n )=0$\com 都有$\lim\limits_{x \rightarrow + \infty } (f(x_n)- f(y_n) )=0$。
+}
+\zhu[一致连续与（点）连续的区别]{
+	连续是函数在某一点处（或区间中每一点处）的性质\com 先取定$x_0$再给定$\delta$；一致连续是函数在区间上的性质\com 先给出$\delta$后取出$x_1\com x_2$。
+}
+\di[一致连续与（点）连续的关系]{
+	（1）一致连续函数一定在区间上每一点处连续。\\
+	（2）\tbome{闭区间上等价性}\quad $f\in \mathscr{C}[a,~b]$在$[a,~b]$上一致连续。
+}
+\begin{example}
+	设$f$在$[a,~b]$上可导,~证明：$f'\in \mathscr{C}[a,~b]$当且仅当$\forall \varepsilon >0$,~$\exists \delta >0$,~当$0<|h|<\delta$时, $\forall x \in [a,~b]$\com 都有$\left| \dfrac{f(x+h)-f(x)}{h} - f'(x) \right|<\varepsilon$。
+\end{example}
+\begin{proofs}
+	（1）\textit{必要性}。由$f$在$[a,~b]$上可导及Lagrange中值定理\com 知存在$\xi$严格介于$x$和$x+h$之间\com 使$\dfrac{f(x+h)-f(x)}{h}=f'(\xi)$。由$f'\in \mathscr{C}[a,~b]$知$f'$在$[a,~b]$上一致连续\com 即$\forall \varepsilon >0$\com $\exists \delta >0$\com $\forall x_1,~x_2 \in [a,~b]$,~当$|x_1-x_2|<\delta$时,~都有$|f'(x_1)-f'(x_2)|<\varepsilon$。此时,~令$0<|h|<\delta$,~有$0<|\xi - x|<|h|<\delta$,~于是
+	$$\left| \frac{f(x+h)-f(x)}{h} - f'(x) \right|=|f'(\xi)-f'(x)|<\varepsilon$$
+
+	\quad（2）\textit{充分性}。要证$f'\in \mathscr{C}[a,~b]$\com 即证$\forall x \in [a,~b]$\com $\forall \tilde{\varepsilon}  >0$\com 都$\exists \tilde{\delta}  >0$\com 当$0<|h|<\tilde{\delta} $时\com 有$|f'(x+h)-f'(x)|<\tilde{\varepsilon} $。而令$\tilde{\varepsilon}=2\varepsilon$\com $\tilde{\delta}=\delta$\com 即有$0<|h|<\delta$时\com 
+	\begin{align*}
+		|f'(x+h)-f'(x)|&=\left|f'(x+h){\colors{meihong}-\frac{f(x+h-h)-f(x+h)}{-h}+\frac{f(x+h)-f(x)}{h}}-f'(x)\right|\\
+		&\le \left|f'(x+h)-\frac{f(x+h-h)-f(x+h)}{-h}\right|+\left|\frac{f(x+h)-f(x)}{h}-f'(x)\right|\\
+		&< 2\varepsilon =\tilde{\varepsilon} \qedhere
+	\end{align*}
+\end{proofs}
+%----------------------------------------------------------
+\newpage
+\section{导数与微分}
+\subsection{导数}
+\subsubsection{导数的定义与计算}
+\de[导数]{
+	设$f:(a,~b)\rightarrow\mathbb{R}$为函数\com $x_0\in (a,~b)$\com 若$$\lim\limits_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}=\lim\limits_{h\rightarrow 0}\frac{f(x_0+h)-f(x_0)}{h}$$存在且有限,~则称$f$在点$x_0$处\textbf{\color{bali!75!black}可导},~上述极限被称为函数$f$在点$x_0$处的\textbf{\color{bali!75!black}导数},~被记作$\boldsymbol{\color{bali!75!black}f'(x_0)}$\com 或者$\boldsymbol{\color{bali!75!black}\left.\dfrac{\mathrm{d}y}{\mathrm{d}x}\right|_{x=x_0}}$、$\boldsymbol{\color{bali!75!black}\dfrac{\mathrm{d}  f}{\mathrm{d}  x}(x_0)}$、$\mathrm{D}_xf(x_0)$等。
+	\\若函数$f$在$(a,~b)$的每一点处可导\com 则称之在$(a,~b)$上可导。此时其上各点与在该点处的导数构成函数$f':(a,~b)\rightarrow\mathbb{R}$\com $x_0\mapsto f'(x_0)$\com 称为$f$的\textbf{\color{bali!75!black}导函数}\com 简称导数。
+}
+
+\zhu[记号$\boldsymbol{f'_+(x_0)}$和$\boldsymbol{f'(x_0+0)}$的理解]{
+	$f'(x_0+0)$是一个导数的极限\com 即两个极限\com 为
+	$$f'(x_0+0)=\lim\limits_{x\rightarrow x_0^+}f'(x)=\lim\limits_{x\rightarrow x_0^+}\lim\limits_{h\rightarrow 0}\dfrac{f(x_0+h)-f(x_0)}{h}$$
+	$f'_+(x_0)$是一个导数\com 即一个极限\com 为
+	$$f'_+(x_0)=\lim\limits_{h\rightarrow 0^+}\dfrac{f(x_0+h)-f(x_0)}{h}$$
+	（1）若函数$f(x)$在$x_0$的右邻域$[x_0,~x_0+\delta]$上连续\com 在$(x_0,~x_0+\delta)$上可导\com 且$f'(x_0+0)$存在\com 则$f'_+(x_0)$也存在\com 且二者相等。\\
+	（2）若函数$f(x)$在$x_0$处连续\com 在$B(x_0,~\delta)$可导\com 且$\lim\limits_{x\rightarrow x_0}f'(x)$存在\com 则$f'(x_0)$也存在\com 且二者相等。    
+}
+\zhu[记号$\boldsymbol{f'(g(x))}$与$\boldsymbol{\dfrac{\dif f(g(x))}{\dif x}=[f(g(x))]'}$的区别]{
+	$f'(g(x))$只对外层函数求导\com 即等同于把$g(x)$代入导函数$f'(x)$中自变量的位置；$\dfrac{\dif f(g(x))}{\dif x}=[f(g(x))]'$是对复合函数$f \circ g(x)$求导\com 需使用链式求导法则\com 有$[f(g(x))]'=f'(g(x))g'(x)$。
+}
+
+\begin{example}\label{四则运算法则应用典例正解}
+	设$f$在$x=0$处可导\com $a_n\rightarrow 0^-\com b_n\rightarrow 0^+(n\rightarrow 0)$\com 求证：
+	$$\lim_{n\rightarrow \infty} \frac{f(b_n)-f(a_n)}{b_n-a_n}=f'(0)$$
+\end{example}
+本题给出三种证法。助教在习题课上讲的证法是：
+\begin{proofs}
+	由题\com 有
+	$$\lim_{n\rightarrow \infty} \frac{f(b_n)-f(0)}{b_n-0}=f'_+(0)=f'(0)$$
+	$$\lim_{n\rightarrow \infty} \frac{f(a_n)-f(0)}{a_n-0}=f'_-(0)=f'(0)$$
+	则
+	$$\frac{f(b_n)-f(0)}{b_n}=f'(0)+o(1)$$
+	$$\frac{f(a_n)-f(0)}{a_n}=f'(0)+o(1)$$
+	于是
+	\begin{equation*}
+	\begin{aligned}
+		\frac{f(b_n)-f(a_n)}{b_n-a_n}
+		&=\frac{[f(b_n)-f(0)]-[f(a_n)-f(0)]}{b_n-a_n}\\
+		&=\frac{f(b_n)-f(0)}{b_n-a_n}-\frac{f(a_n)-f(0)}{b_n-a_n}\\
+		&=\frac{f(b_n)-f(0)}{b_n}\cdot \frac{b_n}{b_n-a_n}-\frac{f(a_n)-f(0)}{a_n}\cdot \frac{a_n}{b_n-a_n}\\
+		&=f'(0)\cdot \frac{b_n}{b_n-a_n}+o(1)\cdot \frac{b_n}{b_n-a_n}-f'(0)\cdot \frac{aligned_n}{b_n-a_n}-o(1)\cdot \frac{a_n}{b_n-a_n}\\
+		&=f'(0)+o(1)\cdot \frac{b_n}{b_n-a_n}-o(1)\cdot \frac{a_n}{b_n-a_n}\\
+		&=f'(0)+o(1)
+	\end{aligned}
+	\end{equation*}
+	故
+	\begin{equation*}
+		\lim_{n\rightarrow \infty} \frac{f(b_n)-f(a_n)}{b_n-a_n}=f'(0) \qedhere
+	\end{equation*}
+\end{proofs}
+在例~\ref{四则运算法则应用典例错解}~中的证法\com 可模仿上面证明严谨化（感谢{\kai 层筱缱琅}同学提供的灵感）：
+\begin{proofs}
+	由题\com 有
+	$$\lim_{n\rightarrow \infty} \frac{f(b_n)-f(0)}{b_n-0}=f'_+(0)=f'(0)$$
+	$$\lim_{n\rightarrow \infty} \frac{f(a_n)-f(0)}{a_n-0}=f'_-(0)=f'(0)$$
+	则
+	$$\frac{f(b_n)-f(0)}{b_n}=f'(0)+o(1)$$
+	$$\frac{f(a_n)-f(0)}{a_n}=f'(0)+o(1)$$
+	即
+	$$f(b_n)-f(0)=(f'(0)+o(1))b_n=f'(0)b_n+b_no(1)$$
+	$$f(a_n)-f(0)=(f'(0)+o(1))a_n=f'(0)a_n+a_no(1)$$
+	于是
+	\begin{equation*}
+	\begin{aligned}
+		\frac{f(b_n)-f(a_n)}{b_n-a_n}
+		&=\frac{[f(b_n)-f(0)]-[f(a_n)-f(0)]}{b_n-a_n}\\
+		&=\frac{f'(0)b_n+b_no(1)-f'(0)a_n-a_no(1)}{b_n-a_n}\\
+		&=\frac{f'(0)(b_n-a_n)+b_no(1)-a_no(1)}{b_n-a_n}\\
+		&=f'(0)+o(1)
+	\end{aligned}
+	\end{equation*}
+	故
+	\begin{equation*}
+		\lim_{n\rightarrow \infty} \frac{f(b_n)-f(a_n)}{b_n-a_n}=f'(0) \qedhere
+	\end{equation*}
+\end{proofs}
+注意到$\displaystyle{\lim_{n\rightarrow\infty}\frac{f(b_n)-f(0)}{b_n-0}}=\displaystyle{\lim_{n\rightarrow\infty}\frac{f(a_n)-f(0)}{a_n-0}}=f'(0)$\com 若用夹逼定理证明\com 思路即为：
+\begin{proofs}
+	已知$b_n>0>a_n$\com 考虑讨论$\displaystyle{\frac{f(b_n)-f(0)}{b_n-0}}$与$\displaystyle{\frac{f(a_n)-f(0)}{a_n-0}}$的大小关系。\\
+	（1）若$\displaystyle{\frac{f(b_n)-f(0)}{b_n-0}} \ge \displaystyle{\frac{f(a_n)-f(0)}{a_n-0}}$\com 则有$$a_nf(b_n)-a_nf(0) \le b_nf(a_n)-b_nf(0) $$
+	通过添项法可有
+	\begin{equation*}
+		\begin{aligned}
+			 a_nf(b_n){\color[rgb]{0.85,0.2,0.47} -b_nf(b_n)} -a_nf(0)+b_nf(0) \le b_nf(a_n) {\color[rgb]{0.85,0.2,0.47} -b_nf(b_n)} \\ \Rightarrow\quad  (a_n-b_n)(f(b_n)-f(0))\le b_n(f(a_n)-f(b_n))
+		\end{aligned}
+	\end{equation*}
+	\begin{equation*}
+		\begin{aligned}
+			a_nf(b_n){\color[rgb]{0.85,0.2,0.47} -a_nf(a_n)} \le a_nf(0)-b_nf(0) +b_nf(a_n) {\color[rgb]{0.85,0.2,0.47} -a_nf(a_n)} \\ \Rightarrow\quad  a_n(f(b_n)-f(a_n))\le (a_n-b_n)(f(0)-f(a_n))
+		\end{aligned}
+	\end{equation*}
+	即知$$\frac{f(b_n)-f(0)}{b_n-0} \ge \frac{f(b_n)-f(a_n)}{b_n-a_n} \ge \frac{f(a_n)-f(0)}{a_n-0}$$
+	（2）若$\displaystyle{\frac{f(b_n)-f(0)}{b_n-0}} \le \displaystyle{\frac{f(a_n)-f(0)}{a_n-0}}$\com 同理得$$\frac{f(b_n)-f(0)}{b_n-0} \le \frac{f(b_n)-f(a_n)}{b_n-a_n} \le \frac{f(a_n)-f(0)}{a_n-0}$$
+	综上\com $$\min\left\{\frac{f(a_n)-f(0)}{a_n-0}\com \frac{f(b_n)-f(0)}{b_n-0} \right\}\le \frac{f(b_n)-f(a_n)}{b_n-a_n} \le \max\left\{\frac{f(a_n)-f(0)}{a_n-0}\com \frac{f(b_n)-f(0)}{b_n-0} \right\}$$
+	又$\displaystyle{\lim_{n\rightarrow\infty}\frac{f(b_n)-f(0)}{b_n-0}}=\displaystyle{\lim_{n\rightarrow\infty}\frac{f(a_n)-f(0)}{a_n-0}}=f'(0)$\com 则由夹逼定理\com 知$\lim\limits_{n\rightarrow \infty} \displaystyle{\frac{f(b_n)-f(a_n)}{b_n-a_n}}=f'(0) $。
+\end{proofs}
+
+\di[复合函数的求导法则]{
+	如果$g:(a,~b)\rightarrow (c,~d)$在点$x_0\in (a,~b)$可导\com 而$f: (c,~d)\rightarrow \mathbb{R}$在点$u_0=g(x_0)$处可导\com 则复合函数$f\circ g: (a,~b)\rightarrow \mathbb{R}$在点$x_0$可导\com 且$$(f\circ g)'(x_0)=f'(g(x_0))g'(x_0)$$
+}
+若记$y=f(u)$\com $u=g(x)$\com 这个定理也写作$$\frac{\dif y}{\dif x}=\frac{\dif y}{\dif u}\frac{\dif u}{\dif x}$$其也称为\textbf{\color{meihong!75!black}链式法则}。
+\di[反函数的求导法则]{
+	设函数$f:(a,~b)\rightarrow (c,~d)$为双射\com 在$x_0\in (a,~b)$可导\com 且${\color{meihong!75!black}f'(x_0)\neq 0}$\com 则反函数$f^{-1}$在$y_0=f(x_0)$处可导\com 且$$(f^{-1})'(y_0)=\frac{1}{f'(x_0)}$$
+}
+\begin{example}
+	$x=\tan y$（$y\in\left[-\dfrac{\pi}{2},~\dfrac{\pi}{2}\right]$）的反函数$y=\arctan x$的导数为$(\arctan x)'= \dfrac{1}{(\tan y)'_y}=\dfrac{1}{\dfrac{1}{\cos^2 y}}=\cos^2 y=\dfrac{\cos^2 y}{\sin^2 y+\cos^2y}=\dfrac{1}{1+\tan^2 y}=\dfrac{1}{1+x^2}$。\hfill $\circledS$
+\end{example}
+如此我们可以求出以下常见初等函数的导数。
+\begin{table}[ht!]
+	\begin{center}
+		\caption{常见初等函数的导函数}\label{Tab:1}
+		\begin{tabular}{p{60pt}<{\centering}p{60pt}<{\centering}|p{60pt}<{\centering}p{60pt}<{\centering}|p{60pt}<{\centering}p{60pt}<{\centering}}
+			\toprule
+			$\boldsymbol{f}$ & $\boldsymbol{f'}$ & $\boldsymbol{f}$ & $\boldsymbol{f'}$ & $\boldsymbol{f}$ & $\boldsymbol{f'}$\\
+			\midrule
+			$C$ & $0$ & $kx$ & $k$ & $x^\alpha$（$\alpha \neq 0$） & $\alpha x^{\alpha-1}$\\
+			$a^x$（$a>0$） & $a^x \ln a$ & \thead{$\log_a x$\\ （$a>0\com a \neq 1$）} & $\displaystyle{\frac{1}{x \ln a}}$ & $\ln x$ & $\displaystyle{\frac{1}{x}}$ \\
+			\rule{0pt}{20pt}
+			$\sin x$ & $\cos x$ & $\cos x$ & $-\sin x$ & $\tan x$ & $\displaystyle{\frac{1}{\cos ^2 x}}$ \\
+			\rule{0pt}{25pt}
+			\thead{$\sec x$\\$=\dfrac{1}{\cos^2 x}$} & \thead{$\sec x\tan x$\\$=\dfrac{\sin x}{\cos^2 x}$} & \thead{$\csc x$\\$=\dfrac{1}{\sin^2 x}$} & \thead{$-\csc x\cot x$\\$=-\dfrac{\cos x}{\sin^2 x}$}& $\cot x$ & $\displaystyle -\frac{1}{\sin ^2 x}$ \\
+			\rule{0pt}{25pt}
+			$\arcsin x$ & $\dfrac{1}{\sqrt{1-x^2}}$ & $\arccos x$ & $-\dfrac{1}{\sqrt{1-x^2}}$ & $\arctan x$ & $\dfrac{1}{1+x^2}$ \\
+			\rule{0pt}{30pt}
+			\thead{$\sinh x$\\$=\dfrac{\mathrm{e}^x-\mathrm{e}^{-x}}{2}$}& \thead{$\dfrac{\mathrm{e}^x+\mathrm{e}^{-x}}{2}$\\$=\cosh x$}& \thead{$\cosh x$\\$=\dfrac{\mathrm{e}^x+\mathrm{e}^{-x}}{2}$} &\thead{$\dfrac{\mathrm{e}^x-\mathrm{e}^{-x}}{2}$\\$=\sinh x$} & \thead{$\tanh x$\\$=\dfrac{\mathrm{e}^x-\mathrm{e}^{-x}}{\mathrm{e}^x+\mathrm{e}^{-x}}$} & \thead{$\dfrac{4}{\left(\mathrm{e}^x+\mathrm{e}^{-x}\right)^2}$\\$=\dfrac{1}{\cosh^2 x}$} \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+\subsubsection{特殊函数的求导}
+\di[隐函数的求导法则]{
+	考虑方程$f(x\com y)=0$\com 设$f$可导\com $f(x_0\com y_0)=0$\com 且在点$(x_0\com y_0)$的某邻域内可由此将$y$确定成关于$x$的可导函数$y=y(x)$\com 也即存在点$x_0$的某邻域$B(x_0)$使得$\forall x\in B(x_0)$\com $f(x\com y(x))=0$。于是由下个学期会讲的多元复合函数求导法则可得$$\frac{\partial f}{\partial x}(x\com y(x)) +\frac{\partial f}{\partial y}(x\com y(x))y'(x)=0$$
+	解出$$y'(x)=-\frac{\frac{\partial f}{\partial x}(x\com y(x))}{\frac{\partial f}{\partial y}(x\com y(x))}$$
+}
+\de[参数方程]{
+	形如$$\left\{\begin{NiceArray}{l}
+		x=x(t)\com \\y=y(t) \text{\com }
+	\end{NiceArray}\right.~ t\in (a,~b)$$的曲线方程称为\textbf{\color{bali!75!black}参数方程}。
+}
+考虑平面曲线方程$$\left\{\begin{NiceArray}{l}
+	x=x(t)\com \\y=y(t) \text{\com }
+\end{NiceArray}\right.~ t\in (a,~b)$$
+设函数$x(t)\com y(t)$关于参数$t$可导\com 并且$x'(t)\neq 0$。则在局部上\com 参数$t$可反过来看成是$x$的函数\com 也即$t=t(x)$。于是由反函数求导可得$\frac{\dif t}{\dif x}=\frac{1}{\frac{\dif x}{\dif t}}$。另外$y=y(t(x))$也可以被看成是$x$的函数。
+将函数~$y=y(t(x))$~关于~$x$~求导\com 则我们有
+\begin{equation*}
+	\frac{\dif y}{\dif x} =\frac{\dif y}{\dif t}\cdot\frac{\dif t}{\dif x}=\frac{\frac{\dif y}{\dif t}}{\frac{\dif x}{\dif t}} =\frac{y'(t)}{x'(t)}. 
+\end{equation*}
+同样 地\com 如 果$y'(t)\neq 0$\com 局 部 上\com 我们也可以将$x$看成是$y$的函数。此时我们则有
+\begin{equation*}
+\frac{\dif x}{\dif y}=\frac{x'(t)}{y'(t)}
+\end{equation*}
+
+可见\com 对参数方程确定的函数求导时\com 尽管求出的是$y$关于$x$的导数\com 但这个导函数常常是以参数$t$为变量的\com 大部分情况下$x$无法用$t$显式地表示\com 则这个导数也就保持其以$t$为变量的形式\com 这并不意味着它是关于$t$的导数。
+
+\de[高阶导数]{
+	归纳地定义$f$的高阶导数如下：若已定义了$n$阶导数$f^{(n)}$（也记作$\frac{\dif^nf}{\dif x^n}$）且其可导\com 则将$f^{(n)}$的导数称为\textbf{\color{bali!75!black}$\boldsymbol{f}$的$\boldsymbol{(n+1)}$阶导数}\com 记作$\boldsymbol{\color{bali!75!black}f^{(n+1)}}$\com 即$f^{(n+1)}=(f^{(n)})'$\com 也可写成$$\boldsymbol{\color{bali!75!black}\frac{\dif^{n+1}f}{\dif x^{n+1}}}=\frac{\dif}{\dif x}\left(\frac{\dif^nf}{\dif x^n}\right)$$
+	若$f$在$(a\com[0.5] b)$上$n$阶可导且$f^{(n)}$连续\com 那么称$f~$\textbf{\color{bali!75!black}$\boldsymbol{n}$阶连续可导}\com 也称$f$为$\mathscr{C}^{(n)}$类函数。所有这样函数组成的集合\com 记作$\mathscr{C}^{(n)}(a\com[0.5] b)$。特别地\com 若$f$在$(a\com[0.5] b)$上有任意阶导数\com 那么称$f$~\textbf{\color{bali!75!black}无穷可导}\com 也称$f$为$\mathscr{C}^{(\infty)}$类函数\com 所有这样函数组成的集合记作$\mathscr{C}^{(\infty)}(a\com[0.5] b)$。
+}
+\btheo{高阶导数的四则运算法则}
+	设$f$、$g$均$n$阶连续可导\com 则\\
+	（1）$\forall \lambda\com \mu\in\mathbb{R}$\com $(\lambda f+\mu g)^{(n)} =\lambda f^{(n)} +\mu g^{(n)}$；\\
+	（2）\textbf{\color{meihong!75!black}\textup{Leibniz}公式}\quad  $(fg)^{(n)} =\displaystyle\sum\limits_{k=0}^{n}\dbinom{n}{k}f^{(k)}g^{(n-k)}$\com 其中$\dbinom{n}{k} =\mathrm{C}_n^k =\dfrac{n!}{k!(n-k)!}$。
+\etheo
+设~$n\ge 1$~为整数\com 则常用的高阶求导公式有：
+\begin{equation*}
+	\begin{aligned}
+	&(x^{\alpha})^{(n)} =\alpha (\alpha-1) \cdots (\alpha-n+1)x^{\alpha-n}\quad(\alpha\in \mathbb{R})\\
+	&(e^{\alpha x})^{(n)} =\alpha^ne^{\alpha x}\quad{\color{meihong!75!black}(\alpha\in \mathbb{C})}\\
+	&\big(\ln (1+x)\big)^{(n)}=(-1)^{n-1}(n-1)!(1+x)^{-n}\\
+	&\sin^{(n)}(x)=\sin(x+\frac{n\pi}{2})\quad
+	\cos^{(n)}(x)=\cos(x+\frac{n\pi}{2})        
+	\end{aligned}
+\end{equation*}
+\btheo{}
+	初等函数在其定义域的内部无穷可导。
+\etheo
+
+\subsection{微分}
+\dep[微分]{189}{
+	设$f:(a,~b)\rightarrow\mathbb{R}$为函数\com $x_0\in (a,~b)$。称~$f$~在点~$x_0$~处\textbf{\color{bali!75!black}可微}\com 若$\exists A\in\mathbb{R}$使得$$f(x_0+h)-f(x_0) =Ah +o(h) \quad (h\rightarrow 0)$$
+	此时还称线性函数$h\mapsto Ah$为$f$在点$x_0$处的\textbf{\color{bali!75!black}微分}\com 记作$\displaystyle{\color{bali!75!black} \dif f(x_0)}$或$\dif y|_{x=x_0}$。
+	\\若函数$f$在$(a,~b)$的每一点处可微\com 则称之在$(a,~b)$上可微。
+}
+\subsection{函数的研究}
+\subsubsection{微分中值定理}
+\dep[驻点]{150}{
+	设函数$f:(a,~b)\rightarrow\mathbb{R}$可导\com 若$x_0\in(a\com[0.5] b)$\com 且$f'(x_0)=0$\com 则$x_0$称为函数$f$的一个\textbf{\color{bali!75!black}驻点}。
+}
+\btheo{Fermat定理\page{149}}
+	函数在其上{\color{meihong!75!black}可导}的极值点是函数的驻点。
+\etheo
+\btheo{导数介值定理\textmd{（Darboux定理）}}
+	若$f$在$[a,~b]$上可导\com $\mu$严格介于$f'_+(a)$与$f'_-(b)$之间\com 则$\exists\xi\in (a,~b)$使得$f'(\xi)=\mu$。
+\etheo
+\begin{corollary}
+	定义在区间上的可导函数的导数像集为区间。
+\end{corollary}
+\dip[Rolle定理]{150}{
+	如果$f\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com $f(a)=f(b)$\com 则$\exists \xi \in (a,~b)$使$f'(\xi)=0$。
+}
+\begin{corollary}
+	如果$f\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com $f(a+)=f(b-)$有限或无穷\com 则$\exists \xi \in (a,~b)$使$f'(\xi)=0$。
+\end{corollary}
+\begin{proofs}[\indent \yan{证法一}]
+	若$f(a+)=f(b-)$有限\com 取函数$F(x)=\left\{ \begin{NiceArray}{ll}
+		f(a+)\com & x=a\com \\
+		f(x)\com & x\in (a,~b)\com \\
+		f(b-)\com & x=b\com 
+	\end{NiceArray}\right.$对其在$[a\com[0.5] b]$上用Rolle定理即可。
+
+	若$f(a+)=f(b-)$无穷\com 由连续性不妨设$f(a+)=f(b-)=+\infty$\com 则知$\forall M > {\colors{meihong} f\left(\dfrac{a+b}{2}\right)}$\com $\exists \delta \in \left(0,~\dfrac{a+b}{2}\right)$\com 使得当$a<x<a+\delta$及$b-\delta < x<b$时都有$f(x)>M>f\left(\dfrac{a+b}{2}\right)$\com 于是由介值定理知对$\mu \in \left(f\left(\dfrac{a+b}{2}\right),~M\right)$\com $\exists \xi_1 \in \left(a,~\dfrac{a+b}{2}\right)$\com $\xi_2 \in \left(\dfrac{a+b}{2},~b\right)$\com 使$f(\xi_1)=f(\xi_2)=\mu$\com 在$[\xi_1,~\xi_2]$上用Rolle定理即可。
+\end{proofs}
+\begin{proofs}[\indent \yan{证法二}]
+	取$F(x)=\arctan f(x)$\com $\tilde{F} (x)=\left\{ \begin{NiceArray}{ll}
+		F(a+)\com & x=a\com \\
+		F(x)\com & x\in (a\com[0.5] b)\com \\
+		F(b-)\com & x=b\com 
+	\end{NiceArray}\right.$则知$\tilde{F} \in \mathscr{C}[a\com[0.5] b]$在$(a\com[0.5] b)$内可导\com 直接用Rolle定理即可。
+\end{proofs}
+\begin{corollary}
+	如果$f\in \mathscr{C}(\R)$在$\R$上可导\com $f(-\infty)=f(+\infty)$有限\com 则$\exists \xi \in \R$使$f'(\xi)=0$。
+\end{corollary}
+\begin{proofs}
+	取$F(x)=f(\tan x)$（$x\in \left(-\dfrac{\pi}{2},~\dfrac{\pi}{2}\right)$）\com $\tilde{F} (x)=\left\{ \begin{NiceArray}{ll}
+		f(-\infty)\com & x=-\dfrac{\pi}{2}\com \\
+		F(x)\com & x\in \left(-\dfrac{\pi}{2},~\dfrac{\pi}{2}\right)\com \\
+		F(+\infty)\com & x=\dfrac{\pi}{2}\com 
+	\end{NiceArray}\right.$则知$\tilde{F} \in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com 直接用Rolle定理即可。
+\end{proofs}
+
+\zhu[含有高阶导数的$\boldsymbol{\xi}$存在性的处理]{
+	（1）移项\com 将含有$x$的项整体记为$\lambda$；\\
+	（2）积分构造函数；\\
+	（3）依据所给条件构造新函数（或其某阶导数）的零点；\\
+	（4）应用Rolle定理。
+}
+
+\di[Lagrange中值定理]{
+	如果$f\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com 则$\exists \xi \in (a,~b)$使$f'(\xi)=\dfrac{f(b)-f(a)}{b-a}$。
+}
+\begin{proofs}
+	构造$F(x)=f(x)-\left(f(a)+\dfrac{f(b)-f(a)}{b-a}(x-a)\right)$。
+\end{proofs}
+Rolle定理是Lagrange中值定理在$f(a)=f(b)$处的特例。
+\begin{corollary}
+	如果$f\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com 则$f$为常值函数当且仅当$f$在$(a,~b)$上导数恒为\textup{0}。
+\end{corollary}
+\di[Cauchy中值定理]{
+	如果$f,~g\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com 则$\exists \xi \in (a,~b)$使$$(f(b)-f(a))g'(\xi)=(g(b)-g(a))f'(\xi)$$
+}
+\begin{proofs}
+	构造$F(x)=(f(b)-f(a))(g(x)-g(a))-(g(b)-g(a))(f(x)-f(a))$。
+\end{proofs}
+Lagrange中值定理是Cauchy中值定理在$g(x)=x$时的特例。
+\begin{corollary}
+	如果$f,~g\in \mathscr{C}[a\com[0.5] b]$在$(a\com[0.5] b)$内可导\com $g'(x)\neq 0$\com 则$\exists \xi \in (a\com[0.5] b)$使$$\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}$$
+\end{corollary}
+注意这个推论不是Lagrange中值定理的直接推论。
+\begin{corollary}
+	如果$f,~g\in \mathscr{C}[a,~b]$在$(a,~b)$内可导\com 且$f(a)=f(b)=0$\com 则$\exists \xi \in (a,~b)$使$$f'(\xi)+g'(\xi)f(\xi)=0$$
+\end{corollary}
+\begin{proofs}
+	构造$F(x)=f(x)\e^{g(x)}$。
+\end{proofs}
+\zhu[三个微分中值定理的使用]{
+	一方面\com 三个微分中值定理只是言明了$\xi$的存在性\com 并没有更进一步的信息；另一方面\com 通过构造函数\com 微分中值定理联系了函数与导函数\com 也可以证明不等式。
+}
+\begin{example}
+	设$f,~g\in\mathscr{C}[a,~b]$在~$(a,~b)$~内二阶可导且有相同最大值\com 若~$f(a)=g(a)$\com $f(b)=g(b)$\com 求证：$\exists \xi\in (a,~b)$~使得~$f''(\xi)=g''(\xi)$。
+\end{example}
+\begin{proofs}
+	构造函数$F(x)=f(x)-g(x)$\com 则$F\in \mathscr{C}[a,~b]$\com 在$(a,~b)$二阶可导。设~$f,~g$~在~$(a,~b)$~内的最大值点分别为~$\alpha\com \beta$\com 则~$f(\alpha)=g(\beta)$\com 并且由函数连续性知 这也是~$f,~g$~在~$[a,~b]$~上的最大值。
+
+	若~$\alpha=\beta$\com 令~$\eta=\alpha$\com 此时~$F(\eta)=0$。 
+
+	若~$\alpha\neq\beta$\com 则
+	$F(\alpha)=f(\alpha)-g(\alpha)=g(\beta)-g(\alpha)\ge 0$\com 
+	$F(\beta)=f(\beta)-g(\beta)=f(\beta)-f(\alpha)\le 0$\com 
+	于 是由连续函数介值定理可知\com $\exists\eta\in(a\com[0.5] b)$~ 使得
+	$F(\eta)=0$。  又~$F(a)=F(b)=0$\com 则由~Rolle~定理可知\com $\exists \xi_1\in (a,~\eta)$\com 
+	$\exists \xi_2\in (\eta,~b)$~ 使得~$F'(\xi_1)=0$\com $F'(\xi_2)=0$。 
+	再由~Rolle~定理可得知\com $\exists \xi\in (\xi_1,~\xi_2)$
+	使得~$F''(\xi)=0$\com 
+	也即~$f''(\xi)=g''(\xi)$。
+\end{proofs}
+\begin{example}
+	如果$f:\R\rightarrow\R$可导\com 且对任意$x\in\R$都有$f'(x)=f(x)$\com 则存在$c\in \R$使得$f(x)=c\e^x$。
+\end{example}
+\begin{proofs}
+	构造函数$F(x)=f(x)\e^{-x}$。
+\end{proofs}
+
+\subsubsection{函数的基本性质}
+\di[单调性与导数]{
+	设~$f\in\mathscr{C}[a\com[0.5] b]$~在~$(a\com[0.5] b)$~内可导. 则\\
+	（1）函数$f$递增当且仅当$\forall x\in (a\com[0.5] b)$\com $f'(x)\ge 0$；\\
+	（2）函数$f$递减当且仅当$\forall x\in (a\com[0.5] b)$\com $f'(x)\le 0$；\\
+	（3）函数$f$严格递增当且仅当~$\forall x\in (a\com[0.5] b)$\com 
+	均有~$f'(x)\ge 0$\com 且~$f'$~在~$(a\com[0.5] b)$~的任意子区间上不恒为零；\\
+	（4）函数$f$严格递减当且仅当~$\forall x\in (a\com[0.5] b)$\com 
+	均有~$f'(x)\le 0$\com 且~$f'$~在~$(a\com[0.5] b)$~的任意子区间上不恒为零；
+}
+\zhu[研究（初等）函数的单调性的步骤]{
+	（1）计算导数\com 找出{\colors{qinglv}临界点}（驻点、导数不存在的点）；\\
+	（2）以临界点为端点来分割函数的定义域；\\
+	（3）判断导函数在每个子区间的符号\com 由此确定函数的单调性。
+}
+画草图是很好用的方法。
+\begin{theorem}
+	假设$f$ 在 $[a\com[0.5] b]$ 上连续\com $f'(x_0)=0$\com $f''(x_0)$存在。那么\\
+	（1）当 $f''(x_0)<0$ 时\com $f(x_0)$ 是一个严格极大值；\\
+	（2）当 $f''(x_0)>0$ 时\com $f(x_0)$ 是一个严格极小值。
+\end{theorem}
+\de[凸函数]{
+	设~$I$~为区间\com 而~$f:I\rightarrow\mathbb{R}$~为函数\com \\
+	（1）若~$\forall x\com y\in I$~以及~$\forall \lambda\in (0\com 1)$\com 均有
+	$f\big(\lambda x+(1-\lambda)y\big)\le \lambda f(x)+(1-\lambda)f(y)$\com 
+	则称~$f$~为~$I$~上的\tboba{下凸函数}\com 简称\tboba{凸函数}。
+
+	\quad\quad 特别地\com 若~$\forall x\com y\in I\ (x\neq y)$~以及~$\forall \lambda\in (0\com 1)$\com 均有
+	$f\big(\lambda x+(1-\lambda)y\big)< \lambda f(x)+(1-\lambda)f(y)$\com 
+	则称~$f$~为~$I$~上严格下凸函数\com 也称严格凸函数。
+
+	（2）若~$\forall x\com y\in I$~以及~$\forall \lambda\in (0\com 1)$\com 均有
+	$f\big(\lambda x+(1-\lambda)y\big)\ge \lambda f(x)+(1-\lambda)f(y)$\com 
+	则称~$f$~为~$I$~上的\tboba{上凸函数}\com 也称\tboba{凹函数}。 
+
+	\quad \quad 特别地\com 若~$\forall x\com y\in I\ (x\neq y)$~以及~$\forall \lambda\in (0\com 1)$\com 均有
+	$f\big(\lambda x+(1-\lambda)y\big)>\lambda f(x)+(1-\lambda)f(y)$\com 
+	则称~$f$~为~$I$~上严格上凸函数\com 也称严格凹函数。
+}
+\di[凸函数的等价定义之一]{
+	函数~$f$~为区间~$I$~上的凸函数当且仅当对任意整数$n\ge 1$\com 对任意的$x_1\com x_2\com \cdots\com x_n\in I$\com 对任意~$\lambda_1\com \ldots\com \lambda_n\ge 0$\com 若~$\lambda_1+\cdots +\lambda_n=1$\com 则
+	\begin{equation}
+		f\left(\sum_{k=1}^n\lambda_k x_k\right)\le \sum_{k=1}^n\lambda_k f(x_k)
+	\end{equation}
+}
+\begin{proofs}
+	\kai
+	充分性只需令$n=2$；
+	
+	必要性用数学归纳法\com 有
+	$f\left(\sum\limits_{k=1}^{n+1}\lambda_k x_k\right)=f\left(\lambda_{n+1}x_{n+1}+(1-\lambda_{n+1})\sum\limits_{k=1}^{n}\dfrac{\lambda_k}{1-\lambda_{n+1}} x_k\right)$。
+\end{proofs}
+式中\com $\sum\limits_{k=1}^n\lambda_k x_k$称为$x_1\com x_2\com \cdots\com x_n$的一个\textbf{凸组合}。
+\di[凸函数的等价定义之二]{
+	函数~$f$~为区间~$I$~上的凸函数当且仅当$\forall x_1\com x_2\com x_3\in I$\com 当~$x_1<x_2<x_3$~时\com 均有
+	\begin{equation}
+		\frac{f(x_2)-f(x_1)}{x_2-x_1}\le \frac{f(x_3)-f(x_1)}{x_3-x_1}\le \frac{f(x_3)-f(x_2)}{x_3-x_2}
+	\end{equation}
+}
+\begin{proofs}
+	\kai
+	充分性只需令$x_1=x$\com $x_2=\lambda x + (1-\lambda)y$\com $x_3=y$；
+
+	必要性只需令$\lambda=\dfrac{x_3-x_2}{x_3-x_1}$\com 即设$x_2=\lambda x_1 + (1-\lambda)x_3$\com 有 
+	\begin{equation*}
+		\begin{aligned}
+			f(x_2) &\le \frac{x_3-x_2}{x_3-x_1}\cdot f(x_1)+\left(1- \frac{x_3-x_2}{x_3-x_1}\right)\cdot f(x_3)\\
+			&=\frac{x_3-x_2}{x_3-x_1}\cdot f(x_1)+\frac{x_2-x_1}{x_3-x_1}\cdot (f(x_3)-f(x_2))+\frac{x_2-x_1}{x_3-x_1}\cdot f(x_2)
+		\end{aligned}
+	\end{equation*}
+	即有$\dfrac{f(x_2)-f(x_1)}{x_2-x_1}\le \dfrac{f(x_3)-f(x_2)}{x_3-x_2}$。又一般地由$\dfrac{a}{b}\le \dfrac{c}{d}\xLongrightarrow{~b>0 \com d>0~} \dfrac{a}{b}\le \dfrac{a+c}{b+d}\le \dfrac{c}{d}$可证。
+\end{proofs}
+\di[凹凸性与二阶导数的关系]{
+	如果$f\in\mathscr{C}[a\com[0.5] b]$在$(a\com[0.5] b)$上二阶可导\com 则$f$为凸函数当且仅当$\forall x \in (a\com[0.5] b)$\com 均有$f''(x)\ge 0$。\\如果$f\in\mathscr{C}[a\com[0.5] b]$在$(a\com[0.5] b)$上二阶可导\com 则$f$为严格凸函数当且仅当$\forall x \in (a\com[0.5] b)$\com $f''(x)\ge 0$\com 且$f''$在$(a\com[0.5] b)$的任意子区间上不恒为零。
+}
+\de[拐点]{函数图像凸凹性发生改变的点称为\tboba{拐点}。}
+若函数~$f$~可导且点~$(x_0\com f(x_0))$~为~$f$~的图像的拐点\com 则~$x_0$~为~$f'$~的极值点；若~$f$~在点~$x_0$~处二阶可导且点~$(x_0\com f(x_0))$为~$f$~的函数图像的拐点\com 则~$f''(x_0)= 0$。
+\zhu[研究（初等）函数的凹凸性的步骤]{
+	（1）计算二阶导数\com 找出{\colors{qinglv}临界点}（拐点、二阶导数不存在的点）；\\
+	（2）以临界点为端点来分割函数的定义域；\\
+	（3）判断二阶导数在每个子区间的符号\com 由此确定函数的凹凸性。
+}
+
+\de[渐近线]{
+	设曲线~$\Gamma$~由方程~$y=f(x)$~给出\com \\
+	（1）若~$\lim\limits_{x\rightarrow -\infty}f(x)=L$~或~$\lim\limits_{x\rightarrow +\infty}f(x)=L$\com 则称~$y=L$为曲线~$\Gamma$~的\tboba{水平渐近线}\com 其中~$L\in\mathbb{R}$；\\
+	（2）若~$x_0\in\mathbb{R}$~使~$\lim\limits_{x\rightarrow x_0^{-}}f(x)=\infty$~或$\lim\limits_{x\rightarrow x_0^{+}}f(x)=\infty$\com 则称~$x=x_0$~为曲线~$\Gamma$~的\tboba{竖直渐近线}；\\
+	（3）若~$\exists k\com b\in\mathbb{R}$~使得~$\lim\limits_{x\rightarrow +\infty}\big(f(x)-kx-b\big)=0$~或$\lim\limits_{x\rightarrow -\infty}\big(f(x)-kx-b\big)=0$\com 称~$y=kx+b$~为曲线~$\Gamma$~的\tboba{斜渐近线}\com 其中假设~$k\neq 0$。
+}
+由斜渐近线的定义\com 曲线~$y=f(x)$~有斜渐近线$y=kx+b$（其中~$k\neq 0$）当且仅当 我们有
+\begin{eqnarray*}
+k=\lim_{x\rightarrow +\infty}\frac{f(x)}{x}\neq 0\com \quad b=\lim_{x\rightarrow +\infty}(f(x)-kx)
+\end{eqnarray*}
+或者我们有
+\begin{eqnarray*}
+k=\lim_{x\rightarrow -\infty}\frac{f(x)}{x}\neq 0\com \quad b=\lim_{x\rightarrow -\infty}(f(x)-kx)
+\end{eqnarray*}
+这同时给出了求斜渐近线的方法。
+
+\subsubsection{L'Hospital法则}
+\din[L'Hospital法则（$\boldsymbol{\frac{0}{0}}$型）]{
+	假设$f(x)\com g(x)$在点$x_0$的某个去心邻域内可导\com 并且 $g'(x)\not=0$\com 满足：
+
+	（1）  $\displaystyle \lim_{x\to x_0} f(x)=\lim_{x\to x_0} g(x)=0$；
+	
+	（2）  $\displaystyle  \lim_{x\to x_0} \frac{f'(x)}{g'(x)}$ 存在或者等于 $\pm \infty$ 或者 $\infty$；
+	
+	那么  $\displaystyle  \lim_{x\to x_0} \frac{f(x)}{g(x)}=\lim_{x\to x_0} \frac{f'(x)}{g'(x)}$。
+}
+\din[L'Hospital法则（$\boldsymbol{\frac{*}{\infty}}$型）]{
+	假设函数 $f\com g $ 在 $(x_0\com x_0+\rho)$ 上可导\com $g'(x)\not=0$ \com 并且当 $x\to x_0^+$时\com $g(x)\to \infty$。 如果存在 $A\in [-\infty\com +\infty]$ 或者 $A=\infty$\com 使得
+	$ \lim\limits_{x\to x_0^+} \dfrac{f'(x)}{g'(x)}=A$\com 那么$\lim\limits_{x\to x_0^+} \dfrac{f(x)}{g(x)}=A$。
+}
+$x\rightarrow +\infty$等情形也有这些结论。
+\zhu[不定型]{
+	极限无法确定的情形包括$\dfrac{0}{0}$、$\dfrac{\infty}{\infty}$、$0\cdot\infty$、$\infty-\infty$、$0^0$、$\infty^0$、$1^\infty$等\com 这些均可以转化为适用L'Hospital法则的情形。
+}
+
+\subsection{Taylor定理}
+\subsubsection[（带Peano余项）]{带Peano余项的Taylor公式}
+\di[带Peano余项的Taylor公式]{
+	假设~$n\ge 1$为整数\com $x_0\in\mathbb{R}$\com $B(x_0)$为$x_0$的邻域\com 函数~$f:B(x_0)\rightarrow \mathbb{R}$~为~$n-1$~阶可导且在点~$x_0$为~$n$~阶可导。则当~$x\rightarrow x_0$~时\com $$f(x)=\sum\limits_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o\big((x-x_0)^n\big)$$
+	其中$\sum\limits_{k=0}^{n}\dfrac{f^{(k)}(x_0)}{k!}(x-x_0)^k$称为$f$在点$x_0$处的$n$阶~\tbome{\textup{Taylor}多项式}\com $o\big((x-x_0)^n\big)$称为~\tbome{\textup{Peano}余项}。
+}
+\begin{proofs}
+	令$r_n(x)=f(x)-\sum\limits_{k=0}^{n}\dfrac{f^{(k)}(x_0)}{k!}(x-x_0)^k$\com 由于~$r_n$~为~$n-1$~阶可导\com $r^{(n)}_n(x_0)$~存在\com 且
+	\begin{equation*}
+	r^{(n-1)}_n(x)=f^{(n-1)}(x)-f^{(n-1)}(x_0)-f^{(n)}(x_0)(x-x_0)
+	\end{equation*}
+	故$r^{(n-1)}_n(x_0)=0=r^{(n)}_n(x_0)$\com 由L'Hospital法则\com 
+	\begin{equation*}
+	\lim_{x\rightarrow x_0}\frac{r_n(x)}{(x-x_0)^n}
+	=\lim_{x\rightarrow x_0}\frac{r_n^{(n-1)}(x)}{n!(x-x_0)}
+	=\lim_{x\rightarrow x_0}\frac{r_n^{(n-1)}(x)-r_n^{(n-1)}(x_0)}{n!(x-x_0)}=\frac{r_n^{(n)}(x_0)}{n!}=0
+	\end{equation*}
+	因此所证结论成立。
+\end{proofs}
+
+当$x_0=0$\com 即$x\rightarrow 0$时\com 该公式也称为~\tbome{Maclaurin公式}。基本的Maclaurin公式有
+\di[基本Maclaurin展开式]{
+\begin{equation*}
+	\begin{aligned}
+		&e^x=\sum\limits_{k=0}^n\frac{x^k}{k!}+o(x^n)
+		\qquad \ln(1+x)=\sum\limits_{k=1}^n(-1)^{k-1}\frac{x^{k}}{k}+o(x^{n})\\
+		&\sin x=\sum\limits_{k=0}^n\frac{(-1)^k x^{2k+1}}{(2k+1)!}+ o(x^{2n+1})\qquad
+		\cos x=\sum\limits_{k=0}^n\frac{(-1)^k x^{2k}}{(2k)!}+o(x^{2n})\\
+		&(1+x)^{\alpha}=\sum\limits_{k=0}^n\frac{\alpha(\alpha-1)\cdots (\alpha-k+1)}{k!}x^k+o(x^{n})\\
+		&\frac{1}{1-x}=\sum\limits_{k=0}^nx^k+o(x^n)
+	\end{aligned}
+\end{equation*}
+}
+\begin{example}
+	\begin{equation*}
+		\begin{aligned}
+				&\lim\limits_{x\rightarrow 0^{+}}\frac{e^{\sin^2 x}-\cos(2\sqrt{x})-2x}{x^2}\\
+				&=\lim\limits_{x\rightarrow 0^{+}}\frac{1}{x^2}\left[\left(1+\sin^2x+o(\sin^2x)\right)-\left(1-\frac{1}{2!}(2\sqrt{x})^2+\frac{1}{4!}(2\sqrt{x})^4+o(x^2)\right)-2x\right]\\
+				&=\lim\limits_{x\rightarrow 0^{+}}\frac{1}{x^2}\left(\sin^2x-\frac{2}{3}x^2\right)
+				=1-\frac{2}{3}=\frac{1}{3}
+		\end{aligned}
+	\end{equation*}
+\end{example}
+\zhu[基本函数在非零处的Taylor展开]{
+	要求基本函数在非零$x_0$处的Taylor展开\com 可换元$t=x-x_0$\com 对$t$做 Maclaurin 展开\com 然后将$x$代回。
+}
+\subsubsection[（带Lagrange余项）]{带Lagrange余项的Taylor公式}
+\di[带Lagrange余项的Taylor公式]{
+	假设~$n\in\mathbb{N}^{*}$\com $f\in\mathscr{C}^{(n)}[a\com[0.5] b]$~在~$(a\com[0.5] b)$~上~$n+1$~阶可导\com 那么$\forall x_0\com x\in [a\com[0.5] b]\ (x_0\neq x)$\com 存在~$\xi_{x_0}(x)$~严格介于~$x_0\com x$~之间使得
+	\begin{equation*}
+		f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+\frac{f^{(n+1)}(\xi_{x_0}(x))}{(n+1)!}(x-x_0)^{n+1}
+	\end{equation*}
+	其中$\dfrac{f^{(n+1)}(\xi_{x_0}(x))}{(n+1)!}(x-x_0)^{n+1}$称为~\tbome{\textup{Lagrange}余项}；$\xi_{x_0}(x)$与$x$和$x_0$都有关\com 也可写成$x_0+\theta(x-x_0)$（$\theta \in (0\com 1)$）\com $\theta$也与$x$和$x_0$有关。
+}
+\begin{proofs}
+	不失一般性\com 设~$x>x_0$。$\forall t\in [x_0\com x]$\com 令
+	\begin{equation*}
+	F(t)=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(t)}{k!}(x-t)^k\com \quad G(t)=(x-t)^{n+1}
+	\end{equation*}
+	则~$F\in\mathscr{C}[x_0\com x]$~在~$(x_0\com x)$~上可导\com $\forall t\in [x_0\com x]$\com 
+	\begin{equation*}
+		\begin{aligned}
+				&F'(t)=-\sum_{k=0}^{n}\frac{f^{(k+1)}(t)}{k!}(x-t)^k-\sum_{k=1}^{n}\frac{f^{(k)}(t)}{(k-1)!}(x-t)^{k-1}\cdot (-1)=-\frac{f^{(n+1)}(t)}{n!}(x-t)^n\\
+				&G'(t)=-(n+1)(x-t)^n
+		\end{aligned}
+	\end{equation*}
+	又$F(x)=G(x)=0$\com 则由~Cauchy~中值定理可知\com $\exists\xi\in (x_0\com x)$使得
+	\begin{equation*}
+	\frac{F(x_0)}{G(x_0)}=\frac{F(x)-F(x_0)}{G(x)-G(x_0)}
+	=\frac{F'(\xi)}{G'(\xi)}=\frac{f^{(n+1)}(\xi)}{(n+1)!}
+	\end{equation*}
+	即$F(x_0)=\dfrac{f^{(n+1)}(\xi)}{(n+1)!}G(x_0)
+	=\dfrac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$\com 
+	故所证结论成立。
+\end{proofs}
+
+\begin{example}
+	（{\kai 期中}）已知$f$在$(a\com[0.5] b)$上二阶可导\com 证明：存在$\xi \in (a\com[0.5] b)$\com 使
+	$$f(b)-2f\left(\frac{a+b}{2}\right)+f(a)=\frac{(b-a)^2}{4}f''(\xi)$$
+\end{example}
+\begin{proofs}
+	\kai
+	取$f$在$\dfrac{a+b}{2}$处的Taylor展开\com 即存在$\xi_x$严格介于$x$与$\dfrac{a+b}{2}$之间\com 有
+	$$f(x)=f\left(\frac{a+b}{2}\right)+f'\left(\frac{a+b}{2}\right)\left(x - \frac{a+b}{2}\right)+\frac{f''(\xi_x)}{2}\left(x - \frac{a+b}{2}\right)^2$$
+	代入$a$、$b$\com 即存在$\xi_1 \in \left(a\com \dfrac{a+b}{2}\right)$、$\xi_2 \in \left(\dfrac{a+b}{2}\com b\right)$\com 使得
+	\begin{align*}
+		f(a)&=f\left(\frac{a+b}{2}\right)+f'\left(\frac{a+b}{2}\right)\left(\frac{a-b}{2}\right)+\frac{f''(\xi_1)}{2}\left(\frac{a-b}{2}\right)^2\\
+		f(b)&=f\left(\frac{a+b}{2}\right)+f'\left(\frac{a+b}{2}\right)\left(\frac{b-a}{2}\right)+\frac{f''(\xi_2)}{2}\left(\frac{b-a}{2}\right)^2
+	\end{align*}
+	两式相加\com 即
+	$$f(b)-2f\left(\frac{a+b}{2}\right)+f(a)=\frac{(b-a)^2}{4} \cdot \frac{f''(\xi_1)+f''(\xi_2)}{2}$$
+	由Darboux定理\com 存在$\xi \in (\xi_1\com \xi_2) \subseteq (a\com[0.5] b)$\com 使$f''(\xi)=\dfrac{f''(\xi_1)+f''(\xi_2)}{2}$\com 则原式得证。
+\end{proofs}
+\begin{example}
+	（\textit{期中}）设$x_0\in (a\com[0.5] b)$\com 函数$f$在$(a\com[0.5] b)$上可导\com 在$x_0$处二阶可导且$f''(x_0) \neq 0 $。求证：
+
+	（1）$\forall x \in (a\com[0.5] b)\backslash \{x_0\}$\com $\exists \theta(x) \in (0\com 1)$\com 使得$f(x)=f(x_0)+f'(x_0+\theta(x)(x-x_0))(x-x_0)$；
+
+	（2）由（1）给出的$\theta(x)$满足$\lim\limits_{x \to x_0}\theta(x)=\dfrac{1}{2}$。
+\end{example}
+\begin{proofs}
+	由带Lagrange余项的Taylor定理\com 令$\xi = x_0 + \theta(x)(x-x_0)$\com 则知$\forall x \in (a\com[0.5] b)\backslash \{x_0\}$\com 存在$\xi$严格介于$x_0\com x$之间\com 也即$\exists \theta(x) \in (0\com 1)$\com 使得
+	\begin{align*}
+		f(x)=f(x_0)+f'(\xi)(x-x_0)=f(x_0)+f'(x_0+\theta(x)(x-x_0))(x-x_0)
+	\end{align*}
+	\quad 由夹逼原理\com 知$\lim\limits_{x \to x_0}\theta(x)(x-x_0)=0$。则由导数定义知
+	\begin{align*}
+		f''(x_0) &= \lim\limits_{\xi \to x_0}\frac{f'(\xi)-f'(x_0)}{\xi-x_0}
+		= \lim\limits_{x \to x_0}\frac{f'(x_0 + \theta(x)(x-x_0))-f'(x_0)}{\theta(x)(x-x_0)}\\
+		&= \lim\limits_{x \to x_0}\frac{\dfrac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}{\theta(x)(x-x_0)}
+		= \lim\limits_{x \to x_0}\frac{f(x)-f(x_0)-f'(x_0)(x-x_0)}{\theta(x)(x-x_0)^2}
+	\end{align*}
+	而$\dfrac{f(x)-f(x_0)-f'(x_0)(x-x_0)}{(x-x_0)^2}$的极限可求：
+	$$\lim\limits_{x \to x_0}\frac{f(x)-f(x_0)-f'(x_0)(x-x_0)}{(x-x_0)^2}
+	\xlongequal{\textup{L'Hospital}}\lim\limits_{x \to x_0}\frac{f'(x)-f'(x_0)}{2(x-x_0)}
+	=\frac{f''(x_0)}{2}$$
+	即$f''(x_0) = \lim\limits_{x \to x_0} \dfrac{1}{\theta(x)} \cdot \dfrac{f''(x_0)}{2}$\com 又$f''(x_0) \neq 0 $\com 故$\lim\limits_{x \to x_0}\theta(x)=\dfrac{1}{2}$。
+\end{proofs}
+当$x_0=0$\com 即$\xi_{x_0}(x)=\theta x$（$\theta \in (0\com 1)$）时\com 有
+\di[带Lagrange余项的基本Taylor公式]{
+\begin{equation*}
+	\begin{aligned}
+		&e^x=\sum\limits_{k=0}^n\frac{x^k}{k!}+\frac{e^{\theta x}}{(n+1)!}x^{n+1}\\
+		&\sin x=\sum\limits_{k=0}^n(-1)^{k}\frac{x^{2k+1}}{(2k+1)!}+(-1)^{n+1}\frac{\sin(\theta x)}{(2n+2)!}x^{2n+2}\\
+		&\cos x=\sum\limits_{k=0}^n(-1)^k\frac{x^{2k}}{(2k)!}+(-1)^{n+1}\frac{\sin(\theta x)}{(2n+1)!}x^{2n+1}\\
+		&\log(1+x)=\sum\limits_{k=1}^n(-1)^{k-1}\frac{x^{k}}{k}+\frac{(-1)^{n}x^{n+1}}{(n+1)(1+\theta x)^{n+1}}\\
+		&(1+x)^{\alpha}=\sum\limits_{k=0}^n\frac{\alpha(\alpha-1)\cdots (\alpha-k+1)}{k!}x^k+\frac{\alpha(\alpha-1)\cdots (\alpha-n)}{(n+1)!}(1+\theta x)^{\alpha-n-1}x^{n+1}
+	\end{aligned}
+\end{equation*}
+}
+
+\newpage
+\section{不定积分}
+\subsection{基本积分法}
+\subsubsection{定义法}
+\dep[不定积分]{228}{
+	将定义在区间上的函数~$f$~的原函数的一般表达式称为~$f$~的\tboba{不定积分}\com 记作$\displaystyle{\int f(x)\dif x}$。
+}
+若$\int f(x) \dif x=F(x)+C$\com 即$F'(x)=f(x)$\com 则容易看出不定积分与导数、微分有如下关系：
+\begin{equation*}
+	\begin{aligned}
+		&\left(\int f(x) \dif x\right)'=F'(x)=f(x)\\
+		&\dif F(x)=\dif \left(\int f(x) \dif x \right)=f(x)\dif x\\
+		&\int f(x)\dif x=\int F'(x) \dif x =\int \dif F(x)=F(x)+C
+	\end{aligned}
+\end{equation*}
+\begin{theorem}
+	\textbf{不定积分的线性性}\quad $\forall \alpha\com \beta\in\mathbb{R}$\com 有$$\int (\alpha f(x)+\beta g(x))\dif x =\alpha\int f(x)\dif x+\beta\int g(x)\dif x$$
+\end{theorem}
+从常见的初等函数的导数（见表~\ref{Tab:1}）出发\com 我们能得到一些基本的不定积分公式如下表~\ref{Tab:2}~所示。
+\begin{table}[ht!]
+	\begin{center}
+		\caption{基本的不定积分公式$\displaystyle{\int }f(x) \dif x =F(x)+C$}\label{Tab:2}
+		\begin{tabular}{p{105pt}<{\centering}p{90pt}<{\centering}|p{105pt}<{\centering}p{90pt}<{\centering}}
+			\toprule
+			$\boldsymbol{f(x) \dif x}$ & $\boldsymbol{F(x)}$ & $\boldsymbol{f(x) \dif x}$ & $\boldsymbol{F(x)}$ \\
+			\midrule
+			0 & 0 & $k\dif x$ & $kx$ \\
+			\rule{0pt}{15pt}
+			$x^\alpha\dif x$（$\alpha \neq -1$） & $\dfrac{x^{\alpha+1}}{\alpha+1}$ &
+			$\dfrac{\dif x}{x}$ & $\ln |x|$ \\
+			\rule{0pt}{20pt}
+			$a^x\dif x$（$a>0$\com $a \neq 1$） & $\dfrac{a^x}{\ln a}$ & $\e^x\dif x$ & $\e^x$ \\
+			\rule{0pt}{15pt}
+			$\ln x\dif x$ & $x\ln x -x$ & & \\
+			$\sin x\dif x$ & $-\cos x$ & $\cos x\dif x$ & $\sin x$ \\
+			$\tan x\dif x$ & $-\ln |\cos x|$ & $\cot x\dif x$ & $\ln |\sin x|$ \\
+			\rule{0pt}{20pt}
+			$\dfrac{\dif x}{\sin x}=\csc x\dif x$ & $\ln \left|\tan \dfrac{x}{2}\right|$ & $\dfrac{\dif x}{\cos x}=\sec x\dif x$ & $\ln |\sec x + \tan x|$\\
+			\rule{0pt}{20pt}
+			$\dfrac{\dif x}{\sin^2 x}=\csc^2 x\dif x$ & $-\cot x$ & $\dfrac{\dif x}{\cos^2 x}=\sec^2 x\dif x$ & $\tan x$ \\
+			\rule{0pt}{20pt}
+			$\dfrac{\sin x}{\cos^2 x}\dif x$ & $\sec x$ & $\dfrac{\cos x}{\sin^2 x}\dif x$ & $-\csc x$ \\
+			\rule{0pt}{20pt}
+			$\sinh x\dif x$ & $\cosh x$ & $\cosh x\dif x$ & $\sinh x$ \\
+			\rule{0pt}{20pt}
+			$\dfrac{\dif x}{\sqrt{1-x^2}}$ & $\arcsin x$ & $\dfrac{\dif x}{1+x^2}$ & $\arctan x$ \\
+			\rule{0pt}{20pt}
+			$\dfrac{\dif x}{\sqrt{x^2+a^2}}$ & $\ln \left| x+\sqrt{x^2+a^2} \right|$ & $\dfrac{\dif x}{\sqrt{x^2-a^2}}$ & $\ln \left| x+\sqrt{x^2-a^2} \right|$ \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+\begin{example}计算$\displaystyle{\int\frac{\dif x}{(\cos^2x)(\sin^2x)}}$。
+\end{example}
+\begin{solution}
+		$\displaystyle{\int\frac{\dif x}{(\cos^2x)(\sin^2x)}
+		=\int\frac{\colors{meihong}\cos^2x+\sin^2x}{(\cos^2x)(\sin^2x)}\dif x}$
+
+		\hskip 100pt $\displaystyle{=\int\left(\frac{1}{\cos^2x}+\frac{1}{\sin^2x}\right)\dif x
+		=\tan x-\cot x+C}$。
+\end{solution}
+\begin{example}计算$\displaystyle{\int \frac{x^5}{1+x} \dif x}$。
+\end{example}
+\begin{solution}
+		$\displaystyle{\int \frac{x^5}{1+x} \dif x
+		={\colors{meihong} \int \frac{1-(-x)^5-1}{1-(-x)} \dif x}
+		=\int\left(1-x+x^2-x^3+x^4-\frac{1}{1+x}\right)\dif x}$
+
+		\hskip 70.5pt $\displaystyle{=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}-\ln|1+x|+C}$。
+\end{solution}
+\subsubsection[第一换元积分法]{第一换元积分法\page{234}}\label{不定积分的换元法与分部积分法1}
+若~$F'(y)=f(y)$\com 而~$u$~为可导函数\com 则$(F\circ u)'(x)=F'(u(x))u'(x)=f(u(x))u'(x)$\com 故$$\int f(u(x))u'(x)\dif x=F(u(x))+C$$
+通常也将左式写成~$\dint f(u(x))\dif u(x)$\com 则我们有
+$$\int f(u(x))u'(x)\dif x =\int f(u(x))\dif u(x)= F(u(x))+C$$
+
+\begin{example}
+	以下是一些应用第一换元积分法的算例。
+\end{example}
+\begin{pf}
+	\renewcommand{\qedsymbol}{$\circledS$}
+	\kai\small
+	（1）设$a> 0$\com 
+	$\displaystyle{\int\frac{\dif x}{\sqrt{a^2-x^2}}
+	=\int  \frac{\dif \left(\dfrac{x}{a}\right)}{\sqrt{1-\left(\dfrac{x}{a}\right)^2}}
+	=\int\dif \left(\arcsin\frac{x}{a}\right)
+	=\arcsin\frac{x}{a}+C}$；
+
+	（2）$\displaystyle{\int \tan x\dif x
+	=\int \frac{\sin x}{\cos x}\dif x
+	\xlongequal{u=\cos x}-\int \frac{\dif (\cos x)}{\cos x}
+	=-\int \dif \big(\ln |\cos x|\big)
+	=-\ln |\cos x|+C}$。
+
+	（3）$\displaystyle{\int \frac{\dif x}{1+\e^x}
+	=\int \frac{\e^{-x}}{\e^{-x}+1}\dif x
+	\xlongequal{u=\e^{-x}}-\int \frac{\dif (\e^{-x})}{\e^{-x}+1}
+	=-\ln (1+\e^{-x})+C}$；
+
+	（4）$\displaystyle{\int \frac{\dif x}{(1+4x^2)(1+\arctan 2x)^2}
+	\xlongequal{u=2x}\frac{1}{2}\int \frac{\dif (2x)}{(1+(2x)^2)(1+\arctan 2x)^2}}$
+
+	\hskip 136pt $\displaystyle{\xlongequal{u=\arctan 2x}\frac{1}{2}\int \frac{\dif (\arctan 2x)}{(1+\arctan 2x)^2}}$
+
+	\hskip 136pt $\displaystyle{\xlongequal{u=1+\arctan 2x}\frac{1}{2}\int \frac{\dif (1+\arctan 2x)}{(1+\arctan 2x)^2}}$
+
+	\hskip 136pt $\displaystyle{=-\frac{1}{2}\int \dif \left(\frac{1}{1+\arctan 2x}\right) -\frac{1}{2(1+\arctan 2x)}+C\text{。}}$ \qed
+\end{pf}
+第一换元积分法的实质\com 就是不断运用$u'(x)\dif x=\dif u(x)$\com 化简积分号$\displaystyle{\int}$和微元$\dif u$之间的表达式。
+\newpage
+\begin{example}
+	计算$\displaystyle{\int \frac{x}{\sqrt{3+2x-x^2}}\dif x}$。
+\end{example}
+\begin{pf}
+	\setlength\abovedisplayskip{0pt plus 0pt minus 0pt}
+	\setlength\belowdisplayskip{0pt plus 0pt minus 0pt}
+	\renewcommand{\qedsymbol}{$\circledS$}
+	\kai \small
+	\begin{flalign*}
+		\begin{split}
+			\textit{\yan 解.~~}\int \frac{x}{\sqrt{3+2x-x^2}}\dif x
+			&= {\colors{meihong}\int\left(\frac{-\frac{1}{2}(3+2x-x^2)'}{\sqrt{3+2x-x^2}}+\frac{1}{\sqrt{3+2x-x^2}}\right)\dif x}\\
+			&=-\int\frac{1}{2\sqrt{3+2x-x^2}}\dif (3+2x-x^2)+\int\frac{1}{\sqrt{4-(x-1)^2}}\dif x\\
+			&=-\sqrt{3+2x-x^2}+\int\frac{1}{\sqrt{1-\left(\frac{x-1}{2}\right)^2}}\dif \left(\frac{x-1}{2}\right)\\
+			&=-\sqrt{3+2x-x^2}+\arcsin \frac{x-1}{2} +C\text{。}\hfill 
+		\end{split}&
+		\begin{array}{r}
+			\\ \\ \\ \\ \\ \\ \qed
+		\end{array}
+	\end{flalign*}
+\end{pf}
+\subsubsection{第二积分换元法}
+\begin{equation*}
+	\int f(x)\dif x \xlongequal{x=x(t)}\int f(x(t))x'(t)\dif t =F(t)+C \xlongequal{t=t(x)} F(t(x))+C
+\end{equation*}
+\begin{example}
+	以下是一些应用第二换元积分法进行\tbome{三角换元}的算例。
+\end{example}
+\begin{pf}[breakable, enhanced jigsaw]
+	\renewcommand{\qedsymbol}{$\circledS$}
+	\kai\small
+	（1）设$a>0$\com 有
+	\begin{align*}
+		\int \sqrt{a^2-x^2}\dif x 
+		&\xlongequal[|t|\le \frac{\pi}{2}]{x=a\sin t}\int \sqrt{a^2-a^2\sin^2 t}\dif (a\sin t)
+		=\int (a\cos t)\cdot (a\cos t)\dif t \\
+		&=a^2\int \cos^2t\dif t
+		=a^2\int \frac{1+\cos 2t}{2}\dif t
+		=\frac{a^2}{2}\left(t+\frac{\sin 2t}{2}\right)+C\\
+		&=\frac{a^2}{2}(t+\sin t\cos t)+C
+		=\frac{a^2}{2}\arcsin\frac{x}{a}+\frac{x}{2}\sqrt{a^2-x^2}+C      
+	\end{align*}
+
+	（2）沿用上面思路\com 有
+	\begin{align*}
+		\int \frac{1-x+x^2}{\sqrt{1+x-x^2}}\dif x
+		&=\int \frac{1-x+x^2}{\sqrt{(\frac{\sqrt{5}}{2})^2-(x-\frac{1}{2})^2}}\dif x\\
+		&\xlongequal[|t|\le \frac{\pi}{2}]{x=\frac{1}{2}+\frac{\sqrt{5}}{2}\sin t}
+		\int \frac{1-(\frac{1}{2}+\frac{\sqrt{5}}{2}\sin t)+(\frac{1}{2}
+		+\frac{\sqrt{5}}{2}\sin t)^2}{\sqrt{(\frac{\sqrt{5}}{2})^2-(\frac{\sqrt{5}}{2}\sin t)^2}}\dif 
+		\left(\frac{1}{2}+\frac{\sqrt{5}}{2}\sin t\right)\\
+		&=\int\left(\frac{3}{4}+\frac{5}{4}\sin^2t\right)\dif t
+		=\int\left(\frac{3}{4}+\frac{5}{4}\frac{1-\cos 2t}{2}\right)\dif t\\
+		&=\frac{11}{8}t-\frac{5}{16}\sin 2t+C
+		=\frac{11}{8}t-\frac{5}{8}\sin t\cos t+C\\
+		&=\frac{11}{8}\arcsin\frac{2}{\sqrt{5}}\left(x-\frac{1}{2}\right)-\frac{5}{8}\cdot \frac{2}{\sqrt{5}}\left(x-\frac{1}{2}\right)
+		\cdot \sqrt{1-\left[\frac{2}{\sqrt{5}}\left(x-\frac{1}{2}\right)\right]^2}+C\\
+		&=\frac{11}{8}\arcsin\frac{2}{\sqrt{5}}\left(x-\frac{1}{2}\right)-\frac{1}{2}\left(x-\frac{1}{2}\right)\sqrt{1+x-x^2}+C
+	\end{align*}
+
+	（3）设$a>0$\com 则$x>a$时
+	\begin{align*}
+		\int \frac{\dif x}{\sqrt{x^2-a^2}}
+		&\xlongequal[0<t<\frac{\pi}{2}]{x=a\sec t}\int \frac{1}{a\tan t}\cdot a\frac{\sin t}{\cos^2t}\dif t
+		=\int\frac{\dif t}{\cos t}\\
+		&=\ln |\sec t+\tan t|+C_1
+		=\ln \left|\frac{x}{a}+\frac{\sqrt{x^2-a^2}}{a}\right|+C_1\\
+		&=\ln \left|x+\sqrt{x^2-a^2}\right|+C'_1
+	\end{align*}
+	$x<-a$时\com 可有换元
+	\begin{align*}
+		\int \frac{\dif x}{\sqrt{x^2-a^2}}
+		&\xlongequal[u>a]{u=-x} -\int \frac{\dif u}{\sqrt{u^2-a^2}}
+		=-\ln \left|u+\sqrt{u^2-a^2}\right|+C_2\\
+		&=\ln \frac{1}{\left|-x+\sqrt{x^2-a^2}\right|}+C_2
+		=\ln \left|x+\sqrt{x^2-a^2}\right|+C'_2
+	\end{align*}
+	于是两者可合并为$\displaystyle{\int \frac{\dif x}{\sqrt{x^2-a^2}}=\ln \left|x+\sqrt{x^2-a^2}\right|+C}$。\qed
+\end{pf}
+\zhu[三角换元的常见规律]
+{
+	（1）$\sqrt{a^2-x^2} \xlongequal[{u\in \left[-\frac{\pi}{2} \com[0.5] \frac{\pi}{2} \right]}]{x=a\sin u} \sqrt{a^2(1-\sin^2 u)} = a\cos u$；
+
+	（2）$\sqrt{a^2+x^2} \xlongequal[{u\in \left[-\frac{\pi}{2} \com[0.5] \frac{\pi}{2} \right]}]{x=a\tan u} \sqrt{a^2(1+\tan^2 u)} = a\sec u$；
+
+	（3）$\sqrt{x^2-a^2} =\left\{\begin{NiceArray}{ll}
+		\xlongequal[{u\in \left( 0 \com[0.5] \frac{\pi}{2} \right)}]{x=a\sec u} \sqrt{a^2(\sec^2 u -1)} = a\tan u \com & x>a \com\\
+		\xlongequal[{u\in \left( 0 \com[0.5] \frac{\pi}{2} \right)}]{x=-a\sec u} \sqrt{a^2(\sec^2 u -1)} = a\tan u \com & x<-a \text{。}\\
+	\end{NiceArray}\right.$
+}
+\di[三角换元解决的两组复杂积分]{
+	$$\int \sqrt{a^2+x^2} \dif x = \frac{x\sqrt{a^2+x^2}}{2}+ \frac{a^2}{2} \ln\left(x+\sqrt{a^2+x^2}\right) +C$$
+	$$\int \frac{x^2}{\sqrt{a^2+x^2}} \dif x = \frac{x\sqrt{a^2+x^2}}{2} - \frac{a^2}{2}\ln\left(x+\sqrt{a^2+x^2}\right) +C$$
+	$$\int \sqrt{a^2-x^2} \dif x = \frac{{a}^{2}\arcsin\frac{x}{a}}{2}+\frac{x\sqrt{{a}^{2}-{x}^{2}}}{2}+C$$
+	$$\int \frac{x^2}{\sqrt{a^2-x^2}} \dif x = \frac{{a}^{2}\arcsin\frac{x}{a}}{2}-\frac{x\sqrt{{a}^{2}-{x}^{2}}}{2}+C$$
+}
+\begin{example}
+	\textbf{（\tbome{倒代换}的算例）}计算~$\displaystyle \int\frac{\arctan\frac{1}{x}}{1+x^2}\dif x$。
+\end{example}
+\begin{solution}
+	做变量替换可得
+	\begin{align*}
+		\int\frac{\arctan\dfrac{1}{x}}{1+x^2}\dif x
+		&\xlongequal{t=\frac{1}{x}}
+		\int\frac{\arctan t}{1+\dfrac{1}{t^2}}\dif\left(\frac{1}{t}\right)
+		=\int\frac{\arctan t}{\left(1+\dfrac{1}{t^2}\right)t^2}\dif t
+		=\int\frac{\arctan t}{t^2+1}\dif t\\
+		&=\int\arctan t\dif (\arctan t)
+		=\frac{1}{2}(\arctan t)^2 \qedhere
+	\end{align*} 
+\end{solution}
+\subsubsection{分部积分法}
+由导数乘法法则$\dif(uv)=u\dif v+v\dif u$\com 两边积分得$\displaystyle{uv=\int u \dif v + \int v \dif u}$\com 右边两个不定积分中\com 难求的一个可由易求的一个推出\com 即$$\int u \dif v = uv - \int v\dif u$$
+
+\begin{example}
+	以下是一些应用分部积分法的算例。
+\end{example}
+\begin{pf}[breakable, enhanced jigsaw]
+	\renewcommand{\qedsymbol}{$\circledS$}
+	\kai \small
+	（1）$\displaystyle{\int \ln  x \dif x=x\ln  x-\int x \dif(\ln  x)=x\ln  x-\int x\cdot \frac{1}{x} \dif x=x\ln  x-x +C}$。
+
+	（2）$\displaystyle{\int x\cos x \dif x=\int x \dif(\sin x)=x\sin x-\int \sin x \dif x = x\sin x+\cos x+C}$。
+
+	{   \setlength\abovedisplayskip{-8pt plus 0pt minus 0pt}
+	\setlength\belowdisplayskip{7pt plus 0pt minus 0pt}
+	\begin{flalign*}
+		\begin{split}
+			\text{（3）}\int x\ln^2 x \dif x
+			&=\int \ln^2 x \dif \left(\frac{x^2}{2}\right)
+			=\frac{x^2}{2}\ln^2x-\int \frac{x^2}{2} \dif (\ln^2 x)\\
+			&=\frac{1}{2}x^2\ln^2x-\int \frac{x^2}{2}\cdot \frac{2\ln x}{x} \dif x\\
+			&=\frac{1}{2}x^2\ln^2x-\int x\ln x \dif x
+			=\frac{1}{2}x^2\ln^2x-\int \ln x \dif \left(\frac{x^2}{2}\right)\\
+			&=\frac{1}{2}x^2\ln^2x- \frac{1}{2}x^2\ln x+\int \frac{x^2}{2}\cdot \frac{1}{x} \dif x\\
+			&=\frac{1}{2}x^2\ln^2x- \frac{1}{2}x^2\ln x+\frac{x^2}{4}+C \text{。}
+		\end{split}&
+	\end{flalign*}
+	}
+
+	（4）有时分部积分可能在运算中出现需要计算的不定积分\com 如
+	\begin{align*}
+		\int \sqrt{a^2-x^2} \dif x
+		&=x\sqrt{a^2-x^2}-\int x \dif \left(\sqrt{a^2-x^2}\right)\\
+		&=x\sqrt{a^2-x^2}+\int \frac{x^2}{\sqrt{a^2-x^2}} \dif x\\
+		&=x\sqrt{a^2-x^2}+\int \left(\frac{a^2}{\sqrt{a^2-x^2}}-\sqrt{a^2-x^2}\right)\mathrm{d}x\\
+		&=x\sqrt{a^2-x^2}+a^2\int \frac{\mathrm{d}(\frac{x}{a})}{\sqrt{1-(\frac{x}{a})^2}}-\int \sqrt{a^2-x^2} \dif x\\
+		&=x\sqrt{a^2-x^2}+a^2\arcsin \frac{x}{a}-{\colors{meihong}\int \sqrt{a^2-x^2} \dif x}
+	\end{align*}
+	由此我们\tbome{解方程}立刻可得
+	$$\int \sqrt{a^2-x^2} \dif x=\frac{1}{2}\left(x\sqrt{a^2-x^2}+a^2\arcsin \frac{x}{a}\right)+C$$
+
+	（5）有时运算可能产生\tbome{递推关系}\com 如求$\displaystyle{I_m=\int \frac{\dif x}{(x^2+a^2)^m}}$（$a>0$）时
+	\begin{align*}
+		I_m&=\frac{x}{(x^2+a^2)^m}-\int x \dif \frac{1}{(x^2+a^2)^m}
+		=\frac{x}{(x^2+a^2)^m}+2m\int \frac{x^2 \dif x}{(x^2+a^2)^{m+1}}\\
+		&=\frac{x}{(x^2+a^2)^m}+2m{\colors{meihong}\int \frac{\dif x}{(x^2+a^2)^{m}}}-2ma^2{\colors{meihong}\int \frac{\dif x}{(x^2+a^2)^{m+1}}}\\
+		&=\frac{x}{(x^2+a^2)^m}+2m I_m-2ma^2I_{m+1}
+	\end{align*}
+	于是$I_{m+1}=\dfrac{x}{2a^2m(x^2+a^2)^m}+\dfrac{2m-1}{2a^2m}I_m$\com 又$I_1=\displaystyle{\int \frac{\dif x}{x^2+a^2}=\frac{1}{a}\arctan\frac{x}{a}+C}$\com 由此可得$I_m$的一般表达式。这个积分会在后面用到。
+
+	（6）有时两个不定积分在运算中互相关联\com 如计算$\displaystyle{\int} e^{ax}\cos bx \dif x$（其中$ab\neq 0$）时\com 有
+	\begin{equation*}
+		\int e^{ax}\cos bx \dif x
+		=\int e^{ax} \dif \big(\frac{1}{b}\sin bx \big)
+		=\frac{1}{b}e^{ax}\sin bx-\frac{a}{b}{\colors{meihong}\int e^{ax}\sin bx \dif x}
+	\end{equation*}
+	而
+	\begin{equation*}
+		\int e^{ax}\sin bx \dif x
+		=\int e^{ax} \dif \big(-\frac{1}{b}\cos bx \big)
+		=-\frac{1}{b}e^{ax}\cos bx+\frac{a}{b}{\colors{meihong}\int e^{ax}\cos bx \dif x}
+	\end{equation*}
+	由此\tbome{解方程组}得
+	$
+		\displaystyle{\int e^{ax}\cos bx \dif x=\frac{e^{ax}}{a^2+b^2}(a\cos bx+ b\sin bx)+C}
+	$。\qed
+\end{pf}\label{不定积分的换元法与分部积分法2}
+\subsection{特殊函数的不定积分}
+\Subsubsection{有理函数的不定积分}
+设$Q(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n\ (a_n\neq 0)$\com 由代数基本定理可知$Q$有~$n$~个根（包括重数）\com 其中复根成对出现。于是
+$$Q(x)=a_n\prod\limits_{j=1}^s(x-\alpha_j)^{l_j}\cdot \prod\limits_{k=1}^t(x^2+p_kx+q_k)^{m_k}$$
+这里$\alpha_j\in\mathbb{R}$均不相同\com $p_k^2-4q_k<0$\com 而且
+$\sum\limits_{j=1}^sl_j+2\sum\limits_{k=1}^tm_k=n$。
+\dip[部分子式定理]{241}{
+	任意的有理真分式~$R(x)=\dfrac{P(x)}{Q(x)}$（其中$P\com[0.5] Q$为多项式且$\deg P<\deg Q$）可分解为
+	$$R(x)=\sum_{j=1}^s\sum_{u=1}^{l_j}\frac{a_{j\com u}}{(x-\alpha_j)^u}
+	+\sum_{k=1}^{t}\sum_{v=1}^{m_k}\frac{b_{k\com v}x+c_{k\com v}}{(x^2+p_kx+q_k)^{v}}$$
+	其中~$a_{j,u}\com[0.5] b_{k,v}\com[0.5] c_{k,v}\in\mathbb{R}$~为常数。
+}
+\begin{proofs}
+	$Q(x)=a_n\prod\limits_{j=1}^s(x-\alpha_j)^{l_j}\cdot \prod\limits_{k=1}^t(x^2+p_kx+q_k)^{m_k}$\com 分母上每一个实根的因子$(x-\alpha_j)^{l_j}$对应拆分为$\sum\limits_{u=1}^{l_j}\dfrac{a_{j, u}}{(x-\alpha_j)^u}$\com 每一对复根的因子$(x^2+p_kx+q_k)^{m_k}$对应拆分为$\sum\limits_{v=1}^{m_k}\dfrac{b_{k, v}x+c_{k, v}}{(x^2+p_kx+q_k)^{v}}$。
+\end{proofs}
+为确定分解式\com 我们可将$a_{j,u}\com[0.5] b_{k,v}\com[0.5] c_{k,v}$看成未知元（共有$n$个）\com 
+两边乘以$Q(x)$\com 比较多项式的系数\com 得到~$n$个线性方程\com 由此可以唯一确定未定元的值。
+
+于是有理真分式~$R(x)=\dfrac{P(x)}{Q(x)}$~最终可以分解成如下~$4$~种最简单的分式之和（$m\ge 2$\com $p^2-4q<0$）：
+$$\frac{A}{x-\alpha}\qquad\frac{A}{(x-\alpha)^m}\qquad\frac{Ax+B}{x^2+px+q}\qquad\frac{Ax+B}{(x^2+px+q)^m}$$
+由于$x^2+px+q=\left(x+\dfrac{p}{2}\right)^2+\dfrac{4q-p^2}{4}$\com 经过变量替换$a^2=\dfrac{4q-p^2}{4}$\com $u=x+\dfrac{p}{2}$\com 有理分式的不定积分可归结成下述$6$种最简单的分式的不定积分（$a>0$）：
+$$\frac{1}{x-\alpha}\qquad \frac{1}{(x-\alpha)^m}\qquad
+\frac{x}{x^2+a^2}\qquad \frac{1}{x^2+a^2}\qquad \frac{x}{(x^2+a^2)^m}\qquad \frac{1}{(x^2+a^2)^m}$$
+而它们都有（比较）显式的表达式。
+
+\subsubsection{可有理化无理函数的不定积分}
+规定记号$R(u\com v)=\dfrac{P(u\com v)}{Q(u\com v)}$\com 其中$P(u\com v)\com Q(u\com v)$均为关于变量$u\com v$的多项式。
+
+\tboba{三角有理函数}就是指$\mboba{R(\sin x\com \cos x)}$。令$t=\tan\dfrac{x}{2}$\com 则$x=2\arctan t$\com $\dif x=\dif(2\arctan t)=\dfrac{2}{1+t^2} \dif t$\com 于是由万能公式
+$$\sin x=\frac{2\sin\frac{x}{2}\cos\frac{x}{2}}{\cos^2\frac{x}{2}+\sin^2\frac{x}{2}}=\frac{2t}{1+t^2}
+\qquad \cos x=\frac{\cos^2\frac{x}{2}-\sin^2\frac{x}{2}}{\cos^2\frac{x}{2}+\sin^2\frac{x}{2}}=\frac{1-t^2}{1+t^2}$$
+知三角有理函数可以有理化为
+$$\int R(\sin x\com \cos x) \dif x \xlongequal{t=\tan\frac{x}{2}}
+\int R\left(\frac{2t}{1+t^2}\com \frac{1-t^2}{1+t^2}\right)\frac{2}{1+t^2} \dif t$$
+
+\zhu[三角有理函数积分过程的简化]{
+	在一些特殊情形下\com 不必作$t=\tan\dfrac{x}{2}$换元\com 而有更简单的换元法积分操作。
+	
+	（1）被积函数为关于$\sin x$ 的奇函数：$\displaystyle{\int}R(\sin^2 x\com \cos x)\sin x \dif x \xlongequal{t=\cos x} - \displaystyle{\int}R(1-t^2\com t)\dif t $；
+
+	（2）被积函数为关于$\cos x$ 的奇函数：$\displaystyle{\int}R(\sin x\com \cos^2 x)\cos x \dif x \xlongequal{t=\sin x} - \displaystyle{\int}R(t\com 1-t^2)\dif t $；
+
+	（3）被积函数为齐次式（$\dfrac{c\sin x +d\cos x}{a\sin x+ b\cos x}$）：令$t(x)=a\sin x+ b\cos x$\com[0.25] 则$t'(x)=-b\sin x + a \cos x$\com 被积函数可化为$\dfrac{kt'(x)}{t(x)}+b$的形式。
+}
+对形如$\mboba{R\left(x\com \sqrt[n]{\dfrac{ax+b}{cx+d}}\right)}$（$n\in \mathbb{N}^*$\com $ad-bc \neq 0$）的无理函数\com 令$t=\sqrt[n]{\dfrac{ax+b}{cx+d}}$\com 则$t^n=\dfrac{ax+b}{cx+d}$\com 从而$x=\dfrac{dt^n-b}{a-ct^n}$\com 于是$\dif x=\dfrac{n(ad-bc)t^{n-1}}{(a-ct^n)^2} \dif t$\com 该函数即有理化为
+$$\int R\left(x\com \sqrt[n]{\frac{ax+b}{cx+d}}\right) \dif x \xlongequal{t=\sqrt[n]{\frac{ax+b}{cx+d}}}\int R\left(\frac{dt^n-b}{a-ct^n}\com t\right) \frac{n(ad-bc)t^{n-1}}{(a-ct^n)^2} \dif t$$
+
+\begin{example}
+	计算$\dint[\frac{\dif x}{\sqrt[3]{(x-1)(x+1)^2}}]$。
+\end{example}
+\begin{solution}
+	\begin{align*}
+		\int\frac{\dif x}{\sqrt[3]{(x-1)(x+1)^2}} 
+		&= \int\sqrt[3]{\frac{x+1}{x-1}}\frac{1}{x+1}\dif x 
+		\xlongequal{t=\sqrt[3]{\frac{x+1}{x-1}}}
+		\int t\cdot \frac{1}{~-\dfrac{1+t^3}{1-t^3}+1~}\dif \left(-\frac{1+t^3}{1-t^3}\right)\\
+		&=\int \frac{1-t^3}{-2t^2}\cdot \left(-\frac{6t^2}{(1-t^3)^2}\right)\dif t\\
+		&=\int \frac{3}{(1-t)(1+t+t^2)}\dif t
+		=\int\left(\frac{1}{1-t}+\frac{t+2}{1+t+t^2}\right)\dif t\\
+		&=-\ln |1-t|+\int \frac{\left(t+\dfrac{1}{2}\right)+\dfrac{3}{2}}{~\dfrac{3}{4}+\left(t+\dfrac{1}{2}\right)^2~}\dif \left(t+\frac{1}{2}\right)\displaybreak\\
+		&=-\ln |1-t|+\frac{1}{2}\ln \left[\left(t+\frac{1}{2}\right)^2+\frac{3}{4}\right]+\sqrt{3}\arctan \frac{2t+1}{\sqrt{3}}+C\\
+		&=-\ln \left|1-\sqrt[3]{\frac{x+1}{x-1}}\right|+\frac{1}{2}\ln \left[\left(\sqrt[3]{\frac{x+1}{x-1}}+\frac{1}{2}\right)^2+\frac{3}{4}\right]+\sqrt{3}\arctan \frac{2\sqrt[3]{\frac{x+1}{x-1}}+1}{\sqrt{3}}+C \qedhere
+	\end{align*}
+\end{solution}
+\zhu[有理化技巧]{
+	（1）$\dint \sqrt{\dfrac{2-3x}{2+3x}} \dif x = \dint \sqrt{\dfrac{(2-3x)^2}{4-9x^2}} \dif x = \dint \dfrac{2-3x}{\sqrt{4-9x^2}} \dif x=$可解；
+
+	（2）$\dint \dfrac{x}{x+\sqrt{x^2 + 1}} \dif x = \dint \dfrac{x(\sqrt{x^2 + 1}-x)}{x^2 + 1 - x^2} \dif x = \dint x\sqrt{x^2 + 1} \dif x + \dint -x^2 \dif x = $可解。
+}
+对形如$\mboba{R\left(x\com \sqrt{ax^2+bx+c}\right)}$（$a \neq 0$）的无理函数\com 通常先将$ax^2+bx+c$配方\com 然后再来应用三角函数去根号\com 将原来那个不定积分转化成三角有理函数的不定积分。
+
+\begin{example}
+	计算$\dint[\frac{\dif x}{2+\sqrt{x^2-2x+5}}]$。
+\end{example}
+\begin{solution}
+	配方\com 利用三角换元去根号\com 有
+	\begin{align*}
+		\int\frac{\dif x}{2+\sqrt{x^2-2x+5}}
+		&=\int\frac{\dif x}{2+\sqrt{(x-1)^2+4}}
+		\xlongequal[|t|<\frac{\pi}{2}]{x=1+2\tan t}
+		\int\frac{\dif (1+2\tan t)}{2+\sqrt{4\tan^2t+4}}\\
+		&=\int\frac{\dfrac{2}{\cos^2t}}{~2+\dfrac{2}{\cos t}~}\dif t
+		=\int\frac{\dif t}{(\cos t)\cdot (1+\cos t)}\displaybreak\\
+		&=\int\left(\frac{1}{\cos t}-\frac{1}{1+\cos t}\right)\dif{t}
+		=\ln |\sec t+\tan t|-\tan\frac{t}{2}+C_1
+	\end{align*}
+	由于$\tan t=\dfrac{x-1}{2}$\com 可知$\sec t=\sqrt{1+\tan^2t}=\dfrac{1}{2}\sqrt{x^2-2x+5}$\com $\tan\dfrac{t}{2}=\dfrac{1-\cos t}{\sin t}=\dfrac{\sec t-1}{\tan t}=\dfrac{\sqrt{x^2-2x+5}-2}{x-1}$\com 于是回代得
+	\begin{align*}
+		\int\frac{\dif x}{2+\sqrt{x^2-2x+5}}
+		&=\ln |\sec t+\tan t|-\tan\frac{t}{2}+C_1\\
+		&=\ln (\sqrt{x^2-2x+5}+x-1)-\frac{\sqrt{x^2-2x+5}-2}{x-1}+C \qedhere
+	\end{align*}
+\end{solution}
+\di[Euler代换]{
+	对形如$R\left(x\com \sqrt{ax^2+bx+c}\right)$的无理函数 \com 以下代换可使其有理化：
+
+	（1）\tbome{Euler第一代换}\quad 若$a>0$ \com 令$\sqrt{ax^2+bx+c}=\sqrt{a}x + t$或$\sqrt{ax^2+bx+c}=-\sqrt{a}x + t$；
+
+	（2）\tbome{Euler第二代换}\quad 若$c>0$\com 令$\sqrt{ax^2+bx+c}=tx + \sqrt{c}$或$\sqrt{ax^2+bx+c}=tx - \sqrt{c}$;
+
+	（3）\tbome{Euler第三代换}\quad 若$ax^2+bx+c=0$有两个不等实根$\alpha \com \beta$ \com 令$\sqrt{ax^2+bx+c}=t(x-\alpha)$或$\sqrt{\dfrac{a(x-\beta)}{x-\alpha}}=t$。
+}
+\newpage
+\section[定积分]{定积分\page{252}}
+\subsection{函数的Riemann积分}
+\dep[Riemann积分]{254}{
+	\hang 给定区间$[a\com[0.5] b]$\com 称$P:~a=x_0<x_1<\cdots <x_n=b$为$[a\com[0.5] b]$的一个\tboba{分割}\com 它将$[a\com[0.5] b]$分成内部不相交的小区间$\Delta_i=[x_{i-1}\com x_i]$（$1\le i\le n$）\com 每个小区间的长度为$\Delta x_i = x_i-x_{i-1}$\com 称$\lambda(P)=\max\limits_{1\le i\le n}\Delta x_i$为$P$的\tboba{步长}。
+
+	\hang 任取$\xi_i\in[x_{i-1}\com[0.5] x_i]$（$1\le i\le n$）\com 称$\xi=\{\xi_1\com \ldots\com \xi_n\}$为分割$P$的\tboba{取点}\com 给出取点$\xi$的分割$P$称为$[a\com[0.5] b]$的\tboba{带点分割}\com 记作$(P\com[0.5] \xi)$。
+
+	\hang 设$f:[a\com[0.5] b]\rightarrow\mathbb{R}$为函数。对$[a\com[0.5] b]$的带点分割$(P\com[0.5] \xi)$\com 令$\sigma(f;P,\xi):=\sum\limits_{i=1}^n f(\xi_i)\Delta x_i$\com 称$\sigma(f;P,\xi)$为$f$关于带点分割$(P\com[0.5] \xi)$的~\tboba{Riemann和}。
+
+	\hang 如果存在$I\in\mathbb{R}$\com 使得$\forall \varepsilon>0$\com $\exists \delta>0$\com 对于$[a\com[0.5] b]$的任意带点分割$(P\com[0.5] \xi)$\com 当$\lambda(P)<\delta$时\com 都有$|\sigma(f;P,\xi)-I|<\varepsilon$\com 那么记$I=\lim\limits_{\lambda(P)\rightarrow 0}\sigma(f;P,\xi)=\lim\limits_{\lambda(P)\rightarrow 0}\sum\limits_{i=1}^n f(\xi_i)\Delta x_i$\com 并称$I$为$f$在$[a\com[0.5] b]$上的\tboba{定积分}（或称~\tboba{Riemann积分}）\com 记作$I=\displaystyle{\int_{a}^{b}f(x) \dif x}$；称$f$在$[a\com[0.5] b]$上~\tboba{Riemann可积}\com 记作$f\in \mathscr{R}[a\com[0.5] b]$。
+}
+由此\com 函数$f$在$[a\com[0.5] b]$上\textbf{不可积}当且仅当
+$\forall I\in\mathbb{R}$\com $\exists \varepsilon_0>0$使得$\forall \delta>0$\com 存在$[a\com[0.5] b]$的带点分割$(P\com[0.5] \xi)$满足$\lambda(P)<\delta$\com 但有
+$|\sigma(f;P,\xi)-I|\ge \varepsilon_0$。
+
+\begin{example}
+	在$[0\com 1]$上定义\textbf{Dirichlet函数}$D(x)=\left\{ \begin{NiceArray}{ll}
+		0\com &  x\in \mathbb{Q}\com \\ 1\com & x \notin \mathbb{Q}\com 
+	\end{NiceArray} \right.$\com 证明$D \notin \mathscr{R}[0\com[0.5] 1]$。
+\end{example}
+\begin{proofs}
+	用反证法。假设$D$可积\com 即存在$I \in \R$为其积分。令$\varepsilon=\dfrac{1}{4}$\com 于是由可积性可知\com $\exists \delta>0$使得对于$[0\com 1]$的任意带点分割$(P\com \xi)$\com 当$\lambda(P)<\delta$时\com 都有$|\sigma(D;P,\xi)-I|<\dfrac{1}{4}$。
+
+	\qquad 选取$n = \left[\dfrac{1}{\delta}\right]+1$\com $P: 0=x_0<x_1<\cdots<x_n=1$为~$[0\com 1]$~的均匀分割\com 则$\lambda(P)=\dfrac{1}{n}<\delta$。再取点$\xi=\{\xi_i\}_{1\le i\le n}$\com $\xi'=\{\xi'_i\}_{1\le i\le n}$\com 使得对$1\le i\le n$\com 均有~$\xi_i\in [x_{i-1}\com x_i]\cap\mathbb{Q}$\com $\xi_i'\in [x_{i-1}\com x_i]\setminus\mathbb{Q}$\com 那么由上面假设有$|\sigma(D;P,\xi)-I|<\dfrac{1}{4}$\com $|\sigma(D;P,\xi')-I|<\dfrac{1}{4}$。
+
+	\qquad 注意到
+	\begin{align*}
+		&\sigma(D;P,\xi)=\sum_{i=1}^nD(\xi_i)\Delta x_i=0
+		&\sigma(D;P,\xi')=\sum_{i=1}^nD(\xi'_i)\Delta x_i =\sum_{i=1}^n\Delta x_i=1
+	\end{align*}
+	于是~$|I|<\dfrac{1}{4}$\com $|1-I|<\dfrac{1}{4}$\com 从而我们有$\dfrac{1}{2}>|I|+|1-I|\ge |I+(1-I)|=1$\com 矛盾！
+	故不存在$I$为上述积分\com 即所证结论成立。
+\end{proofs}
+
+定义仅讨论了上限$b$大于下限$a$的情况\com 我们约定$\dint[_b^a f(x) \dif x]=-\dint[_a^b f(x) \dif x]$\com $\dint[_a^a f(x) \dif x]=0$。
+
+\subsection{定积分的性质}
+\dip[Riemann积分的线性性]{254}{
+	设函数$f\com g\in\mathscr{R}[a\com[0.5] b]$\com 而$\alpha\com \beta\in\mathbb{R}$\com 则$\alpha f+\beta g\in\mathscr{R}[a\com[0.5] b]$\com 且
+	$$\int_a^b\big(\alpha f(x)+\beta g(x)\big)\dif x=\alpha\int_a^b f(x)\dif x+\beta \int_a^b g(x)\dif x$$
+}
+\begin{corollary}
+	\textbf{有限韧性}\quad 如果$f\in \mathscr{R}[a\com[0.5] b]$\com 则在有限多个点处改变$f$的取值\com 既不改变可积性\com 也不改变积分。
+\end{corollary}
+\dip[可积函数的有界性]{260}{
+	若$f\in \mathscr{R}[a\com[0.5] b]$\com 则$f$在$[a\com[0.5] b]$上有界。
+}
+\dip[积分区间的可加性]{261}{
+	设$f : [a\com[0.5] b]\rightarrow \mathbb{R}$为函数\com 而$c\in (a\com[0.5] b)$\com 则$f$在$[a\com[0.5] b]$上可积当且仅当$f$分别在$[a\com c]$、$[c\com b]$上可积；此时
+	$$\int_a^b f(x)\dif x=\int_a^c f(x)\dif x+\int_c^b f(x)\dif x$$
+}
+由上面的约定\com 这个定理对任意取的$a\com b\com c \in \R$都成立。
+\dip[保序性]{}{
+	若$f\com g \in \mathscr{R}[a\com[0.5] b]$\com 且$f \ge g$\com 则$\dint[_a^b f(x) \dif x] \ge \dint[_a^b g(x) \dif x]$。
+}
+\dip[严格保序性]{}{
+	若$f\com g \in \mbome{\mathscr{C}[a\com[0.5] b]}$\com 且$f \ge g$\com 则$\dint[_a^b f(x) \dif x] \ge \dint[_a^b g(x) \dif x]$\com 等号成立当且仅当$f \equiv g$。
+}
+\begin{example}
+	若$f \in \mathscr{C}[a-1\com b+1]$（$a<b$）\com 求证$\lim\limits_{t \to 0} \dint[_a^b |f(x+t) - f(x)| \dif x]=0$。
+\end{example}
+\begin{proofs}
+	由于~$f\in\mathscr{C}[a-1\com b+1]$\com 则~$f$~一致连续\com 从而~$\forall \varepsilon>0$\com $\exists \delta_1>0$\com 使得~$\forall x\com y\in [a-1\com b+1]$\com 当~$|x-y|<\delta_1$~时\com 我们有$|f(x)-f(y)|<\dfrac{\varepsilon}{b-a}$。令~$\delta=\min\left(\delta_1\com \frac{1}{2}\right)$\com 于是$\forall x\in [a\com[0.5] b]$以及$\forall t\in\mathbb{R}$\com 当$|t|<\delta$时\com 均有$|f(x+t)-f(x)|<\dfrac{\varepsilon}{b-a}$\com 故
+	$$\int_a^b|f(x+t)-f(x)|\dif x<\frac{\varepsilon}{b-a}\cdot (b-a)=\varepsilon$$
+	则$\lim\limits_{t \to 0} \dint[_a^b |f(x+t) - f(x)| \dif x]=0$。
+\end{proofs}
+\di[绝对值三角不等式的推广]{
+	若$f\in \mathscr{R}[a\com[0.5] b]$\com 则$|f| \in \mathscr{R}[a\com[0.5] b]$\com 且$\left| \dint[_a^b f(x) \dif x] \right| \le \dint[_a^b |f(x)| \dif x]$。
+}
+\din[Cauchy-Schwarz-Buniakowsky不等式\textmd{（Cauchy不等式的积分形式）}]{
+	若$f\com[0.5] g \in \mathscr{R}[a\com[0.5] b]$\com 则 
+	$$\left(\int_a^b f(x)g(x) \dif x\right)^2 \le \left(\int_a^b f^2(x) \dif x\right)\left(\int_a^b g^2(x) \dif x\right)$$
+}
+\begin{proofs}
+	令$F(t) = \dint[_a^b \left(tf(x)-g(x)\right)^2 \dif x]$\com 则$F(t) \ge 0$\com 从而$\Delta \le 0$。
+\end{proofs}
+
+\begin{theorem}
+	\textbf{\textup{H\"older}~不等式} \quad 若$x_k\com[0.5] y_k\com[0.5] p\com[0.5] q>0$（$
+	1\le k\le n$）\com $\dfrac{1}{p}+\dfrac{1}{q}= 1$\com 则
+	$$\sum\limits_{k=1}^nx_ky_k\le
+	\left(\sum\limits_{k=1}^nx_k^p\right)^{\frac{1}{p}}\left(\sum\limits_{k=1}^ny_k^q\right)^{\frac{1}{q}}$$
+	并且等号成立当且仅当~$x^p_ky^{-q}_k$~为不依赖~$k$~的常数。
+\end{theorem}
+\din[积分H\"older不等式]{
+	若$f\com[0.5] g\in\mathscr{C}[a\com[0.5] b]$\com $p\com[0.5] q> 1$且~$\dfrac{1}{p}+\dfrac{1}{q}=1$\com 则
+	$$\left|\int_a^bf(x)g(x) \dif x\right|\le
+	\left(\int_a^b|f(x)|^p \dif x\right)^{\frac{1}{p}}
+	\left(\int_a^b|g(x)|^q \dif x\right)^{\frac{1}{q}}$$
+}
+可以看出，Cauchy-Schwarz-Buniakowsky不等式是积分 H\"older不等式在$p=q=2$时的特例；积分的绝对值三角不等式是积分 H\"older不等式在$p=1\com q=\infty\com g\equiv 1$时的特例。
+\din[积分第一中值定理]{
+	若$f\in \mathscr{C}[a\com[0.5] b]$\com 则$\exists \xi \in [a\com[0.5] b]$使得$\dint _a^b f(x) \dif x = f(\xi) (b-a)$。
+}
+\din[广义积分第一中值定理]{
+	若$f\in \mathscr{C}[a\com[0.5] b]$\com $g\in \mathscr{R}[a\com[0.5] b]$且$g$不变号\com 则$\exists \xi\in[a\com[0.5] b]$使得
+	$$\int_a^b f(x)g(x) \dif x=f(\xi)\int_a^b g(x) \dif x$$
+}
+\begin{proofs}
+	由于$f\com g\in \mathscr{R}[a\com[0.5] b]$\com 则$fg\in \mathscr{R}[a\com[0.5] b]$。设$f$在$[a\com[0.5] b]$ 上的最大值和最小值分别为$M\com m$。又$g$在$[a\com[0.5] b]$上不变号\com 不失一般性\com 可以假设$g\ge 0$\com 否则考虑$-g$。有
+	$$mg(x)\le f(x)g(x)\le Mg(x)$$
+	进而就有
+	$$m\int_a^bg(x) \dif x\le \int_a^bf(x)g(x) \dif x
+	\le M\int_a^bg(x) \dif x$$
+	如果$\dint[_a^b]g(x) \dif x= 0$\com 则$\dint[_a^b]f(x)g(x) \dif x=0$\com 此时$\forall \xi\in[a\com[0.5] b]$\com 所证结论成立；
+
+	若$\dint[_a^b]g(x) \dif x\neq 0$\com 则
+	$$m\le \frac{\dint[_a^b]f(x)g(x) \dif x}{\dint[_a^b]g(x) \dif x}\le M$$
+	由连续函数最值定理与介值定理知\com $\exists\xi\in[a\com[0.5] b]$\com 
+	使得$\dfrac{\dint[_a^b]f(x)g(x) \dif x}{\dint[_a^b]g(x) \dif x}=f(\xi)$\com 故所证结论成立。
+\end{proofs}
+\begin{example}
+	若$f\in\mathscr{C}^{(1)}[a\com[0.5] b]$\com 求证:
+	$$\max_{x\in [a\com[0.5] b]}|f(x)|\le \frac{1}{b-a}\left|\int_a^bf(x) \dif x\right|+\int_a^b|f'(x)| \dif x$$
+\end{example}
+\begin{proofs}
+	由于$f\in\mathscr{C}^{(1)}[a\com[0.5] b]$\com 因此$|f|$ 连续\com 从而由最值定理知\com $\exists \xi\in [a\com[0.5] b]$ 使$|f(\xi)|=\max\limits_{x\in [a\com[0.5] b]}|f(x)|$。
+	
+	又由积分中值定理\com $\exists\eta\in [a\com[0.5] b]$ 使得我们有 $\dfrac{1}{b-a}\dint[_a^b]f(x) \dif x=f(\eta)$。而
+	$$|f(\xi)-f(\eta)|=\left|\int_{\eta}^{\xi} f'(x) \dif x\right|
+	\le \left|\int_{\eta}^{\xi} |f'(x)| \dif x\right|
+	\le \int_a^b |f'(x)| \dif x$$
+	于是
+	\begin{equation*}
+		\max_{x\in [a\com[0.5] b]}|f(x)|=|f(\xi)|\le |f(\eta)|+|f(\xi)-f(\eta)|
+	\le \frac{1}{b-a}\left|\int_a^bf(x) \dif x\right|
+	+\int_a^b|f'(x)| \dif x \qedhere
+	\end{equation*}
+\end{proofs}
+\di[周期连续函数的定积分]{
+	如果$f\in\mathscr{C}(\mathbb{R})$ 是周期为$T>0$ 的周期函数\com 则$\forall a\in\mathbb{R}$\com $\dint[_a^{a+T}]f(x) \dif x=\dint[_0^{T}]f(x) \dif x$。
+}
+
+\subsection{定积分的计算}
+\subsubsection{变限积分函数与微积分基本定理}
+\din[变上限积分作原函数]{
+	设$f\in\mathscr{R}[a\com[0.5] b]$\com $\forall x\in [a\com[0.5] b]$\com 定义
+	$F(x)=\dint[_a^x] f(t) \dif t$\com 
+	那么
+	
+	（1）$F\in\mathscr{C}[a\com[0.5] b]$；
+	
+	（2）如果$f$在点$x_0\in [a\com[0.5] b]$连续\com 那么$F$在点$x_0$处可导且$F'(x_0)=f(x_0)$。
+}
+\begin{proofs}
+	（1）由于$f$可积\com 则$M=\sup\limits_{x\in [a\com[0.5] b]}|f(x)|<+\infty$\com 
+	于是$\forall x\com y\in [a\com[0.5] b]$\com 我们均有
+	\begin{align*}
+		|F(x)-F(y)|=\left|\int_a^xf(t) \dif t-\int_a^yf(t) \dif t\right|
+		=\left|\int_y^xf(t) \dif t\right|
+		\le \left|\int_y^x|f(t)| \dif t\right|
+		\le M|x-y|
+	\end{align*}
+	从而由夹逼原理可知\com $\forall x_0\in [a\com[0.5] b]$\com 有$\lim\limits_{x\rightarrow x_0}|F(x)-F(x_0)|=0$\com 进而可知函数$F$在$[a\com[0.5] b]$上连续。
+
+	（2）假设$f$在点$x_0$处连续\com 则$\forall \varepsilon>0$\com $\exists \delta>0$ 使得$\forall t\in [a\com[0.5] b]$\com 当$|t-x_0|<\delta$ 时\com $|f(t)-f(x_0)|<\dfrac{\varepsilon}{2}$。于是$\forall x\in [a\com[0.5] b]\setminus\{x_0\}$\com 当$|x-x_0|<\delta$时\com 均有
+	\begin{align*}
+		\left|\frac{F(x)-F(x_0)}{x-x_0}-f(x_0)\right|
+		&=\left|\frac{1}{x-x_0}\int_{x_0}^x(f(t)-f(x_0)) \dif t\right|\\
+		&\le \frac{1}{|x-x_0|}\left|\int_{x_0}^x|f(t)-f(x_0)| \dif t\right|
+		\le \frac{\varepsilon}{2}<\varepsilon
+	\end{align*}
+	故$F$在点$x_0$处可导\com 且$F'(x_0)=f(x_0)$。
+\end{proofs}
+如果$f\in\mathscr{C}[a\com[0.5] b]$\com 则$F\in\mathscr{C}^{(1)}[a\com[0.5] b]$ 并且
+$F'=f$\com 也即$F$为$f$在$[a\com[0.5] b]$上的一个原函数。
+\di[变限积分定义的函数求导]{
+	假设$f\in\mathscr{C}[a\com[0.5] b]$\com 而函数$\varphi\com \psi:[\alpha\com \beta]\rightarrow [a\com[0.5] b]$可导。$\forall u\in [\alpha\com \beta]$\com 令$G(u)=\dint[_{\psi(u)}^{\varphi(u)}]f(t) \dif t$\com 那么函数$G$可导\com 且$\forall u\in  [\alpha\com \beta]$\com 我们均有
+	$$G'(u)=f\big(\varphi(u)\big)\varphi'(u)-f\big(\psi(u)\big)\psi'(u)$$
+}
+\begin{proofs}
+	$G(u)=\dint[_{a}^{\varphi(u)}]f(t) \dif t-\dint[_a^{\psi(u)}] f(t) \dif t
+	=F\big(\varphi(u)\big)-F\big(\psi(u)\big)$。
+\end{proofs}
+\begin{example}
+	设$f\in\mathscr{C}[a\com[0.5] b]$。$\forall x\in [a\com[0.5] b]$\com 定义
+	$F(x)=\dint[_a^x](x-t)f(t) \dif t$\com 
+	计算$F''$。
+\end{example}
+\begin{solution}
+	$\forall x\in [a\com[0.5] b]$\com 我们有$F(x)=x\dint[_a^x]f(t) \dif t-\dint[_a^x]tf(t) \dif t$\com 
+	于是$F'(x)=\dint[_a^x]f(t) \dif t$\com 从而$F''(x)=f(x)$。
+\end{solution}
+\begin{example}
+	若~$f\in\mathscr{C}[0\com 1]$\com 求证：$\dint[_0^1]\Big(\dint[_{x^2}^{\sqrt{x}}f(t) ]\dif t\Big) \dif x = \dint[_0^1](\sqrt{x}-x^2)f(x) \dif x$。
+\end{example}
+\begin{proofs}
+	$\forall x\in [0\com 1]$\com 定义$F(x)=\dint[_{0}^{x}]f(t) \dif t$\com 则$F$ 连续可导且$F'=f$\com 于是由分部积分可得
+	\begin{align*}
+		\int_0^1\Big(\int_{x^2}^{\sqrt{x}}f(t) \dif t\Big) \dif x 
+		&=\int_0^1(F(\sqrt{x})-F(x^2)) \dif x \\
+		&= x(F(\sqrt{x})-F(x^2))\Big|_0^1-\int_0^1x(F(\sqrt{x})-F(x^2))' \dif x \\
+		&=-\int_0^1x\left(\frac{f(\sqrt{x})}{2\sqrt{x}}-2xf(x^2)\right) \dif x \displaybreak\\
+		&=\int_0^1 2x^2f(x^2) \dif x-\int_0^1\frac{x}{2\sqrt{x}}f(\sqrt{x}) \dif x \\
+		&=\int_0^1xf(x^2) \dif (x^2)-\int_0^1xf(\sqrt{x}) \dif (\sqrt{x}) \\
+		&=\int_0^1\sqrt{x}f(x) \dif x-\int_0^1x^2f(x) \dif x 
+		=\int_0^1(\sqrt{x}-x^2)f(x) \dif x \qedhere
+	\end{align*}
+\end{proofs}
+
+\din[微积分基本定理\textmd{（Newton-Leibniz公式）}]{\label{微积分基本定理}
+	假设$f\in \mathscr{C}[a\com[0.5] b]$\com 而$G\in \mathscr{C}[a\com[0.5] b]$为$f$的一个原函数\com 则
+	$$\int_a^bf(x) \dif x=G(b)-G(a)=:G\big|_a^b$$
+}
+\subsubsection{定积分的分部与换元积分}
+\di[定积分的换元积分公式]{
+	若$f\in\mathscr{C}[a\com[0.5] b]$\com 而$\varphi:[\alpha\com \beta]\rightarrow [a\com[0.5] b]$ 连续可导\com 则$\dint[_{\varphi(\alpha)}^{\varphi(\beta)}]f(x) \dif x=\dint[_{\alpha}^{\beta}]f(\varphi(t))\varphi'(t) \dif t$。
+}
+\begin{proofs}
+	设$F$为$f$的一个原函数\com 令$G(t)=F(\varphi(t))$\com 则$G$连续可导\com 且$G'(t)=f\big(\varphi(t)\big)\varphi'(t)$。
+\end{proofs}
+这个定理相当于作$x=\varphi(t)$的变换；区别于不定积分\com 其中$\varphi$不必为双射。
+\begin{example}
+	计算$\dint[_{-4}^{-3}]\dfrac{\dif x}{\sqrt{x^2-4}}$。
+\end{example}
+\begin{solution}
+	\begin{align*}
+		\int_{-4}^{-3}\frac{\dif x}{\sqrt{x^2-4}}
+		&=\int_3^4\frac{\dif x}{\sqrt{x^2-4}}\\
+		&\xlongequal{x=2\sec t} \int_{\arccos\frac{2}{3}}^{\frac{\pi}{3}} 
+			\frac{\dif (2\sec t)}{2\tan t}
+		=\int_{\arccos\frac{2}{3}}^{\frac{\pi}{3}}
+			\frac{\frac{\sin t}{\cos^2t}\dif  t}{\tan t}
+		=\int_{\arccos\frac{2}{3}}^{\frac{\pi}{3}}
+			\frac{\dif  t}{\cos t}
+		=\int_{\arccos\frac{2}{3}}^{\frac{\pi}{3}}
+			\frac{\dif (\sin t)}{\cos^2 t}\\
+		&\xlongequal{z=\sin t} \int_{\frac{\sqrt{5}}{3}}^{\frac{\sqrt{3}}{2}}
+			\frac{\dif z}{1-z^2}
+		=\frac{1}{2}\int_{\frac{\sqrt{5}}{3}}^{\frac{\sqrt{3}}{2}}
+			\left(\frac{1}{1-z}+\frac{1}{1+z}\right) \dif z
+		\displaybreak\\
+		&=\left.\frac{1}{2}\ln\left|\frac{1+z}{1-z}\right|\right|_{\frac{\sqrt{5}}{3}}^{\frac{\sqrt{3}}{2}}
+		=\frac{1}{2}\ln\frac{1+\frac{\sqrt{3}}{2}}{1-\frac{\sqrt{3}}{2}}
+		\cdot\frac{1-\frac{\sqrt{5}}{3}}{1+\frac{\sqrt{5}}{3}}
+		=\ln\frac{2+\sqrt{3}}{3+\sqrt{5}}+\ln 2   \qedhere
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	\tbome{（函数再现）}计算$I=\dint[_0^{\pi}]\dfrac{x\sin x \dif x}{1+\cos^2x}$。
+\end{example}
+\begin{solution}
+	注意到
+	\begin{align*}
+		I&=\int_0^{\pi}\frac{x\sin x}{1+\cos^2x} \dif x
+		\xlongequal{x=\pi-t} \int_{\pi}^0\frac{(\pi-t)\sin t}{1+\cos^2t} \dif (\pi-t)
+		=\int_0^{\pi}\frac{(\pi-t)\sin t}{1+\cos^2t} \dif t
+		=\int_0^{\pi}\frac{\pi\sin t}{1+\cos^2t} \dif t-I. 
+	\end{align*}
+	于是$I=-\dfrac{\pi}{2}\dint[_0^{\pi}]\dfrac{\dif(\cos t)}{1+\cos^2t}
+	=\left.-\dfrac{\pi}{2}\arctan(\cos t)\right|_0^{\pi}=\dfrac{\pi^2}{4}$。
+\end{solution}
+\begin{example}
+	\tbome{（区间分拆）}计算$\dint[_0^\pi] \dfrac{x\sin x}{1+\cos^2x} \dif x$。
+\end{example}
+\begin{solution}
+	由三角函数的对称性\com 分段考虑有
+	\begin{align*}
+		\int _0^\pi \frac{x\sin x}{1+\cos^2x} \dif x
+		&=\int _0^{\frac{\pi}{2}} \frac{x\sin x}{1+\cos^2x} \dif x
+		+\int _{\frac{\pi}{2}}^{\pi} \frac{x\sin x}{1+\cos^2x} \dif x\\
+		&=\int _0^{\frac{\pi}{2}} \frac{x\sin x}{1+\cos^2x} \dif x
+		+\int _{\frac{\pi}{2}}^0 \frac{(\pi-x)\sin(\pi- x)}{1+\cos^2(\pi-x)} \dif (\pi-x)\\
+		&=\int _0^{\frac{\pi}{2}} \frac{x\sin x}{1+\cos^2x} \dif x
+		+\int _0^{\frac{\pi}{2}} \frac{(\pi-x)\sin x}{1+\cos^2x} \dif x\\
+		&=\int _0^{\frac{\pi}{2}} \frac{\pi\sin x}{1+\cos^2x} \dif x
+		=-\pi\arctan(\cos x)\Big|_0^{\frac{\pi}{2}}
+		=\frac{\pi^2}{4}.   \qedhere
+	\end{align*}
+\end{solution}
+\di[定积分的对称性]{
+	设$f\in\mathscr{R}[-a\com a]$\com 其中$a>0$。
+
+	（1）若$f$为奇函数\com 则$\dint[_{-a}^a]f(x) \dif x=0$；
+
+	（2）若$f$ 为偶函数\com 则$\dint[_{-a}^a] f(x) \dif x =2 \int_0^a f(x) \dif x$。
+}
+\begin{example}
+	计算$\dint[_{-2}^{2}]\sqrt{4-x^2} \dif x$。
+\end{example}
+\begin{solution}
+	由对称性\com 
+	\begin{align*}
+		\int_{-2}^{2}\sqrt{4-x^2} \dif x
+		&=2\int_{0}^{2}\sqrt{4-x^2} \dif x 
+		\xlongequal{x=2\sin t} 2\int_{0}^{\frac{\pi}{2}}\sqrt{4-4\sin^2t} \dif (2\sin t)
+		=8\int_{0}^{\frac{\pi}{2}}\cos^2t \dif t\\
+		&=4\int_{0}^{\frac{\pi}{2}}(1+\cos 2t) \dif t
+		=4\left.\left(t+\frac{1}{2}\sin 2t\right)\right|_{0}^{\frac{\pi}{2}}
+		=4\cdot \frac{\pi}{2}=2\pi \qedhere
+	\end{align*}
+\end{solution}
+
+\din[定积分的分部积分公式]{
+	若$u\com v\in\mathscr{C}^{(1)}[a\com[0.5] b]$\com 则
+	$$\int_a^bu(x) \dif v(x)=uv\big|_a^b-\int_a^b v(x) \dif u(x)$$
+}
+\begin{proofs}
+	$\dint[_a^b]\big(u'(x)v(x)+u(x)v'(x)\big) \dif x = \dint[_a^b] (uv)'(x) \dif x =uv\big|_a^b$。
+\end{proofs}
+
+\din[Wallis公式\textmd{（点火公式）}\page{271}]{
+	记$I_n=\dint[_0^{\frac{\pi}{2}} \sin^n x]\dif x=\dint[_0^{\frac{\pi}{2}} \cos^n x] \dif x$\com 有$I_n=\left\{ \begin{NiceArray}{ll}
+		\dfrac{(n-1)!!}{n!!}\cdot\dfrac{\pi}{2}\com &  n~\text{为偶数}\com \\
+		\dfrac{(n-1)!!}{n!!}\com & n~\text{为奇数。}
+	\end{NiceArray} \right.$
+}
+\begin{proofs}
+	首先有
+	$$\int_{0}^{\frac{\pi}{2}}\cos^n x \dif x
+	\xlongequal{x=\frac{\pi}{2}-t}
+	\int_{\frac{\pi}{2}}^0\cos^n \left(\frac{\pi}{2}-t\right) \dif \left(\frac{\pi}{2}-t\right)
+	=\int_0^{\frac{\pi}{2}}\sin^n t \dif t$$
+	$n \ge 2$时\com 
+	\begin{align*}
+		I_n&=\int_{0}^{\frac{\pi}{2}}\sin^n x \dif x
+		=-\int_{0}^{\frac{\pi}{2}}\sin^{n-1} x \dif (\cos x)\\
+		&=-\sin^{n-1} x\cdot\cos x\Big|_{0}^{\frac{\pi}{2}}
+		+\int_{0}^{\frac{\pi}{2}}\cos x \dif (\sin^{n-1} x)\\
+		&=(n-1)\int_{0}^{\frac{\pi}{2}}\cos x\cdot\sin^{n-2}x\cdot \cos x \dif x\\
+		&=(n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x \dif x
+		-(n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n}x \dif x
+		=(n-1)(I_{n-2}-I_n)
+	\end{align*}
+	即$I_n=\dfrac{n-1}{n}I_{n-2}$（$n \ge 2$）\com 由
+	$I_0=\dint[_{0}^{\frac{\pi}{2}}] \dif x=\dfrac{\pi}{2}$\com 
+	$I_1=\dint[_{0}^{\frac{\pi}{2}}] \sin x \dif x=1$递推可得。
+\end{proofs}
+\begin{example}
+	计算$\lim\limits_{n \to \infty}\dint[_0^{\frac{\pi}{2}} \sin^n x]\dif x$。
+\end{example}
+\begin{solution}
+$\forall n\ge 1$\com 令$I_n=\int_0^{\frac{\pi}{2}}\sin^n x \dif x$\com 则$I_n\ge 0$\com 且
+$$I_n=\int_0^{\frac{\pi}{2}}\sin^n x \dif x
+\ge \int_0^{\frac{\pi}{2}}\sin^{n+1} x \dif x
+=I_{n+1}$$
+于是由单调有界定理可知数列$\{I_n\}$收敛。设其极限为$I$\com 则由数列极限的保号性可知$I\ge 0$。
+
+注意到$\forall n\ge 1$以及$\forall \varepsilon\in (0\com \frac{\pi}{2})$\com 我们有
+\begin{align*}
+	I_n
+	&=\int_0^{\frac{\pi}{2}}\sin^n x \dif x
+	=\int_0^{\frac{\pi}{2}-\varepsilon}\sin^n x \dif x
+	+\int_{\frac{\pi}{2}-\varepsilon}^{\frac{\pi}{2}}\sin^n x \dif x
+	\le \left(\sin\left(\frac{\pi}{2}-\varepsilon\right)\right)^n
+	\left(\frac{\pi}{2}-\varepsilon\right)+\varepsilon
+\end{align*}
+则由极限保序性可得$0\le I\le \varepsilon$\com 
+再由$\varepsilon\in \left(0\com \dfrac{\pi}{2}\right)$
+的任意性立刻可得$I=0$。
+\end{solution}
+
+\subsubsection{定积分计算综合}
+\begin{example}
+	若~$f\in\mathscr{C}[-1\com 1]$\com 求证：$\lim\limits_{h\rightarrow 0^{+}}\dint[_{-1}^1\frac{hf(x)}{h^2+x^2} ]\dif x=\pi f(0)$。
+\end{example}
+\begin{proofs}
+	注意到
+	$$\lim\limits_{h\rightarrow 0^{+}}\int_{-1}^1\frac{h}{h^2+x^2} \dif x
+	=\lim\limits_{h\rightarrow 0^{+}}\arctan\frac{x}{h}\Big|_{-1}^1
+	=\lim\limits_{h\rightarrow 0^{+}} 2\arctan\frac{1}{h} =\pi$$
+	我们希望能有$\lim\limits_{h\rightarrow 0^{+}}\dint[_{-1}^1\frac{hf(x)}{h^2+x^2} ]\dif x=\pi f(0)=f(0)\lim\limits_{h\rightarrow 0^{+}}\dint[_{-1}^1\frac{h}{h^2+x^2} ]\dif x$\com 即要证
+	$$\lim\limits_{h\rightarrow 0^{+}}\int_{-1}^1\frac{h(f(x)-f(0))}{h^2+x^2} \dif x=0$$
+
+	由于$f\in\mathscr{C}[-1\com 1]$\com 因此存在~$M>0$使得 $\forall x\in [-1\com 1]$\com 均有~$|f(x)|\le M$。又$f$在原点处连续\com 于是~$\forall \varepsilon>0$\com $\exists \delta\in (0\com 1)$\com 使得$\forall x\in [-\delta\com \delta]$\com $|f(x)-f(0)|<\dfrac{\varepsilon}{2\pi}$。
+	
+	令$\eta=\dfrac{\varepsilon \delta^2}{8M+1}$\com 则$\forall h\in (0\com \eta)$\com 
+	\begin{align*}
+		\int_{-1}^1\frac{h|f(x)-f(0)|}{h^2+x^2} \dif x
+		&= \int_{-\delta}^{\delta}\frac{h|f(x)-f(0)|}{h^2+x^2} \dif x
+		+\int_{-1}^{-\delta}\frac{h|f(x)-f(0)|}{h^2+x^2} \dif x
+		+\int_{\delta}^1\frac{h|f(x)-f(0)|}{h^2+x^2} \dif x\\
+		&\le \frac{\varepsilon}{2\pi}\int_{-\delta}^{\delta}\frac{h}{h^2+x^2} \dif x
+		+\frac{2Mh}{\delta^2}(1-\delta)+\frac{2Mh}{\delta^2}(1-\delta)\\
+		&\le \frac{\varepsilon}{2\pi}\arctan\frac{x}{h}\Big|_{-\delta}^{\delta}+\frac{\varepsilon}{2}
+		= \frac{\varepsilon}{\pi}\arctan \frac{\delta}{h}+\frac{\varepsilon}{2}<\varepsilon        
+	\end{align*}
+	由此可得$\lim\limits_{h\rightarrow 0^{+}}\dint[_{-1}^1\frac{h(f(x)-f(0))}{h^2+x^2}] \dif x=0$。由此可知所证结论成立。    
+\end{proofs}
+
+\begin{example}
+	若~$f$~在~$[a\com[0.5] b]$~上二阶可导并且~$f\left(\dfrac{a+b}{2}\right)=0$\com 求证: $\left|\dint[_a^b]f(x) \dif x\right|\le \dfrac{(b-a)^3}{24}\sup\limits_{x\in [a\com[0.5] b]}|f''(x)|$。
+\end{example}
+\begin{proofs}
+	令~$M=\sup\limits_{x\in [a\com[0.5] b]}|f''(x)|$。由于~$f$~为二阶可导\com 则由带Lagrange余项的Taylor公式可知\com $\forall x\in [a\com[0.5] b]$\com 存在$\xi(x)$介于$x\com \dfrac{a+b}{2}$使得 
+	$$
+		f(x)=f\left(\frac{a+b}{2}\right)+f'\left(\frac{a+b}{2}\right)\left(x-\frac{a+b}{2}\right)
+		+\frac{f''(\xi(x))}{2!}\left(x-\frac{a+b}{2}\right)^2
+	$$
+	于是
+	\begin{align*}
+		\left|\int_a^bf(x) \dif x\right| 
+		&=\left|f'\left(\frac{a+b}{2}\right)\int_a^b\left(x-\frac{a+b}{2}\right) \dif x+\int_a^b\frac{f''(\xi(x))}{2!}\left(x-\frac{a+b}{2}\right)^2 \dif x\right| \\
+		&=\left|f'\left(\frac{a+b}{2}\right)\cdot \frac{1}{2}\left(x-\frac{a+b}{2}\right)^2\Bigg|_a^b+\int_a^b\frac{f''(\xi(x))}{2!}\left(x-\frac{a+b}{2}\right)^2 \dif x\right| \\
+		&=\left|\int_a^b\frac{f''(\xi(x))}{2!}\left(x-\frac{a+b}{2}\right)^2 \dif x\right| \\
+		&\le \int_a^b\frac{|f''(\xi(x))|}{2!}\left(x-\frac{a+b}{2}\right)^2 \dif x \\
+		&\le \frac{M}{2}\int_a^b \left(x-\frac{a+b}{2}\right)^2 \dif x 
+		=\frac{M}{2}\cdot \frac{1}{3}\left(x-\frac{a+b}{2}\right)^3\Big|_a^b =\frac{(b-a)^3}{24}M \qedhere
+	\end{align*}
+\end{proofs}
+
+\begin{example}
+	若~$f\in\mathscr{C}^{(1)}[a\com[0.5] b]$~使得~$f(a)=0$\com 求证：
+	$$\int_a^b(f(x))^2 \dif x \le \frac{1}{2}(b-a)^2\int_a^b(f'(x))^2 \dif x-\frac{1}{2}\int_a^b(f'(x))^2(x-a)^2 \dif x$$
+\end{example}
+\begin{proofs}
+	$\forall t\in [a\com[0.5] b]$\com 令 
+	$$
+	F(t)=\frac{(t-a)^2}{2}\int_a^t (f'(x))^2 \dif x
+	-\frac{1}{2}\int_a^t (f'(x))^2(x-a)^2 \dif x
+	-\int_a^t(f(x))^2 \dif x
+	$$
+	则~$F$~连续可导且~$F(a)=0$\com 而~$\forall t\in [a\com[0.5] b]$\com 均有 
+	\begin{align*}
+	F'(t)&=(t-a)\int_a^t(f'(x))^2 \dif x-(f(t))^2\\
+	&\le \left(\int_a^t f'(x) \dif x\right)^2-(f(t))^2 =\left(f(t)-f(a)\right)^2-(f(t))^2=0 \qedhere
+	\end{align*}
+\end{proofs}\label{定积分的分部与换元积分}
+
+\di[Minkowski积分不等式]{
+	若~$p>1$\com 而~$f\com g\in\mathscr{C}[a\com[0.5] b]$\com 则
+	$$
+	\left(\int_a^b(|f(x)|+|g(x)|)^p \dif x\right)^{\frac{1}{p}}
+	\le \left(\int_a^b|f(x)|^p \dif x\right)^{\frac{1}{p}}
+	+\left(\int_a^b|g(x)|^p \dif x\right)^{\frac{1}{p}}
+	$$
+}
+\begin{proofs}
+	若~$f$~或~$g$~恒为零\com 则所证成立\com 下设~$f\com g$均不恒为零。令~$q=\dfrac{p}{p-1}$\com 由H\"older不等式可知
+	\begin{align*}
+		\int_a^b(|f(x)|+|g(x)|)^p \dif x 
+		&=\int_a^b|f(x)|(|f(x)|+|g(x)|)^{p-1} \dif x+\int_a^b|g(x)|(|f(x)|+|g(x)|)^{p-1} \dif x \\
+		&\le \left(\int_a^b|f(x)|^{p} \dif x\right)^{\frac{1}{p}}\cdot
+		\left(\int_a^b(|f(x)|+|g(x)|)^{(p-1)q} \dif x\right)^{\frac{1}{q}}\\
+		&\qquad+\left(\int_a^b|g(x)|^{p} \dif x\right)^{\frac{1}{p}}\cdot
+		\left(\int_a^b(|f(x)|+|g(x)|)^{(p-1)q} \dif x\right)^{\frac{1}{q}}\\
+		&=\left[\left(\int_a^b|f(x)|^{p} \dif x\right)^{\frac{1}{p}} + \left(\int_a^b|g(x)|^{p} \dif x\right)^{\frac{1}{p}} \right]
+		\cdot \left(\int_a^b(|f(x)|+|g(x)|)^p \dif x\right)^{\frac{p-1}{p}}
+	\end{align*}
+	即 
+	\begin{equation*}
+		\left(\int_a^b(|f(x)|+|g(x)|)^p \dif x\right)^{\frac{1}{p}}
+		\le \left(\int_a^b|f(x)|^p \dif x\right)^{\frac{1}{p}}
+		+\left(\int_a^b|g(x)|^p \dif x\right)^{\frac{1}{p}} \qedhere
+	\end{equation*}
+\end{proofs}
+
+\subsection{函数可积的条件}
+\subsubsection[Darboux和与可积性]{利用Darboux和刻画函数的可积性}
+\de[Darboux和]{
+	设$f:[a\com[0.5] b]\rightarrow \mathbb{R}$为有界函数\com 而$P: a=x_0<x_1<\cdots<x_n=b$为~$[a\com[0.5] b]$~的分割。对于$1\le i\le n$\com 定义
+
+	（1）$m_i=\inf\limits_{x\in \Delta_i}f(x)$\com $M_i=\sup\limits_{x\in \Delta_i}f(x)$；
+
+	（2）$L(f;P)=\sum\limits_{i=1}^{n}m_i\Delta x_i$\com 称为~\tboba{Darboux下和}；
+
+	（3）$U(f;P)=\sum\limits_{i=1}^{n}M_i\Delta x_i$\com 称为~\tboba{Darboux上和}。
+}
+\begin{corollary}
+	给定有界函数$f:[a\com[0.5] b]\rightarrow \mathbb{R}$\com $m=\inf\limits_{x\in [a\com[0.5] b]}f(x)$\com $M=\sup\limits_{x\in [a\com[0.5] b]}f(x)$\com 则
+	$$m(b-a) \le L(f;P) \le \sigma(f;P,\xi) \le U(f;P) \le M(b-a)$$
+\end{corollary}
+\begin{proofs}
+	$m_i \ge m$\com $M_i \le M$。
+\end{proofs}
+\begin{corollary}
+	给定有界函数$f:[a\com[0.5] b]\rightarrow \mathbb{R}$\com 若$P_1\com P_2$为$[a\com[0.5] b]$的分割且$P_1\subseteq P_2$\com 则
+	$$L(f;P_1)\le L(f;P_2)\le U(f;P_2)\le U(f;P_1)$$
+\end{corollary}
+\begin{proofs}
+	不妨设$x_1<x_2<x_3$为$P_2$的分割中相邻三点\com 其中$x_1\com x_3$同时为$P_1$的分割中相邻两点\com 那么$\inf\limits_{x\in [x_1\com[0.5] x_3]} f(x) \le \inf\limits_{x\in [x_1\com[0.5] x_2]} f(x) $\com $\inf\limits_{x\in [x_1\com[0.5] x_3]} f(x) \le \inf\limits_{x\in [x_2\com[0.5] x_3]} f(x) $\com 则
+	\begin{align*}
+		(x_3-x_1)\inf\limits_{x\in [x_1\com[0.5] x_3]} f(x) 
+		& = (x_2-x_1)\inf\limits_{x\in [x_1\com[0.5] x_3]} f(x) + (x_3-x_2)\inf\limits_{x\in [x_1\com[0.5] x_3]} f(x)\\
+		& \le (x_2-x_1)\inf\limits_{x\in [x_1\com[0.5] x_2]} f(x) + (x_3-x_2)\inf\limits_{x\in [x_2\com[0.5] x_3]} f(x) \qedhere
+	\end{align*}
+\end{proofs}
+\begin{lemma}
+	给定有界函数$f:[a\com[0.5] b]\rightarrow \mathbb{R}$\com $P_1\com P_2$为$[a\com[0.5] b]$的分割\com 则$L(f;P_1) \le U(f;P_2)$。
+\end{lemma}
+\begin{proofs}
+	取分割$Q = P_1 \cap P_2$\com 则$P_1 \subseteq Q$\com $P_2 \subseteq Q$。
+\end{proofs}
+
+\begin{lemma}
+	设$f:[a\com[0.5] b]\rightarrow \mathbb{R}$为有界函数\com 而$P: a=x_0<x_1<\cdots<x_n=b$为~$[a\com[0.5] b]$~的分割\com 则$$L(f;P)=\inf\limits_{\xi}\sigma(f;P,\xi)\com \qquad U(f;P)=\sup\limits_{\xi}\sigma(f;P,\xi)$$
+\end{lemma}
+
+\de[上积分、下积分]{
+	给定有界函数$f:[a\com[0.5] b]\rightarrow \mathbb{R}$\com 称
+
+	（1）$\displaystyle{\lowint_a^b}f(x) \dif x=\sup\limits_{P}L(f;P)$为$f$在$[a\com[0.5] b]$上的\tboba{下积分}；
+
+	（2）$\displaystyle{\upint_a^b}f(x) \dif x=\inf\limits_{P}U(f;P)$为$f$在$[a\com[0.5] b]$上的\tboba{上积分}。
+}
+
+\dip[Darboux判别准则]{281}{
+	设$f:[a\com[0.5] b]\rightarrow \mathbb{R}$为有界函数\com 则下述结论等价：
+
+	（1）$f$在$[a\com[0.5] b]$上Riemann可积；
+
+	（2）$\forall \varepsilon>0$\com 存在$[a\com[0.5] b]$的分割$P$使得$U(f;P)-L(f;P)<\varepsilon$；
+
+	（3）$\displaystyle\lowint_a^bf(x) \dif x=\upint_a^bf(x) \dif x$。
+}
+\begin{proofs}
+	首先给出下面引理。
+	\begin{lemma}
+		设 $f:[a\com[0.5] b]\to\mathbb{R}$ 为有界函数\com 而
+		$P:a=x_0<x_1<\cdots<x_n=b$
+		为 $[a\com[0.5] b]$ 的分割。在$P$的基础上多加一个分点\com 组成一个具有$n+2$个分点的分割\com 记为$P^{\prime}$\com 则
+		\begin{align*}
+			& L(f;P)\le L(f;P')\le L(f;P)+\omega\lambda(P)\\
+			& U(f;P)-\omega\lambda(P) \le U(f;P') \le U(f;P)
+		\end{align*}
+	\end{lemma}
+	\begin{proofs}
+		设在第$i$个区间$[x_{i-1}\com x_i]$内部加上了一个分点$x^*$\com 得到：
+		$$P':a=x_0<x_1<\cdots<x_{i-1}<x^*<x_i<\cdots<x_n=b$$
+		这时下和$L(f;P)$与下和$L(f;P')$的不同之处在于\com 前者中一项$m_i\Delta x_i$被后者中两项之和$(x^*-x_{i-1})\inf\limits_{x\in[x_{i-1}\com x^*]}f(x)+(x_i-x^*)\inf\limits_{x\in[x^*\com x_i]}f(x)$代替。而
+		\begin{align*}
+			&(x^*-x_{i-1})\inf\limits_{x\in[x_{i-1}\com x^*]}f(x)+(x_i-x^*)\inf\limits_{x\in[x^*\com x_i]}f(x)\\
+			&\ge (x^*-x_{i-1})\inf\limits_{x\in[x_{i-1}\com x_i]}f(x)+(x_i-x^*)\inf\limits_{x\in[x_{i-1}\com x_i]}f(x) \\
+			&= (x_i-x_{i-1})m_i = m_i \Delta x_i
+		\end{align*}
+		故有$L(f;P')-L(f;P) \ge 0$。
+
+		另一方面\com 令$\omega=M-m$\com $\omega_i = M_i - m_i$\com 有
+		\begin{align*}
+			L(f;P')-L(f;P) &= (x^*-x_{i-1})\inf\limits_{x\in[x_{i-1}\com x^*]}f(x)+(x_i-x^*)\inf\limits_{x\in[x^*\com x_i]}f(x) - (x_i-x_{i-1})m_i\\
+			&\le (x_i-x_{i-1})M_i - (x_i-x_{i-1})m_i\\
+			&\le \omega_i \Delta x_i \le \omega \Delta x_i \le \omega \lambda(P)
+		\end{align*}
+		故$L(f;P)\le L(f;P')\le L(f;P)+\omega\lambda(P)$。
+		
+		类似地\com 有$U(f;P)-\omega\lambda(P) \le U(f;P') \le U(f;P)$。
+	\end{proofs}
+	以此类推\com 有
+	\begin{lemma}
+		设 $f:[a\com[0.5] b]\to\mathbb{R}$ 为有界函数\com $P\com P'$ 为 $[a\com[0.5] b]$ 的两个分割\com 其中$P^{\prime}$ 是在$P$的基础上多加$n$个新分点\com 则：
+		\begin{align*}
+			& L(f;P)\le L(f;P')\le L(f;P)+n\omega\lambda(P)\\
+			& U(f;P)-n\omega\lambda(P) \le U(f;P') \le U(f;P)
+		\end{align*}
+	\end{lemma}
+	由这两个引理易证。
+\end{proofs}
+\subsubsection[振幅与可积性]{利用振幅刻画函数的可积性}
+\dep[振幅]{279}{
+	假设~$X$~为非空数集\com 而~$f:X\rightarrow \mathbb{R}$为有界函数。对于任意非空子集$J\subseteq X$\com 定义$\omega(f;J):=\sup\limits_{x\com y\in J}|f(x)-f(y)|$\com 称为$f$在$J$上的\tboba{振幅}。
+}
+容易看出\com $\omega(f;J)=\sup\limits_{x\in J}f(x) - \inf\limits_{x \in J}f(x)$。
+\di[利用振幅刻画可积性]{
+	设$f:[a\com[0.5] b]\rightarrow \mathbb{R}$为有界函数\com 则$f\in \mathscr{R}[a\com[0.5] b]$当且仅当$\lim\limits_{\lambda(P) \to 0} \sum\limits_{i=1}^n \omega(f;\Delta_i)\Delta x_i=0$。
+}
+由此我们可以很容易地得到一大类函数的可积性。
+\dip[连续函数的可积性]{283}{
+	闭区间上的连续函数一定可积\com 即$\mathscr{C}[a\com[0.5] b] \subseteq \mathscr{R}[a\com[0.5] b]$。
+}
+\begin{proofs}
+	由于$f\in \mathscr{C}[a\com[0.5] b]$在$[a\com[0.5] b]$上一致连续\com 故$\forall \varepsilon>0$\com $\exists \delta>0$\com 使得$\forall x\com y\in [a\com[0.5] b]$\com 若$|x-y|<\delta$\com 则$|f(x)-f(y)|<\dfrac{\varepsilon}{b-a+1}$。
+	对$[a\com[0.5] b]$的任意分割$P: a=x_0<\cdots<x_n=b$\com 当~$\lambda(P)<\delta$时\com $\sum\limits_{i=1}^n\omega(f;\Delta_i)\Delta x_i \le \sum\limits_{i=1}^n\dfrac{\varepsilon}{b-a+1}(x_i-x_{i-1}) <\varepsilon$\com 因此所证结论成立。
+\end{proofs}
+\begin{definition}
+	称函数$f:[a\com[0.5] b]\rightarrow \R$为\textbf{逐段}（或\textbf{分段}）\textbf{连续函数}\com 如果$f$在$[a\com[0.5] b]$上至多只有有限多个间断点\com 且均为第一类间断点。
+\end{definition}
+\dip[逐段连续函数的可积性]{283}{
+	闭区间上的逐段连续函数一定可积。
+}
+\dip[单调函数的可积性]{282}{
+	若$f:[a\com[0.5] b] \to \R$单调\com 则$f \in \mathscr{R}[a\com[0.5] b]$。
+}
+\begin{proofs}
+	不失一般性\com 假设$f$为单调递增（否则可考虑$-f$）\com $\forall \varepsilon>0$\com 选取$\delta=\dfrac{\varepsilon}{f(b)-f(a)+1}$\com 则对于区间~$[a\com[0.5] b]$~的任意分割~$P:a=x_0<\cdots< x_n=b$\com 当~$\lambda(P)<\delta$~时\com 我们均有
+	$$\sum_{i=1}^n\omega(f;\Delta_i)\Delta x_i 
+	\le \sum_{i=1}^n\big(f(x_i)-f(x_{i-1})\big)\delta
+	= \big(f(b)-f(a)\big)\delta<\varepsilon$$
+	因此所证结论成立。
+\end{proofs}
+\begin{example}
+	证明：若$f\com g\in \mathscr{R}[a\com[0.5] b]$\com 则$fg\in\mathscr{R}[a\com[0.5] b]$。
+\end{example}
+\begin{proofs}
+	定义$M=\sup\limits_{x\in [a\com[0.5] b]}|f(x)|$\com 则$\forall x\com y\in [a\com[0.5] b]$\com 
+	$\big|(f(x))^2-(f(y))^2\big|=\big|f(x)+f(y)\big|\cdot\big|f(x)-f(y)\big| \le 2M\big|f(x)-f(y)\big|$。于是对于区间$[a\com[0.5] b]$的任意分割~$P$\com 我们有$$
+	\sum_{i=1}^n\omega(f^2;\Delta_i)\Delta x_i
+	\le 2M\sum_{i=1}^n\omega(f;\Delta_i)\Delta x_i
+	$$
+	由于~$f\in\mathscr{R}[a\com[0.5] b]$\com 则由夹逼原理可知
+	$$\lim\limits_{\lambda(P)\rightarrow 0}\sum\limits_{i=1}^n\omega(f^2;\Delta_i)\Delta x_i=0$$
+	故$f^2\in \mathscr{R}[a\com[0.5] b]$。则由$f\com g\in\mathscr{R}[a\com[0.5] b]$\com 有    $f+g\com f-g\in\mathscr{R}[a\com[0.5] b]$\com 
+	由此可得$fg=\frac{1}{4}\big((f+g)^2-(f-g)^2\big)\in\mathscr{R}[a\com[0.5] b]$\com 从而所证结论成立。
+\end{proofs}
+\subsubsection[Lebesgue测度与可积性]{利用Lebesgue测度刻画函数的可积性}
+\dep[零测度集]{285}{
+	称数集$X$为\tboba{零测度集}\com 若$\forall \varepsilon>0$\com 存在至多可数的一列开区间$\{(a_n\com b_n)\}$使得$X\subseteq \bigcup\limits_{n=1}^{\infty}(a_n\com b_n)$\com 且$\lim\limits_{n\rightarrow \infty}\sum\limits_{k=1}^n(b_k-a_k)<\varepsilon$。
+}
+显然$\varnothing$是零测度集；容易看出\com 至多可数的数集（如有理数集）是零测度集。
+\dip[零测度集的性质]{285}{
+	（1）零测度集的子集也为零测度集；
+
+	（2）至多可数个零测度集的并集是零测度集。
+}
+\dip[Lebesgue判别准则]{287}{
+	区间$[a\com[0.5] b]$上的有界函数$f$~Riemann可积当且仅当由$f$的所有间断点所构成的集合为零测度集。
+}
+\begin{corollary}
+	如果$f: [a\com[0.5] b]\rightarrow [c\com d]$可积\com 而$g\in \mathscr{C}[c\com d]$\com 则$g\circ f\in\mathscr{R}[a\com[0.5] b]$。
+\end{corollary}
+\begin{proofs}
+	$g \circ f$的间断点一定是$f$的间断点。
+\end{proofs}
+
+\subsection{定积分的应用}\label{定积分的应用1}
+\subsubsection{平面区域的面积}
+\textbf{显式表示}\quad 在直角坐标系下\com 假设$f\com g\in\mathscr{C}[a\com[0.5] b]$ 使得$\forall x\in [a\com[0.5] b]$\com 均有$f(x)\ge g(x)$。则由曲线$y=f(x)$、$y=g(x)$与直线$x=a$、$x=b$所围平面区域的面积等于 $$S=\int_a^b \big(f(x)-g(x)\big) \dif x$$
+如果曲线有「纠缠」\com 则 $$S=\int_a^b \big|f(x)-g(x)\big| \dif x$$
+\begin{example}
+	计算椭圆$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$（$a>0$\com $b>0$）所围面积。
+\end{example}
+\begin{solution}
+	由对称性知所求面积为第一象限内面积的4倍\com 后者由曲线$y=b\sqrt{1-\dfrac{x^2}{a^2}}$（$0 \le x \le a$）与直线$y=0$围成\com 故所求面积为
+	\begin{align*}
+		S &= 4\int_0^a b\sqrt{1-\frac{x^2}{a^2}} \dif x
+		\xlongequal{x=a\sin t} 4b\int_0^{\frac{\pi}{2}}\sqrt{1-\sin^2t} \dif (a\sin t) \\
+		&= 4ab\int_0^{\frac{\pi}{2}}\cos^2 t \dif t
+		= 2ab\int_0^{\frac{\pi}{2}}(1+\cos 2t) \dif t
+		= 2ab\left.\left(t+\frac{1}{2}\sin 2t\right)\right|_0^{\frac{\pi}{2}}
+		=\pi ab \qedhere
+	\end{align*}
+\end{solution}
+\begin{example}
+	设$L$是连接$A(0\com 1)$\com $B(1\com 0)$的一条连续上凸曲线\com $P(x\com y)$为$L$上任意一点。已知$L$与弦$AP$围成的平面有界区域的面积等于$x^4$\com 求曲线$L$的函数表达式$y=f(x)$。
+\end{example}
+\begin{solution}
+	弦$AP:v=1+\dfrac{f(x)-1}{x}u$\com 由题有
+	\begin{align*}
+		x^4 &= \int_0^x \left(f(u) - \left(1+\frac{f(x)-1}{x}u\right)\right)\dif u\\
+		&= \int_0^x f(u) \dif u - \left.\left(u+\frac{f(x)-1}{2x}u^2\right)\right|_0^x
+		= \int_0^x f(u) \dif u - \frac{f(x)+1}{2}x
+	\end{align*}
+	求导\com 得 
+	$$4x^3 = f(x) -\frac{f(x)+1}{2} - \frac{f'(x)}{2}x$$
+	解常微分方程得$f(x)=Cx-4x^3+1$\com 代入$f(1)=0$得$C=3$\com 故$f(x)=1+3x-4x^3$（$x\in [0\com 1]$）。
+\end{solution}
+\textbf{参数方程}\quad 在直角坐标系下\com 设曲线$\Gamma$的方程为$\left\{\begin{NiceArray}{l}
+	x=x(t)\text{\com }\\
+	y=y(t)
+\end{NiceArray}
+\right. $（$\alpha \le t \le \beta$）\com 其中$x\com y$ 连续\com $y \ge 0$\com $x(t)$ 为严格递增\com 则存在连续反函数$t=t(x)$。
+定义$a=x(\alpha)$\com $b=x(\beta)$\com 由$\Gamma$、$x=a$、$x=b$及$x$轴所围区域的面积等于$$S=\int_a^b y(t(x)) \dif x \xlongequal{x=x(t)}\int_{\alpha}^{\beta}y(t)x'(t) \dif t$$
+\begin{example}
+	求旋轮线$\Gamma: \left\{\begin{NiceArray}{l}
+		x=a(t-\sin t)\text{\com }\\
+		y=a(1-\cos t)
+	\end{NiceArray}\right.$（$0\le t\le 2\pi$）与$x$轴所围成的区域的面积。
+\end{example}
+\begin{solution}
+	因$\forall t\in [0\com 2\pi]$\com 均有$x'(t)=a(1-\cos t)\ge 0$\com 并且$x'(t)$在$[0\com 2\pi]$的任意子区间上不恒为零\com 从而$x(t)$为严格递增\com 则所求面积为
+	\begin{equation*}
+		S = \int_0^{2\pi}y(t)x'(t) \dif t
+		=\int_0^{2\pi}a(1-\cos t)\cdot a(1-\cos t) \dif t
+		= a^2\left.\left(t-2\sin t+\frac{t+\frac{1}{2}\sin 2t}{2}\right)\right|_0^{2\pi}
+		=3\pi a^2 \qedhere
+	\end{equation*}
+\end{solution}
+\textbf{极坐标方程}\quad 在极坐标系下\com 设曲线弧 $\wideparen{AB}$的方程为$\rho=\rho(\theta)$（$\alpha \le \theta \le \beta$）\com 
+其中$\rho(\theta)$ 为连续函数。那么曲线弧$\wideparen{AB}$与射线$\theta=\alpha$、$\theta=\beta$所围成的区域的面积等于
+$$S=\frac{1}{2}\int_{\alpha}^{\beta}\big(\rho(\theta)\big)^2 \dif \theta$$
+\begin{example}
+	求心形线$\rho=a(1+\cos \theta)$（$a>0$）所围的区域的面积。
+\end{example}
+\begin{solution}
+	容易积出
+	\begin{align*}
+		S &=\frac{1}{2}\int_0^{2\pi}\big(\rho(\theta)\big)^2 \dif \theta
+		=\frac{1}{2}\int_0^{2\pi}a^2(1+\cos \theta)^2 \dif \theta
+		=\frac{a^2}{2}\int_0^{2\pi} (1+2\cos \theta+\cos^2 \theta) \dif \theta\\
+		&=\frac{a^2}{2}\int_0^{2\pi} \left(1+2\cos \theta+\frac{1+\cos 2\theta}{2}\right) \dif \theta
+		=\frac{a^2}{2}\left.\left(\theta+2\sin \theta+\frac{\theta+\frac{1}{2}\sin 2\theta}{2}\right)\right|_0^{2\pi}
+		=\frac{3}{2}a^2\pi    \qedhere
+	\end{align*}
+\end{solution}
+\subsubsection{平面曲线的弧长}
+\de[平面曲线的弧长]{
+	设平面曲线 $C=\widetilde{AB}$\com 在 $C$ 上从 $A$ 到 $B$ 依次取分点$ A=P_0\com P_1\com ...\com P_{n-1}\com P_{n}=B$\com 它们成为一个分割\com 记为 $T$。然后用线段连接相邻的两点\com 得到\tboba{内接折线}。
+	
+	记最长弦的长度为$ \|T\|=\max\limits_{1\leq i\leq n}|P_{i-1}P_i|$\com 折线的总长度为$S_T=\sum\limits_i^n |P_{i-1}P_i|$。
+	对于曲线 $C$ 的无论怎么样的分割 $T$\com 如果存在极限$ \lim\limits_{\|T\|\to 0}S_T=S$\com 则称 $C$ 是\tboba{可以求长}的\com 这个极限值称为曲线$C$的\tboba{长度}或称\tboba{弧长}。
+}
+\de[光滑曲线]{
+	假设平面曲线$C$ 的参数方程为：
+	$\left\{\begin{NiceArray}{l} x=x(t)\text{\com } \\ y=y(t) \end{NiceArray} \right.$（$t\in [\alpha\com \beta]$）\com 如果 $x(t)\com y(t)$ 在  $[\alpha\com \beta]$ 上连续可微\com 并且 $x'(t)\com y'(t)$ 不同时为零\com 则称 $C$ 为一条\tboba{光滑曲线}。
+}
+\di[光滑曲线的弧长]{
+	设平面曲线$C:\left\{\begin{NiceArray}{l} x=x(t)\text{\com } \\ y=y(t) \end{NiceArray} \right.$（$t\in [\alpha\com \beta]$）是一条光滑曲线\com 则$C$是可以求长的\com 弧长为
+	$$S=\int_\alpha^\beta \sqrt{(x'(t))^2+(y'(t))^2} \dif t$$
+}
+\begin{proofs}
+	在 $C$ 上从 $A$ 到 $B$ 取分割$T: A=P_0\com P_1\com ...\com P_{n-1}\com P_{n}=B$\com 假设 $P_0$、$P_n$  分别对应 $t=\alpha$、$t=\beta$\com 并且
+	$  P_i(x_i\com y_i)=(x(t_i)\com y(t_i))$（$i=1\com ...\com n-1$）\com 于是得到 $[\alpha\com \beta]$ 的一个分割
+	$T': \alpha=t_0<t_1<....< t_{n-1}< t_n=\beta$。
+
+	在每个 $\Delta_i=[t_{i-1}\com t_i]$ 上用微分中值定理:
+	\begin{align*}
+		&\Delta x_i=x(t_i)-x(t_{i-1})=x'(\xi_i)\Delta t_i\com \quad \xi_i \in \Delta_i\\
+		&\Delta y_i=y(t_i)-y(t_{i-1})=y'(\eta_i)\Delta t_i\com \quad \eta_i \in \Delta_i       
+	\end{align*}
+	从而内接折线的总长度为
+	$S_T=\sum\limits_{i=1}^n \sqrt{\Delta x_i^2+\Delta y_i^2}=\sum\limits_{i=1}^n \sqrt{ (x'(\xi_i))^2+(y'(\eta_i))^2}\Delta t_i$。
+
+	因为 $C$ 是光滑曲线\com 当 $x'(t) \neq 0$ 时\com 在 $t$ 的某个邻域内 $x=x(t)$ 有连续的反函数。 所以当$\Delta x\to 0$ 时 $\Delta t\to 0$。类似地\com 当 $y'(t)\neq 0$ 时\com $\Delta y\to 0$ 时必有 $\Delta t\to 0$。
+	所以\com 当 $|P_{i-1}P_i|=\sqrt{\Delta x_i^2+\Delta y_i^2} \to 0$ 时\com $\Delta t_i\to 0$ \com 而且反之当 $\Delta t_i\to 0$\com 显然有$|P_{i-1}P_i|\to 0$。由此可知\com \textbf{当 $\boldsymbol{C}$ 为光滑曲线时\com $\boldsymbol{\|T\|\to 0}$ 等价于$\boldsymbol{\|T'\|\to 0}$}。
+
+	由于  $\sqrt{(x'(t))^2+(y'(t))^2}$  在 $[\alpha\com \beta]$ 上连续从而可积\com 只需证
+	$$  \lim_{\|T\|\to 0} S_T=\lim_{\|T\|\to 0} \sum_{i=1}^n \sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}\Delta t_i$$
+	等式右边$\lim\limits_{\|T\|\to 0} \sum\limits_{i=1}^n \sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}\Delta t_i=\dint[_\alpha^\beta] \sqrt{(x'(t))^2+(y'(t))^2} \dif t$就是要证的定积分$S$。
+
+	为证之\com 记
+	$ \delta_i= \sqrt{(x'(\xi_i))^2+(y'(\eta_i))^2}-\sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}$\com 则
+	$$ S_T=\sum\limits_{i=1}^n \left[\sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}+\delta_i \right]\Delta t_i$$
+	只需证明$\lim\limits_{\|T\|\to 0} \sum\limits_{i=1}^n\delta_i \Delta t_i=0$。分子有理化可得
+	\begin{align*}
+		|\delta_i| &= \left|\frac{(y'(\eta_i))^2-(y'(\xi_i))^2}{\sqrt{(x'(\xi_i))^2+(y'(\eta_i))^2}+\sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}}\right|\\
+		&= \frac{\big|y'(\eta_i)-y'(\xi_i)\big|\cdot\big|y'(\eta_i)+y'(\xi_i)\big|}{\left|\sqrt{(x'(\xi_i))^2+(y'(\eta_i))^2}+\sqrt{(x'(\xi_i))^2+(y'(\xi_i))^2}\right|}
+		\le |y'(\eta_i)-y'(\xi_i)|
+	\end{align*}
+
+	由于 $y'(t)$ 在$[\alpha\com \beta]$ 上连续\com 从而一致连续\com 则对任意给定的 $\varepsilon>0$ \com 存在 $\delta>0$\com 使得当 $\|T\|<\delta$ 时\com 只要$\xi_i\com \eta_i\in \Delta_i$ 就一定有$ |\delta_i| < \dfrac{\varepsilon}{\beta-\alpha}$\com 故$\left|\sum\limits_{i=1}^n\delta_i \Delta t_i \right| \le \sum\limits_{i=1}^n|\delta_i| \Delta t_i < \varepsilon$。
+\end{proofs}
+
+\begin{definition}
+	对平面光滑曲线$C:\left\{\begin{NiceArray}{l} x=x(t)\com \\ y=y(t) \end{NiceArray} \right.$（$t\in [\alpha\com \beta]$）\com 微分$\dif \ell =\sqrt{(x'(t))^2+(y'(t))^2} \dif t$称为$C$的\textbf{弧微分}。
+\end{definition}
+
+若在直角坐标系下曲线$\Gamma$的方程为$y=f(x)$（$a\le x\le b$）\com 其中~$f$~连续可导\com 则其弧微分为$\dif \ell=$ $\sqrt{1+(f'(x))^2} \dif x$\com 弧长为
+$$L=\int_{a}^{b}\sqrt{1+(f'(x))^2} \dif x$$
+
+若在极坐标系下曲线$\Gamma$的方程为$\rho=\rho(\theta)$（$\alpha \le \theta \le \beta$）\com 其中~$\rho(\theta)$~连续可导\com 则其直角坐标系下参数表示为$\Gamma:\left\{\begin{NiceArray}{l} x(\theta)=\rho(\theta)\cos \theta\text{\com } \\ y(\theta)=\rho(\theta)\sin \theta \end{NiceArray} \right.$（$\theta \in [\alpha\com \beta]$）\com 于是其弧微分为$\dif \ell=\sqrt{(\rho(\theta))^2+(\rho'(\theta))^2} \dif \theta$\com 弧长为
+$$L=\int_{\alpha}^{\beta}\sqrt{(\rho(\theta))^2+(\rho'(\theta))^2}\dif \theta$$
+
+若在直角坐标系下空间曲线的参数方程为$\left\{\begin{NiceArray}{l} x=x(t)\text{\com } \\ y=y(t) \text{\com } \\ z=z(t)\end{NiceArray} \right.$（$t\in [\alpha\com \beta]$）\com $x\com y\com z$~为连续可导且导数不全为零\com 则
+弧微分为$\dif \ell=\sqrt{(x'(t))^2+(y'(t))^2+(z'(t))^2} \dif t$\com 
+弧长为$$L=\int_{\alpha}^{\beta} \sqrt{(x'(t))^2+(y'(t))^2+(z'(t))^2} \dif t$$
+
+\subsubsection{不规则几何体的体积和侧面积}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{volumn.jpg}
+	\caption{不规则的几何体}
+\end{figure}
+
+将一个物体置于平面$x=a$ 与$x=b$之间（$a<b$）\com $\forall x\in [a\com[0.5] b]$\com 用垂直于~$x$~轴的平面去截此物体所得到的截面的面积为$S(x)$\com 并且假设$S\in\mathscr{R}[a\com[0.5] b]$\com 则该物体的体积为
+$$V=\int_a^bS(x) \dif x$$
+
+假设$f\in\mathscr{C}[a\com[0.5] b]$\com 并且$f\ge 0$\com 
+考虑由$y=f(x)$、$x=a$、$x=b$（$b>a\ge 0$）及$x$轴围成的区域$\Gamma$\com 其绕$x$轴生成的旋转体的体积为
+$$V_x=\int_a^b \pi(f(x))^2 \dif x = \pi\int_a^b (f(x))^2\dif x$$
+绕$y$轴生成的旋转体的体积为
+$$V_y=\int_a^b 2\pi xf(x) \dif x = 2\pi\int_a^b xf(x)\dif x$$
+
+\begin{example}
+	求旋轮线$\left\{\begin{NiceArray}{l}
+x=a(t-\sin t)\text{\com }\\
+y=a(1-\cos t)
+\end{NiceArray}\right.$（$0\le t\le 2\pi$\com $a>0$）
+绕~$x$~旋转所得到的旋转体的体积。
+\end{example}
+\begin{solution}
+	$\forall t\in (0\com 2\pi)$\com 均有$x'(t)=a(1-\cos t)>0$\com 
+	故$x(t)$~在~$[0\com 2\pi]$~上严格递增\com 
+	从而有连续反函数$t=t(x)$\com 则~$y=y(t(x))$\com 故所求体积为
+	\begin{align*}
+	V&=\pi\int_{0}^{2\pi a} y^2 \dif x
+	\xlongequal{x=x(t)}\pi\int_0^{2\pi} (a(1-\cos t))^2\cdot a(1-\cos t) \dif t\\
+	&=\pi a^3\int_0^{2\pi}(1-\cos t)^3 \dif t
+	=5a^3\pi^2 \qedhere
+	\end{align*}
+\end{solution}
+
+考虑$xOy$平面上光滑曲线$\Gamma$绕$x$轴或$y$轴旋转生成的曲面的面积。
+绕$x$轴旋转时\com \textbf{面积微元}为$\dif \sigma=2\pi |y| \dif \ell$\com 侧面积为$\dint[\limits_\Gamma]\dif \sigma=2\pi \dint[\limits_\Gamma]|y| \dif \ell$\com 代入对应弧微元即可。
+
+\subsubsection{平面曲线的质心}
+设曲线$\Gamma$的参数方程为$\left\{\begin{NiceArray}{l} x=x(t)\text{\com } \\ y=y(t) \end{NiceArray} \right.$（$t\in [\alpha\com \beta]$）\com 其中$x\com y$连续可导。设其线密度$\mu(t)$\com 质量微元为$\dif M(t) = \mu(t) \dif \ell(t)$\com 其质量即为
+$$M=\dint[_\alpha^\beta]\dif M(t)=\dint[_\alpha^\beta]\mu(t) \dif \ell(t)=\dint[_\alpha^\beta]\mu(t)\sqrt{(x'(t))^2+(y'(t))^2} \dif t$$
+
+曲线关于~$y$~轴的静力矩微元为
+$\dif M_y(t)=x(t) \dif M(t)=x(t)\mu(t) \dif \ell(t)$\com 
+故曲线关于~$y$~轴的静力矩为
+$$M_y=\int_{\alpha}^{\beta}\mathrm{d}M_y(t)
+=\int_{\alpha}^{\beta}x(t)\mu(t)\sqrt{(x'(t))^2+(y'(t))^2} \dif t$$
+同理\com 曲线关于~$x$~轴的静力矩为
+$$M_x=\int_{\alpha}^{\beta}\mathrm{d}M_x(t)
+=\int_{\alpha}^{\beta}y(t)\mu(t)\sqrt{(x'(t))^2+(y'(t))^2} \dif t$$
+
+曲线的质心$(\overline{x}\com \overline{y})$的坐标为
+$$  \overline{x}=\frac{M_y}{M}
+	=\frac{\int_{\alpha}^{\beta}x(t)\mu(t) \dif \ell(t)}{\int_{\alpha}^{\beta}\mu(t) \dif \ell(t)} \qquad
+	\overline{y}=\frac{M_x}{M}
+	=\frac{\int_{\alpha}^{\beta}y(t)\mu(t) \dif \ell(t)}{\int_{\alpha}^{\beta}\mu(t) \dif \ell(t)}
+$$
+特别地\com 若$\Gamma$均匀（即~$\mu$~为常数）\com 且其弧长为~$L$\com 则
+$\overline{x}=\dfrac{1}{L}\dint[_{\alpha}^{\beta}]x(t) \dif \ell(t)$\com $\overline{y}=\dfrac{1}{L}\dint[_{\alpha}^{\beta}]y(t) \dif \ell(t)$；若$\Gamma$的方程为$y=f(x)$（$a\le x\le b$）\com 那么
+$\overline{x}
+=\dfrac{\int_{a}^{b}x\mu(x)\sqrt{1+(f'(x))^2} \dif x}
+{\int_{a}^{b}\mu(x)\sqrt{1+(f'(x))^2} \dif x}$\com $
+\overline{y}
+=\dfrac{\int_{a}^{b}f(x)\mu(x)\sqrt{1+(f'(x))^2} \dif x}
+{\int_{a}^{b}\mu(x)\sqrt{1+(f'(x))^2} \dif x}$。\label{定积分的应用2}
+
+\subsection{广义积分（反常积分）}
+\de[广义积分（反常积分）]{
+	设$a\in\mathbb{R}$\com $\omega\in (a\com +\infty]$\com $f:[a\com \omega)\rightarrow \mathbb{R}$\com 满足~$\forall A\in (a\com \omega)$\com 函数~$f$~在~$[a\com A]$~上均可积。积分
+	$$\int_a^{\omega} f(x) \dif x=\lim\limits_{A\rightarrow \omega^{-}}\int_a^A f(x) \dif x$$
+	称为$f$在$[a\com \omega)$上的\tboba{广义积分}\com 也称为\tboba{反常积分}。若上述极限收敛\com 称广义积分$\dint[_a^{\omega}] f(x) \dif x$~\tboba{收敛}\com 否则称之\tboba{发散}。
+}
+通常\com $\omega=+\infty$\com 或者$\omega\in\mathbb{R}$但函数$f$在$\omega$的邻域内无界\com 此时称$\omega$为$f$的\textbf{奇点}或\textbf{瑕点}\com 相应的广义积分被称为\textbf{无穷限积分}或\textbf{瑕积分}。
+
+广义积分的敛散性仅与函数$f$在瑕点$\omega$邻域内的性质有关。
+
+\vskip 10pt
+对称地\com 如果$b\in\mathbb{R}$\com $\omega\in[-\infty\com b)$\com 而且$f:(\omega\com b]\rightarrow \mathbb{R}$ 在$(\omega\com b]$ 的任意的闭子区间上可积\com 则我们可以类似地定义广义积分
+$$\int_{\omega}^bf(x) \dif x=\lim_{B\rightarrow \omega^{+}}\int_B^bf(x) \dif x$$
+
+由此\com 许多积分问题都可以化归地用这两种形式的广义积分问题定义。
+
+（1）设$\omega_1\com \omega_2$（$\omega_1<\omega_2$）为$f$的奇点\com 而函数$f$在$(\omega_1\com \omega_2)$的任意的闭子区间上可积\com 则任意固定$a\in (\omega_1\com \omega_2)$\com 可定义
+$$\int_{\omega_1}^{\omega_2}f(x) \dif x=\int_{\omega_1}^af(x) \dif x+\int_a^{\omega_2}f(x) \dif x$$
+并可证明该定义不依赖点$a$的选择。
+
+（2）如果$a\com b\in\mathbb{R}$（$a<b$）\com 而$\omega\in (a\com[0.5] b)$ 使得$f$ 在$[a\com[0.5] b]\setminus\{\omega\}$的任意闭子区间上可积\com 可定义
+$$\int_a^bf(x) \dif x=\int_a^{\omega}f(x) \dif x+\int_{\omega}^bf(x) \dif x$$
+
+更一般地\com 如果$f$有多个奇点\com 此时可将整个区间分割成若干个小区间使得$f$在每一个小区间上只有一个奇点且该点为小区间的端点\com 随后在每个小区间上定义广义积分\com 再将如此定义的广义积分之和定义为$f$在原来那个区间上的广义积分。有鉴于此\com 再通过坐标变换\com \textbf{我们总可以将问题归结为研究形如}$\boldsymbol{\dint[_a^{\omega}] f(x)\dif x}$\textbf{这样的广义积分}。
+
+\vskip 10pt
+正常积分的各种性质对广义积分都仍然适用\com 例如我们有
+
+\di[广义积分的Newton-Leibniz公式]{
+	若$f\in\mathscr{C}[a\com \omega)$在$[a\com \omega)$上有原函数$F$\com 则
+	$$\int_a^{\omega}f(x) \dif x=F\big|_a^{\omega}=F(\omega-0)-F(a)$$
+}
+\begin{example}
+	讨论$\dint[_1^{+\infty}\frac{\mathrm{d}x}{x^p}]$和$\dint[_0^1\frac{\mathrm{d}x}{x^p}]$的敛散性。
+\end{example}
+\begin{solution}
+	若$p\neq 1$\com 则我们有
+	\begin{align*}
+		&\int_1^{+\infty}\frac{\mathrm{d}x}{x^p}
+		=\frac{1}{1-p}\cdot\frac{1}{x^{p-1}}\Big|_1^{+\infty}
+		=\left\{\begin{NiceArray}{ll}
+			\dfrac{1}{p-1}\com &p>1\com \\
+			+\infty\com &p<1
+		\end{NiceArray}\right.\\
+		&\int_0^1\frac{\mathrm{d}x}{x^p}
+		=\frac{1}{1-p}\cdot\frac{1}{x^{p-1}}\Big|_0^1
+		=\left\{\begin{NiceArray}{ll}
+			+\infty\com &p>1\com \\    
+			\dfrac{1}{1-p}\com &p<1
+		\end{NiceArray}
+		\right.
+	\end{align*} 
+
+	若$p=1$\com 则我们有
+	\begin{equation*}
+		\int_1^{+\infty}\frac{\mathrm{d}x}{x}=\ln x\Big|_1^{+\infty}=+\infty\com \qquad
+		\int_0^1\frac{\mathrm{d}x}{x}=\ln x\Big|_0^1 =+\infty \qedhere
+	\end{equation*} 
+\end{solution}
+
+\begin{example}
+	计算$\dint[_0^{1}]\dfrac{1}{(x+2)\sqrt{1-x}} \dif x$。
+\end{example}
+\begin{solution}
+	瑕点为0\com 换元有
+	\begin{align*}
+		\int_0^{1}\frac{1}{(x+2)\sqrt{1-x}} \dif x
+		&\xlongequal{t=\sqrt{1-x}}\int_1^0\frac{1}{(3-t^2)t} \dif (1-t^2)
+		=\int_0^1\frac{2t}{(3-t^2)t} \dif t\\
+		&=\frac{1}{\sqrt{3}}\int_0^1\big(\frac{1}{\sqrt{3}-t}+\frac{1}{\sqrt{3}+t}\big) \dif t
+		=\frac{1}{\sqrt{3}}\ln\frac{|\sqrt{3}+t|}{|\sqrt{3}-t|}\Big|_0^1
+		=\frac{1}{\sqrt{3}}\ln\frac{\sqrt{3}+1}{\sqrt{3}-1} \qedhere
+	\end{align*}
+\end{solution}
+
+\newpage
+\section[常微分方程]{常微分方程（Ordinary Differential Equation）\page{null}}
+\subsection[基本概念]{常微分方程的基本概念}
+\de[常微分方程]{
+	含有自变量$x$\com 未知函数$y$及其直到$n$阶的导数的等式$F(x\com y\com y'\com \cdots\com y^{(n)})=0$被称为\tboba{常微分方程}。方程中的导数的最高阶被称为方程的\tboba{阶}。若$F$关于$y\com y'\com \cdots\com y^{(n)}$为线性函数\com 则称之为\tboba{线性常微分方程}。
+
+	含有多个未知函数及其导数的方程组称为\tboba{常微分方程组}。出现在上述方程组中的未知函数的导数的最高阶称为方程组的\tboba{阶}。
+
+	在区间$I$上满足$F(x\com y\com y'\com \cdots\com y^{(n)})=0$的函数$y=y(x)$称为该方程在$I$上的一个\tboba{解}\com 称$I$为\tboba{解的存在区间}。不加注明时\com $I$ 是使方程的解有意义的最大区间。
+	
+	如果该解含有\tboba{独立常数}~$C_i$（$i=1\com 2\com \cdots\com n$）\com 也即有$y=f(x\com C_1\com \cdots\com C_n)$\com 则称之为方程的\tboba{通解}。通解中独立常数的个数与方程的阶相同。若不含常数\com 则称之为\tboba{特解}。
+}
+例如\com 方程$\dfrac{\mathrm{d}y}{\mathrm{d}x}+y=0$的阶为$1$\com 
+$\dfrac{\mathrm{d}^2y}{\mathrm{d}x^2}+y=0$的阶为$2$；$y=C\e^{-x}$是$\dfrac{\dif y}{\dif x}+y=0$的通解。
+
+\vskip 10pt
+一般地\com 当通解中的任意常数取遍所有的允许取的实数时\com 应该能得到常微分方程的所有的解。但也有例外\com 例如对方程$y'=\sqrt{y}$\com $y=\dfrac{1}{4}(x+C)^2$为它的通解\com 并且$y\equiv 0$也为上述方程的一个特解\com 但这个特解并没有被包含在上述通解中。这样的特解称为\tboba{奇解}。
+
+求解常微分方程\com 就是\textbf{求方程的通解\com 同时寻求那些不能用通解表示的「奇解」（若存在）}。为了确定通解中的任意常数\com 需要给出附加条件——$n$阶的常微分方程一般需要有$n$ 个条件——这类条件一般被称为\tboba{定解条件}\com 有些也被称为\textbf{初始条件}。例如\com Cauchy问题给出一个常微分方程和未知函数及其前$n-1$阶导数在某点$x_0$处的值\com 其一般形式是$\left\{\begin{NiceArray}{l}
+		F(x\com y\com y'\com y''\com \cdots\com y^{(n)})=0\text{\com }\\
+		y(x_0)=y_0\text{\com }\\
+		\cdots\\
+		y^{(n-1)}(x_0)=y_{n-1}\text{。}
+\end{NiceArray}\right.
+$
+
+\subsection{一阶常微分方程}
+一阶常微分方程的一般形式为$F\left(x\com y\com \dfrac{\dif y}{\dif x}\right)=0$。
+\subsubsection{一阶线性常微分方程的解}
+一阶常微分方程中\com 比较简单的是一阶线性常微分方程\com 典型形式为
+$$\frac{\dif y}{\dif x}+P(x)y=Q(x)$$
+其中$y$为待求解函数\com $P(x)\com Q(x)$为已知函数。如果$Q(x)\equiv 0$\com 则称之为\textbf{一阶线性齐次常微分方程}\com 否则称为一阶线性非齐次常微分方程。
+
+\din[]{
+	一阶线性非齐次常微分方程的通解为方程的一个特解与相应齐次方程的通解之和。
+}
+\begin{proofs}
+	考虑一阶常微分方程$\dfrac{\dif y}{\dif x}+P(x)y=Q(x)$。设$y_0$ 为其特解\com $y$为通解。令$z=y-y_0$\com 因为
+	$$\frac{\dif y}{\dif x}+P(x)y=Q(x)\com \qquad \frac{\dif y_0}{\dif x}+P(x)y_0=Q(x)$$
+	则$\dfrac{\dif z}{\dif x}+P(x)z=0$\com 也即$z$为相应齐次方程的通解\com 有$y=y_0+z$。
+\end{proofs}
+
+\din[一阶线性齐次常微分方程的通解]{
+	设$f$为$P$的任意一个原函数\com 则一阶线性齐次常微分方程$\dfrac{\dif y}{\dif x}+P(x)y=0$的通解为$\displaystyle y=C\e^{-f(x)}$\com 也常被写作$y=C\,\mathrm{exp}\left(-\dint P(x) \dif x\right)$。
+}
+\zhu[符号$\boldsymbol{\int P(x) \dif x}$的约定]{
+	以下我们约定$\dint P(x) \dif x$表示$P$的一个原函数\com 因此在其表达式中不出现常数。
+}
+\begin{proofs}
+	令$C(x)=y\e^{f(x)}$\com 则$y=C(x)\e^{-f(x)}$\com 故
+	\begin{align*}
+		0=\frac{\dif y}{\dif x}+P(x)y
+		=C'(x)\e^{-f(x)}-C(x)\e^{-f(x)}f'(x)+P(x)y
+		=C'(x)\e^{-f(x)}-yP(x)+P(x)y
+		=C'(x)\e^{-f(x)}
+	\end{align*}
+	由此得$C'(x)=0$\com 于是$C(x)\equiv C$为常值函数。因此原常微分方程的通解为$y=C\e^{-f(x)}$。
+\end{proofs}
+
+\din[一阶线性非齐次常微分方程的通解]{
+	一阶线性非齐次常微分方程$\dfrac{\dif y}{\dif x}+P(x)y=Q(x)$的通解为
+	$$\mbome{y=\e^{-\int P(x) \dif x}\left(C+\int Q(x)\e^{\int P(x) \dif x} \dif x\right)}$$
+	其中$C$为任意的常数。
+}
+\begin{proofs}
+	设$f$为$P$的一个原函数\com $C(x)=y\e^{f(x)}$\com 则$y=C(x)\e^{-f(x)}$\com 于是我们有
+	\begin{align*}
+		Q(x)&=\frac{\dif y}{\dif x}+P(x)y\\
+		&=C'(x)\e^{-f(x)}-C(x)\e^{-f(x)}f'(x)+P(x)y\\
+		&=C'(x)\e^{-f(x)}-yP(x)+P(x)y\\
+		&=C'(x)\e^{-f(x)}
+	\end{align*}
+	从而$C'(x)=Q(x)\e^{f(x)}$\com 故$C(x)=C+\dint Q(x)\e^{f(x)} \dif x$
+	则原方程的通解为
+	$$
+	y = \e^{-f(x)}C(x)=\e^{-f(x)}\left(C+\int Q(x)\e^{f(x)} \dif x\right) = \e^{-\int P(x) \dif x}\left(C+\int Q(x)\e^{\int P(x) \dif x} \dif x\right)
+	$$
+	其中$C$为任意的常数。
+\end{proofs}
+\zhu[常数变易法]{
+	将猜想中的常数$C$变为待定函数$C(x)$\com 经过运算确定函数的取值$C(x)\equiv C$或得到其他解的方法\com 称为常数变易法。
+}
+\begin{example}
+	设$p\com q\in\mathscr{C}[0\com[0.5] +\infty)$使得齐次常微分方程$y''+p(x)y'+q(x)y\dif =0$的一个解$\varphi$在$[0\com[0.5] +\infty)$上大于$0$\com 且$\dint[_0^x](\varphi(t))^{-2}\e^{-\int_0^tp(u)\dif u}\dif t$在$[0\com[0.5] +\infty)$上为无界函数。
+
+	（I）求上述齐次常微分方程的通解；
+
+	（II）求证：上述常微分方程满足$\lim\limits_{x\rightarrow+\infty}\dfrac{y(x)}{\varphi(x)}=C$（$C\in\mathbb{R}$为常数）的解只有$y(x)=C\varphi(x)$。
+\end{example}
+\begin{solution}
+	（I）设$y$为常微分方程的任意的解。$\forall x\ge 0$\com 令$C(x)=\dfrac{y(x)}{\varphi(x)}$\com 则$y(x)=C(x)\varphi(x)$\com 代入方程可得$C''(x)\varphi(x)+(2\varphi'(x)+p(x)\varphi(x))C'(x)=0$。这可看作以$C'(x)$为未知函数的一阶线性齐次常微分方程\com 由此我们立刻可知
+	\begin{align*}
+	C'(x)=C'(0)\e^{-\int_0^x\left(2\frac{\varphi'(u)}{\varphi(u)}+p(u)\right)\dif u}
+	=C'(0)\e^{2\ln \varphi(0)-2\ln \varphi(x)-\int_0^xp(u)\dif u}
+	=C_1(\varphi(x))^{-2}\e^{-\int_0^xp(u)\dif u}
+	\end{align*}
+	其中$C_1$为任意的常数。进而\com 有
+	$$C(x)=C_2+C_1\int_0^x(\varphi(t))^{-2}\e^{-\int_0^tp(u)\dif u}\dif t$$
+	故所求常微分方程的通解为
+	$$y(x)=\left(C_2+C_1\int_0^x(\varphi(t))^{-2}\e^{-\int_0^tp(u)\dif u}\dif t\right)\varphi(x)$$
+
+	（II）若$\lim\limits_{x\rightarrow+\infty}\dfrac{y(x)}{\varphi(x)}=C$\com 
+	则我们有
+	$$C=C_2+\lim\limits_{x\rightarrow+\infty}C_1\int_0^x(\varphi(t))^{-2}\e^{-\int_0^tp(u)\dif u}\dif t$$
+	$\forall x\ge 0$\com 令$F(x)=\dint[_0^x](\varphi(t))^{-2}\e^{-\int_0^tp(u)\dif u}\dif t$\com 则由题设可知$F\in\mathscr{C}[0\com +\infty)$为单调递增并且无界\com 于是由单调有界定理可得知$\lim\limits_{x\rightarrow+\infty}F(x)=+\infty$。又$C=C_2+\lim\limits_{x\rightarrow+\infty}C_1F(x)$\com 因此必定有$C_1=0$\com 从而$C_2=C$\com 故$y(x)=C\varphi(x)$。而$C\varphi(x)$的确也满足题设条件\com 由此可知所证结论成立。
+\end{solution}
+\begin{example}
+	假设$\varphi\com[0.5] \psi\in\mathscr{C}[0\com[0.5] T]$\com 而$f$在$[0\com[0.5] T]$上可导。若$\varphi\com[0.5] \psi$均为非负函数\com 且$\forall t\in [0\com[0.5] T]$\com 均有$f'(t)\le \varphi(t)f(t)+\psi(t)$\com 求证: $\forall t\in [0\com[0.5] T]$\com 我们均有
+	$$f(t)\le e^{\int_0^t\varphi(s)\dif s}\left(f(0)+\int_0^t\psi(u)\dif u\right)$$
+\end{example}
+\begin{proofs}
+	$\forall t\in [0\com[0.5] T]$\com 令$C(t)=f(t)\e^{-\int_0^t\varphi(s)\dif s}$\com 那么$C$可导\com 且$\forall t\in [0\com[0.5] T]$\com $f(t)=C(t)\e^{\int_0^t\varphi(s)\dif s}$\com 于是
+	\begin{align*}
+		\varphi(t)f(t)+\psi(t) &\ge f'(t)=C'(t)\e^{\int_0^t\varphi(s)\dif s}+\varphi(t)C(t)\e^{\int_0^t\varphi(s)\dif s}\\
+		&=C'(t)\e^{\int_0^t\varphi(s)\dif s}+\varphi(t)f(t)\com 
+	\end{align*}
+	故$C'(t)\le
+	\psi(t)e^{-\int_0^T\varphi(s)\dif s}$。
+	又$\varphi\com \psi$均为非负函数\com 由此我们可立刻导出$C'(t)\le \psi(t)$。
+	由定义可知$C(0)=f(0)$\com 于是$\forall t\in [0\com[0.5] T]$\com 均有
+	$$C(t)=f(0)+\int_0^tC'(u)\dif u\le f(0)+\int_0^t\psi(u)\dif u$$
+	从而$\forall t\in [0\com[0.5] T]$\com 我们均有
+	\begin{equation*}
+		f(t)=C(t)\e^{\int_0^t\varphi(s)\dif s}
+		\le \e^{\int_0^t\varphi(s)\dif s}\left(f(0)+\int_0^t\psi(u)\dif u\right) \qedhere
+	\end{equation*}
+\end{proofs}
+
+\begin{example}
+	设$a(x)$和$b(x)$为$(-\infty\com +\infty)$上以$2\pi$为周期的连续函数\com 考虑方程$\dfrac{\dif y}{\dif x}=a(x)y+b(x)$。
+
+	\hang[2em]（I）举出$a(x)\com b(x)$的一个例子使得该方程的解为下列三种情况之一：\\
+		（a）没有以$2\pi$为周期的解；
+		（b）只有一个以$2\pi$为周期的解；
+		（c）任意解都以$2\pi$为周期。
+
+	\hang[2em]（II）证明该方程以$2\pi$为周期的解的个数只能为上述三种情况之一。
+\end{example}
+\begin{solution}
+	（I）如对（a）可选取$a(x)=b(x) \equiv 0$\com 解出$y \equiv C$。也可举出非平凡的例子\com 如$a(x)=b(x) = \cos x$\com 解出$y = C \e^{\sin x} - 1$。
+
+	（II）假设（a）（b）不成立\com 那么原方程会有两个以$2\pi$为周期的不同解\com 记作$y_1\com y_2$\com 则$y_2-y_1$为齐次方程不恒为零的解\com 故原方程的通解为
+	$$	y=C(y_2-y_1)+y_1	$$
+	其中$C\in\mathbb{R}$为常数。于是上述方程的任意解均以$2\pi$为周期\com 也即（c）成立\com 故所证结论成立。
+\end{solution}
+
+\subsubsection{可分离变量的一阶常微分方程的解}
+考虑方程$\dfrac{\dif y}{\dif x}=f(x)g(y)$\com 其中$f\com g$ 为连续函数。当$g(y)\neq 0$时\com 有$\dfrac{\dif y}{g(y)}=f(x) \dif x$\com 故$\dint \dfrac{\dif y}{g(y)}=\dint f(x) \dif x+C$\com 由此可得$y$的隐函数方程。若$g(y_0)=0$\com 则$y\equiv y_0$也为方程的解。
+\begin{example}
+	\textbf{Logistic方程}\quad 假设树生长的最大高度为$H>0$\com 在$t$时的高度为$h(t)$\com 则我们有$ \dfrac{\dif h(t)}{\dif t}=k(H-h(t))h(t) $\com 其中$k>0$为常数。由此求解其生长规律$h(t)$。
+\end{example}
+\begin{solution}
+	当$h(t)\neq 0$或$H$时\com 即 $\dfrac{\dif h}{h(H-h)}=k \dif t$\com 
+	故$\dint\frac{\dif h}{h(H-h)}=\dint k \dif t+C_1=kt+C_1$\com 由此可知
+	$$kt+C_1=\int\frac{\dif h}{h(H-h)}=\frac{1}{H}\int\left(\frac{1}{h}+\frac{1}{H-h}\right) \dif h$$
+	于是$\dfrac{1}{H}\ln\dfrac{h}{H-h}=kt+C_1$\com 从而$h(t)=\dfrac{H}{1+Ce^{-kHt}}$\com 其中$C=e^{-C_1H}>0$为常数。
+
+	\vskip 10pt
+	另外\com $h(t)\equiv 0$和$h(t)\equiv H$也为原常微分方程的解。
+\end{solution}
+	
+\subsubsection{可转化成一阶线性方程的一阶方程}
+\begin{circum}
+	\textbf{线性换元型}\quad 求解一阶常微分方程$\dfrac{\dif y}{\dif x}= f(ax+by+c)$\com 其中$a\com b\com c\in\mathbb{R}$为常数。
+\end{circum}
+\begin{solution}
+	若$b=0$\com 则$\dfrac{\dif y}{\dif x}=f(ax+c)$\com 于是$y=\dint f(ax+c)\dif x+C$。
+	
+	若$b\neq 0$\com 令$u=ax+by+c$\com 则我们有$\dfrac{\dif u}{\dif x}=a+b\dfrac{\dif y}{\dif x}=a+bf(u)$\com 
+	故$\dint\frac{\dif u}{a+bf(u)}=\dint\dif x+C=x+C$\com 由此得到$u$\com 进而得$y$。若$\exists u_0\in\mathbb{R}$使得$a+bf(u_0)=0$\com 则$ax+by+c=u_0$也为方程的解\com 即$y=\dfrac{1}{b}(u_0-ax-c)$。
+\end{solution}
+
+\begin{circum}
+	\textbf{齐次换元型}\quad 求解一阶常微分方程$\dfrac{\dif y}{\dif x}=F\left(\dfrac{y}{x}\right)$。
+\end{circum}
+\begin{solution}
+	定义$u=\dfrac{y}{x}$\com 则$y=ux$\com 从而$\dfrac{\dif y}{\dif x}=x\dfrac{\dif u}{\dif x}+u$\com 带入原常微分方程即$x\dfrac{\dif u}{\dif x}+u=F(u)$。
+	
+	若$F(u)=u$\com 则$x\dfrac{\dif u}{\dif x}=0$\com 从而$u\equiv C$\com 也即$y=Cx$。
+
+	下面假设$F(u)\neq u$。则我们有
+	$\dint \frac{\dif u}{F(u)-u}=\int\frac{\dif x}{x}+C=\ln|x|+C$\com 
+	由此可得到$u$的隐函数方程\com 进而可得出$y$。
+
+	如果$\exists u_0\in\mathbb{R}$使得$F(u_0)=u_0$\com 则$u=u_0$也为上述方程的解\com 也即$y=u_0x$为原方程的解。
+\end{solution}
+
+\begin{circum}
+	求解一阶常微分方程$\dfrac{\dif y}{\dif x}=f\left(\dfrac{a_1x+b_1y+c_1}{a_2x+b_2y+c_2}\right)$。
+\end{circum}
+\begin{solution}
+	如果$a_1b_2\neq a_2b_1$\com 则直线$a_1x+b_1y+c_1=0$与$a_2x+b_2y+c_2=0$有唯一的交点\com 设为$(x_0\com y_0)$\com 即有$\left\{\begin{NiceArray}{l} 
+		c_1=-a_1x_0-b_1y_0 \text{\com } \\ c_2=-a_2x_0-b_2y_0 \text{。}
+	\end{NiceArray}\right.$ 定义$X=x-x_0$\com $Y=y-y_0$\com 则原方程变为\textbf{齐次换元型}方程
+	$$\frac{\dif Y}{\dif X}=f\left(\frac{a_1X+b_1Y}{a_2X+b_2Y}\right)
+	=f\left(\frac{a_1+b_1\frac{Y}{X}}{a_2+b_2\frac{Y}{X}}\right)$$
+
+	现在假设$a_1b_2=a_2b_1$。若$(a_2\com b_2)=(0\com 0)$\com 那么
+	$\dfrac{\dif y}{\dif x}
+	=f\left(\dfrac{a_1}{c_2}x+\dfrac{b_1}{c_2}y+\dfrac{c_1}{c_2}\right)$为\textbf{线性换元型}方程。
+	
+	\vskip 10pt
+	若$(a_2\com b_2)\neq (0\com 0)$\com 则由$(a_1\com b_1)$与$(a_2\com b_2)$线性相关可知$\exists k\in\mathbb{R}$ 使得$(a_1\com b_1)=k(a_2\com b_2)$\com 故
+	$$
+	\frac{\dif y}{\dif x}
+	=f\left(\frac{a_1x+b_1y+c_1}{a_2x+b_2y+c_2}\right)
+	=f\left(k+\frac{c_1-kc_2}{a_2x+b_2y+c_2}\right)
+	=F(a_2x+b_2y+c_2)
+	$$
+	也为\textbf{线性换元型}方程。
+\end{solution}
+
+\begin{circum}
+	\textbf{Jacob Bernoulli方程}\quad 求解一阶常微分方程$\dfrac{\dif y}{\dif x}+p(x)y=q(x)y^{\alpha}$\com 其中$\alpha$为
+	常数且不等于$0$或$1$。
+\end{circum}
+\begin{solution}
+	当$y\neq 0$时\com 则有$y^{-\alpha}\dfrac{\dif y}{\dif x}+p(x)y^{1-\alpha}=q(x)$。令$z=y^{1-\alpha}$\com 则$\dfrac{\dif z}{\dif x}=(1-\alpha)y^{-\alpha}\dfrac{\dif y}{\dif x}$\com 从而可得$\dfrac{1}{1-\alpha}\dfrac{\dif z}{\dif x}+p(x)z=q(x)$\com 也即
+	$$\frac{\dif z}{\dif x}+(1-\alpha)p(x)z=(1-\alpha)q(x)$$
+	从而可解出$\displaystyle z=\e^{-\int (1-\alpha)p(x) \dif x}\left(C+\int (1-\alpha)q(x)\e^{\int (1-\alpha)p(x) \dif x} \dif x\right)$\com 于是
+	$$y=z^{\frac{1}{1-\alpha}}=\e^{-\int p(x) \dif x}\left(C+\int (1-\alpha)q(x)\e^{(1-\alpha)\int p(x) \dif x} \dif x\right)^{1-\alpha}\quad\text{（}y>0\text{）}$$
+	
+	若$\alpha>0$\com 则$y\equiv 0$也为方程的解。
+\end{solution}
+
+\subsection{可降阶的高阶常微分方程}
+最简单的情形是$y^{(n)} = f(x)$\com 进行$n$次不定积分即可求出$y$。
+
+\subsubsection[不显含未知量$y$的方程]{不显含未知量$\boldsymbol{y}$的方程}
+考虑常微分方程$y^{(n)}=F(x\com y^{(k)}\com \ldots\com y^{(n-1)})$\com 其中$k\ge 1$。令$p(x)=y^{(k)}$\com 则我们有$p^{(n-k)}=F(x\com p\com p'\com \ldots\com p^{(n-k-1)})$。
+如果由此可以求解出$p=p(x)$\com 那么进而再对$y^{(k)}= p(x)$求$k$次原函数就可求解出$y$。
+
+\subsubsection[不显含自变量$x$的二阶方程]{不显含自变量$\boldsymbol{x}$的二阶方程}
+考虑常微分方程$F\left(y\com \dfrac{\dif y}{\dif x}\com \dfrac{\dif ^2y}{\dif x^2}\right)=0$。将$y$看成自变量\com 并令$p=\frac{\dif y}{\dif x}$\com 则我们有
+$$\frac{\dif ^2y}{\dif x^2}
+=\frac{\dif p}{\dif x}
+=\frac{\dif p}{\dif y}\frac{\dif y}{\dif x}
+=p\frac{\dif p}{\dif y}$$
+
+原方程变为$F(y\com p\com p\frac{\dif p}{\dif y})= 0$。
+如果由此可求$p=p(y)$\com 那么进而对$\dfrac{\dif y}{\dif x}=p(y)$应用分离变量法就可以得到原来方程的解。
+\begin{example}
+	已知曲线$y=y(x)$满足$yy''+(y')^2=1$\com 并且上述曲线与曲线$y=\e^{-x}$相切于点$(0\com 1)$\com 求曲线$y=y(x)$的表达式。
+\end{example}
+\begin{solution}
+	因曲线$y=\e^{-x}$在点$(0\com 1)$处的切线的斜率为$-1$\com 由题设条件可知所求曲线$y=y(x)$为下述初值问题的解：
+	$$\left\{\begin{NiceArray}{l}
+		yy''+(y')^2=1\com \\
+		y(0)=1\com \ y'(0)=-1.
+	\end{NiceArray}\right.$$
+
+	\textbf{令$\boldsymbol{p=y'}$并以$\boldsymbol{y}$作为自变量}\com 则
+	$$
+	y''=\frac{\dif p}{\dif x}
+	=\frac{\dif y}{\dif x}\cdot\frac{\dif p}{\dif y}
+	=p\frac{\dif p}{\dif y}
+	$$
+	于是$yp\dfrac{\dif p}{\dif y}+p^2=1$\com 从而得$\dfrac{\dif (p^2-1)}{\dif y}+\dfrac{2(p^2-1)}{y}=0$\com 由此可得$p^2-1=C\e^{-\int \frac{2}{y}\dif y}=\dfrac{C}{y^2}$。
+	
+	但$y(0)=1$\com $p(0)=y'(0)= -1$\com 因此$C=0$\com 从而$y'=p\equiv -1$\com 进而$y=-x+C_1$。又$y(0)=1$\com 于是$C_1=1$\com 故所求曲线方程为$y=1-x$。
+\end{solution}
+
+\subsection{高阶线性常微分方程解的结构}
+$n$阶线性常微分方程的标准形式为
+$$y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots+a_1(x)y'+a_0(x)y=f(x)$$
+其中$a_0\com \ldots\com a_{n-1}\com f$ 均为区间$I$上的连续函数\com 函数$f$ 被称为该方程的非齐次项。当$f\equiv 0$时\com 相应的方程称为齐次方程。
+
+\zhu[算子思想]{
+	\newcommand{\fdif}[1][]{\dfrac{\dif^{#1}}{\dif x^{#1}}}
+	研究上面方程\com 也可定义一个算子$\mathcal{L}$为$\mathcal{L}y:=y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots+a_1(x)y'+a_0(x)y$\com 或者说
+	$\mathcal{L}:=\fdif[n]+a_{n-1}(x)\fdif[n-1]+\cdots+a_1(x)\fdif+a_0(x)$。$\mathcal{L}$是一个\textbf{线性算子}。
+}
+\di[线性常微分方程解的存在性与唯一性]{
+	$\forall x_0 \in I$以及 $\forall \xi_0\com \ldots\com \xi_{n-1}\in\mathbb{R}$\com 在区间$I$上均存在唯一的解$y=y(x)$满足初始条件
+	$y^{(k)}(x_0)=\xi_k$（$0\le k\le n-1$）。
+}
+\begin{example}
+	假设$p\com q\in\mathscr{C}[a\com[0.5] b]$\com 并且$y=\varphi(x)$为方程$y''+p(x)y'+q(x)y=0$在$[a\com[0.5] b]$上的非零的解\com 求证: $\forall x_0\in [a\com[0.5] b]$\com $\varphi(x_0)$\com $\varphi'(x_0)$不全为零。
+\end{example}
+\begin{proofs}
+	用反证法\com 假设存在某个$x_0\in [a\com[0.5] b]$ 使得$\varphi(x_0)=\varphi'(x_0)=0$。由于$y_1\equiv 0$为原方程的解\com 并且$y_1(x_0)=y'_1(x_0)=0$\com 则由线性常微分方程初值问题的解的唯一性可知$\varphi=y_1\equiv 0$\com 矛盾！于是所证结论成立。
+\end{proofs}
+\begin{theorem}
+	齐次方程的所有解组成的集合是一个$n$维的线性空间（算子$\mathcal{L}$的零空间$\mathrm{Ker}_\mathcal{L}$）\com 非齐次方程的通解就是非齐次方程的特解与齐次方程通解之和（$\mathrm{Ker}_\mathcal{L}+y_0$）。
+\end{theorem}
+\begin{definition}
+	称函数$f_1\com \cdots\com f_n: I\rightarrow\mathbb{R}$在$I$上\textbf{线性相关}\com 如果存在不全为零的实数$c_1\com \cdots\com c_n$ 使得$\forall x\in I$\com 均有$c_1f_1(x)+\cdots +c_nf(x)=0$。
+	
+	相应地\com 若$\forall x\in I$\com $c_1f_1(x)+\cdots +c_nf(x)=0$必然导出$c_1=\cdots=c_n=0$\com 则称$f_1\com \cdots\com f_n$在$I$上\textbf{线性无关}。
+\end{definition}
+例如\com $1\com x\com \cdots\com x^n\com \cdots$在任意区间上线性无关。
+
+\di[连续可导函数线性相关的必要条件]{
+	设$f_1\com f_2\com \cdots\com f_n\in\mathscr{C}^{(n-1)}(I)$\com 记
+	$$
+	W(x):=W(f_1\com f_2\com \ldots\com f_n)(x)
+		:=
+		\begin{vmatrix}
+			f_1(x)  & f_2(x)  &\cdots & f_n(x)\\
+			f'_1(x) & f'_2(x) &\cdots & f'_n(x)\\
+			\vdots  & \vdots  &\ddots &\vdots\\
+			f^{(n-1)}_1(x) &f^{(n-1)}_2(x)&\cdots &f^{(n-1)}_n(x)
+		\end{vmatrix}
+	$$
+	如果$f_1\com f_2\ldots\com f_n\in\mathscr{C}^{(n-1)}(I)$在$I$上线性相关\com 则$\forall x\in I$\com $W(f_1\com f_2\com \cdots\com f_n)(x)=0$。$W(x)$称为$f_1\com f_2\com \cdots\com f_n$的~\tbome{Wronsky行列式}。
+}
+\begin{proofs}
+	如果$f_1\com f_2\cdots\com f_n\in\mathscr{C}^{(n-1)}(I)$在$I$上线性相关\com 那么存在不全为零的实数$c_1\com \cdots\com c_n$ \com 使得$\forall x\in I$\com $c_1f_1(x)+\cdots +c_nf_n(x)=0$\com 对之求导得
+	$$c_1f^{(k)}_1(x)+\cdots +c_nf^{(k)}_n(x)=0\quad\text{（}0\le k< n\text{）}$$
+	于是
+	$$\begin{bmatrix}
+		f_1(x)  & f_2(x)  &\cdots & f_n(x)\\
+		f'_1(x) & f'_2(x) &\cdots & f'_n(x)\\
+		\vdots  & \vdots  &\ddots &\vdots\\
+		f^{(n-1)}_1(x) &f^{(n-1)}_2(x)&\cdots &f^{(n-1)}_n(x)
+	\end{bmatrix}\begin{bmatrix}
+		c_1 \\ c_2 \\ \vdots \\ c_n
+	\end{bmatrix}=\boldsymbol{0}$$
+	即$(c_1\com \cdots\com c_n)$为$n$阶线性方程组的非零解\com 从而相应系数行列式$W(f_1\com f_2\com \cdots\com f_n)(x)=0$。
+\end{proofs}
+\begin{corollary}
+	若$\exists x_0 \in I$使得$W(f_1\com f_2\com \ldots\com f_n)(x_0)\neq 0$\com 则$f_1\com \cdots\com f_n$在$I$上线性无关。
+\end{corollary}
+\di[线性齐次常微分方程的解线性相关的充要条件]{
+	若$y_1\com \cdots\com y_n\in\mathscr{C}^{(n-1)}(I)$ 为$n$ 阶线性齐次常微分方程在$I$上的解\com 那么它们在$I$上线性相关当且仅当$W(y_1\com \cdots\com y_n)\equiv 0$。
+}
+\begin{proofs}
+	仅需证明充分性。假设$W(y_1\com \cdots\com y_n)\equiv 0$\com 固定$x_0\in I$\com 则有$W(y_1\com \cdots\com y_n)(x_0)=0$\com 由此可知$\exists c_1\com c_2\com \cdots \com c_n\in\mathbb{R}$不全为零使得
+	$$
+	\left\{\begin{NiceArray}{l}
+	c_1y_1(x_0)+c_2y_2(x_0)+\cdots +c_ny_n(x_0)=0\com \\
+	\cdots\\
+	c_1y^{(n-1)}_1(x_0)+c_2y^{(n-1)}_2(x_0)+\cdots+c_ny^{(n-1)}_n(x_0)=0
+	\end{NiceArray}\right.
+	$$
+	$\forall x\in I$\com 我们定义$y(x)= c_1y_1(x)+\cdots +c_ny_n(x)$\com 则$y$也为题设方程的解\com 且满足$n$个边界条件
+	$$y^{(k)}(x_0)=0 \quad \text{（}0\le k\le n-1 \text{）}$$
+	由方程的解的唯一性\com 可知$y\equiv 0$\com 故$y_1\com \cdots\com y_n$在$I$上线性相关。
+\end{proofs}
+\begin{definition}
+	$n$阶齐次线性常微分方程的$n$个线性无关解\com 称为该方程的\textbf{基本解组}。
+\end{definition}
+
+\begin{example}
+	若$1\com x\com \e^x$为三阶\textbf{齐次}线性常微分方程的三个解\com 求证它们为基本解组\com 并求相应的三阶齐次线性常微分方程。
+\end{example}
+\begin{pf}[breakable, enhanced jigsaw]
+	\begin{proof}[\small\textit{\yan 证明}]\kai\small
+		证它们是基本解组\com 只需证它们线性无关。由题设可知
+		$$
+		W(1\com x\com \e^x)=\left|\begin{array}{ccc}
+			1 & x &\e^x\\
+			0 & 1 &\e^x\\
+			0 & 0 &\e^x
+		\end{array}\right|=\e^x \neq 0
+		$$
+		故$1\com x\com \e^x$线性无关\com 也即它们构成基本解组。
+	\end{proof}
+	\begin{proof}[\small\textit{\yan 解法一}]\kai\small\renewcommand{\qedsymbol}{$\circledS$}
+		设原来三阶齐次线性常微分方程的任意一个解为$y$\com 则$y\com 1\com x\com \e^x$线性相关\com 于是
+		$$
+		0=W(1\com x\com \e^x\com y)=\begin{vmatrix}
+			1 & x &\e^x &y\\
+			0 & 1 &\e^x &y'\\
+			0 & 0 &\e^x &y''\\
+			0 & 0 &\e^x &y'''
+		\end{vmatrix}=\e^x y'''-\e^xy''
+		$$
+		由此立刻可得原来三阶齐次线性常微分方程为$y'''-y''=0$。
+	\end{proof}
+	\begin{proof}[\small\textit{\yan 解法二}]\kai\small\renewcommand{\qedsymbol}{$\circledS$}
+		设原来三阶齐次线性常微分方程为$y'''+p(x)y''+q(x)y'+r(x)y=0$\com 代入所给的三个特解$y\com 1\com x\com \e^x$即得
+		$$
+		\left\{\begin{NiceArray}{llllllll}
+			~\e^x	&+&p(x)\e^x	&+&q(x)\e^x	&+&r(x)\e^x	&=0\\
+					&&			&& q(x)		&+&r(x)x	&=0\\
+					&&			&&			&& r(x)		&=0
+		\end{NiceArray}\right.
+		$$
+		由此立刻解出$r(x)=q(x)\equiv 0$\com $p(x) = -1$\com 即原来三阶齐次线性常微分方程为$y'''-y''=0$。
+	\end{proof}
+	\begin{proof}[\small\textit{\yan 解法三}]\kai\small\renewcommand{\qedsymbol}{$\circledS$}
+		设原来三阶齐次线性常微分方程为$y'''+p(x)y''+q(x)y'+r(x)y=0$\com 代入所给的三个特解$y\com 1\com x\com \e^x$即得
+		$$
+		\left\{\begin{NiceArray}{llllllll}
+			~y'''	&+&p(x)y''	&+&q(x)y'	&+&r(x)y	&=0\\
+			~\e^x	&+&p(x)\e^x	&+&q(x)\e^x	&+&r(x)\e^x	&=0\\
+					&&			&& q(x)		&+&r(x)x	&=0\\
+					&&			&&			&& r(x)		&=0
+		\end{NiceArray}\right.
+		~\Leftrightarrow~
+		\begin{bmatrix}
+			y'''	&y''	&y'	&y\\
+			\e^x	&\e^x	&\e^x	&\e^x\\
+			0	&0	&1	&x\\
+			0	&0	&0	&1
+		\end{bmatrix}\begin{bmatrix}
+			1 \\p(x) \\q(x) \\r(x)
+		\end{bmatrix}=\begin{bmatrix}
+			0 \\0\\0\\0
+		\end{bmatrix}$$
+		由此知$\begin{bmatrix}
+			y'''	&y''	&y'	&y\\
+			\e^x	&\e^x	&\e^x	&\e^x\\
+			0	&0	&1	&x\\
+			0	&0	&0	&1
+		\end{bmatrix}\boldsymbol{x}=\boldsymbol{0}$有非零解\com 即$\begin{vmatrix}
+			y'''	&y''	&y'	&y\\
+			\e^x	&\e^x	&\e^x	&\e^x\\
+			0	&0	&1	&x\\
+			0	&0	&0	&1			
+		\end{vmatrix}=0$\com 得原来三阶齐次线性常微分方程为$y'''-y''=0$。
+	\end{proof}
+\end{pf}
+
+\begin{example}
+	设$y_1\com y_2\com y_3$ 为二阶\textbf{非齐次}线性常微分方程$y''+p(x)y'+q(x)y=f(x)$ 的三个特解\com 问：它们何时可以给出非齐次常微分方程的通解？若能给出\com 请给出通解的表达式。
+\end{example}
+\begin{solution}
+	令$z_1=y_1-y_3$\com $z_2=y_2-y_3$\com 那么$z_1\com z_2$为相应齐次方程$y''+p(x)y'+q(x)y=0$的特解。从而\textbf{$\boldsymbol{y_1\com y_2\com y_3}$ 能够给出非齐次微分方程的通解\com 只需要 $\boldsymbol{z_1\com z_2}$ 是上述齐次方程的线性无关解}。而这则等价于
+	\begin{align*}
+		0 &\neq  W(z_1\com z_2)=z_1z'_2-z'_1z_2
+		=(y_1-y_3)(y'_2-y'_3)-(y'_1-y'_3)(y_2-y_3)\\
+		&=(y_1y'_2-y'_1y_2)+(y_2y'_3-y'_2y_3)+(y_3y'_1-y'_3y_1)
+		=W(y_1\com y_2)+W(y_2\com y_3)+W(y_3\com y_1)
+	\end{align*}
+	此时\com 这个非齐次方程的通解为
+	$$y=y_3+C_1(y_1-y_3)+C_2(y_2-y_3)$$
+	其中$C_1\com C_2$为任意常数。
+\end{solution}
+\subsection{常系数高阶线性常微分方程}
+$n$阶线性常微分方程的标准形式为
+$$y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=f(x)$$
+其中$a_0\com a_1\com \cdots\com a_{n-1}\in\mathbb{R}$为常数\com 而$f\in\mathscr{C}(I)$。
+函数$f$ 称为该方程的非齐次项；当$f\equiv 0$时\com 相应的方程被称为齐次方程. 
+
+出于简便\com 下面仅考虑\textbf{二阶线性常系数常微分方程}\com 对于高阶方程\com 其方法和结论均类似。
+
+\subsubsection{二阶线性常系数齐次方程的解}
+二阶线性常系数齐次方程的一般形式为$y''+py'+qy=0$\com 其中$p\com q$为常数。
+
+尝试性地考虑形如$y=\e^{\lambda x}$这样的解\com 其中$\lambda$为常数。带入原方程得$(\lambda^2+p \lambda +q)\e^{\lambda x}=0$。如果$\lambda^2+p \lambda +q=0$\com 则$y=\e^{\lambda x}$为原方程的解。
+
+\de[二阶线性常系数齐次方程的特征方程]{
+	称代数方程$\lambda^2+p\lambda+q=0$为相应的齐次常微分方程$y''+py'+qy=0$的\tboba{特征方程}\com 称其解为\tboba{特征根}\com 而称$\Delta=p^2-4q$为其\tboba{判别式}。
+}
+下面\com 依据特征方程解的情况\com 讨论二阶线性常系数齐次方程的解。
+\begin{pf}[breakable, enhanced jigsaw]
+	\small\kai
+	\hang \textbf{\textit{如果}}$\boldsymbol{\Delta > 0}$\com 则特征方程有两个互异实根$\lambda_1\com \lambda_2$\com 从而$y_1=\e^{\lambda_1x}$\com $y_2=\e^{\lambda_2x}$为方程的解。又
+	$$W(y_1\com y_2)=y_1y'_2-y'_1y_2 =(\lambda_2-\lambda_1)y_1y_2 \neq 0$$
+	故$y_1\com y_2$线性无关\com 从而原齐次方程的通解为
+	$$y=C_1\e^{\lambda_1 x}+C_2\e^{\lambda_2 x}$$
+	其中$C_1\com C_2$为任意常数。
+	
+	\hang \textbf{\textit{如果}}$\boldsymbol{\Delta = 0}$\com 则特征方程只有一个实根$\lambda=-\dfrac{p}{2}$\com 故$y_1=\e^{-\frac{p}{2} x}$为原方程的解。令$y_2=x \e^{-\frac{p}{2} x}$\com 则
+	\begin{align*}
+	y'_2 &= \e^{-\frac{p}{2} x}-\frac{p}{2}x\e^{-\frac{p}{2} x}\\
+	y''_2&= -\frac{p}{2}\e^{-\frac{p}{2} x}-\frac{p}{2}\e^{-\frac{p}{2} x}+\left(\frac{p}{2}\right)^2x\e^{-\frac{p}{2} x}
+	\end{align*}
+	从而$y''_2+py'_2=-\dfrac{1}{4}p^2x \e^{-\frac{p}{2} x}=-qy_2$\com 即$y_2$也为原齐次常微分方程的解。又 
+	\begin{align*}
+		W(y_1\com y_2) =y_1y'_2-y'_1y_2
+		=\e^{-\frac{p}{2} x}\left(\e^{-\frac{p}{2} x}-\frac{p}{2}x\e^{-\frac{p}{2} x}\right)
+		-\left(-\frac{p}{2}\e^{-\frac{p}{2} x}\right)\cdot x\e^{-\frac{p}{2} x}=\e^{-px}\neq 0
+	\end{align*}
+	则$y_1\com y_2$线性无关\com 从而原齐次方程的通解为
+	$$y=(C_1+C_2x)\e^{-\frac{p}{2} x}$$
+	其中$C_1\com C_2$为任意常数。
+	\begin{lemma}
+		设$p(x)\com q(x)$为实值函数\com $f(x)$为复值函数\com 而复值函数$y=y(x)$满足非齐次方程$y''+p(x)y'+q(x)y=f(x)$。令$u(x)=\mathrm{Re} y(x)$\com $v(x)=\mathrm{Im} y(x)$\com 则
+		\begin{align*}
+		u''+p(x)u'+q(x)u=\mathrm{Re}f(x)\qquad
+		v''+p(x)v'+q(x)v=\mathrm{Im}f(x)
+		\end{align*}
+	\end{lemma}
+	
+	\hang \textbf{\textit{如果}}$\boldsymbol{\Delta < 0}$\com 则特征方程有两个共轭的复特征根$\lambda=\alpha\pm \i\beta$\com 其中$\alpha\com \beta\in\mathbb{R}$ 且$\beta\neq 0$。则$\e^{(\alpha+\i\beta)x}=\e^{\alpha x}(\cos \beta x + \i \sin \beta x)$
+	为原齐次方程的复解\com 而齐次方程中$\mathrm{Re}f(x) = \mathrm{Im}f(x) = 0$\com 从而由上面引理\com $y_1=\e^{\alpha x}\cos \beta x$\com $y_2=\e^{\alpha x}\sin \beta x$为原齐次常微分方程的实解。
+	同样有
+	\begin{align*}
+	W(y_1\com y_2)&=y_1y'_2-y'_1y_2\\
+	&=\e^{\alpha x}\cos \beta x(\alpha \e^{\alpha x}\sin \beta x+\beta e^{\alpha x}\cos \beta x)-(\alpha \e^{\alpha x}\cos \beta x-\beta \e^{\alpha x}\sin \beta x)\e^{\alpha x}\sin \beta x\\ &= \beta \e^{2\alpha x}\neq 0	
+	\end{align*}
+	故$y_1\com y_2$线性无关\com 从而原齐次方程的通解为
+	$$y=\e^{\alpha x}(C_1\cos \beta x+C_2\sin \beta x)$$
+	其中$C_1\com C_2$为任意常数。	
+\end{pf}
+\zhu[$\boldsymbol{n}$阶线性常系数齐次方程的求解]{
+	考虑$n$阶线性常系数齐次常微分方程
+	$y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=0$\com 其中$a_0\com \cdots\com a_{n-1}\in\mathbb{R}$ 为常数。该常微分方程的特征多项式被定义为
+	$$P(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0$$
+	
+	假设该特征多项式不同的特征根为$\lambda_1\com \cdots\com \lambda_k$\com 重数对应为$n_1\com \cdots\com n_k$\com 则齐次方程的复值通解为
+	$$y(x)=\sum_{j=1}^k \left(\e^{\lambda_j x}\sum_{l=0}^{n_j-1}C_{j\com l}x^l\right)$$
+	其中$C_{j\com l}$ 为任意的复值常数。
+	
+	为得到实值通解\com 只需要针对复数值特征根$\lambda_j$\com 在上式中将$\e^{\lambda_j x}$及其共轭替换成$\e^{\lambda_j x}$的实部和虚部\com 并让$C_{j\com l}$为任意的实常数即可。
+}
+\subsubsection{二阶线性常系数非齐次方程的解}
+二阶线性常系数非齐次方程的一般形式为$y''+py'+qy=f(x)$\com 其中$p\com q$为常数。
+从齐次方程$y''+py'+qy=0$的线性无关解$y_1\com y_2$出发\com 由公式
+$$
+z_0(x)=\int_{x_0}^x\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{W(y_1\com y_2)(t)}f(t)\dif t 
+$$
+可得非齐次方程的一个特解\com 进而得到非齐次方程的通解$y=z_0+C_1y_1+C_2y_2$。但通常很难计算$z_0$\com 仅在某些特殊的情形\com 我们才能得到通解的显式表达式。
+\begin{example}
+	设~$f$~连续\com 考虑~$y''+8y'+7y=f(x)$\com 证明：
+	
+	（1）若~$f$~在~$[0,+\infty)$~上有界\com 则方程的任意解均在~$[0,+\infty)$~上有界；
+
+	（2）若~$\lim\limits_{x\rightarrow +\infty}f(x)=0$\com 则方程的任意解亦如此。
+\end{example}
+\begin{proofs}
+	齐次方程的特征方程为
+	$\lambda^2+8\lambda+7=(\lambda+1)(\lambda+7)=0$\com
+	从而特征根为~$\lambda_1=-1$\com $\lambda_2=-7$\com 则齐次方程的基本解组为~$y_1=\e^{-x}$\com $y_2=\e^{-7x}$\com 
+	它们的Wronsky行列式为
+	$W(x)=\e^{-x}(-7\e^{-7x})-(-\e^{-x})\e^{-7x}=-6\e^{-8x}$。于是非齐次方程有特解形如
+	\begin{align*}
+		z_0(x)
+		&=\int_0^{x}\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{W(t)}f(t)\dif t
+		=\int_0^{x}\frac{\e^{-t}\e^{-7x}-\e^{-x}\e^{-7t}}{-6\e^{-8t}}f(t)\dif t\\
+		&=\frac{\e^{-x}}{6}\int_0^x\e^tf(t)\dif t-\frac{\e^{-7x}}{6}\int_0^x\e^{7t}f(t)\dif t
+	\end{align*}
+	又非齐次方程的通解为$y(x)=z_0+C_1\e^{-x}+C_2\e^{-7x}$\com 而~$\e^{-x}\com \e^{-7x}$~满足~（1）\com （2）中的性质\com 由此可知非齐次方程的任意解满足（1）或（2）中的性质当且仅当~$z_0$~满足（1）或（2）中的性质。
+
+	（1）如果$f$ 在$[0\com  +\infty)$ 上有界\com 则$\exists M>0$ 使得$\forall x\ge 0$\com  均有$|f(x)|<M$。故$\forall x\ge 0$\com  我们有
+	\begin{align*}
+		|z_0(x)|
+		\le \frac{\e^{-x}}{6}\int_0^x\e^t|f(t)|\dif t+\frac{\e^{-7x}}{6}\int_0^x\e^{7t}|f(t)|\dif t 
+		&\le \frac{\e^{-x}}{6}M\int_0^x\e^t\dif t+\frac{\e^{-7x}}{6}M\int_0^x\e^{7t}\dif t\\
+		&=\frac{\e^{-x}}{6}M(\e^x-1)+\frac{\e^{-7x}}{6}M\cdot \frac{1}{7}(\e^{7x}-1)\le \frac{4}{21}M
+	\end{align*}
+	因此所证结论成立。
+
+	（2）若$\lim\limits_{x\rightarrow +\infty}f(x)=0$\com 则
+	\begin{align*}
+		\lim_{x\rightarrow +\infty}z_0(x)&=\lim_{x\rightarrow +\infty}\frac{1}{6 \e^{x}}\int_0^x\e^tf(t)\dif t-\lim_{x\rightarrow +\infty}\frac{1}{6 \e^{7x}}\int_0^x\e^{7t}f(t)\dif t\\
+		&\xlongequal{\text{L'Hospital}}\lim_{x\rightarrow +\infty}\frac{\e^xf(x)}{6\e^{x}}
+		-\lim_{x\rightarrow +\infty}\frac{\e^{7x}f(x)}{42\e^{7x}}=0
+	\end{align*}
+	此时所证结论也成立。
+\end{proofs}
+\begin{circum}
+	$f(x)= P_n(x)\e^{\mu x}$\com 这里$P_n$为$n$ 次多项式\com $\mu\in\mathbb{C}$ 为常数。
+\end{circum}
+我们首先寻求复值解\com 然后再借助前面的命题来得到相应的常微分方程的实值解。
+
+	（1）如果$\mu$ 不是齐次方程的特征根\com 则会有特解$z_0(x)=Q_n(x)\e^{\mu x}$\com $Q_n$为待定$n$次多项式；
+
+	（2）如果$\mu$ 为齐次方程的一重特征根\com 则有特解$z_0(x)=Q_n(x)x\e^{\mu x}$\com $Q_n$为待定$n$次多项式；
+
+	（3）如果$\mu$ 为齐次方程的二重特征根\com 则有特解$z_0(x)=Q_n(x)x^2\e^{\mu x}$\com $Q_n$为待定$n$次多项式。
+
+将$z_0$代入非齐次方程即可确定$Q_n$。
+
+\begin{example}
+	求解$y''+y=\dfrac{1}{2}\cos x$。
+\end{example}
+\begin{solution}
+	齐次方程的特征方程为$\lambda^2+1=0$\com 由此得$\lambda=\pm i$。则齐次方程的基本解组为$\cos x$\com $\sin x$\com 非齐次项为$f(x)=\dfrac{1}{2}\cos x$。由此\com 考虑非齐次方程$y''+y=\dfrac{1}{2} \e^{\i x}$。由于$\i$为齐次方程的一重特征根\com 故非齐次方程有特解$z_0=Ax \e^{\i x}$\com 则
+	\begin{align*}
+	z'_0&=A(1+\i x)\e^{\i x}\\
+	z''_0&=\i A \e^{\i x}+A\i(1+\i x)\e^{\i x}=A(2\i-x)\e^{\i x}
+	\end{align*}
+	于是$A(2\i- x)\e^{\i x}+Ax\e^{\i x}=\dfrac{1}{2}\e^{\i x}$\com 从而$A=-\dfrac{\i}{4}$\com 进而$z_0=-\dfrac{\i}{4}x \e^{\i x}$为非齐次方程
+	$y''+y=\dfrac{1}{2} \e^{\i x}$的特解\com 则$y_0=\dfrac{1}{4}x\sin x$为非齐次方程$y''+y=\dfrac{1}{2}\cos x$的特解\com 故所求非齐次方程的通解为
+	\begin{equation*}
+		y=\frac{1}{4}x\sin x+C_1\cos x+C_2\sin x \qedhere	
+	\end{equation*}
+\end{solution}
+\zhu[待定系数法的推广应用]{
+	待定系数法\com 结合复值函数实部与虚部分别对应的性质和线性性\com 可处理如下形式的非齐次项$f(x)$及它们之间的常系数线性组合：
+	\begin{align*}
+	&P_n(x) \qquad P_n(x)\e^{ax}\\
+	&P_n(x)\sin bx=\mathrm{Im} (P_n(x)\e^{\i bx}) \qquad P_n(x)\cos bx=\mathrm{Re}(P_n(x)\e^{\i bx})\\
+	&P_n(x)e^{ax}\sin bx=\mathrm{Im} (P_n(x)\e^{(a+\i b)x}) \qquad
+	P_n(x)e^{ax}\cos bx=\mathrm{Re}(P_n(x)\e^{(a+\i b)x})
+	\end{align*}
+	其中$P_n$为$n$次多项式\com $a\com b$为实常数。
+}
+
+\begin{example}
+	求解$y''+y=\cos x\cos 2x$。
+\end{example}
+\begin{solution}
+	齐次方程的特征方程为$\lambda^2+1=0$\com 由此得$\lambda=\pm \i$。故齐次方程的基本解组为$\cos x$\com $\sin x$。由于非齐次项为$\cos x\cos 2x=\dfrac{1}{2}\cos x+\dfrac{1}{2}\cos 3x$\com 这促使我们考虑非齐次方程
+	$y''+y=\dfrac{1}{2}\e^{\i x}$和$y''+y=\dfrac{1}{2}\e^{3\i x}$。
+	前者有特解$z_1=-\dfrac{\i}{4}x \e^{\i x}$；由于$3\i$不是其齐次方程的特征根\com 故后者有特解$z_2=A\e^{3\i x}$\com 于是
+	$$A(3\i)^2 \e^{3\i x}+A\e^{3\i x}=\dfrac{1}{2}\e^{3\i x}$$
+	故$A=-\dfrac{1}{16}$\com 从而$z_2=-\dfrac{1}{16}\e^{3\i x}$。则所求通解为
+	\begin{equation*}
+		y=\frac{1}{4}x\sin x-\frac{1}{16}\cos 3x+C_1\cos x+C_2\sin x \qedhere
+	\end{equation*}
+\end{solution}
+
+\subsubsection{Euler方程}
+Euler方程的一般形式为
+$$x^ny^{(n)}+a_{n-1}x^{n-1}y^{(n-1)}+\cdots +a_1 xy'+a_0y=0$$
+其中$a_0\com a_1\com \cdots\com a_{n-1}$为常数。即 Euler方程 是变系 数 的
+线 性 方 程\com 其系数均为幂函数\com 且幂次与相应项的求导阶数一致。
+
+一般解法是做$t=\ln |x|$换元\com 化成以$t$为自变量\com $y$为未知函数的常系数方程。
+
+\begin{example}
+	求解非齐次方程$x^2y''+xy'+y=2x$. 
+\end{example}
+\begin{solution}
+	令$t=\ln |x|$\com 则$\dif t=\dfrac{1}{x}\dif x$\com 从而我们有
+	\begin{align*}
+		&\frac{\dif y}{\dif x}=\frac{\dif y}{\dif t}\cdot \frac{\dif t}{\dif x}
+		=\frac{1}{x}\frac{\dif y}{\dif t} \Rightarrow x\frac{\dif y}{\dif x}=\frac{\dif y}{\dif t}\\
+		&\frac{\dif ^2y}{\dif x^2}=
+		-\frac{1}{x^2}\frac{\dif y}{\dif t}+\frac{1}{x}\frac{\dif }{\dif x}\left(\frac{\dif y}{\dif t}\right)
+		=-\frac{1}{x^2}\frac{\dif y}{\dif t}+\frac{1}{x^2}\frac{\dif ^2y}{\dif t^2} \Rightarrow x^2\frac{\dif ^2y}{\dif x^2}=-\frac{\dif y}{\dif t}+\frac{\dif ^2y}{\dif t^2}
+	\end{align*}
+	当$x>0$时\com 原方程变为$\dfrac{\dif ^2y}{\dif t^2}+y=2 \e^t$\com 由此知特征方程为$\lambda^2+1=0$\com 特征根为$\lambda=\pm i$\com 从而该方程有形如$z=A\e^t$的特解\com 代入方程可得$A=1$\com 于是原方程的通解为
+	\begin{equation*}
+	y=\e^t+C_1\cos t+C_2\sin t=x+C_1\cos\ln |x|+C_2\sin \ln |x|
+	\end{equation*}
+	当$x<0$时\com 原方程变为$\frac{\dif ^2y}{\dif t^2}+y=-2\e^t$\com 于是通解为
+	\begin{equation*}
+		y=x+C_1\cos\ln |x|+C_2\sin \ln |x| \qedhere
+	\end{equation*}
+\end{solution}\label{所学}
+
+\Subsection{一阶线性常微分方程组}
+一阶线性常微分方程组的一般形式为
+\begin{align*}
+	\left\{\begin{array}{l}
+	\dfrac{\dif y_1}{\dif x}=a_{11}(x)y_1+a_{12}(x)y_2+\cdots+a_{1n}(x)y_n+f_1(x)\\
+	\dfrac{\dif y_2}{\dif x}=a_{21}(x)y_1+a_{22}(x)y_2+\cdots+a_{2n}(x)y_n+f_2(x)\\
+	\cdots\\
+	\dfrac{\dif y_n}{\dif x}=a_{n1}(x)y_1+a_{n2}(x)y_2+\cdots+a_{nn}(x)y_n+f_n(x)\\
+	\end{array}
+	\right.
+\end{align*}
+其中$a_{jl}(x)\com  f_j(x)\in\mathscr{C}(I)$（$1\le j,l\le n$）。可以证明\com 该方程组满足初值条件
+$y_j(x_0)=\xi_j$（$1\le j\le n$）
+的解存在且唯一。
+
+如果我们定义$\boldsymbol{A}(x)=\begin{pmatrix}
+	a_{jl}(x)
+\end{pmatrix}_{1\le j\com l\le n}$\com 并且记$\boldsymbol{Y}=\begin{pmatrix}
+	y_1\\y_2\\ \vdots\\ y_n
+\end{pmatrix}$\com $\boldsymbol{\xi}=\begin{pmatrix}
+	\xi_1\\\xi_2\\\vdots\\\xi_n
+\end{pmatrix}$\com $\boldsymbol{F}(x)=\begin{pmatrix}
+	f_1(x)\\f_2(x)\\	\vdots\\	f_n(x)
+\end{pmatrix}$\com 
+则初值问题可以重新表述成
+$$\left\{\begin{array}{l}
+	\dfrac{\dif \boldsymbol{Y}}{\dif x} = \boldsymbol{A}(x)\boldsymbol{Y}+\boldsymbol{F}(x)\\
+	\boldsymbol{Y}(x_0)=\boldsymbol{\xi}
+\end{array}\right.$$
+当$\boldsymbol{F}(x)\equiv 0$ 时\com 其称为齐次方程。
+
+\Subsubsection{一阶线性常微分方程组解的结构}
+$n$个方程\com $n$个未知函数所组成的一阶线性齐次常微分方程组的解集为$n$维线性空间。设$\boldsymbol{Y}_1$\com  $\boldsymbol{Y}_2\com $ $\cdots\com  \boldsymbol{Y}_n$为该齐次方程组的$n$个线性无关的解。定义$\boldsymbol{\varPhi}=\begin{pmatrix}
+	\boldsymbol{Y}_1 & \boldsymbol{Y}_2 & \cdots & \boldsymbol{Y}_n
+\end{pmatrix}$\com 称为齐次方程组的\textbf{基解矩阵}\com 则其通解为
+$$\boldsymbol{Y}=C_1\boldsymbol{Y}_1+C_2\boldsymbol{Y}_2+\cdots+C_n\boldsymbol{Y}_n=\boldsymbol{\varPhi C}$$
+其中$\boldsymbol{C}=\begin{pmatrix}
+	C_1 & C_2 & \cdots & C_n
+\end{pmatrix}^\mathrm{T}$为常数列向量。
+
+\Subsubsection{一阶线性常系数常微分方程组的求解}
+一阶线性常系数常微分方程组 的基本形式为
+$$\frac{\dif \boldsymbol{Y}}{\dif x}=\boldsymbol{A}\boldsymbol{Y}$$
+其中$\boldsymbol{A}$是与$x$无关的常系数矩阵。
+
+我们考虑形如$\boldsymbol{Y}=\e^{\lambda x}\boldsymbol{r}$这样的解\com 其中$\lambda$为常数。带入方程组可得
+\begin{equation*}
+	\boldsymbol{A}e^{\lambda x}\boldsymbol{r}=\boldsymbol{A}\boldsymbol{Y}=\frac{\dif \boldsymbol{Y}}{\dif x}=\lambda e^{\lambda x}\boldsymbol{r}
+\end{equation*}
+记$\boldsymbol{I}$为单位矩阵\com 那么$(\boldsymbol{A}-\lambda\boldsymbol{I})\boldsymbol{r}=\boldsymbol{0}$。
+于是$\lambda$为$\boldsymbol{A}$的特征值\com $\boldsymbol{r}$为相应的特征向量。方程组的特征方程被定义为$\det(\lambda\boldsymbol{I}-\boldsymbol{A})=0$。
+
+\begin{circum}
+	$n=2$\com 即2个方程、2个未知函数的一阶线性常系数常微分方程组$\dfrac{\dif \boldsymbol{Y}}{\dif x}=\boldsymbol{AY}$。
+\end{circum}
+\begin{pf}[breakable, enhanced jigsaw]
+	\kai\small
+	\hang 若$\boldsymbol{A}$有\textbf{\textit{两个不相等的实特征值}}$\lambda_1\com \lambda_2$\com 那么相应特征向量$\boldsymbol{r}_1$\com $\boldsymbol{r}_2$为实向量且线性无关\com 因此$e^{\lambda_1 x}\boldsymbol{r}_1$, $e^{\lambda_2 x}\boldsymbol{r}_2$为方程组的线性无关解\com 从而所求的通解为
+	$$\boldsymbol{Y}=C_1e^{\lambda_1 x}\boldsymbol{r}_1+C_2e^{\lambda_2 x}\boldsymbol{r}_2$$
+	其中$C_1\com C_2$为任意的常数。
+
+	\hang 若$\boldsymbol{A}$有\textbf{\textit{两个相等的（实）特征值}}$\lambda$\com 相应特征向量$\boldsymbol{r}$为实向量\com 于是$e^{\lambda x}\boldsymbol{r}$为方程组的解。与之线性无关的解可以取为$e^{\lambda x}\boldsymbol{P}(x)$\com 其中$\boldsymbol{P}(x)$是一个待定列向量\com 它的每个元素为次数$\le 1$的多项式\com 也即$\boldsymbol{P}(x)=\boldsymbol{C}_0+\boldsymbol{C}_1 x$\com 其中$\boldsymbol{C}_0\com \boldsymbol{C}_1$为二阶列向量。通过将之带入方程组来确定系数$\boldsymbol{C}_0\com \boldsymbol{C}_1$\com 进而得到$\boldsymbol{P}(x)$。
+
+	\hang 若$\boldsymbol{A}$有\textbf{\textit{两个不相等的共轭复特征值}}$\lambda_1\com \lambda_2$\com 相应的特征向量$\boldsymbol{r}_1$\com $\boldsymbol{r}_2$也为共轭的复向量且线性无关。于是$e^{\lambda_1 x}\boldsymbol{r}_1$\com $e^{\lambda_2 x}\boldsymbol{r}_2$为原方程组的两个线性无关解。此时通解为
+	$$\boldsymbol{Y}=Ce^{\lambda_1 x}\boldsymbol{r}_1+\overline{C}e^{\lambda_2 x}\boldsymbol{r}_2$$
+	其中$C$为任意的复常数。
+\end{pf}
+
+\begin{example}
+	求解$\dfrac{\dif}{\dif x}\begin{pmatrix}
+		y_1 \\ y_2
+	\end{pmatrix} = \begin{pmatrix}
+		1 & 2 \\ 4 & 3
+	\end{pmatrix}\begin{pmatrix}
+		y_1 \\ y_2
+	\end{pmatrix}$。
+\end{example}
+\begin{solution}
+	\hang 方程组的的特征方程为
+	$$
+	\begin{vmatrix}
+		\lambda-1&-2\\
+		-4& \lambda-3
+	\end{vmatrix}
+	=\lambda^2-4\lambda-5 = (\lambda-5)(\lambda+1)=0
+	$$
+	故特征根为$\lambda_1=5$\com $\lambda_2=-1$。
+
+	\hang 对于特征值$\lambda_1=5$\com 特征向量满足
+	$\begin{pmatrix}
+		1&2\\
+		4&3
+	\end{pmatrix}\begin{pmatrix}
+		r_1\\
+		r_2
+	\end{pmatrix}
+	=5\begin{pmatrix}
+		r_1\\
+		r_2
+	\end{pmatrix}$\com 由此可求得一个特征向量$\begin{pmatrix}
+		1\\2
+	\end{pmatrix}$\com 进而可得到原常微分方程组的一个特解为$\e^{5x}\begin{pmatrix}
+		1\\
+		2
+	\end{pmatrix}$。
+
+	\hang 对于特征值$\lambda_1=-1$\com 特征向量满足
+	$\begin{pmatrix}
+		1&2\\
+		4&3
+	\end{pmatrix}
+	\begin{pmatrix}
+		r_1\\
+		r_2
+	\end{pmatrix}
+	=-\begin{pmatrix}
+		r_1\\
+		r_2
+	\end{pmatrix}$
+	由此可得相应的特征向量$\begin{pmatrix}
+		1\\
+		-1\\
+	\end{pmatrix}$\com 则方程组的另一个特解为$\e^{-x}\begin{pmatrix}
+		1\\
+		-1
+	\end{pmatrix}$。
+
+	故\com 方程组的通解为
+	\begin{equation*}
+		\begin{pmatrix}
+			y_1\\
+			y_2
+		\end{pmatrix}=C_1 \e^{5x}\begin{pmatrix}
+			1\\
+			2
+		\end{pmatrix}+C_2 \e^{-x}
+		\begin{pmatrix}
+			1\\
+			-1
+		\end{pmatrix} \qedhere
+	\end{equation*}
+\end{solution}
+
+\begin{example}
+	求解$\dfrac{\dif}{\dif x}\begin{pmatrix}
+		y_1 \\ y_2
+	\end{pmatrix} = \begin{pmatrix}
+		1&-1\\1&3
+	\end{pmatrix}\begin{pmatrix}
+		y_1 \\ y_2
+	\end{pmatrix}$。
+\end{example}
+\begin{solution}
+	方程组的的特征方程为$
+	\begin{vmatrix}
+		\lambda-1&1\\
+		-1& \lambda-3
+	\end{vmatrix}
+	=\lambda^2-4\lambda+4=0$\com 故特征值为$\lambda_1=\lambda_2=2$。
+
+	考虑方程组如下形式的解：
+	$$
+	\begin{pmatrix}
+		y_1\\
+		y_2
+	\end{pmatrix}
+	=\e^{2x}\begin{pmatrix}
+		a_1x+b_1\\
+		a_2x+b_2
+	\end{pmatrix}
+	$$
+	代入方程组可得
+	$$
+	\e^{2x}\begin{pmatrix}
+		2a_1x+a_1+2b_1\\
+		2a_2x+a_2+2b_2
+	\end{pmatrix}=\e^{2x}\begin{pmatrix}
+		(a_1-a_2)x+(b_1-b_2)\\
+		(a_1+3a_2)x+(b_1+3b_2)
+	\end{pmatrix}
+	$$
+	比较系数可得$a_2=-a_1=b_1+b_2$。
+
+	于是方程组的通解为
+	\begin{align*}
+		\begin{pmatrix}
+			y_1\\	y_2
+		\end{pmatrix}
+		&=\e^{2x}
+		\begin{pmatrix}
+			-(b_1+b_2)x+b_1	\\	(b_1+b_2)x+b_2
+		\end{pmatrix}=\e^{2x}
+		\begin{pmatrix}
+			b_1(1-x)-b_2x\\	b_1x+b_2(1+x)
+		\end{pmatrix}=b_1 \e^{2x}
+		\begin{pmatrix}
+			1-x\\
+			x
+		\end{pmatrix}+b_2\e^{2x}
+		\begin{pmatrix}
+			-x\\
+			1+x
+		\end{pmatrix}
+	\end{align*}
+	其中$b_1\com b_2$为任意的常数。
+\end{solution}
+
+%----------------------------------------------------------
+\end{document}

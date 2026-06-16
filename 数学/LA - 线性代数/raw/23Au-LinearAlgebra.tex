@@ -1,0 +1,2613 @@
+\documentclass[10pt, a4paper, oneside, fontset=none]{ctexart}
+%调用宏包
+\usepackage{amsmath, amsthm, amssymb, graphicx, mathrsfs}
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]{hyperref}
+\usepackage{color, framed, geometry, tcolorbox}
+\tcbuselibrary{breakable}%box跨页
+\tcbuselibrary{skins}%box跨页不留边
+\usepackage{makecell, booktabs}
+\usepackage[labelfont=bf]{caption}
+\usepackage{multicol}
+\usepackage{arydshln, nicematrix}%矩阵
+\usepackage{extarrows}
+\usepackage{rotating}%旋转
+\usepackage[text=\includegraphics{C:/Users/16870/.vscode/LaTeX_Application/tex/23Au/图标简稿.png},angle=0]{draftwatermark}%水印
+%\usepackage{pxfonts}
+
+%基本字体设置
+\setCJKmainfont{方正书宋_GBK}[BoldFont={思源宋体 CN Bold}, ItalicFont=方正楷体_GBK, BoldItalicFont={思源宋体 CN Bold}]
+\setCJKsansfont{方正黑体_GBK}[BoldFont={造字工房言宋体（非商用）}, ItalicFont={方正颜真卿楷书 简繁}]
+\setCJKmonofont{思源宋体 CN}
+%附加字体设置
+\newCJKfontfamily{\kaico}{可口可乐在乎体 楷体}
+\newCJKfontfamily{\kai}{方正楷体_GBK}[BoldFont={汉仪润圆-75W}, ItalicFont={方正清刻本悦宋 简繁},BoldItalicFont={汉仪润圆-75W}]
+\newCJKfontfamily{\yan}{方正清刻本悦宋 简繁}[ItalicFont={方正颜真卿楷书 简繁}]
+\newCJKfontfamily{\xiu}{方正宋刻本秀楷_GBK}[ItalicFont={方正宋刻本秀楷_GBK}, BoldFont={方正颜真卿楷书 简繁}]
+\newCJKfontfamily{\run}{汉仪润圆-45W}[BoldFont=汉仪润圆-75W, ItalicFont={汉仪润圆-45W}]
+%文档格式
+\geometry{left=2.54cm, right=2.54cm, top=3.18cm, bottom=3.18cm}
+\linespread{1.4}
+%定理环境
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}{定义}[subsection]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{proposition}[theorem]{命题}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{例}
+
+\newenvironment{proofs}[1][\small\proofname]{\begin{pf}[breakable, enhanced jigsaw]\small\begin{proof}[#1]\kai}{\end{proof}\end{pf}}
+\newenvironment{solution}{\begin{proofs}[\small\textit{\yan 解}]\small\renewcommand{\qedsymbol}{$\circledS$}}{\end{proofs}}
+\renewcommand{\proofname}{\yan{证明}}
+%颜色命名
+\definecolor{meihong}{rgb}{0.85,0.2,0.47}
+\definecolor{bali}{rgb}{0.2,0.6,0.78}
+\definecolor{qinglv}{rgb}{0,0.35,0.32}
+%box环境
+\newtcolorbox[use counter=definition,number within=subsection]{defi}[2][]{colback=bali!5!white,colframe=bali!75!black,fonttitle=\bfseries,title=定义~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=definition,number within=subsection]{defil}[2][]{colback=bali!5!white,colframe=bali!75!black,fonttitle=\bfseries,label=#2,title=定义~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=theorem,number within=section]{theo}[2][]{colback=meihong!5!white,colframe=meihong!75!black,fonttitle=\bfseries,title=定理~\thetcbcounter. #2,#1}
+\newtcolorbox[use counter=theorem,number within=section]{theol}[2][]{colback=meihong!5!white,colframe=meihong!75!black,fonttitle=\bfseries,label=#2,title=定理~\thetcbcounter. #2,#1}
+\newtcolorbox[auto counter,number within=section]{note}[2][]{colback=qinglv!5!white,colframe=qinglv!75!black,fonttitle=\bfseries,title=注~\thetcbcounter. #2,#1}
+\newtcolorbox{prenote}[2][]{colback=qinglv!5!white,colframe=qinglv!75!black,fonttitle=\bfseries,title=#2,#1}
+\newtcolorbox{pf}[1][]{colback=black!5!white,colframe=white!75!black,#1}
+
+\newcommand{\hang}[1][2em]{\hangafter 1 \hangindent #1 \noindent}
+\newcommand{\com}{,\,\,\,\:}
+\newcommand{\colors}[1]{\color{#1!75!black}}
+\newcommand{\btheo}[1]{\begin{theo}{#1}}
+\newcommand{\etheo}{\end{theo}}
+\newcommand{\de}[2][]{\begin{defil}{#1}\kai #2\end{defil}}
+\newcommand{\den}[2][]{\begin{defi}{#1}\kai #2\end{defi}}
+\newcommand{\di}[2][]{\begin{theo}{#1}\run #2\end{theo}}
+\newcommand{\dil}[2]{\begin{theol}{#1}\run #2\end{theol}}
+\newcommand{\zhu}[2][]{\begin{note}{#1}\xiu{#2}\end{note}}
+\newcommand{\rref}{\mathrm{rref}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand*{\page}[1]{\hfill P$_\text{#1}$}
+\newcommand{\tboba}[1]{\textbf{\kai\color{bali!75!black}#1}}
+\newcommand{\mboba}[1]{\kai\boldsymbol{\color{bali!75!black}#1}}
+\newcommand{\tbome}[1]{\textbf{\run\color{meihong!75!black}#1}}
+\newcommand{\mbome}[1]{\run\boldsymbol{\color{meihong!75!black}#1}}
+\newcommand{\neiji}[4]{\boldsymbol{#1}_{#3}^\mathrm{T}\boldsymbol{#2}_{#4}}
+%标题、作者、日期
+\title
+{
+    \textbf{线性代数}~\textit{知识与方法}
+}
+\author{\zihao{5} T$^\text{T}$T整理自{\kai 张鼎新}老师课堂\com {\kai 层筱缱琅}审定}
+\date{\zihao{5}\kai \today}
+%----------------------------------------------------------
+\begin{document}
+
+\maketitle
+\begin{multicols}{2}
+    \begin{flushleft}
+        \tableofcontents
+    \end{flushleft}
+\end{multicols}
+
+\begin{prenote}{\xiu \zihao{-4} 期末复习特别注意}
+    \hang \textbf{Gram-Schmidt正交化公式}\com 见于第~\pageref{Gram-Schmidt正交化公式}~页~\ref{Gram-Schmidt正交化公式}~节的内容；
+
+    \hang \textbf{简化QR分解}\com 见于第~\pageref{QR分解}~页定义~\ref{QR分解}~及其前后的内容；
+
+    \hang \textbf{正交矩阵}和\textbf{正交投影矩阵}\com 同时注意其性质的区分\com 分别见于第~\pageref{正交矩阵}~页定义~\ref{正交矩阵}~及第~\pageref{正交投影矩阵}~页定义~\ref{正交投影矩阵}；
+
+    \hang \textbf{最小二乘问题的三种解法}\com 见于第~\pageref{最小二乘问题}~页~\ref{最小二乘问题}~节；
+
+    \hang \textbf{行列式的简单计算}\com 包括初等变换、展开、加边拆边等\com 见于第4章；
+
+    \hang 以下内容综合第5、6章：\\
+    \textbf{特征值、特征向量、特征多项式、特征子空间}的求法；\\
+    \textbf{方阵的相似对角化、实对称矩阵的正交对角化}的条件和步骤\com 以及同时相似对角化、同时正交对角化的条件；\\
+    \textbf{相似、合同、正交相似}以及先前学习的相抵等等价关系\com 注意其不变量、标准型；\\
+    \textbf{奇异值}与特征值、\textbf{奇异向量}与特征向量、\textbf{Rayleign商}与\textbf{范数}；
+
+    \hang \textbf{矩阵的正定性}\com 见于第~\pageref{正定矩阵}~页定义~\ref{正定矩阵}~及其前后的内容；
+
+    \hang \textbf{奇异值分解与低秩逼近}\com 以及所得到的矩阵生成的子空间的关系\com 见于第~\pageref{奇异值分解}~页~\ref{奇异值分解}~节以及第~\ref{低秩逼近}~页定理~\ref{低秩逼近}；
+
+    \hang \textbf{抽象的线性空间、线性映射的基变换}\com 见于第~\pageref{基变换}~页~\ref{基变换}~节。
+\end{prenote}
+\begin{prenote}{\xiu \centering 勘误链接}
+    \begin{center}
+        \includegraphics[width=4cm]{TTT_ LinearAlgebra_QRCode.png}
+    \end{center}
+\end{prenote}
+%----------------------------------------------------------
+\newpage
+\section{矩阵及其运算}
+\subsection{线性方程组与初等变换}
+\de[线性方程组的表示矩阵]{
+    对线性方程组$$\begin{cases}
+        a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n=b_1\com \\
+        a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n=b_2\com \\
+        \cdots\\
+        a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n=b_m
+    \end{cases}$$
+    定义其\textbf{\color{bali!75!black}系数矩阵}~$A=\begin{bmatrix}
+        a_{11}&a_{12}&\cdots&a_{1n}\\
+        a_{21}&a_{22}&\cdots&a_{2n}\\
+        \vdots&\vdots&\ddots&\vdots\\
+        a_{m1}&a_{m2}&\cdots&a_{mn}\\
+    \end{bmatrix}$,~常数项向量$\boldsymbol{b}=\begin{bmatrix}
+        b_1\\b_2\\\vdots\\b_m
+    \end{bmatrix}$,~未知数向量$\boldsymbol{x}=\begin{bmatrix}
+        x_1\\x_2\\\vdots\\x_n
+    \end{bmatrix}$,~则这个线性方程组可表示为
+    \begin{equation*}
+        A\boldsymbol{x}=\boldsymbol{b}
+    \end{equation*}
+    其中系数矩阵和常数项向量包含了这个线性方程组的全部信息\com 两者可合为其\textbf{\color{bali!75!black}增广矩阵}$$\tilde{A}
+    =\left[\begin{array}{c|c}
+        A & \boldsymbol{b}
+    \end{array}\right]=\left[\begin{array}{cccc|c}
+        a_{11}&a_{12}&\cdots&a_{1n}&b_1\\
+        a_{21}&a_{22}&\cdots&a_{2n}&b_2\\
+        \vdots&\vdots&\ddots&\vdots&\vdots\\
+        a_{m1}&a_{m2}&\cdots&a_{mn}&b_m\\
+    \end{array}\right]$$
+}
+\begin{defi}[breakable, enhanced jigsaw]{初等行（列）变换、初等矩阵}
+    \kai
+    下面这些变换不改变增广矩阵所对应的线性方程组的解\com 统称为矩阵的\textbf{\color{bali!75!black}初等行（列）变换}；其中\com 每一种初等行（列）变换对应于将该矩阵{\color{bali!75!black}左（右）乘}对应的\textbf{\color{bali!75!black}初等矩阵}：\\
+    （1）\textbf{\color{bali!75!black}对换变换}\quad 互换第$i$、$j$行（列）的位置\com 对应的\textbf{\color{bali!75!black}对换矩阵}为$I_n$的第$i$、$j$行位置互换得到\com 即为
+    \begin{small}
+    $$P_{ij}={\begin{bNiceMatrix}[last-row,last-col]
+        \ddots\\
+         & 1 \\
+         & &0& & & &\boldsymbol{\color{bali!75!black}1}& & &i\\
+         & & &1& & & & & \\
+         & & & &\ddots& & & & \\
+         & & & & &1& & & \\
+         & &\boldsymbol{\color{bali!75!black}1}& & & &0& & &j\\
+         & & & & & & &1& \\
+         & & & & & & & &\ddots&_n\\
+         & &i& & & &j&
+    \end{bNiceMatrix}}$$
+    \end{small}
+    （2）\textbf{\color{bali!75!black}倍乘变换}\quad 将第$i$行（列）乘以{\color{bali!75!black}非零}常数$k$\com 对应的\textbf{\color{bali!75!black}倍乘矩阵}为$I_n$的第$i$行乘以$k$\com 即为$$E_{ii;k}=\begin{bNiceMatrix}[last-row,last-col]
+        \ddots \\
+           & 1 \\
+           &   & k &   &   & i\\
+           &   &   & 1 &   \\
+           &   &   &   & \ddots & _n\\
+           &   & i &   &   \\
+    \end{bNiceMatrix}$$
+    （3）\textbf{\color{bali!75!black}倍加变换}\quad 把第$j$行的$k$倍加到第$i$行（$j \neq i$）上\com 或是把第$i$列的$k$倍加到第$j$列（$j \neq i$）上\com 对应的\textbf{\color{bali!75!black}倍加矩阵}为$I_n$中的第$(i\com j)$元变为$k$\com 即为$E_{ij;k}=I_n+k\boldsymbol{e}_i\boldsymbol{e}_j^\mathrm{T}$。
+\end{defi}
+要特别注意倍加矩阵左乘、右乘时\com $i$、$j$的意义不同。
+
+通过初等行变换\com 任意矩阵都可以化成\textbf{\color{bali!75!black}行简化阶梯型}矩阵\com 矩阵$A$的行简化阶梯型矩阵记作$\mathrm{rref}(A)$。从$\rref(A)$中可以看出一个增广矩阵所对应的线性方程组解的情况。
+\di[线性方程组解的情况与增广矩阵的行简化阶梯型矩阵的关系]{
+    （1）如果$\tilde{A}$对应的阶梯数比$A$对应的阶梯数多1\com 则方程组无解；
+
+    （2）如果$\tilde{A}$与$A$对应的阶梯数相等\com 则方程组有解。此时\com 
+
+    \qquad（a） 如果阶梯数等于未知数的个数\com 则方程组有唯一解；
+
+    \qquad（b） 如果阶梯数小于未知数的个数\com 则方程组有无穷多组解。
+}
+
+线性方程组有解的情况下\com 将增广矩阵化为阶梯型进行消元\com 进一步化为行简化阶梯型直接移项写出通解的办法\com 称为~\textbf{\color{bali!75!black}Gauss-Jordan消元法}。
+
+\subsection{线性映射与矩阵}
+
+\subsubsection{线性映射的表示矩阵}
+\de[线性运算]{
+    在$\R^m$中\com 定义运算：\\
+    （1）两个$m$维向量的\textbf{\color{bali!75!black}加法}\quad$\begin{bmatrix}
+        a_1\\a_2\\\vdots\\a_m
+    \end{bmatrix}+\begin{bmatrix}
+        b_1\\b_2\\\vdots\\b_m
+    \end{bmatrix}:=\begin{bmatrix}
+        a_1+b_1\\a_2+b_2\\\vdots\\a_m+b_m
+    \end{bmatrix}$；\\
+    （2）一个$m$维向量与一个实数的\textbf{\color{bali!75!black}数乘}\quad$k\begin{bmatrix}
+        c_1\\c_2\\\vdots\\c_m
+    \end{bmatrix}:=\begin{bmatrix}
+        kc_1\\kc_2\\\vdots\\kc_m
+    \end{bmatrix}$。\\
+    向量的加法和数乘统称向量的\tboba{线性运算}。
+}
+\de[线性空间]{
+    带有线性运算的所有$m$维向量的集合$\R^m$\com 称为\tboba{线性空间}~$\mboba{\R^m}$。
+}
+从线性空间到线性空间、\textbf{「尊重」}线性运算的映射称为线性映射。
+\de[线性映射]{
+    设映射$\mathscr{A}:\R^n \rightarrow \R^m$\com 如果\\
+    （1）$\forall \boldsymbol{x}\com \boldsymbol{x'} \in \R^n$\com $\mathscr{A}(\boldsymbol{x}+\boldsymbol{x'})=\mathscr{A}(\boldsymbol{x})+\mathscr{A}(\boldsymbol{x'})$\com \\
+    （2）$\forall \boldsymbol{x} \in \R^n$\com $\forall k \in \R$\com $\mathscr{A}(k\boldsymbol{x})=k\mathscr{A}(\boldsymbol{x})$\com \\
+    则称$\mathscr{A}$为一个$\R^n \rightarrow \R^m$的\tboba{线性映射}。\\
+    特别地\com 从$\R^n$到自身的线性映射称为$\R^n$上的\tboba{线性变换}。
+}
+线性映射保持线性运算\com 这是它的\tbome{「线性性」}。特别地\com 线性映射把零向量映射到零向量（$\mathscr{A}(\boldsymbol{0}_n)=\boldsymbol{0}_m$）\com 据此可以判断一些映射是否线性。
+\di[线性映射的形式]{
+    映射$\mathscr{A }:\R^n\rightarrow\R^m$是线性映射\com 当且仅当其可以写成
+    $$\mathscr{A }\left(\begin{bmatrix}
+        x_1\\x_2\\\vdots\\x_n
+    \end{bmatrix}\right)=\begin{bmatrix}
+        a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n\\
+        a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n\\
+        \vdots\\
+        a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n
+    \end{bmatrix}$$其中$a_{ij}\in \R$。
+}
+\di[线性映射的决定]{
+    任取$\R^m$中的$n$个向量$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_n$\com 都存在唯一的线性映射$f:\R^n\rightarrow\R^m$\com 满足$f(\boldsymbol{e}_i)=\boldsymbol{a}_i$（$i=1,~2,~\cdots,~n$）。
+}
+于是可以通过这一组$\boldsymbol{a}_i=f(\boldsymbol{e}_i)$描述一个线性映射$f$。
+\de[线性映射的表示矩阵]{
+    设线性映射$f:\R^n\rightarrow\R^m$\com $\boldsymbol{a}_i=f(\boldsymbol{e}_i)$（$i=1,~2,~\cdots,~n$）\com 则称矩阵$A=\left[\begin{array}{cccc}
+        \boldsymbol{a}_1 & \boldsymbol{a}_2 & \cdots & \boldsymbol{a}_n 
+    \end{array}\right]$为线性映射$f$的\tboba{表示矩阵}。
+}
+\de[矩阵与向量的乘法]{
+    设$A$为线性映射$\mathscr{A}:\R^n\rightarrow\R^m$的表示矩阵\com $\boldsymbol{x}\in \R^n$\com 则定义$A\boldsymbol{x}:=\mathscr{A}(\boldsymbol{x})$为矩阵$A$与向量$\boldsymbol{x}$的\tboba{乘法}。
+}
+若线性映射$\mathscr{A}:\R^n\rightarrow\R^m$为$\mathscr{A }\left(\begin{bmatrix}
+        x_1\\x_2\\\vdots\\x_n
+    \end{bmatrix}\right)=\begin{bmatrix}
+        a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n\\
+        a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n\\
+        \vdots\\
+        a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n
+    \end{bmatrix}$\com 则
+$$A\boldsymbol{x}=\begin{bmatrix}
+    a_{11}&a_{12}&\cdots&a_{1n}\\
+    a_{21}&a_{22}&\cdots&a_{2n}\\
+    \vdots&\vdots&\ddots&\vdots\\
+    a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}\begin{bmatrix}
+    x_1\\x_2\\\vdots\\x_n
+\end{bmatrix}=\begin{bmatrix}
+        a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n\\
+        a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n\\
+        \vdots\\
+        a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n
+    \end{bmatrix}$$
+一般地\com $\R^n\rightarrow\R^m$的线性映射的表示矩阵是$m\times n$矩阵。
+\begin{pf}[breakable, enhanced jigsaw]
+\begin{example}
+    平面$\R^2$上的线性变换。
+    \renewcommand{\qedsymbol}{$\circledS$}
+
+    （1）\tboba{旋转变换}\quad 将向量$\boldsymbol{x}$绕原点逆时针旋转$\theta$弧度的角（$\theta \in \R$）得到的向量为$\mathscr{R}_\theta(\boldsymbol{x})$\com 这定义了$\R^2$上的旋转变换$\mathscr{R}_\theta$\com 这是一个线性变换。
+    $$R_\theta=\begin{bmatrix}
+        \cos\theta&-\sin\theta \\ \sin\theta&\cos\theta
+    \end{bmatrix}
+    \quad\quad\mathscr{R}_\theta\left(\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}\right)=\begin{bmatrix}
+        \cos\theta&-\sin\theta \\ \sin\theta&\cos\theta
+    \end{bmatrix}\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}=\begin{bmatrix}
+        x_1\cos\theta-x_2\sin\theta \\ x_1\sin\theta+x_2\cos\theta
+    \end{bmatrix}$$
+
+    （2）\tboba{反射变换}\quad 给定过原点的直线$l_\theta:x_2\cos\theta-x_1\sin\theta=0$（$\theta \in \R$是直线与$x_1$坐标轴正方向的夹角）。将向量$\boldsymbol{x}$关于$l_\theta$做反射\com 得到的向量为$\mathscr{H}_\theta(\boldsymbol{x})$\com 这定义了$\R^2$上的反射变换$\mathscr{H}_\theta$\com 这是一个线性变换。
+    $$H_\theta=\begin{bmatrix}
+        \cos2\theta&\sin2\theta \\ \sin2\theta&-\cos2\theta
+    \end{bmatrix}
+    \quad\quad \mathscr{H}_\theta\left(\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}\right)=\begin{bmatrix}
+        \cos2\theta&\sin2\theta \\ \sin2\theta&-\cos2\theta
+    \end{bmatrix}\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}=\begin{bmatrix}
+        x_1\cos 2\theta+x_2\sin2\theta \\ x_1\sin2\theta-x_2\cos2\theta
+    \end{bmatrix}$$
+
+    （3）\tboba{对换变换}\quad 对换向量的两个分量\com 也构成一个线性变换$\mathscr{P}$\com 显然$\mathscr{P}=\mathscr{H}_{\pi/4}$。
+    $$P=\begin{bmatrix}
+        0&1\\1&0
+    \end{bmatrix}
+    \quad\quad \mathscr{P}\left(\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}\right)=\begin{bmatrix}
+        0&1\\1&0
+    \end{bmatrix}\begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}=\begin{bmatrix}
+        x_2\\x_1
+    \end{bmatrix}$$
+
+    （4）\tboba{错切变换}\quad 设$k\in\R$\com 将向量$\boldsymbol{x}$的$x_1$分量的 $k$倍加到$x_2$方向上\com 得到的向量为$\mathscr{S}_k(\boldsymbol{x})$\com 这定义了$\R^2$上的错切变换$\mathscr{S}_k$\com 这是一个线性变换。
+    \vskip 10pt
+    \quad \hfill $
+        S_k=\begin{bmatrix}
+            1&0\\k&1
+        \end{bmatrix}
+        \quad\quad \mathscr{S}_k\left(\begin{bmatrix}
+            x_1\\x_2
+        \end{bmatrix}\right)=\begin{bmatrix}
+            1&0\\k&1
+        \end{bmatrix}=\begin{bmatrix}
+            x_1\\x_2
+        \end{bmatrix}\begin{bmatrix}
+            x_1 \\ kx_1+x_2
+        \end{bmatrix}
+    $ \hfill $\circledS$
+\end{example}
+\end{pf}
+\begin{pf}
+\begin{example}
+    \renewcommand{\qedsymbol}{$\circledS$}
+    $\R^n$上的差分。
+
+    （1）定义\tboba{向前差分}为：$\begin{NiceMatrix}[baseline=1]
+        \R^n & \rightarrow & \R^n \\
+        \begin{bmatrix}
+            x_1\\x_2\\\vdots\\x_n
+        \end{bmatrix} & \mapsto & \begin{bmatrix}
+            x_1 \\ x_2-x_1 \\\vdots\\ x_n-x_{n-1}
+        \end{bmatrix}
+    \end{NiceMatrix}$\com 表示矩阵是$D_{nn}=\begin{bmatrix}
+        1\\
+        -1&1\\
+        &\ddots&\ddots\\
+        &&-1&1
+    \end{bmatrix}$\com 称为$n$阶\tboba{向前差分矩阵}。
+
+    （2）定义\tboba{向后差分}为：$\begin{NiceMatrix}[baseline=1]
+        \R^n & \rightarrow & \R^n \\
+        \begin{bmatrix}
+            x_1\\x_2\\\vdots\\x_n
+        \end{bmatrix} & \mapsto & \begin{bmatrix}
+            x_1-x_2 \\ x_2-x_3 \\\vdots\\ x_n
+        \end{bmatrix}
+    \end{NiceMatrix}$\com 其表示矩阵是$D_{nn}^\mathrm{T}=\begin{bmatrix}
+        1&-1\\
+        &1&\ddots\\
+        &&\ddots&-1\\
+        &&&1
+    \end{bmatrix}$\com 称为$n$阶\tboba{向后差分矩阵}。\qed
+\end{example}
+\end{pf}
+\subsubsection{线性映射的复合与矩阵的乘法}
+\de[复合]{
+    设线性映射$\mathscr{A}:\R^n\rightarrow\R^m$\com $\mathscr{B}:\R^l\rightarrow\R^n$\com 则可以定义$\mathscr{B}$与$\mathscr{A}$的\tboba{复合}为
+    \begin{equation*}
+        \begin{array}{cccc}
+            \mboba{\mathscr{A}\circ \mathscr{B}}:&\R^l & \rightarrow &\R^n\\
+             & \boldsymbol{x} & \mapsto & \mathscr{A}\left(\mathscr{B}(\boldsymbol{x})\right)
+        \end{array}
+    \end{equation*}
+}
+复合得到的$\mathscr{B}\circ \mathscr{A}$仍是线性映射。
+\de[矩阵乘法]{
+    设$m\times n$矩阵$A=\begin{bmatrix} a_{ij} \end{bmatrix}_{m\times n}$、$n\times l$矩阵$B=\begin{bmatrix} b_{jk} \end{bmatrix}_{n\times l}$是线性映射$\mathscr{A}:\R^n\rightarrow\R^m$,~$\mathscr{B}:\R^l\rightarrow\R^n$的表示矩阵\com 则可以定义$A$与$B$的\tboba{乘法}为$AB:=\left[\displaystyle{\sum_{j=1}^{n}a_{ij}b_{jk}}\right]_{m\times l}$\com 其是线性映射$\mathscr{A}\circ \mathscr{B}$的表示矩阵。
+}
+设$A=\begin{bmatrix}
+    \tilde{\boldsymbol{a}}_1&\tilde{\boldsymbol{a}}_2&\cdots&\tilde{\boldsymbol{a}}_m
+\end{bmatrix}^\mathrm{T}$\com $B=\begin{bmatrix}
+    \boldsymbol{b}_1&\boldsymbol{b}_2&\cdots&\boldsymbol{b}_l
+\end{bmatrix}$\com 则
+$$AB=\begin{bmatrix}
+    A\boldsymbol{b}_1&A\boldsymbol{b}_2&\cdots&A\boldsymbol{b}_l
+\end{bmatrix}=\begin{bmatrix}
+    \tilde{\boldsymbol{a}}_1^\mathrm{T}\boldsymbol{b}_1 & \tilde{\boldsymbol{a}}_1^\mathrm{T}\boldsymbol{b}_2 & \cdots & \tilde{\boldsymbol{a}}_1^\mathrm{T}\boldsymbol{b}_l \\
+    \tilde{\boldsymbol{a}}_2^\mathrm{T}\boldsymbol{b}_1 & \tilde{\boldsymbol{a}}_2^\mathrm{T}\boldsymbol{b}_2 & \cdots & \tilde{\boldsymbol{a}}_2^\mathrm{T}\boldsymbol{b}_l \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \tilde{\boldsymbol{a}}_m^\mathrm{T}\boldsymbol{b}_1 & \tilde{\boldsymbol{a}}_m^\mathrm{T}\boldsymbol{b}_2 & \cdots & \tilde{\boldsymbol{a}}_m^\mathrm{T}\boldsymbol{b}_l 
+\end{bmatrix}=\begin{bmatrix}
+    \tilde{\boldsymbol{a}}_1^\mathrm{T}B\\\tilde{\boldsymbol{a}}_2^\mathrm{T}B\\\vdots\\\tilde{\boldsymbol{a}}_m^\mathrm{T}B
+\end{bmatrix}$$
+灵活将矩阵拆成行或列向量再做乘法\com 会使运算简单很多。
+\di[矩阵乘法的运算律]{
+    （1）矩阵乘法{\colors{meihong}没有交换律}；若$AB=BA$\com 称$A$与$B$~\tbome{可交换}\com 此时它们一定是同阶方阵；\\
+    （2）矩阵乘法的\tbome{结合律}：$ABC=(AB)C=A(BC)$；\\
+    （3）矩阵乘法{\colors{meihong}没有消去律}；\\
+    （4）矩阵乘法\tbome{对加法的分配律}：$A(B+C)=AB+AC$；$(A+B)C=AC+BC$；\\
+    （5）矩阵乘法\tbome{对数乘的交换律}：$k(AB)=(kA)B=A(kB)$；特别地\com $kI_n$称为{\colors{meihong}数量矩阵}；\\
+    （6）\tbome{转置对矩阵乘法的分配律}：$(AB)^\mathrm{T}=B^\mathrm{T}A^\mathrm{T}$。
+}
+\de[矩阵的迹]{
+    方阵$A$的对角元素的和称为它的\tboba{迹}\com 记作$\mathrm{trace}(A)$\com 即对$A=\begin{bmatrix}
+        a_{ij}
+    \end{bmatrix}_{n\times n}$\com $\mathrm{trace}(A)=\sum\limits_{i=1}^{n}a_{ii}$。
+}
+\di[迹的性质]{
+    （1）$\mathrm{trace}(A+B)=\mathrm{trace}(A)+\mathrm{trace}(B)$\com $\mathrm{trace}(kA)=k~\mathrm{trace}(A)$；\\
+    （2）$\mathrm{trace}(A)=\mathrm{trace}(A^{\mathrm{T}})$；\\
+    （3）设$A$、$B$分别是$m\times n$、$n\times m$矩阵\com 则$\mathrm{trace}(AB)=\mathrm{trace}(BA)$；\\
+    （4）设$A=\begin{bmatrix}
+        a_{ij}
+    \end{bmatrix}$、$B=\begin{bmatrix}
+        b_{ij}
+    \end{bmatrix}$为$m$阶方阵\com 则$\mathrm{trace}(AB^\mathrm{T})=\mathrm{trace}(B^\mathrm{T}A)=\sum\limits_{1\le i,j\le n}a_{ij}b_{ij}$；特别地\com $\mathrm{trace}(A^\mathrm{T}A)=\sum\limits_{1\le i,j\le n}a_{ij}^2=\|A\|_\mathrm{F}^2$。
+}
+
+\subsubsection{线性映射的逆与矩阵的逆}
+\de[矩阵的逆]{
+    设$A$为一个矩阵\com 若存在矩阵$B$\com 使得$AB=I_n$\com $BA=I_m$\com 则称$A$与$B$互逆\com 称$A$是一个\tboba{可逆矩阵}\com 称$B$是$A$的\tboba{逆}。
+}
+可以证明\com 满足$AB=I_n$\com $BA=I_m$的矩阵$A$、$B$一定是同阶方阵。初等矩阵一定可逆。
+\begin{example}
+    （{\kai 期中}）证明：如果方阵$A$满足$A^{2023}=O$\com 则$I-A^2$可逆。
+\end{example}
+\begin{proofs}
+    由$A^{2023}=O$\com 知
+    \begin{align*}
+        &(I-A)(I+A+A^2+A^3+\cdots+A^{2021}+A^{2022})=I-A^{2023}=I\\
+        &(I+A)(I-A+A^2-A^3+\cdots+A^{2022}-A^{2023})=I-A^{2024}=I
+    \end{align*}
+    故$I-A$与$I+A$均可逆\com 则$I-A^2=(I-A)(I+A)$可逆。
+\end{proofs}
+\di[逆的运算律]{
+    设$A\com B$为可逆矩阵\com 则\\
+    （1）逆\tbome{与转置的交换律}：$A^\mathrm{T}$可逆\com 且$(A^\mathrm{T})^{-1}=(A^{-1})^\mathrm{T}=A^{-\mathrm{T}}$；\\
+    （2）逆\tbome{对乘法的分配律}：$(AB)^{-1}=B^{-1}A^{-1}$；\\
+    （3）$A+B$可逆$\Leftrightarrow A^{-1}+B^{-1}$可逆。
+}
+\begin{proofs}
+    （3）$A(A^{-1}+B^{-1})B(A+B)^{-1}=I_n$。
+\end{proofs}
+\di[矩阵可逆的条件]{
+    设$A$为$n$阶方阵\com 则
+    \begin{equation*}
+        \begin{aligned}
+            A~\text{可逆}
+            &\Leftrightarrow \forall \boldsymbol{b}\in \R^n \text{\com }A\boldsymbol{x}=\boldsymbol{b}~\text{有唯一解}
+            \Leftrightarrow A\boldsymbol{x}=\boldsymbol{0}~\text{只有零解}
+            \Leftrightarrow \rref(A)=I_n\\
+            &\Leftrightarrow A~\text{是有限个（不多于}~n^2~\text{个）初等矩阵的乘积}\\
+            &\Leftrightarrow \mathrm{rank}(A)=n
+            \Leftrightarrow A~\text{行、列满秩。}
+        \end{aligned}
+    \end{equation*}
+}
+\begin{example}
+    设有$n$阶方阵$A$\com 对任意$n$维向量$\boldsymbol{x}$\com 恒有$|\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}|<|\neiji{x}{x}{}{}|$\com 求证：$I_n-A^2$可逆。
+\end{example}
+\begin{proofs}
+    只需证明$I_n-A$与$I_n+A$可逆。考虑方程$(I_n-A)\boldsymbol{x}=\boldsymbol{0}$\com 即$A\boldsymbol{x}=\boldsymbol{x}$\com 即有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}=\neiji{x}{x}{}{}$\com 则由条件只能$\boldsymbol{x}=\boldsymbol{0}$\com 于是$I_n-A$可逆。
+\end{proofs}
+求解$n$阶方阵$A$的逆时\com 把$A$和$I_n$并列排成矩阵$\left[\begin{NiceArray}{c|c}
+    A & I_n
+\end{NiceArray}\right]$\com 对其做Gauss-Jordan消元法\com 当$A$化成$\rref(A)=I_n$时$I_n$就化成$A^{-1}$。同理\com {\colors{meihong}求解矩阵方程$AX=B$（其中$A$可逆）时\com 也可以对$\left[\begin{NiceArray}{c|c}
+    A & B
+\end{NiceArray}\right]$做Gauss-Jordan消元法}。
+\di[对角矩阵的逆]{
+    对角矩阵可逆当且仅当对角元素都不为零\com 且$\mathrm{diag}^{-1}(d_i)=\mathrm{diag}(d_i^{-1})$。
+}
+\begin{theorem}
+    上三角矩阵可逆当且仅当其对角元素都不为零；此时\com 其逆矩阵也是上三角矩阵\com 逆矩阵的对角元素是该矩阵对应对角元素的倒数。
+
+    下三角矩阵可逆当且仅当其对角元素都不为零；此时\com 其逆矩阵也是下三角矩阵\com 逆矩阵的对角元素是该矩阵对应对角元素的倒数。
+\end{theorem}
+\di[对角占优]{
+    如果$n$阶方阵$A=\left[a_{ij}\right]$恒有$|a_{ii}|>\sum_{j\neq i}|a_{ij}|$\com 则$A$一定可逆\com 称其为\tbome{对角占优矩阵}。
+}
+\zhu[判断矩阵可逆的常用技巧]{
+    （1）考虑方程组$A\boldsymbol{x}=\boldsymbol{0}$（常用$\neiji{x}{x}{}{}$）；\\
+    （2）观察形式：对角矩阵、三角矩阵、对角占优矩阵……}
+\zhu[$A^n$的计算]{
+    （1）暴算；\\
+    （2）找规律；\\
+    （3）若$A=\boldsymbol{\alpha}\boldsymbol{\beta}^\mathrm{T}$\com 可有$A^n=\boldsymbol{\alpha}(\boldsymbol{\beta}^\mathrm{T}\boldsymbol{\alpha})\cdots(\boldsymbol{\beta}^\mathrm{T}\boldsymbol{\alpha})\boldsymbol{\beta}^\mathrm{T}=(\boldsymbol{\beta}^\mathrm{T}\boldsymbol{\alpha})^{n-1}A$；\\
+    （4）若$A=kI_m+L$\com 其中$L$为对角元素全为0的上三角矩阵\com 可有$A^n=\sum\limits_{i=0}^{n}\dbinom{n}{i}k^{n-i}I_m^{n-i}A^i$。
+}
+\subsubsection{LU分解}
+\de[LU分解]{
+    如果$n$阶方阵$A$只使用倍加矩阵$E_{ji;k}$（$j>i$）做行变换就可以化成阶梯型矩阵\com 那么存在$n$阶单位下三角矩阵$L$和$n$阶上三角矩阵$U$\com 使得$A=LU$\com 这个分解称为矩阵$A$的~\tboba{\textup{LU}分解}。
+}
+当且仅当$A$是可逆矩阵时\com $U$的对角元素全不为0。
+
+求$A$的LU分解\com 实际上就是对$A$做只使用倍加行变换的Gauss消元\com 逐个消去$A$的$(2,1),~(3,1),$ $\cdots,~(n,1),~(3,2),~\cdots$位置元素\com\!\! 消元得到的阶梯型矩阵是$U$\com\!\! 消元过程中所用的倍加矩阵乘积是$L^{-1}$。
+
+\subsection{分块矩阵方法}
+\subsubsection{分块矩阵的初等变换}
+\de[广义初等变换与分块初等矩阵]{
+    （1）\tboba{分块对换变换}\quad 互换两大行（列）的位置\com 其对应的\tboba{分块对换矩阵}为${\begin{bmatrix}
+         & I_{n_1}\\ I_{n_2}&
+    \end{bmatrix}}$。
+    $$\begin{bmatrix}
+        & I_{n_1}\\ I_{n_2}&
+    \end{bmatrix}\begin{bmatrix}
+        A_1\\A_2
+    \end{bmatrix}=\begin{bmatrix}
+        A_2\\A_1
+    \end{bmatrix}\quad\quad \begin{bmatrix}
+        B_1& B_2
+    \end{bmatrix}\begin{bmatrix}
+        & I_{n_1}\\ I_{n_2}&
+    \end{bmatrix}=\begin{bmatrix}
+        B_2 & B_1
+    \end{bmatrix}$$
+    （2）\tboba{分块倍乘变换}\quad 将某一大行（列）各块同左（右）乘{\colors{bali}可逆矩阵}~$P$\com 其对应的\tboba{分块倍乘矩阵}形如${\begin{bmatrix}
+        I_{n_1} & \\ & P
+    \end{bmatrix}}$。
+    $$\begin{bmatrix}
+        I_{n_1} & \\ & P
+    \end{bmatrix}\begin{bmatrix}
+        A_1\\A_2
+    \end{bmatrix}=\begin{bmatrix}
+        A_1\\PA_2
+    \end{bmatrix}\quad\quad \begin{bmatrix}
+        B_1& B_2
+    \end{bmatrix}\begin{bmatrix}
+        I_{n_1} & \\ & P
+    \end{bmatrix}=\begin{bmatrix}
+        B_1 & B_2P
+    \end{bmatrix}$$
+    （3）\tboba{分块倍加变换}\quad 将某大行（列）左（右）乘矩阵$M$加到另一大行（列）\com 其对应的\tboba{分块倍加矩阵}形如${\begin{bmatrix}
+        I_{n_1} & M\\ & I_{n_2}
+    \end{bmatrix}}$。
+    $$\begin{bmatrix}
+        I_{n_1} & M\\ & I_{n_2}
+    \end{bmatrix}\begin{bmatrix}
+        A_1\\A_2
+    \end{bmatrix}=\begin{bmatrix}
+        A_1+MA_2\\A_2
+    \end{bmatrix}\quad\quad \begin{bmatrix}
+        B_1& B_2
+    \end{bmatrix}\begin{bmatrix}
+        I_{n_1} & M\\ & I_{n_2}
+    \end{bmatrix}=\begin{bmatrix}
+        B_1 & B_1M+B_2
+    \end{bmatrix}$$
+}
+\subsubsection{分块矩阵的逆}
+\di[]{
+    若$A$和$D-CA^{-1}B$可逆\com 则$\begin{bmatrix}
+        A&B\\C&D
+    \end{bmatrix}$可逆。
+}
+事实上\com $\begin{bmatrix}
+    A&B\\C&D
+\end{bmatrix}^{-1}=\begin{bmatrix}
+    I & -A^{-1}B \\ O & I
+\end{bmatrix}\begin{bmatrix}
+    A^{-1} & O \\ O & (D-CA^{-1}B)^{-1}
+\end{bmatrix}\begin{bmatrix}
+    I & O \\ -CA^{-1} & I
+\end{bmatrix}$。$D-CA^{-1}B$称为$A$关于$\begin{bmatrix}
+    A&B\\C&D
+\end{bmatrix}$的~\tboba{Schur补}。
+\di[Sherman-Morrison公式]{
+    若$A$可逆\com 则$\mbome{A+\boldsymbol{u}\boldsymbol{v}^\mathrm{T}}$~\tbome{可逆当且仅当}~$\mbome{1+\boldsymbol{v}^\mathrm{T}A^{-1}\boldsymbol{u} \neq 0}$；其可逆时\com $$(A+\boldsymbol{u}\boldsymbol{v}^\mathrm{T})^{-1}=A^{-1}-\frac{A^{-1}\boldsymbol{u}\boldsymbol{v}^\mathrm{T}A^{-1}}{1+\boldsymbol{v}^\mathrm{T}A^{-1}\boldsymbol{u}}$$
+}
+\subsubsection{分块矩阵的LU分解}
+\di[分块矩阵的LU分解]{
+    设方阵$A_1\com A_2$有\textup{LU}分解\com $A_1=L_1U_1$\com $A_2=L_2U_2$\com 则分块矩阵$\begin{bmatrix}
+        A_1 & B \\ & A_2
+    \end{bmatrix}$有\textup{LU}分解\com 且
+    $$\begin{bmatrix}
+        A_1 & B \\ & A_2
+    \end{bmatrix}=\begin{bmatrix}
+        L_1 &  \\ & L_2
+    \end{bmatrix}\begin{bmatrix}
+        U_1 & L_1^{-1}B \\ & U_2
+    \end{bmatrix}$$
+}
+\newpage
+\section{子空间与维数}
+\subsection{线性子空间}
+\de[线性子空间]{
+    设$\mathcal{M}\subseteq\R^m$\com {\colors{bali}$\mathcal{M}\neq \varnothing$}\com 如果对任意$\boldsymbol{a},~\boldsymbol{b}\in \mathcal{M}$和$k \in \R$\com 都有$\boldsymbol{a}+\boldsymbol{b}\in \mathcal{M}$\com $k\boldsymbol{a}\in \mathcal{M}$\com 则称$\mathcal{M}$为$\R^m$的一个\tboba{线性子空间}。
+}
+任何子空间都包含$\boldsymbol{0}$。
+\subsubsection{表示子空间的向量组}
+\de[线性相关、线性无关]{
+    给定向量组$\{\boldsymbol{a}_i\}_{i=1}^n\subseteq\R^m$\com 如果存在不全为零的一组数$k_1,~k_2,~\cdots,~k_n\in \R$\com 使得$\sum\limits_{i=1}^{n}k_i\boldsymbol{a}_i=\boldsymbol{0}$\com 则称向量组$\{\boldsymbol{a}_i\}_{i=1}^n$~\tboba{线性相关}；否则\com $\sum\limits_{i=1}^{n}k_i\boldsymbol{a}_i=\boldsymbol{0}$一定推出$k_1=k_2=\cdots=k_n=0$\com 则称向量组$\{\boldsymbol{a}_i\}_{i=1}^n$~\tboba{线性无关}。
+}
+给定一组线性无关的向量$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_n$\com 则对任意向量$\boldsymbol{b}$\com $\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_n,~\boldsymbol{b}$线性无关当且仅当$\boldsymbol{b}$不能被$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_n$线性表示。
+\di[线性表示的等价表述]{
+    给定$\R^m$中的两组向量$S:\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s$\com $T:\boldsymbol{b}_1,~\boldsymbol{b}_2,~\cdots,~\boldsymbol{b}_t$\com 则
+    \begin{equation*}
+        \begin{aligned}
+            S~\text{可以被}~T~\text{线性表示}&\Leftrightarrow \text{存在}~t\times s~\text{矩阵}~U\text{\com 使}\begin{bmatrix}
+                \boldsymbol{a}_1&\boldsymbol{a}_2&\cdots&\boldsymbol{a}_s
+            \end{bmatrix}=\begin{bmatrix}
+                \boldsymbol{b}_1&\boldsymbol{b}_2&\cdots&\boldsymbol{b}_t
+            \end{bmatrix}U\\
+            &\Leftrightarrow \mathrm{span}(\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s)\subseteq \mathrm{span}(\boldsymbol{b}_1,~\boldsymbol{b}_2,~\cdots,~\boldsymbol{b}_t)
+        \end{aligned}
+    \end{equation*}
+}
+\begin{theorem}
+    给定$\R^m$中的两组向量$S:\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s$,~$T:\boldsymbol{b}_1,~\boldsymbol{b}_2,~\cdots,~\boldsymbol{b}_t$,~$S$可以被$T$线性表示\com 若$s>t$\com 则$S$必然线性相关。
+\end{theorem}
+\begin{definition}
+    可以互相线性表示的两个向量组\textbf{线性等价}。
+\end{definition}
+\di[等价线性无关向量组中的向量个数]{
+    若$\R^m$中的两个线性无关的向量组$S:\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s$\com $T:\boldsymbol{b}_1,~\boldsymbol{b}_2,~\cdots,~\boldsymbol{b}_t$线性等价\com 则$s=t$。
+}
+\subsubsection{基与维数}
+\de[基]{
+    给定线性子空间$\mathcal{M}\subseteq\R^m$\com 若其中存在有限个向量$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_r$\com 使得$\mathcal{M}=\mathrm{span}\left(\boldsymbol{a}_1,~\boldsymbol{a}_2,~\right.$ $\left.\cdots,~\boldsymbol{a}_r\right)$\com 且$\{\boldsymbol{a}_i\}_{i=1}^r$~{线性无关}\com 则称$\{\boldsymbol{a}_i\}_{i=1}^r$为$\mathcal{M}$的一组\tboba{基}。
+}
+如果$\mathcal{M}\neq\{\boldsymbol{0}\}$\com 则$\mathcal{M}$存在一组基；如果$\mathcal{M}\subseteq\mathcal{N}$\com 则$\mathcal{M}$的任意一组基都可以扩充为$\mathcal{N}$的一组基。给定子空间的任意一组基中向量数都相同。
+\de[维数]{
+    一个子空间$\mathcal{M}$的任意一组基中向量的个数称为子空间$\mathcal{M}$的\tboba{维数}\com 记作$\mathrm{dim~}\mathcal{M}$。
+}
+\di[]{
+    给定$\R^m$上的线性变换$\mathscr{A}$及其表示矩阵$A$\com 则
+    \begin{equation*}
+        \begin{aligned}
+            A~\text{可逆}
+            &\Leftrightarrow  \text{存在}~m~\text{阶方阵}~B\text{\com 满足}~AB=BA=I_m\Leftrightarrow \mathscr{A}~\text{是双射}\\
+            &\Leftrightarrow  \text{存在}~m~\text{阶方阵}~B\text{\com 满足}~BA=I_m\Leftrightarrow \mathscr{A}~\text{是单射}\\
+            &\Leftrightarrow  \text{存在}~m~\text{阶方阵}~B\text{\com 满足}~AB=I_m\Leftrightarrow \mathscr{A}~\text{是满射}
+        \end{aligned}
+    \end{equation*}
+}
+\subsection{矩阵生成的子空间}
+\de[列空间、零空间]{
+    设$A$为$m\times n$矩阵\com 定义\\
+    （1）\tboba{列空间}~$\mboba{\mathcal{R}(A)}=\left\{\boldsymbol{b}\in \R^m \middle| \exists \boldsymbol{x} \in \R^n \com A\boldsymbol{x}=\boldsymbol{b}\right\}=\left\{A\boldsymbol{x} \middle| \boldsymbol{x} \in \R^n \right\}$；\\
+    （2）\tboba{零空间}~$\mboba{\mathcal{N}(A)}=\left\{ \boldsymbol{x} \in \R^n \middle| A\boldsymbol{x}=\boldsymbol{0} \right\}$。
+}
+可知\com $\mathcal{R}(A)$和$\mathcal{N}(A)$都是子空间。
+\di[]{
+    设$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_n$是$\R^n$的一组基\com $\boldsymbol{b}_1,~\boldsymbol{b}_2,~\cdots,~\boldsymbol{b}_n\in \R^m$\com 则存在唯一的$m\times n$矩阵$A$\com 使得$A\boldsymbol{a}_i=\boldsymbol{b}_i$（$i=1,~2,~\cdots,~n$）。
+}
+这个定理可以用于构造满足$X\boldsymbol{\alpha}_i=\boldsymbol{\beta}_i$的矩阵$X$。
+
+\begin{example}
+    设$A$为$m \times n$矩阵\com 已知$\mathcal{N}(A)$的一组基$\boldsymbol{b}_1\com \boldsymbol{b}_2\com \cdots\com \boldsymbol{b}_s$（$s \le n$）\com 求$\mathrm{rref}(A)$。
+\end{example}
+\begin{solution}
+    由题\com $A\boldsymbol{b}_i=\boldsymbol{0}$\com 即$A\begin{bmatrix}
+        \boldsymbol{b}_1&\boldsymbol{b}_2&\cdots&\boldsymbol{b}_s
+    \end{bmatrix}=O$\com 即$\begin{bmatrix}
+        \boldsymbol{b}_1^\mathrm{T}\\\boldsymbol{b}_2^\mathrm{T}\\\vdots\\\boldsymbol{b}_s^\mathrm{T}
+    \end{bmatrix}A^\mathrm{T}=O$。设$A=\begin{bmatrix}
+        \tilde{\boldsymbol{a}}_1^\mathrm{T}\\\tilde{\boldsymbol{a}}_2^\mathrm{T}\\\vdots\\\tilde{\boldsymbol{a}}_m^\mathrm{T}
+    \end{bmatrix}$\com $B=\begin{bmatrix}
+        \boldsymbol{b}_1^\mathrm{T}\\\boldsymbol{b}_2^\mathrm{T}\\\vdots\\\boldsymbol{b}_s^\mathrm{T}
+    \end{bmatrix}$\com 则$A^\mathrm{T}=\begin{bmatrix}
+        \tilde{\boldsymbol{a}}_1&\tilde{\boldsymbol{a}}_2&\cdots&\tilde{\boldsymbol{a}}_m
+    \end{bmatrix}$\com 于是有$B\tilde{\boldsymbol{a}}_j=\boldsymbol{0}$\com 解出$\mathcal{N}(B)$即可给出$\mathrm{rref}(A)$。
+\end{solution}
+\di[]{
+    $\mathcal{N}\left(\begin{bmatrix}
+        X \\ Y
+    \end{bmatrix}\right)=\mathcal{N}(X)\cap\mathcal{N}(Y)$
+}
+\begin{example}
+    设$A=\begin{bmatrix}
+        1&0&0\\2&3&0\\4&5&6
+    \end{bmatrix}\begin{bmatrix}
+        1&0&1&1&1\\0&1&1&1&1\\0&0&0&1&1
+    \end{bmatrix}$\com 分别找出$\mathcal{N}(A)$\com $\mathcal{N}(A^\mathrm{T})$\com $\mathcal{R}(A)$\com $\mathcal{R}(A^\mathrm{T})$的一组基。
+\end{example}
+\begin{solution}
+    注意到$A=BC$\com $B=\begin{bmatrix}
+        1&0&0\\2&3&0\\4&5&6
+    \end{bmatrix}$\com $C=\begin{bmatrix}
+        1&0&1&1&1\\0&1&1&1&1\\0&0&0&1&1
+    \end{bmatrix}$\com 其中 $B$ 可逆。因此
+    $$
+    \mathcal{N}(A)=\mathcal{N}(C)=\mathcal{N}\left(\begin{bmatrix}
+        1&0&1&0&0\\0&1&1&0&0\\0&0&0&1&1
+    \end{bmatrix}\right)=\left\{\boldsymbol{x}~ \left|~ \boldsymbol{x}=\begin{bmatrix}-x_3\\-x_3\\x_3\\-x_5\\ x_5\end{bmatrix}\right.\right\}=\mathrm{span}\left(\begin{bmatrix}-1\\-1\\1\\0\\0\end{bmatrix}\com \begin{bmatrix}0\\0\\0\\-1\\1\end{bmatrix}\right)
+    $$
+    注意到 $A^\mathrm{T}$ 是 $5\times3$ 的矩阵。因为$\mathrm{rank}(A^\mathrm{T})=\mathrm{rank}(A)=\mathrm{rank}(C)=3$\com 
+    所以 $\mathcal{N}(A^\mathrm{T})=\{\boldsymbol{0}\}$\com $\mathcal{R}(A)=\mathcal{N}\left(A^\mathrm{T}\right)^\perp=\mathbb{R}^3$。因此 $\mathcal{N}(A^\mathrm{T})$ 不存在基\com $\mathcal{R}(A)$ 的一组基为 $\{\boldsymbol{e}_1\com \boldsymbol{e}_2\com \boldsymbol{e}_3\}$。则
+    \begin{equation*}   
+        \mathcal{R}(A^\mathrm{T})=\mathcal{R}(C^\mathrm{T}B^\mathrm{T})=\mathcal{R}(C^\mathrm{T})=\mathrm{span}\left(\begin{bmatrix}1\\0\\1\\1\\1\end{bmatrix}\com \begin{bmatrix}0\\1\\1\\1\\1\end{bmatrix}\com \begin{bmatrix}0\\0\\0\\1\\1\end{bmatrix}\right) \qedhere
+    \end{equation*}
+\end{solution}
+\subsection{矩阵的秩}
+\di[秩的性质]{
+    设$A$\com $B$\com $C$分别为$m\times n$\com $n\times k$\com $k\times l$矩阵\com $P$为$n$阶方阵\com 有\\
+    （1）$\mathrm{rank}(A)+\mathrm{rank}(B)-n \le \mathrm{rank}(AB) \le \min\left\{\mathrm{rank}(A)\com \mathrm{rank}(B)\right\}$；\\
+    （2）$\mathrm{rank}(A+B)\le \mathrm{rank}(A)+\mathrm{rank}(B)$\\
+    （3）\tbome{\textup{Frobenius}不等式}\quad$\mathrm{rank}(AB)+\mathrm{rank}(BC) \le \mathrm{rank}(ABC)+\mathrm{rank}(B)$；\\
+    （4）$P^2=P \Leftrightarrow \mathrm{rank}(A)+\mathrm{rank}(I_n-A)=n$；\\
+    （5）$\mathrm{rank}(A)=\mathrm{rank}(A^\mathrm{T}A)$
+}
+\di[]{
+    $\mathrm{rank}(A)=\mathrm{rank}\left(\begin{bmatrix}
+        A & C
+    \end{bmatrix}\right) \Leftrightarrow \exists Y\in M(\R) $使得$ C=AY$
+}
+\di[]{
+    任意线性子空间均是某个矩阵的零空间。即对任意$\mathcal{M}\subseteq\R^m$\com 均存在矩阵$M$\com 使得$\mathcal{N}(M)=\mathcal{M}$。
+}
+\begin{lemma}
+    如果存在正整数$k$使$\mathrm{rank}(A^k)=\mathrm{rank}(A^{k-1})$\com 则对任意正整数$i$都有$\mathrm{rank}(A^{k+i})=\mathrm{rank}(A^k)$。
+\end{lemma}
+\di[]{
+    设$A$为$n$阶方阵\com 如果存在$N>n$使$A^N=O$\com 则有$A^n=O$。
+}
+\begin{example}
+    对$n$阶方阵$A$\com 求证：
+
+    （1）$A^2=A$当且仅当$\mathrm{rank}(A)+\mathrm{rank}(I_n-A)=n$；
+
+    （2）$A^2=I_n$当且仅当$\mathrm{rank}(I_n+A)+\mathrm{rank}(I_n-A)=n$。
+\end{example}
+\newpage
+\section{内积与正交性}
+\subsection{向量的内积与子空间的标准正交基}
+\subsubsection{标准正交基}
+\de[内积]{
+    $\R^n$上两个向量$\boldsymbol{v}\com \boldsymbol{w}$的\tboba{内积}定义为$\boldsymbol{v}^\mathrm{T}\boldsymbol{w}$。
+}
+显然\com 分量均为实数的向量与自身做内积具有\tboba{正定性}：$\neiji{x}{x}{}{}=0$。由此有
+\di[$\boldsymbol{A^\mathrm{T}A}$生成的子空间]{
+    若$A$为\textbf{实}矩阵\com 则
+    \begin{equation*}
+        \begin{aligned}
+            &\mathcal{R}(A^\mathrm{T}A)=\mathcal{R}(A^\mathrm{T})\com 
+            &&\mathcal{N}(A^\mathrm{T}A)=\mathcal{N}(A)\\
+            &\mathcal{R}(AA^\mathrm{T})=\mathcal{R}(A)\com 
+            &&\mathcal{N}(AA^\mathrm{T})=\mathcal{N}(A^\mathrm{T})
+        \end{aligned}
+    \end{equation*}
+}
+\de[长度]{
+    实向量$\boldsymbol{v}$的\tboba{长度}定义为$\left\lVert \boldsymbol{v}\right\rVert :=\sqrt{\boldsymbol{v}^\mathrm{T}\boldsymbol{v}}$。
+}
+特别地\com 定义两个向量$\boldsymbol{v}\com \boldsymbol{w}$的\tboba{距离}为$\left\lVert \boldsymbol{v}-\boldsymbol{w}\right\rVert $。
+
+\de[正交]{
+    如果$\R^n$上两个向量$\boldsymbol{v}\com \boldsymbol{w}$的内积$\boldsymbol{v}^\mathrm{T}\boldsymbol{w}=0$\com 则称$\boldsymbol{v}$与$\boldsymbol{w}$~\tboba{正交}或\tboba{垂直}。
+}
+\begin{proposition}
+    如果$\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_r\in \R^n$均非零\com 且对任意$i\neq j$\com 都有$\neiji{v}{v}{i}{j}=0$\com 则$\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_r$~线性无关。
+\end{proposition}
+\di[Cauchy-Buniakowsky-Schwarz不等式]{
+    对任意$\boldsymbol{a},~\boldsymbol{b}\in \R^m$\com $$\left\lvert \neiji{a}{b}{}{}\right\rvert\le \left\lVert \boldsymbol{a}\right\rVert \left\lVert \boldsymbol{b}\right\rVert  $$等号成立当且仅当$\boldsymbol{a}$与$\boldsymbol{b}$共线。
+}
+\de[夹角]{
+    $\R^n$上两个{\colors{bali}非零}向量$\boldsymbol{v}\com \boldsymbol{w}$的\tboba{夹角}定义为$\arccos\dfrac{\left\lvert \boldsymbol{v}^\mathrm{T}\boldsymbol{w}\right\rvert }{ \left\lVert \boldsymbol{v}\right\rVert \left\lVert \boldsymbol{w}\right\rVert}$。
+}
+\di[三角不等式]{
+    \centering{$\left\lvert \left\lVert \boldsymbol{a}\right\rVert -\left\lVert \boldsymbol{b}\right\rVert \right\rvert  \le \left\lVert \boldsymbol{a}\pm \boldsymbol{b}\right\rVert  \le \left\lVert \boldsymbol{a}\right\rVert +\left\lVert \boldsymbol{b}\right\rVert $}
+}
+\di[勾股定理]{
+    若$\boldsymbol{a}$与$\boldsymbol{b}$正交\com 则
+    $$\left\lVert \boldsymbol{a}\right\rVert^2+\left\lVert \boldsymbol{b}\right\rVert^2=\left\lVert \boldsymbol{a}\pm \boldsymbol{b}\right\rVert^2   $$
+}
+\de[向量向直线的投影]{
+    设$\boldsymbol{v}\com \boldsymbol{w}$是$\R^n$上两个向量\com $\boldsymbol{v}\neq \boldsymbol{0}_n$\com 若将$\boldsymbol{w}$分解为$$\boldsymbol{w}=\frac{\neiji{v}{w}{}{}}{\left\lVert \boldsymbol{v}\right\rVert^2 }\boldsymbol{v}+\boldsymbol{r}$$则知$\neiji{v}{r}{}{}=0$\com 即$\boldsymbol{v}\bot \boldsymbol{r}$\com $\dfrac{\neiji{v}{w}{}{}}{\left\lVert \boldsymbol{v}\right\rVert^2 }\boldsymbol{v} \parallel \boldsymbol{v}$。称向量$\dfrac{\neiji{v}{w}{}{}}{\left\lVert \boldsymbol{v}\right\rVert^2 }\boldsymbol{v}$为向量$\boldsymbol{w}$向直线$\mathrm{span} (\boldsymbol{v})$的\tboba{投影}。
+}
+\di[「垂线段」最短]{\label{线投影}
+    设$\boldsymbol{a}\com \boldsymbol{b}$是$\R^n$中的两个向量\com $\boldsymbol{a}\neq \boldsymbol{0}$\com 则$$\left\lVert \boldsymbol{b}-\frac{\neiji{a}{b}{}{}}{\neiji{a}{a}{}{}}\boldsymbol{a}\right\rVert =\min_{x\in\R}\left\lVert \boldsymbol{b}-x\boldsymbol{a}\right\rVert $$
+}
+\begin{definition}
+    设向量组$\{\boldsymbol{a}_i\}_{i=1}^n\subseteq\R^m$\com 若其满足\\
+    （1）$\forall i \in \{1,~2,~\cdots,~n\}$\com $\boldsymbol{a}_i\neq \boldsymbol{0}$；\\
+    （2）$\forall i\com j \in \{1,~2,~\cdots,~n\}$\com $i\neq j$\com $\neiji{a}{a}{i}{j}=0$；\\
+    则称向量组$\{\boldsymbol{a}_i\}_{i=1}^n\subseteq\R^m$为\textbf{正交向量组}。特别地\com 如果$\forall i \in \{1,~2,~\cdots,~n\}$\com $\left\lVert \boldsymbol{a}_i\right\rVert =1 $\com 则称向量组$\{\boldsymbol{a}_i\}_{i=1}^n\subseteq\R^m$为\textbf{正交单位向量组}。
+\end{definition}
+
+\de[标准正交基]{
+    设子空间$\mathcal{M}\in \R^n$\com 向量组$\{\boldsymbol{v}_i\}_{i=1}^m\subseteq\R^n$是$\mathcal{M}$的一组基。如果$\{\boldsymbol{v}_i\}_{i=1}^m$是正交向量组\com 则称其为$\mathcal{M}$的\tboba{正交基}；如果$\{\boldsymbol{v}_i\}_{i=1}^m$是正交单位向量组\com 则称其为$\mathcal{M}$的\tboba{标准正交基}。
+}
+当选定了子空间$\mathcal{M}\in \R^n$的一组标准正交基$\{\boldsymbol{v}_i\}_{i=1}^m$后\com 任意向量$\boldsymbol{a}$就可以表示为
+$$\boldsymbol{a}=\sum_{i=1}^{m}\alpha_i\boldsymbol{v}_i=\begin{bmatrix}
+    \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_m
+\end{bmatrix}\begin{bmatrix}
+    \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_m 
+\end{bmatrix}$$
+
+内积的值与所选标准正交基给出的坐标系无关。
+
+\subsubsection{Gram-Schmidt正交化}
+给出子空间$\mathcal{M}\in \R^n$的任意一组基$\{\boldsymbol{v}_i\}_{i=1}^m$\com 我们希望构造一个映射\com 将这组基化为一组标准正交基$\{\boldsymbol{q}_i\}_{i=1}^m$。
+
+首先考虑将其\tbome{正交化}为一组正交基$\{\tilde{\boldsymbol{q}} _i\}_{i=1}^m$。假设$\{\boldsymbol{v}_i\}_{i=1}^m$中前$r$个向量$\{\boldsymbol{v}_i\}_{i=1}^r$已经化成正交向量组$\{\tilde{\boldsymbol{q}}_i\}_{i=1}^r$\com 则对$\boldsymbol{v}_{r+1}$\com 其减去对$\mathrm{span}(\tilde{\boldsymbol{q}} _i)$（$i=1,~2,~\cdots,~r$）的投影后\com 余下的部分$\tilde{\boldsymbol{q}}_{r+1}$与$\tilde{\boldsymbol{q}}_i$（$i=1,~2,~\cdots,~r$）都正交\com 
+且在这个过程中\com $\tilde{\boldsymbol{q}}_{1},~\tilde{\boldsymbol{q}}_{2},~\cdots,~\tilde{\boldsymbol{q}}_{r},~\boldsymbol{v}_{r+1}$与$\tilde{\boldsymbol{q}}_{1},~\tilde{\boldsymbol{q}}_{2},~\cdots,~\tilde{\boldsymbol{q}}_{r},~\tilde{\boldsymbol{q}}_{r+1}$线性等价。于是\com 重复进行这个算法\com 就可以将$\{\boldsymbol{v}_i\}_{i=1}^m$化为线性等价的$\{\tilde{\boldsymbol{q}} _i\}_{i=1}^m$：\label{Gram-Schmidt正交化公式}
+\begin{equation*}\begin{aligned}
+    &\tilde{\boldsymbol{q}}_{1} =\boldsymbol{v}_{1}\com \\
+    &\tilde{\boldsymbol{q}}_{2} =\boldsymbol{v}_{2}-\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{2}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1}\com \\
+    &\tilde{\boldsymbol{q}}_{3} =\boldsymbol{v}_{3}-\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{3}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1}-\frac{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\boldsymbol{v}_{3}}{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{2}}\tilde{\boldsymbol{q}}_{2}\com \\
+    &\cdots\\
+    &\tilde{\boldsymbol{q}}_{m}=\boldsymbol{v}_{m}-\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1}-\frac{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{2}}\tilde{\boldsymbol{q}}_{2}-\cdots-\frac{\tilde{\boldsymbol{q}}_{m-1}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{m-1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{m-1}}\tilde{\boldsymbol{q}}_{m-1}
+\end{aligned}\end{equation*}
+其也是$\mathcal{M}$的基。然后\com 只需将$\{\tilde{\boldsymbol{q}} _i\}_{i=1}^m$~\tbome{归一化（单位化）}得到$\{\boldsymbol{q}_i\}_{i=1}^m$即可：
+$$\boldsymbol{q}_{i}=\frac{\tilde{\boldsymbol{q}}_{i}}{\|\tilde{\boldsymbol{q}}_{i}\|}\com \quad i=1,~2,~\cdots,~m$$
+\di[Gram-Schmidt正交化]{
+    从子空间$\mathcal{M}\in \R^n$的任意一组基$\{\boldsymbol{v}_i\}_{i=1}^m$出发\com 都可以得到$\mathcal{M}$的一组正交基$\{\tilde{\boldsymbol{q}} _i\}_{i=1}^m$\com 进而得到一组标准正交基$\{\boldsymbol{q}_i\}_{i=1}^m$。
+}
+
+设
+$A=\begin{bmatrix}\boldsymbol{v}_1&\boldsymbol{v}_2&\cdots&\boldsymbol{v}_m\end{bmatrix}$\com 
+$\widetilde{Q}=\begin{bmatrix}\tilde{\boldsymbol{q}}_1&\tilde{\boldsymbol{q}}_2&\cdots&\tilde{\boldsymbol{q}}_m\end{bmatrix}$\com 
+$Q=\begin{bmatrix}\boldsymbol{q}_1&\boldsymbol{q}_2&\cdots&\boldsymbol{q}_m\end{bmatrix}$。
+Gram-Schmidt正交化的第一步正交化能得到 $\boldsymbol{v}_i$（$i=1,~2,~\cdots,~m$） 被 $\tilde{\boldsymbol{q}}_1\com \tilde{\boldsymbol{q}}_2\com \cdots\com \tilde{\boldsymbol{q}}_i$ 线性表示的表示法：
+\begin{equation*}\begin{aligned}
+    &\boldsymbol{v}_{1}=\tilde{\boldsymbol{q}}_{1}\com \\
+    &\boldsymbol{v}_{2}=\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{2}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1} + \tilde{\boldsymbol{q}}_{2} \com \\
+    &\boldsymbol{v}_{3}=\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{3}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1}+\frac{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\boldsymbol{v}_{3}}{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{2}}\tilde{\boldsymbol{q}}_{2}+\tilde{\boldsymbol{q}}_{3}\com \\
+    &\cdots\\
+    &\boldsymbol{v}_{m}=\frac{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{1}}\tilde{\boldsymbol{q}}_{1}+\frac{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{2}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{2}}\tilde{\boldsymbol{q}}_{2}+\cdots+\frac{\tilde{\boldsymbol{q}}_{m-1}^{\mathrm{T}}\boldsymbol{v}_{m}}{\tilde{\boldsymbol{q}}_{m-1}^{\mathrm{T}}\tilde{\boldsymbol{q}}_{m-1}}\tilde{\boldsymbol{q}}_{m-1}+\tilde{\boldsymbol{q}}_{m}
+\end{aligned}\end{equation*}
+这可用矩阵乘法表示：
+$$A=\widetilde{Q}\widetilde{R}\com \quad 
+\widetilde{R}=
+\begin{bmatrix}
+    1&\dfrac{\tilde{\boldsymbol{q}}_1^\mathrm{T}\boldsymbol{v}_2}{\tilde{\boldsymbol{q}}_1^\mathrm{T}\tilde{\boldsymbol{q}}_1}&\cdots&\dfrac{\tilde{\boldsymbol{q}}_1^\mathrm{T}\boldsymbol{v}_m}{\tilde{\boldsymbol{q}}_1^\mathrm{T}\tilde{\boldsymbol{q}}_1}\\
+    &1&\ddots&\vdots\\
+    &&\ddots&\dfrac{\tilde{\boldsymbol{q}}_{m-1}^\mathrm{T}\boldsymbol{v}_m}{\tilde{\boldsymbol{q}}_{n-1}^\mathrm{T}\tilde{\boldsymbol{q}}_{m-1}}\\
+    &&&1
+\end{bmatrix}$$ 
+第二步单位化可以写成 $\widetilde{Q}=Q\operatorname{diag}(\|\tilde{\boldsymbol{q}}_i\|)$\com 因此
+$$A=Q\operatorname{diag}(\|\tilde{\boldsymbol{q}}_{i}\|)\widetilde{R}=QR$$
+其中 $R=\operatorname{diag}(\|\tilde{\boldsymbol{q}}_i\|)\widetilde{R}$ 是对角元素都是正数的上三角矩阵。
+\subsubsection{正交矩阵与QR分解}
+\de[正交矩阵]{
+    给定$m \times n$矩阵$Q$。\\
+    （1）若$Q^\mathrm{T}Q=I_n$\com 则称$Q$是\tboba{列正交矩阵}；\\
+    （2）若$QQ^\mathrm{T}=I_m$\com 则称$Q$是\tboba{行正交矩阵}；\\
+    （3）若$Q$既是列正交矩阵又是行正交矩阵\com 则$m=n$\com 称方阵$Q$是\tboba{正交矩阵}。
+}
+\di[正交矩阵的等价表述]{
+    设$Q$为$n$阶方阵\com 其对应的线性变换为$\mathscr{Q}$\com 则
+    \begin{equation*}
+        \begin{aligned}
+            Q~\text{为} ~n~\text{阶正交矩阵}
+            &\Leftrightarrow Q^\mathrm{T}Q=I_n \Leftrightarrow QQ^\mathrm{T}=I_n\\
+            &\Leftrightarrow Q~\text{可逆\com 且}~Q^{-1}=Q^\mathrm{T}\\
+            &\Leftrightarrow Q^\mathrm{T}~\text{为} ~n~\text{阶正交矩阵}\\
+            &\Leftrightarrow Q~\text{可逆\com 且}~Q^{-1}~\text{为} ~n~\text{阶正交矩阵}\\
+            &\Leftrightarrow Q~\text{的列向量组成}~\R^n~\text{的一组标准正交基}\\
+            &\Leftrightarrow Q~\text{的行向量组成}~\R^n~\text{的一组标准正交基}\\
+            &\Leftrightarrow \mathscr{Q}~\text{为\tbome{保距变换}} \Leftrightarrow \forall \boldsymbol{x} \in \R^n \text{\com 有}~ \left\lVert \mathscr{Q}(\boldsymbol{x}) \right\rVert=\left\lVert Q\boldsymbol{x} \right\rVert =\left\lVert \boldsymbol{x} \right\rVert\\
+            &\Leftrightarrow \mathscr{Q}~\text{为\tbome{保内积变换}} \Leftrightarrow \forall \boldsymbol{x},\, \boldsymbol{y} \in \R^n \text{\com 有}~ (Q\boldsymbol{x})^\mathrm{T}(Q\boldsymbol{y})=\neiji{x}{y}{}{}
+        \end{aligned}
+    \end{equation*}
+}
+\begin{example}
+    求证：对任意单位向量$\boldsymbol{v}\in \R^n$\com $I_n-2\boldsymbol{v}\boldsymbol{v}^\mathrm{T}$为正交矩阵。
+\end{example}
+\begin{proofs}
+    $\left(I_n-2\boldsymbol{v}\boldsymbol{v}^\mathrm{T}\right)\left(I_n-2\boldsymbol{v}\boldsymbol{v}^\mathrm{T}\right)^\mathrm{T}=I_n-2\boldsymbol{v}\boldsymbol{v}^\mathrm{T}-2\boldsymbol{v}\boldsymbol{v}^\mathrm{T}+4\boldsymbol{v}\boldsymbol{v}^\mathrm{T}\boldsymbol{v}\boldsymbol{v}^\mathrm{T}=I_n$。
+\end{proofs}
+注意到Gram-Schmidt正交化的矩阵表示中
+$$Q^\mathrm{T}Q=\begin{bmatrix}\boldsymbol{q}_1^\mathrm{T}\\\boldsymbol{q}_2^\mathrm{T}\\\vdots\\\boldsymbol{q}_m^\mathrm{T}\end{bmatrix} \begin{bmatrix}\boldsymbol{q}_1&\boldsymbol{q}_2&\cdots&\boldsymbol{q}_m\end{bmatrix}=\begin{bmatrix}
+    \boldsymbol{q}_1^\mathrm{T}\boldsymbol{q}_1&\boldsymbol{q}_1^\mathrm{T}\boldsymbol{q}_2&\cdots&\boldsymbol{q}_1^\mathrm{T}\boldsymbol{q}_m\\
+    \boldsymbol{q}_2^\mathrm{T}\boldsymbol{q}_1&\boldsymbol{q}_2^\mathrm{T}\boldsymbol{q}_2&\cdots&\boldsymbol{q}_2^\mathrm{T}\boldsymbol{q}_m\\
+    \vdots&\vdots&\ddots&\vdots\\
+    \boldsymbol{q}_m^\mathrm{T}\boldsymbol{q}_1&\boldsymbol{q}_m^\mathrm{T}\boldsymbol{q}_2&\cdots&\boldsymbol{q}_m^\mathrm{T}\boldsymbol{q}_m\\
+\end{bmatrix}=I_m$$
+即Gram-Schmidt正交化是将$A$分解为了一个列正交矩阵和一个对角元素都是正数的上三角矩阵之积。
+\de[QR分解]{
+    对列满秩的$m \times n$矩阵$A$\com 存在$m \times n$列正交矩阵 $Q$\com 和具有非负对角元的$n$阶上三角矩阵 $R$\com 使得$A=QR$\com 这个分解称为矩阵$A$的~\tboba{（简化）\textup{QR}分解}。
+}
+若对列满秩的$m \times n$矩阵$A$\com 存在$m \times n$列正交矩阵 $Q$\com 和具有非负对角元的$n$阶上三角矩阵 $R$\com 使得$A=QR$\com 则同时也可写出$A=\begin{bmatrix}
+    Q & Q'
+\end{bmatrix}_{m \times m}\begin{bmatrix}
+    R \\ O
+\end{bmatrix}_{m \times n}$\com 其中$\begin{bmatrix}
+    Q & Q'
+\end{bmatrix}$是正交矩阵。
+\subsection{正交投影}
+\de[子空间的正交]{
+    给定 $\mathbb{R}^n$ 的子空间 $\mathcal{M}\com \mathcal{N}$ \com 如果 $\mathcal{M}$ 中任意向量和 $\mathcal{N}$ 中任意向量都正交\com 则称 $\mathcal{M}$ 与 $\mathcal{N}$ \tboba{正交}\com 记为 $\mathcal{M} \perp \mathcal{N}$。\\
+    特别地\com 如果 $\mathrm{span}(\boldsymbol{a}) \perp \mathcal{M}$\com 则简称向量 $\boldsymbol{a}$ 与子空间 $\mathcal{M}$ 正交\com 记为 $\boldsymbol{a}\perp \mathcal{M}$。
+    与子空间 $\mathcal{M}$ 正交的所有向量的集合$\mathcal{M}^{\perp}:=\{\boldsymbol{a}\in\mathbb{R}^{n}\mid\boldsymbol{a}\perp\mathcal{M}\}$称为子空间 $\mathcal{M}$的\tboba{正交补}。
+}
+\di[矩阵生成的子空间之间的关系]{
+    给定$m \times n$矩阵$A$\com 则
+    $$\mathcal{R}(A^\mathrm{T})^\perp = \mathcal{N}(A)\com \qquad \mathcal{R}(A)^\perp = \mathcal{N}(A^\mathrm{T})$$
+}
+\begin{proofs}
+    （1）对任意$A$的行向量$\tilde{\boldsymbol{a}}_i$\com 若$\boldsymbol{x} \in \mathcal{N}(A)$\com 则都有$\tilde{\boldsymbol{a}}_i^\mathrm{T} \boldsymbol{x} = 0 $；而$\mathcal{R}(A^\mathrm{T}) = \mathrm{span}(\{\tilde{\boldsymbol{a}}_i\})$。
+
+    （2）在（1）中取$A$为$A^\mathrm{T}$。
+\end{proofs}
+一般地\com 对任意$m \times n$矩阵$A$\com 记其引导的及其转置矩阵引导的线性映射为$\mathscr{A}$、$\mathscr{A}^*$\com 我们有
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{矩阵生成的子空间的关系.png}
+    \caption{矩阵生成的子空间之间的关系}\label{矩阵生成的子空间之间的关系}
+\end{figure}
+\di[一般化的秩零定理]{
+    设子空间$\mathcal{M} \subseteq \R^m$的一组标准正交基为$\{\boldsymbol{q}_i\}_{i=1}^n$\com 将其扩充为$\R ^m$的一组标准正交基$\{\boldsymbol{q}_i\}_{i=1}^m$\com 则$\mathcal{M}^{\perp}=\mathrm{span}(\{\boldsymbol{q}_i\}_{i=n+1}^m)$。
+}
+由此\com 立得$\mathrm{dim}~\mathcal{M}^\perp = m - \mathrm{dim}~\mathcal{M} $。
+
+于是\com $\text{对任意 }~\boldsymbol{a}\in\mathbb{R}^m\text{ \com 都存在唯一的分解 }~\boldsymbol{a}=\boldsymbol{a}_1+\boldsymbol{a}_2\text{ \com 使得 }~\boldsymbol{a}_1\in\mathcal{M}$\com $\boldsymbol{a}_2\in\mathcal{M}^\perp $。
+\de[正交投影]{
+    给定子空间$\mathcal{M} \subseteq \R^m$与向量$\boldsymbol{a}\in\mathbb{R}^m$\com 则存在唯一的分解 $\boldsymbol{a}=\boldsymbol{a}_1+\boldsymbol{a}_2$\com 使得$\boldsymbol{a}_1\in\mathcal{M}$\com $\boldsymbol{a}_2\in\mathcal{M}^\perp $\com 于是存在映射$\begin{NiceMatrix}[baseline=1]
+        \mathscr{P}_\mathcal{M}: & \R^m & \rightarrow & \mathcal{M} \\
+        & \boldsymbol{a} & \mapsto & \boldsymbol{a}_1
+    \end{NiceMatrix}$\com 这称为$\mathcal{M}$上的\tboba{正交投影（变换）}\com $\boldsymbol{a}_1$称为$\boldsymbol{a}$在$\mathcal{M}$上的\tboba{正交投影}。
+}
+类比定理~\ref{线投影}\com 可知$\left\lVert\boldsymbol{a} - \mathscr{P}_\mathcal{M}\left(\boldsymbol{a}\right)\right\rVert =\min\limits_{\boldsymbol{x}\in \mathcal{M}}\left\lVert \boldsymbol{a} - \boldsymbol{x} \right\rVert $。
+\zhu[计算正交投影的方法]{
+    （1）直接计算。
+    
+    \quad\quad 设 $\{\boldsymbol{q}_i\}_{i=1}^r$ 是 $\mathcal{M}$ 的一组标准正交基\com 对任意 $\boldsymbol{a}\in\mathbb{R}^n$\com 容易验证 
+    $$\mathscr{P}_\mathcal{M}\left(\boldsymbol{a}\right)=
+    \left(\neiji{q}{a}{1}{}\right)\boldsymbol{q}_{1}+\left(\neiji{q}{a}{2}{}\right)\boldsymbol{q}_{2}+\cdots+\left(\neiji{q}{a}{r}{}\right)\boldsymbol{q}_{r}$$
+    （2）矩阵乘法。
+
+    \quad\quad 令$Q_{r}=\begin{bmatrix}
+        \boldsymbol{q}_1 & \boldsymbol{q}_2 & \cdots & \boldsymbol{q}_r
+    \end{bmatrix}$（容易看出其为列正交矩阵）\com 则
+    \begin{equation*}
+        \begin{aligned}
+                \mathscr{P}_\mathcal{M}\left(\boldsymbol{a}\right)
+                &=\neiji{q}{a}{1}{}\boldsymbol{q}_{1}+\neiji{q}{a}{2}{}\boldsymbol{q}_{2}+\cdots+\neiji{q}{a}{r}{}\boldsymbol{q}_{r}
+                =\boldsymbol{q}_{1}\neiji{q}{a}{1}{}+\boldsymbol{q}_{2}\neiji{q}{a}{2}{}+\cdots+\boldsymbol{q}_{r}\neiji{q}{a}{r}{}\\
+                &=\begin{bmatrix}\boldsymbol{q}_1&\boldsymbol{q}_2&\cdots&\boldsymbol{q}_r\end{bmatrix} \begin{bmatrix}\boldsymbol{q}_1^\mathrm{T}\\\boldsymbol{q}_2^\mathrm{T}\\\vdots\\\boldsymbol{q}_r^\mathrm{T}\end{bmatrix}\boldsymbol{a}
+                =Q_{r}Q_{r}^{\mathrm{T}}\boldsymbol{a}
+        \end{aligned}
+    \end{equation*}
+    因此正交投影 $\mathscr{P}_\mathcal{M}$ 的表示矩阵就是 $Q_rQ_r^\mathrm{T}$\com 记为 $P_\mathcal{M}$。
+}
+\de[正交投影矩阵]{
+    给定矩阵$A$\com 其列空间上的正交投影的表示矩阵$P_{\mathcal{R}(A)}$称为关于$A$的\tboba{正交投影矩阵}\com 简记为$\mboba{P_A}$。
+}
+\di[正交投影矩阵的刻画 \hfill p.154]{
+    给定$n$阶方阵$P$\com 则$P$是正交投影矩阵\com 当且仅当$P^2=P$（\tbome{等幂性}）且$P^\mathrm{T}=P$（\tbome{对称性}）。
+}
+\subsection{最小二乘方法}
+\label{最小二乘问题}
+\de[最小二乘解]{
+    给定$m \times n$矩阵$A$和向量$\boldsymbol{b}\in \R^m$\com 若存在$\hat{\boldsymbol{x}} \in \R^n $\com 使得$\left\lVert \boldsymbol{b} - A\hat{\boldsymbol{x}}  \right\rVert = \min\limits_{\boldsymbol{x}\in \R^n}\left\lVert \boldsymbol{b} - A\boldsymbol{x} \right\rVert $\com 则称$\hat{\boldsymbol{x}}$为线性方程组$A\boldsymbol{x}=\boldsymbol{b}$的\tboba{最小二乘解}。
+}
+\di[最小二乘解的确定]{
+    $\hat{\boldsymbol{x}}$为$A\boldsymbol{x}=\boldsymbol{b}$的最小二乘解,~当且仅当$A\hat{\boldsymbol{x}}$是$\boldsymbol{b}$在$\mathcal{R}(A)$上的正交投影,~即$A\hat{\boldsymbol{x}}=\mathscr{P}_{\mathcal{R}(A)}(\boldsymbol{b})=P_A\boldsymbol{b}$。
+}
+\subsubsection[正交化方法]{正交化方法 \hfill p.157}
+不妨设$A$列满秩\com 其QR分解为$A=QR$\com 其中$Q^\mathrm{T}Q=I$\com $R$可逆。那么\com $\mbome{R\hat{x} =Q^\mathrm{T}b}$~\tbome{一定有解}\com 这个解就是$A\boldsymbol{x}=\boldsymbol{b}$的最小二乘解。
+\begin{proofs}
+    由$R$可逆,~$R\boldsymbol{x} =Q^\mathrm{T}\boldsymbol{b}$有解是显然的,~其解为$\hat{\boldsymbol{x}}=R^{-1}Q^\mathrm{T}\boldsymbol{b}$,~于是$A\hat{\boldsymbol{x}}=AR^{-1}Q^\mathrm{T}\boldsymbol{b}=QRR^{-1}Q^\mathrm{T}\boldsymbol{b}=QQ^\mathrm{T}\boldsymbol{b}$。QR分解中$Q$的列向量组成$\mathcal{R}(A)$的一组标准正交基\com 则$QQ^\mathrm{T}=P_A$\com 即$A\hat{\boldsymbol{x}}=P_A\boldsymbol{b}$\com 故$\hat{\boldsymbol{x}}$为$A\boldsymbol{x}=\boldsymbol{b}$的最小二乘解。
+\end{proofs}
+
+\subsubsection[正则化方法]{正则化方法 \page{157}}
+断言：$\mbome{A^\mathrm{T}A\hat{x} =A^\mathrm{T}b}$~\tbome{一定有解}\com 这个解就是$A\boldsymbol{x}=\boldsymbol{b}$的最小二乘解。
+\begin{proofs}
+    对任意向量$\boldsymbol{b}$\com 记其在 $\mathcal{R}(A)$ 上的正交投影为 $A\boldsymbol{x}$ \com 则 $\boldsymbol{b}-A\boldsymbol{x} \perp \mathcal{R}(A)$\com 因此 $\boldsymbol{b}-A\boldsymbol{x} \in \mathcal{R}(A)^\perp = \mathcal{N}(A^\mathrm{T})$\com 即 $A^{\mathrm{T} }( \boldsymbol{b}- A\boldsymbol{x}) = \mathbf{0} $\com 于是 $A^{\mathrm{T}}A\boldsymbol{x}=A^{\mathrm{T}}\boldsymbol{b}$。考虑这个线性方程组\com 由$\mathcal{R} ( A^{\mathrm{T} }A) = \mathcal{R} ( A^{\mathrm{T} }) $\com 知$A^{\mathrm{T} }\boldsymbol{b}\in \mathcal{R} ( A^{\mathrm{T} }A) $\com 这说明 $A^{\mathrm{T}}A\boldsymbol{x}=A^{\mathrm{T}}\boldsymbol{b}$ 有解\com 解出的就是$A\boldsymbol{x}=\boldsymbol{b}$的最小二乘解。
+\end{proofs}
+方程$A^\mathrm{T}A\boldsymbol{x}=A^\mathrm{T}b$称为$A\boldsymbol{x}=\boldsymbol{b}$的\tboba{法方程}。
+如果 $A^\mathrm{T}A$ 可逆（$A^{\mathrm{T}}A$ 可逆当且仅当 $A$ 列满秩）\com 那么法方程有唯一解 $\hat{\boldsymbol{x}}=(A^\mathrm{T}A)^{-1}A^\mathrm{T}\boldsymbol{b}$\com 于是 $\boldsymbol{b}$ 在 $\mathcal{R}(A)$ 上的正交投影为
+$$A\hat{\boldsymbol{x}}=A(A^{\mathrm{T}}A)^{-1}A^{\mathrm{T}}\boldsymbol{b}$$
+这意味着\com 关于 $A$ 的正交投影矩阵是
+$$P_{A}=A\left(A^\mathrm{T}A\right)^{-1}A^\mathrm{T}$$
+
+特别地\com 如果 $A$ 是列正交矩阵\com 则 $A^{\mathrm{T}}A=I_{r}$\com $P_{A}=AA^{\mathrm{T}}$。
+注意\com $A^{\mathrm{T}}A$ 可逆\com 并不意味着 $A^{\mathrm{T}}$ 和 $A$ 可逆\com 事实上\com 两个矩阵都不一定是方阵\com 对 $A^\mathrm{T}A$ 不可逆的情形\com 现在还无法将正交投影矩阵写成 $A$ 的表达式\com 但正交投影矩阵仍能用前述方法计算。事实上\com 可以先求出 $\mathcal{R}(A)$ 的一组基\com 并列排成矩阵 $B$\com 则 $B$ 列满秩\com 且 $\mathcal{R}(B)=\mathcal{R}(A)$\com 因此$P_A=P_B=B(B^\mathrm{T}B)^{-1}B^\mathrm{T}$。
+
+\subsubsection{广义逆方法}
+任意$m \times n$矩阵$A$的广义逆$A^+$定义见第~\pageref{广义逆}~页定义~\ref{广义逆}。由于 $AA^+\boldsymbol{b}$ 是 $\boldsymbol{b}$ 在 $\mathcal{R}(A)$ 上的正交投影\com 因此$A^+\boldsymbol{b}$ 是一个最小二乘解。事实上\com $A^+\boldsymbol{b}$ 也是 $A\boldsymbol{x}=\boldsymbol{b}$ 的最小二乘解中长度最小的解。
+\begin{proofs}
+    记$\boldsymbol{b}$在$\mathcal{R}(A)$上的正交投影为$\hat{\boldsymbol{b}}$（我们知道$\hat{\boldsymbol{b}}=AA^+\boldsymbol{b}$）\com 则求原方程组的最小二乘解即是求方程组$A\boldsymbol{x} = \hat{\boldsymbol{b}}$的解。由上面证明\com 长度最小的解为$A^+\hat{\boldsymbol{b}}=A^+ AA^+\boldsymbol{b}= A^+\boldsymbol{b}$。
+\end{proofs}
+\newpage
+\section[行列式]{行列式\page{162}}
+\subsection[行列式函数]{行列式函数\page{165}}
+\de[行列式函数]{
+    定义在全体 $n$ 阶方阵上的函数 $\delta$\com 如果满足如下性质：\\
+    （1）\tboba{列多线性性}： $\delta$对每个列向量都线性\com 即对任意 $i=1,~2,~\cdots,~n$\com 都有
+    $$
+    \delta \left(\begin{bmatrix}
+        \cdots & k\boldsymbol{a}_i+k^{\prime}\boldsymbol{a}_i^{\prime} & \cdots 
+    \end{bmatrix}\right)=k\delta\left(\begin{bmatrix}
+        \cdots & \boldsymbol{a}_i & \cdots
+    \end{bmatrix}\right)+k^{\prime}\delta\left(\begin{bmatrix}
+        \cdots & \boldsymbol{a}_i^{\prime} & \cdots
+    \end{bmatrix}\right)
+    $$
+    （2）\tboba{列反对称性}：「互换两列\com 差个负号」\com 即对任意 $i\com j=1,~2,~\cdots,~n$\com 且 $i<j$\com 都有
+    $$
+    \delta\left(\begin{bmatrix}
+        \cdots & \boldsymbol{a}_i& \cdots&\boldsymbol{a}_j&\cdots
+    \end{bmatrix}\right)=-\delta\left(\begin{bmatrix}
+        \cdots&\boldsymbol{a}_j&\cdots&\boldsymbol{a}_i&\cdots
+    \end{bmatrix}\right)
+    $$
+    （3）\tboba{归一性}：$\delta\left(I_{n}\right)=1$；\\
+    则 $\delta$ 就称为一个 $n$ 阶\tboba{行列式函数}。
+}
+所谓「定义在全体 $n$ 阶方阵上」\com $\delta$的定义域既可以是$M_{n \times n}(\R)$\com 也可以是$M_{n \times n}(\mathbb{C})$；对应地\com 其值域可以是$\R$\com 也可以扩展到$\mathbb{C}$。
+
+我们将证明 $n$ 阶方阵的行列式函数存在且唯一\com 这个唯一的行列式函数在矩阵 $A$ 的值称为 $A$ 的\tboba{行列式}\com 记为$\det (A) $ 或 $|A|$。某个$n$ 阶方阵的行列式可以直接称为一个$\mboba{n}$~\tboba{阶行列式}。
+
+\di[行列式的一些性质]{
+    \hang（1）若$A$有两列相等\com 则$\det (A)=0$；进一步\com 若$A$~\tbome{不可逆}\com 则$\det (A)=0$。特别地\com 若$A$有某列（行）全为$0$\com 则$\det (A)=0$。
+
+    （2）\tbome{初等矩阵的行列式}均不为零\com 且$\det(P_{ij})=-1$\com $\det(E_{ii;k})=k$\com $\det(E_{ij;k})=1$。
+
+    \hang（3）\tbome{初等列变换}中\com $\det(AP_{ij})=-\det(A)$\com $\det(AE_{ii;k})=k\det(A)$\com $\det(AE_{ij;k})=\det(A)$\com 也即有对任意$n$阶初等矩阵$E$\com $\det(AE)=\det(A)\det(E)$。
+    
+    （4）\tbome{行列式的可乘性}\quad 总有$\mbome{\det(AB)=\det(A)\det(B)}$。
+
+    \hang（5）矩阵\tbome{转置}不改变行列式\com 即$\det(A^\mathrm{T})=\det(A)$。由此\com 初等列变换对行列式的影响可以推广到\tbome{初等行变换}中\com 即$\det(P_{ij}A)=-\det(A)$\com $\det(E_{ii;k}A)=k\det(A)$\com $\det(E_{ij;k}A)=\det(A)$。
+}
+由矩阵转置不改变行列式的性质\com 知行列式函数同时也有行多线性性和行反对称性。类似于上面的定义~\ref{行列式函数}\com 可以用行多线性性、行反对称性和归一性定义行列式函数。
+\di[一些特殊的行列式的计算]{
+    \hang（1）\tbome{对角矩阵}的行列式是对角元素的乘积\com 即$\det(\mathrm{diag}(d_{i}))=\prod\limits_i d_i$；\tbome{分块对角矩阵}的行列式是对角方块的行列式乘积\com 即$\det \left(\begin{bmatrix} A & \\ & B \end{bmatrix}\right)=\det(A)\det(B)$；
+
+    \hang（2）\tbome{上三角矩阵}的行列式是对角元素的乘积\com 即$\det(A)=\prod\limits_i a_{ii}$；\tbome{分块上三角方阵}的行列式是对角方块的行列式乘积\com 即$\det \left(\begin{bmatrix} A & X \\ & B \end{bmatrix}\right)=\det(A)\det(B)$；
+
+    （3）\tbome{正交矩阵}的行列式为$1$或$-1$；
+
+    （4）可逆矩阵的\tbome{逆}的行列式是其行列式的逆\com 即$\det(A^{-1})=\det(A)^{-1}$。
+}
+\begin{example}
+    设多项式$p(x)=k_3x^3+k_2x^2+k_1x+k_0$经过四个横坐标两两不同的点$(\lambda_i\com \mu_i)$\com $i=1\com 2\com 3\com 4$\com 这样的多项式存在吗；如果存在\com 有几个呢？
+\end{example}
+\begin{solution}
+    代入得到方程组
+    $$
+    \left\{\begin{array}{l}
+        k_3\lambda_1^3+k_2\lambda_1^2+k_1\lambda_1+k_0=\mu_1\com \\
+        k_3\lambda_2^3+k_2\lambda_2^2+k_1\lambda_2+k_0=\mu_2\com \\
+        k_3\lambda_3^3+k_2\lambda_3^2+k_1\lambda_3+k_0=\mu_3\com \\
+        k_3\lambda_4^3+k_2\lambda_4^2+k_1\lambda_4+k_0=\mu_4\com 
+    \end{array}\right.\quad\text{或}\quad\begin{bmatrix}
+        1&\lambda_1&\lambda_1^2&\lambda_1^3\\
+        1&\lambda_2&\lambda_2^2&\lambda_2^3\\
+        1&\lambda_3&\lambda_3^2&\lambda_3^3\\
+        1&\lambda_4&\lambda_4^2&\lambda_4^3
+    \end{bmatrix}\begin{bmatrix}
+        k_0\\k_1\\k_2\\k_3
+    \end{bmatrix}=\begin{bmatrix}\mu_1\\\mu_2\\\mu_3\\\mu_4\end{bmatrix}
+    $$
+    下面来说明系数矩阵 $A$ 可逆\com 只需说明 $\det(A)\neq 0$\com 进行计算
+    \begin{align*}
+        \begin{vmatrix}
+            1&\lambda_1&\lambda_1^2&\lambda_1^3\\
+            1&\lambda_2&\lambda_2^2&\lambda_2^3\\
+            1&\lambda_3&\lambda_3^2&\lambda_3^3\\
+            1&\lambda_4&\lambda_4^2&\lambda_4^3
+        \end{vmatrix}
+        &=\begin{vmatrix}
+            1&0&0&0\\
+            1&\lambda_2-\lambda_1&\lambda_2^2-\lambda_2\lambda_1&\lambda_2^3-\lambda_2^2\lambda_1\\
+            1&\lambda_3-\lambda_1&\lambda_3^2-\lambda_3\lambda_1&\lambda_3^3-\lambda_3^2\lambda_1\\
+            1&\lambda_4-\lambda_1&\lambda_4^2-\lambda_4\lambda_1&\lambda_4^3-\lambda_4^2\lambda_1
+        \end{vmatrix}  \\
+        &=\begin{vmatrix}
+            \lambda_2-\lambda_1&\lambda_2(\lambda_2-\lambda_1)&\lambda_2^2(\lambda_2-\lambda_1)\\
+            \lambda_3-\lambda_1&\lambda_3(\lambda_3-\lambda_1)&\lambda_3^2(\lambda_3-\lambda_1)\\
+            \lambda_4-\lambda_1&\lambda_4(\lambda_4-\lambda_1)&\lambda_4^2(\lambda_4-\lambda_1)
+        \end{vmatrix} \\
+        &=(\lambda_2-\lambda_1)(\lambda_3-\lambda_1)(\lambda_4-\lambda_1)\begin{vmatrix}
+            1&\lambda_2&\lambda_2^2\\
+            1&\lambda_3&\lambda_3^2\\
+            1&\lambda_4&\lambda_4^2
+        \end{vmatrix}
+    \end{align*}
+    类似地\com 
+    \begin{align*}
+        &\begin{vmatrix}
+            1&\lambda_2&\lambda_2^2\\
+            1&\lambda_3&\lambda_3^2\\
+            1&\lambda_4&\lambda_4^2
+        \end{vmatrix}=\begin{vmatrix}
+            1&0&0\\
+            1&\lambda_3-\lambda_2&\lambda_3^2-\lambda_3\lambda_2\\
+            1&\lambda_4-\lambda_2&\lambda_4^2-\lambda_4\lambda_2
+        \end{vmatrix}
+        =\begin{vmatrix}
+            \lambda_3-\lambda_2&\lambda_3(\lambda_3-\lambda_2)\\
+            \lambda_4-\lambda_2&\lambda_4(\lambda_4-\lambda_2)
+        \end{vmatrix}
+        =(\lambda_3-\lambda_2)(\lambda_4-\lambda_2)\begin{vmatrix}
+            1&\lambda_3\\
+            1&\lambda_4
+        \end{vmatrix}\\
+        &\begin{vmatrix}
+            1&\lambda_3\\
+            1&\lambda_4
+        \end{vmatrix}=\begin{vmatrix}
+            1&0\\
+            1&\lambda_4-\lambda_3
+        \end{vmatrix}
+        =(\lambda_4-\lambda_3)
+    \end{align*}
+    即知
+    $$
+    \begin{vmatrix}
+        1&\lambda_1&\lambda_1^2&\lambda_1^3\\
+        1&\lambda_2&\lambda_2^2&\lambda_2^3\\
+        1&\lambda_3&\lambda_3^2&\lambda_3^3\\
+        1&\lambda_4&\lambda_4^2&\lambda_4^3
+    \end{vmatrix}=(\lambda_2-\lambda_1)(\lambda_3-\lambda_1)(\lambda_4-\lambda_1)(\lambda_3-\lambda_2)(\lambda_4-\lambda_2)(\lambda_4-\lambda_3)
+    $$
+    由横坐标两两不同\com 知$\begin{vmatrix}
+        1&\lambda_1&\lambda_1^2&\lambda_1^3\\
+        1&\lambda_2&\lambda_2^2&\lambda_2^3\\
+        1&\lambda_3&\lambda_3^2&\lambda_3^3\\
+        1&\lambda_4&\lambda_4^2&\lambda_4^3
+    \end{vmatrix}\neq 0$\com 即系数矩阵可逆\com 方程组有唯一解\com 对应的三次多项式曲线被唯一确定。
+\end{solution}
+按上面过程\com 由数学归纳法可知\com 
+$$\begin{vmatrix}
+    1&\lambda_1&\lambda_1^2&\cdots&\lambda_1^{n-1}\\
+    1&\lambda_2&\lambda_2^2&\cdots&\lambda_2^{n-1}\\
+    1&\lambda_3&\lambda_3^2&\cdots&\lambda_3^{n-1}\\
+    \vdots&\vdots&\vdots&\ddots&\vdots\\
+    1&\lambda_n&\lambda_n^2&\cdots&\lambda_n^{n-1}
+\end{vmatrix}=\prod\limits_{1\le j<i\le n}(\lambda_i-\lambda_j)$$
+
+形如$\begin{bmatrix}
+    1&\lambda_1&\lambda_1^2&\cdots&\lambda_1^{n-1}\\
+    1&\lambda_2&\lambda_2^2&\cdots&\lambda_2^{n-1}\\
+    1&\lambda_3&\lambda_3^2&\cdots&\lambda_3^{n-1}\\
+    \vdots&\vdots&\vdots&\ddots&\vdots\\
+    1&\lambda_n&\lambda_n^2&\cdots&\lambda_n^{n-1}
+\end{bmatrix}$的矩阵称为~\tboba{Vandermonde矩阵}\com 当$\lambda_i$互不相等时其可逆。
+
+\subsection{行列式的展开式}
+\de[代数余子式]{
+    给定$n$阶方阵$A$\com $n \ge 2$\com 定义
+
+    （1）$A_{ij}=A\binom{i}{j}$ 为$A$中划去第$i$行和第$j$列得到的$n-1$阶方阵\com 称为元素$a_{ij}$的\tboba{余子阵}；
+
+    （2）$M_{ij}:=\det (A_{ij})$\com 称为元素$a_{ij}$的\textbf{余子式}；
+
+    （3）$C_{ij}:=(-1)^{i+j}M_{ij}$\com 称为元素$a_{ij}$的\tboba{代数余子式}。
+}
+\di[行列式的展开]{
+    $n$阶方阵$A=\begin{bmatrix}
+        a_{ij}
+    \end{bmatrix}_{n \times n}$（$n \ge 2$）的行列式可
+
+    （1）按第$i$行展开：$\det (A)=\sum\limits_{j=1}^n a_{ij}C_{ij}=\sum\limits_{j=1}^n (-1)^{i+j}a_{ij}\det(A_{ij})$；
+    
+    （2）按第$j$列展开：$\det (A)=\sum\limits_{i=1}^n a_{ij}C_{ij}=\sum\limits_{i=1}^n (-1)^{i+j}a_{ij}\det(A_{ij})$。
+}
+\di[]{
+    \hang（1）令$n$阶方阵$A=\begin{bmatrix}
+        \boldsymbol{a}_{1} & \boldsymbol{a}_{2} & \cdots & \boldsymbol{a}_{n}
+    \end{bmatrix}$（$n \ge 2$）\com 其第$j$列元素的代数余子式组成向量$\boldsymbol{c}_j=\begin{bmatrix}
+        C_{1j} \\ C_{2j} \\ \vdots \\ C_{nj}
+    \end{bmatrix}$\com 则$\neiji{a}{c}{j'}{j}=\left\{ \begin{NiceArray}{ll}
+        0\com &  j'\neq j\com \\ \det (A)\com & j'=j\text{；}
+    \end{NiceArray} \right.$
+
+    \hang（2）令$n$阶方阵$A=\begin{bmatrix}
+        a_{ij}
+    \end{bmatrix}_{n \times n}$（$n \ge 2$）\com 其元素$a_{ij}$的代数余子式组成矩阵$C=\begin{bmatrix}
+        C_{ij}
+    \end{bmatrix}$\com 则$CA^{\mathrm{T}}=\det(A)I_n$。
+}
+\begin{corollary}
+    \tbome{逆矩阵公式} \quad $A^{-1}=\dfrac{1}{\det (A)} C^\mathrm{T}$。
+\end{corollary}
+矩阵$C=\begin{bmatrix}
+    C_{ij}
+\end{bmatrix}$称为\tboba{补矩阵}\com 过去也称为\textbf{伴随矩阵}。若$A=\begin{bmatrix}
+    a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{bmatrix}$\com 则可直接写出$A^{-1}=\dfrac{1}{\det(A)}\begin{bmatrix}
+    a_{22} & -a_{12} \\ -a_{21} & a_{11}
+\end{bmatrix}$。
+\begin{corollary}
+    \textbf{\textup{Cramer}法则} \quad 给定$n$阶方阵$A$\com 线性方程组$A\boldsymbol{x}=\boldsymbol{b}$有唯一解当且仅当$\det(A) \neq 0$\com 且有唯一解时唯一解为$\boldsymbol{x}=\begin{bmatrix}
+        x_1 & x_2 & \cdots & x_n
+    \end{bmatrix}^\mathrm{T}$\com 其中
+    $$x_j = \frac{\det (B_j)}{\det (A)} = \frac{\begin{vmatrix}
+        \boldsymbol{a}_1 & \boldsymbol{a}_2 & \cdots & \boldsymbol{a}_{j-1} & {\colors{meihong} \boldsymbol{b}} & \boldsymbol{a}_{j+1} & \cdots & \boldsymbol{a}_n
+    \end{vmatrix}}{\det (A)}$$
+\end{corollary}
+\begin{definition}
+    \textbf{排列}\quad 若映射$\sigma:~\{1,~2,~\cdots,~n\}~\rightarrow~\{1,~2,~\cdots,~n\}$是一个双射\com 则称其为$1,~2,~\cdots,~n$的一个\tboba{排列}\com 记作将排列的原像与像对应排成的矩阵$\begin{pmatrix}
+        1 & 2 & \cdots & n \\
+        \sigma_1 & \sigma_2 & \cdots & \sigma_n
+    \end{pmatrix}$。
+
+    对调排列中两个数的像\com 称为对原来排列的一次\textbf{对换}。其可以看作对排列的变换\com 也可以看作是一个排列。
+
+    如果排列$\sigma$可以写成奇数个对换的复合\com 称其为\textbf{奇排列}；如果排列$\sigma$可以写成偶数个对换的复合\com 称其为\textbf{偶排列}。定义\tboba{排列的符号}为$\mathrm{sign}(\sigma)=\left\{ \begin{NiceArray}{ll}
+        -1\com &  \sigma~\text{为奇排列}\com \\ 1\com & \sigma~\text{为偶排列。}
+    \end{NiceArray} \right.$
+\end{definition}
+\di[行列式的完全展开]{
+    记排列$\sigma = \begin{pmatrix}
+        1 & 2 & \cdots & n \\
+        \sigma_1 & \sigma_2 & \cdots & \sigma_n
+    \end{pmatrix}$\com $n$阶方阵$A=\begin{bmatrix}
+        a_{ij}
+    \end{bmatrix}_{n \times n}$（$n \ge 2$）\com 则
+    $$
+        \det(A) = \sum_{\sigma}\mathrm{sign}(\sigma)\prod_{i=1}^{n}a_{\sigma_i i} \quad\text{或}\quad
+        \det(A) = \sum_{\sigma}\mathrm{sign}(\sigma)\prod_{i=1}^{n}a_{i\sigma_i} 
+    $$
+}
+\subsection{行列式计算综合}
+\subsubsection{加边}
+\begin{example}
+    计算$\begin{vmatrix}
+        c&a_2&a_3&\cdots&a_{n-1}&a_n\\
+        a_1&c&a_3&\cdots&a_{n-1}&a_n\\
+        a_1&a_2&c&\cdots&a_{n-1}&a_n\\
+        \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+        a_1&a_2&a_3&\cdots&c&a_n\\
+        a_1&a_2&a_3&\cdots&a_{n-1}&c
+    \end{vmatrix}$。
+\end{example}
+\begin{solution}
+    \newcommand{\fu}[1]{\dfrac{a_{#1}}{c-a_{#1}}}
+    记
+    \begin{align*}
+        f(c)&=\begin{vmatrix}
+            c&a_2&a_3&\cdots&a_{n-1}&a_n\\
+            a_1&c&a_3&\cdots&a_{n-1}&a_n\\
+            a_1&a_2&c&\cdots&a_{n-1}&a_n\\
+            \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+            a_1&a_2&a_3&\cdots&c&a_n\\
+            a_1&a_2&a_3&\cdots&a_{n-1}&c
+        \end{vmatrix}
+        = \begin{vmatrix}
+            1&-a_1&-a_2&-a_3&\cdots&-a_{n-1}&-a_n\\
+            0&c&a_2&a_3&\cdots&a_{n-1}&a_n\\
+            0&a_1&c&a_3&\cdots&a_{n-1}&a_n\\
+            0&a_1&a_2&c&\cdots&a_{n-1}&a_n\\
+            \vdots&\vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+            0&a_1&a_2&a_3&\cdots&c&a_n\\
+            0&a_1&a_2&a_3&\cdots&a_{n-1}&c
+        \end{vmatrix}\\
+        & = \begin{vmatrix}
+            1&-a_1&-a_2&\cdots&-a_n\\
+            1&c-a_1&&&\\
+            1&&c-a_2&&\\
+            \vdots&&&\ddots&\\
+            1&&&&c-a_n
+        \end{vmatrix}
+        \xlongequal{\text{假设}~c \neq a_i} \prod\limits_{i=1}^n (c-a_{i})\begin{vmatrix}
+            1&-\fu{1}&-\fu{2}&\cdots&-\fu{n}\\
+            1&1&&&\\
+            1&&1&&\\
+            \vdots&&&\ddots&\\
+            1&&&&1
+        \end{vmatrix}\\
+        &=\prod\limits_{i=1}^n (c-a_{i})\begin{vmatrix}
+            1+\sum\limits_{i=1}^n \fu{i}&-\fu{1}&-\fu{2}&\cdots&-\fu{n}\\
+            0&1&&&\\
+            0&&1&&\\
+            \vdots&&&\ddots&\\
+            0&&&&1
+        \end{vmatrix}\\
+        &=\prod\limits_{i=1}^n (c-a_{i})+\prod\limits_{i=1}^n (c-a_{i})\sum\limits_{i=1}^n \frac{a_{i}}{c-a_{i}}\triangleq g(c)
+    \end{align*}
+    由$f(c)$和$g(c)$均为关于$c$的$n$次多项式\com $f(c)=g(c)$对无穷个$c$都成立\com 则$f(c)=g(c)$对任意$c \in \R$都成立。
+\end{solution}
+\subsubsection{拆边}
+\begin{example}
+    计算$\begin{vmatrix}
+        a_1&x&x&\cdots&x&x\\
+        y&a_2&x&\cdots&x&x\\
+        y&y&a_3&\cdots&x&x\\
+        \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+        y&y&y&\cdots&a_{n-1}&x\\
+        y&y&y&\cdots&y&a_n
+    \end{vmatrix}$。
+\end{example}
+\begin{solution}
+    令$D(n)=\begin{vNiceMatrix}
+            \CodeBefore
+                \columncolor{meihong!25!white}{6}
+            \Body
+            a_1&x&x&\cdots&x&x\\
+            y&a_2&x&\cdots&x&x\\
+            y&y&a_3&\cdots&x&x\\
+            \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+            y&y&y&\cdots&a_{n-1}&x\\
+            y&y&y&\cdots&y&a_n
+        \end{vNiceMatrix}$\com 则由
+    \begin{align*}
+        D(n) &= \begin{vNiceMatrix}
+            \CodeBefore
+                \columncolor{meihong!25!white}{6}
+            \Body
+            a_1&x&x&\cdots&x&x\\
+            y&a_2&x&\cdots&x&x\\
+            y&y&a_3&\cdots&x&x\\
+            \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+            y&y&y&\cdots&a_{n-1}&x\\
+            y&y&y&\cdots&y&x
+        \end{vNiceMatrix} + \begin{vNiceMatrix}
+            \CodeBefore
+                \columncolor{meihong!25!white}{6}
+                \rectanglecolor{bali!25!white}{1-1}{5-5}
+            \Body
+            a_1&x&x&\cdots&x&0\\
+            y&a_2&x&\cdots&x&0\\
+            y&y&a_3&\cdots&x&0\\
+            \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+            y&y&y&\cdots&a_{n-1}&0\\
+            y&y&y&\cdots&y&a_n-x
+        \end{vNiceMatrix}\\
+        &=\begin{vNiceMatrix}
+            \CodeBefore
+                \rectanglecolor{bali!25!white}{2-1}{6-5}
+            \Body
+            a_1&x&x&\cdots&x&x\\
+            y-a_1&a_2-x& & & &0\\
+            &y-a_2&a_3-x&   & &0\\
+            &   &\ddots&\ddots&    &\vdots\\
+            &   &   &y-a_{n-2}&a_{n-1}-x&0\\
+            &   &   &   &y-a_{n-1}&0
+        \end{vNiceMatrix} + (a_n-x)\begin{vmatrix}
+            a_1&x&x&\cdots&x\\
+            y&a_2&x&\cdots&x\\
+            y&y&a_3&\cdots&x\\
+            \vdots&\vdots&\vdots&\ddots&\vdots\\
+            y&y&y&\cdots&a_{n-1}
+        \end{vmatrix}\\
+        &=(-1)^{n+1}x\begin{vmatrix}
+            y-a_1&a_2-x& & & \\
+            &y-a_2&a_3-x&   & \\
+            &   &\ddots&\ddots& \\
+            &   &   &y-a_{n-2}&a_{n-1}-x\\
+            &   &   &   &y-a_{n-1}
+        \end{vmatrix} + (a_n-x)D(n-1)\\
+        &=(a_n-x)D(n-1)+(-1)^{n+1}x\prod_{i=1}^{n-1}(y-a_{i})u7
+    \end{align*}
+    递推可得。
+\end{solution}
+\newpage
+\subsubsection{递推}
+\begin{example}
+    求\textbf{三对角矩阵}的行列式。三对角矩阵是形如$\begin{bmatrix}
+        a & b \\
+        c & a & \ddots \\
+          & \ddots & \ddots & b \\
+         & & c & a
+    \end{bmatrix}$的矩阵\com 其中$bc \neq 0$。
+\end{example}
+\begin{solution}
+    记$A_n=\begin{bmatrix}
+        a & b \\
+        c & a & \ddots \\
+          & \ddots & \ddots & b \\
+         & & c & a
+    \end{bmatrix}_{n \times n}$\com 则$|A_n|=a|A_{n-1}|-b(c|A_{n-2}|) $\com 即
+    \begin{equation*}
+        \begin{bmatrix}
+            |A_n| \\ |A_{n-1}|
+        \end{bmatrix}=\begin{bmatrix}
+            a & -bc \\ 1 & 0
+        \end{bmatrix}\begin{bmatrix}
+            |A_{n-1}| \\ |A_{n-2}|
+        \end{bmatrix} \qedhere
+    \end{equation*}
+\end{solution}
+\newpage
+\section{特征值、相似与矩阵对角化}
+\subsection{相似与特征值}
+\de[矩阵的相似]{
+    给定方阵$A$与$B$\com 若存在可逆矩阵$P$使得$P^{-1}AP=B$\com 则称$A$与$B$~\tboba{相似}。
+}
+相似的方阵有利于求解包含形如$A^n$矩阵的方程\com 因为我们有如下定理：
+\di[]{
+    给定方阵$A$与$B$\com 若$A$与$B$相似\com 即存在可逆矩阵$P$使得$P^{-1}AP=B$\com 则$P^{-1}A^nP=B^n$。
+}
+\noindent 对角矩阵的方幂容易求出：$\mathrm{diag}(d_i)^n=\mathrm{diag}(d_i^n)$。对想求解$A^n$的矩阵$A$\com 我们期望找到对角矩阵$\mathrm{diag}(\lambda_i)$和可逆矩阵$P$\com 使得
+$$P^{-1}AP=\mathrm{diag}(\lambda_i) 
+\Leftrightarrow AP=P\mathrm{diag}(\lambda_i) 
+\xLongleftrightarrow{P=\big[\boldsymbol{x}_i\big]} A\big[\boldsymbol{x}_i\big]=\big[\boldsymbol{x}_i\big]\mathrm{diag}(\lambda_i) 
+\Leftrightarrow A\boldsymbol{x}_i=\lambda_i \boldsymbol{x}_i$$
+\de[谱分解]{
+    给定方阵$A$\com 若存在可逆矩阵$X$\com 使得$XAX^{-1}=\varLambda$为对角矩阵\com 则称$A$在$\C$上\tboba{可对角化}\com 称$X$~\tboba{对角化}~$A$\com 分解$A=X\varLambda X^{-1}$称为$A$的\tboba{谱分解}。
+}
+引入下面概念后\com 若$A$可对角化\com 则由上面分析知与$A$相似的对角矩阵$\varLambda$的第$i$对角元和相似表达式$A=X\varLambda X^{-1}$中的可逆矩阵$X$的第$i$列向量即构成$A$的一个特征对。
+\de[特征值]{
+    给定$n$阶方阵 $A$\com 如果对$\lambda \in \mathbb{C}$\com 存在非零向量$\boldsymbol{x} \in \mathbb{C}^n$\com 使得$A\boldsymbol{x}=\lambda \boldsymbol{x}$\com 则称数$\lambda$为方阵$A$（在$\mathbb{C}$上）的一个\tboba{特征值}（又称\tboba{谱}）\com 而称非零向量$\boldsymbol{x}$为方阵$A$（在$\mathbb{C}$上）的一个属于特征值$\lambda$的\tboba{特征向量}。二元组$(\lambda\com \boldsymbol{x})$常称为方阵$A$的一个\tboba{特征对}。
+}
+特别地\com 对实方阵 $A$\com 如果特征对$(\lambda\com \boldsymbol{x})$满足$\lambda\in \R$\com $\boldsymbol{x} \in \R^n$\com 则分别称二者为$A$在$\mathbb{R}$上的\textbf{特征值}和\textbf{特征向量}\com 称该二元组为$A$在$\R$上的\textbf{特征对}。
+
+一定注意$\boldsymbol{0}$不是特征向量。
+
+\begin{definition}
+    给定$n$阶方阵 $A$\com $\det(\lambda I_n - A)$是关于$\lambda$的$n$次多项式\com 称为$A$的\tboba{特征多项式}。零空间$\mathcal{N}(\lambda_0 I_n - A)$称为$A$属于$\lambda_0$的\tboba{特征子空间}。
+\end{definition}
+\di[]{
+    特征值是特征多项式$\det(\lambda I_n - A)$在复数域内的根\com 属于特征值$\lambda_0$的特征向量是特征子空间$\mathcal{N}(\lambda_0 I_n - A)$中的非零向量。
+}
+\begin{proofs}
+    特征值是这样的$\lambda$：它使得方程组$A\boldsymbol{x} = \lambda \boldsymbol{x}$有非零解\com 即方程组$(A - \lambda I_n)\boldsymbol{x}=0$有非零解\com 于是$A - \lambda I_n$不可逆\com 即$\det(\lambda I_n - A)=0$。
+\end{proofs}
+
+
+\zhu[复数的引入]{
+    从此处开始\com 线性空间扩展到$\C^n$。此前的定义与性质在$\C^n$中基本都仍然有效\com 但需注意：
+
+    （1）线性相关的系数可以为复数\com 矩阵的秩仍然是线性无关列向量的个数\com 如$$\mathrm{rank}\left(\begin{bmatrix}
+        1 & \i \\ \i & -1
+    \end{bmatrix}\right) = 1$$
+
+    （2）内积不再具有正定性\com 进而$\mathrm{rank}(A^\mathrm{T}A)=\mathrm{rank}(A)$不再成立\com 在实数域上的证明过程只余$\mathcal{N}(A) \subseteq \mathcal{N}(A^\mathrm{T}A)$\com 即在复数域内$\mathrm{rank}(A^\mathrm{T}A) \le \mathrm{rank}(A)$；
+
+    （3）长度不能再定义为$\sqrt{\neiji{x}{x}{}{}}$\com 而定义为$\sqrt{\boldsymbol{x}^\mathrm{T}\overline{\boldsymbol{x}}}$\com 其中$\overline{\boldsymbol{x}}$为$\boldsymbol{x}$各分量取共轭得到的向量；
+
+    （4）正交矩阵不再有意义\com 取而代之的是~\textbf{\colors{qinglv} Hermite对称矩阵}~$A$（满足$\overline{A}^\mathrm{T}=A$）定义的\textbf{\colors{qinglv} 酉矩阵}~$U$（满足$\overline{U}^\mathrm{T}U=U\overline{U}^\mathrm{T}=I$）。
+
+    另外一种思路是将$\C^n$看作$\R^{2n}$。
+}
+\begin{example}
+    \renewcommand{\qedsymbol}{$\circledS$}
+    考虑旋转变换的表示矩阵$R_{\theta}=\begin{bmatrix}
+        \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta
+    \end{bmatrix}$。如果 $\theta \neq k\pi$\com 则任意非零向量在变换下的像一定不会与原向量共线\com 即对任意实数 $\lambda$\com $R_{\theta}x=\lambda x$ 都没有非零解。
+    
+    在复数域内\com 考虑求特征多项式的根\com 解方程
+    $$
+    0=\det(\lambda I_2-R_\theta)=\begin{vmatrix}\lambda-\cos\theta&\sin\theta\\-\sin\theta&\lambda-\cos\theta\end{vmatrix}=\lambda^2-2\cos\theta\lambda+1.
+    $$
+    有两复根 $\lambda_1 = \e^{\i \theta} = \cos \theta+ \i\sin\theta$\com $\lambda_2 = \e^{-\i\theta} = \cos \theta- \i\sin\theta$。\qed
+\end{example}
+\begin{example}
+    求$P=\begin{bmatrix}1&0\\0&1\\2&3\end{bmatrix}\left(\begin{bmatrix}1&0&2\\0&1&3\end{bmatrix}\begin{bmatrix}1&0\\0&1\\2&3\end{bmatrix}\right)^{-1}\begin{bmatrix}1&0&2\\0&1&3\end{bmatrix}$的特征多项式。
+\end{example}
+\begin{solution}
+    记$A=\begin{bmatrix}1&0\\0&1\\2&3\end{bmatrix}$\com 则$P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}$\com 于是$P$是关于$A$的正交投影矩阵。考虑方程$P\boldsymbol{x}=\lambda\boldsymbol{x}$\com 若$\boldsymbol{x} \in \mathcal{R}(A)$\com 则$\boldsymbol{x}$的投影$P\boldsymbol{x}=\boldsymbol{x}$\com 即有几何重数为2的特征值$\lambda=1$；若$\boldsymbol{x} \perp \mathcal{R}(A)$\com 则$\boldsymbol{x}$的投影$P\boldsymbol{x}=\boldsymbol{0}$\com 即有几何重数为1的特征值$\lambda=0$。故$P$的特征多项式为$(\lambda-1)^2\lambda=\lambda^3-2\lambda^2+\lambda$。
+\end{solution}
+\di{
+    设$A\com B$为$m \times n\com n \times m$矩阵\com 则$\lambda^n\det(\lambda I_m -AB)=\lambda^m \det(\lambda I_n -BA)$。
+}
+\begin{example}
+    求$A=\begin{bmatrix}
+        a & 1 & 1 & -1\\
+        1 & a & -1 & 1\\
+        1 & -1 & a & 1\\
+        -1 & 1 & 1 & a
+    \end{bmatrix}$的特征多项式。
+\end{example}
+\begin{solution}
+    注意到$A \big|_{a=-1}=\begin{bmatrix}
+        -1 & 1 & 1 & -1\\
+        1 & -1 & -1 & 1\\
+        1 & -1 & -1 & 1\\
+        -1 & 1 & 1 & -1
+    \end{bmatrix}=\begin{bmatrix}
+        1 \\ -1 \\ -1 \\ 1
+    \end{bmatrix}\begin{bmatrix}
+        -1 & 1 & 1 & -1
+    \end{bmatrix}$\com 则令$\boldsymbol{v}=\begin{bmatrix}
+        1 \\ -1 \\ -1 \\ 1
+    \end{bmatrix}$\com 则所求即
+    \begin{align*}
+        \det(\lambda I_4 - A) &= \det \big((\lambda-a-1) I_4 + \boldsymbol{v}\boldsymbol{v}^\mathrm{T}\big)\\
+        &= (\lambda-a-1)^3 \det (\lambda-a-1+\boldsymbol{v}^\mathrm{T}\boldsymbol{v})
+        = (\lambda-a-1)^3(\lambda-a+3) \qedhere
+    \end{align*}
+\end{solution}
+\subsection{特征值的特征与对角化的条件}
+\subsubsection{方阵可对角化的条件}
+\di[]{
+    同一方阵属于不同特征值的特征向量线性无关。
+}
+\de[特征值的重数]{
+    给定$n$阶方阵$A$。
+
+    （1）如果$\det(\lambda I_n - A) = \prod\limits_{i=1}^{r} (\lambda - \lambda_i)^{e_i}$\com 其中$\sum\limits_{i=1}^{r} e_i = n$\com 则称$e_i$为特征值$\lambda_i$的\tboba{代数重数}；
+
+    （2）如果$\lambda$是$A$的一个特征值\com 则称$\mathrm{dim}\mathcal{N}(\lambda I_n - A)$为$\lambda$的\tboba{几何重数}。
+}
+一个特征值的几何重数不大于它的代数重数。几何重数等于代数重数的特征值\com 称为\tboba{半单}特征值；几何重数小于代数重数的特征值\com 称为\tboba{亏损}特征值。
+
+代数重数之和是矩阵的阶数；几何重数之和是矩阵线性无关的特征向量的总数。
+\di[对角化条件]{
+    设$A$为$n$阶方阵\com 则
+    \begin{align*}
+        A~\text{可对角化} \Leftrightarrow A~\text{有}~n~\text{个线性无关的特征向量}
+        \Leftrightarrow A~\text{的特征值均半单}
+    \end{align*}
+}
+\di[对角化判据]{
+    若$\det(\lambda I - A)$无重根\com 则$A$可被对角化。
+}
+\begin{example}
+    定义\textbf{Jordan块}为$J_{n}(\mu)=\begin{bmatrix}
+        \mu &   1 \\
+        &       \mu &   \ddots \\
+        &       &       \ddots &1 \\
+        &       &       &       \mu
+    \end{bmatrix}_{n \times n}$\com 则$\det(\lambda I_n-J_{n\com \mu})=(\lambda - \mu)^n$\com 其只有一个特征值$\lambda = \mu $\com 所有特征向量都与$\tilde{\boldsymbol{e}}_1$线性相关。当$n>1$时\com 其不可对角化。
+\end{example}
+\zhu[Jordan块的性质]{
+    $J_{n}(\mu)$与$J_{n}(\mu)^\mathrm{T}$相似\com 因我们有
+    $$\begin{bmatrix}
+        & & & 1\\
+        & & 1\\
+        & \begin{sideways} $\ddots$ \end{sideways}\\
+        1
+    \end{bmatrix}\begin{bmatrix}
+        \mu &   1 \\
+        &       \mu &   \ddots \\
+        &       &       \ddots &1 \\
+        &       &       &       \mu
+    \end{bmatrix}\begin{bmatrix}
+        & & & 1\\
+        & & 1\\
+        & \begin{sideways} $\ddots$ \end{sideways}\\
+        1
+    \end{bmatrix}=\begin{bmatrix}
+        \mu \\
+        1       &\mu  \\
+        &\ddots  &\ddots \\
+        &       &1      &\mu
+    \end{bmatrix}$$
+}
+\de[同时对角化]{
+    设$A$\com $B$是$n$阶方阵。
+    
+    如果存在可逆矩阵$X$使得$X^{-1}AX=\varLambda_A$\com $X^{-1}BX=\varLambda_B$都是对角矩阵\com 则称$A$和$B$可以\tboba{同时（相似）对角化}。
+
+    如果存在可逆矩阵$X$使得$X^\mathrm{T}AX=\varLambda_A$\com $X^\mathrm{T}BX=\varLambda_B$都是对角矩阵\com 则称$A$和$B$可以\tboba{同时合同对角化}。
+
+    如果存在正交矩阵$X$使得$X^\mathrm{T}AX=\varLambda_A$\com $X^\mathrm{T}BX=\varLambda_B$都是对角矩阵\com 则称$A$和$B$可以\tboba{同时正交对角化}。
+}
+\di[可同时对角化的条件]{
+    若矩阵$A_1\com A_2\com \cdots\com A_m$均可对角化且两两可交换\com 则$A_1\com A_2\com \cdots\com A_m$可同时对角化。
+}
+\begin{proofs}
+    用数学归纳法。
+    
+    \textbf{归纳奠基}\quad 首先考虑$m=2$的情形\com 即若有$A$与$B$可对角化且可交换\com 往证$A$与$B$可同时对角化。
+
+    注意到$AB=BA \xLongleftrightarrow{P~\text{可逆}} (P^{-1}AP)(P^{-1}BP)=(P^{-1}BP)(P^{-1}AP)$\com 不妨直接设$A$为对角阵\com 进一步调整特征值顺序取为$A=\begin{bmatrix}
+        \lambda_1I_{n_1}\\
+        &\lambda_2I_{n_2}\\
+        &&\ddots\\
+        &&&\lambda_kI_{n_k}
+    \end{bmatrix}$\com 其中$\lambda_i \neq \lambda_j$（$\forall i \neq j$）。
+
+    由$A$、$B$可交换\com 即$AB=BA$\com 可知对$A$的属于特征值$\lambda_i$的任意特征向量$\boldsymbol{v}$\com 有$A\boldsymbol{v}=\lambda_i\boldsymbol{v} \Rightarrow AB\boldsymbol{v}=B(A\boldsymbol{v})=\lambda_iB\boldsymbol{v}$\com 于是$B\boldsymbol{v}$也是属于$\lambda_i$的特征向量。而属于$\lambda_i$的特征子空间为
+    \begin{align*}
+        \mathcal{V}_{\lambda_i}&=\mathcal{N}(A-\lambda_iI_n)
+        =\mathcal{N}\left(\begin{bmatrix}
+            (\lambda_1-\lambda_i)I_{n_1}\\
+            &\ddots\\
+            &&O_{n_i}\\
+            &&&\ddots\\
+            &&&&(\lambda_k-\lambda_i)I_{n_k}
+        \end{bmatrix}\right)\\&=\mathrm{span}(\boldsymbol{e}_{\sum_{j=1}^{i-1}n_j+1}\com \cdots\com \boldsymbol{e}_{\sum_{j=1}^{i}n_j})
+    \end{align*}
+    且$\forall \boldsymbol{v} \in \mathcal{V}_{\lambda_i}$\com $B\boldsymbol{v} \in \mathcal{V}_{\lambda_i}$。于是将$B$按$A$方式分块为$B=\begin{bmatrix} B_{ij} \end{bmatrix}_{k \times k}$\com 即有$B_{ij}=O$（$\forall i \neq j$）\com 即$B$成为分块对角矩阵。
+
+    将$B$的每一个对角分块$B_{ii}$对角化为$Q_i^{-1}B_{ii}Q_i=\varLambda_i$\com 记$Q=\begin{bmatrix}
+        Q_1\\
+        &Q_2\\
+        &&\ddots\\
+        &&&Q_k
+    \end{bmatrix}$\com 则
+
+    \begin{align*}
+        &Q^{-1}AQ=\begin{bmatrix}
+            \lambda_1Q_1^{-1}I_{n_1}Q_1\\
+            &\lambda_2Q_2^{-1}I_{n_2}Q_2\\
+            &&\ddots\\
+            &&&\lambda_kQ_k^{-1}I_{n_k}Q_k
+        \end{bmatrix}=A\displaybreak\\
+        &Q^{-1}BQ=\begin{bmatrix}
+            Q_1^{-1}B_{11}Q_1\\
+            &Q_2^{-1}B_{22}Q_2\\
+            &&\ddots\\
+            &&&Q_k^{-1}B_{kk}Q_k
+        \end{bmatrix}=\begin{bmatrix}
+            \varLambda_1\\
+            &\varLambda_2\\
+            &&\ddots\\
+            &&&\varLambda_k
+        \end{bmatrix}
+    \end{align*}
+    即$Q$将$A$与$B$同时对角化。
+
+    \textbf{归纳递推}\quad 假设$m-1$个可对角化且两两可交换的矩阵可同时对角化\com 往证$m$个可对角化且两两可交换的矩阵$A_1\com A_2\com \cdots\com A_m$可同时对角化。同上不妨设$A_1=\begin{bmatrix}
+        \lambda_1I_{n_1}\\
+        &\lambda_2I_{n_2}\\
+        &&\ddots\\
+        &&&\lambda_kI_{n_k}
+    \end{bmatrix}$\com 将$A_j$依此分块得到$\begin{bmatrix}
+        A_{j1}\\
+        &A_{j2}\\
+        &&\ddots\\
+        &&&A_{jk}
+    \end{bmatrix}$（$j=2\com 3\com \cdots\com m$）。由$A_2\com A_3\com \cdots\com A_m$两两可交换\com 知任意固定$l=1,~2,~\cdots,~k$\com $A_{2l}\com A_{3l}\com \cdots\com A_{ml}$两两可交换\com 于是这$m-1$个矩阵可同时对角化\com 不妨设$Q_l$将它们同时对角化。取$Q=\begin{bmatrix}
+        Q_1\\
+        &Q_2\\
+        &&\ddots\\
+        &&&Q_k
+    \end{bmatrix}$\com 同上可知$Q$将$A_1\com A_2\com \cdots\com A_m$同时对角化。
+\end{proofs}
+\subsubsection{不可对角化矩阵的相似}
+\di[]{
+    任意方阵都相似于上三角矩阵。
+}
+\begin{proofs}
+    用数学归纳法。显然1阶方阵满足（本身就是上三角矩阵）\com 假设$1,~2,~\cdots,~n-1$阶方阵都满足上面定理\com 讨论$n$阶方阵的情形。假定$n$阶方阵$A$有特征对$(\lambda\com \boldsymbol{v}_1)$\com 将$\boldsymbol{v}_1$扩充为$\C^n$的一组基$\{\boldsymbol{v}_i\}$\com 并记$Q_n=\begin{bmatrix} \boldsymbol{v}_i \end{bmatrix}$。那么
+    \begin{align*}
+        AQ_n&=A\begin{bmatrix}
+            \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_n
+        \end{bmatrix}
+        =\begin{bmatrix}
+            A\boldsymbol{v}_1 & A\boldsymbol{v}_2 & \cdots & A\boldsymbol{v}_n
+        \end{bmatrix}=\begin{bmatrix}
+            \lambda\boldsymbol{v}_1 & A\boldsymbol{v}_2 & \cdots & A\boldsymbol{v}_n
+        \end{bmatrix}\\
+        &=\begin{bmatrix}
+            \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_n
+        \end{bmatrix}\begin{bmatrix}
+            \lambda & * & * & * \\
+            0 & * & * & * \\
+            \vdots & * & * & * \\
+            0 & * & * & *
+        \end{bmatrix} \triangleq Q_n\begin{bmatrix}
+            1 & * \\
+            \boldsymbol{0}_{n-1} & R
+        \end{bmatrix}  
+    \end{align*}
+    根据归纳假设\com $n-1$阶方阵$R$相似于上三角矩阵\com 记之为$L_R=PRP^{-1}$\com 其中$P$是$n-1$阶可逆矩阵。由$Q_n$满秩知其可逆\com 则
+    \begin{align*}
+        A &= Q_n \begin{bmatrix}
+            \lambda & * \\
+            \boldsymbol{0}_{n-1} & P^{-1}L_RP
+        \end{bmatrix} Q_n^{-1}\displaybreak\\
+        &=  Q_n \begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix}\begin{bmatrix}
+            \lambda & * \\
+            \boldsymbol{0}_{n-1} & P^{-1}L_RP
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix} Q_n^{-1}\displaybreak\\
+        &= \left(Q_n \begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix} \right) \begin{bmatrix}
+            \lambda & * \\
+            \boldsymbol{0}_{n-1} & L_R
+        \end{bmatrix}\left(Q_n\begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix} \right)^{-1}
+    \end{align*}
+    故$A$相似于上三角矩阵$L_A=\begin{bmatrix}
+        \lambda & * \\
+        \boldsymbol{0}_{n-1} & L_R
+    \end{bmatrix}$\com 则归纳知命题成立。
+\end{proofs}
+\di[Hamilton-Cayley定理]{
+    若$A$的特征多项式为$p_A(\lambda)$\com 则$p_A(A)=O$。
+}
+\begin{proofs}
+    （1）若$A$与$B$相似\com 且$B$满足$p_B(B)=O$\com 则$p_A(A)=O$。
+
+    （2）任意方阵$A$都与上三角矩阵相似\com 不妨直接设$A=\begin{bmatrix}
+        \lambda_1 & * & * & *\\
+        & \lambda_2 & * & *\\
+        & & \ddots & *\\
+        & & & \lambda_n
+    \end{bmatrix}$\com 即知$p_A(\lambda)=\prod\limits_{i=1}^{n}(\lambda-\lambda_i)$\com 于是$p_A(A)=\prod\limits_{i=1}^{n}(A-\lambda_iI_n)$。每个对角元处都有一个$(A-\lambda_iI_n)$对应元素为0\com 故$p_A(A)=0$。
+\end{proofs}
+\di[]{
+    任意方阵都相似于以 Jordan块 做对角分块的方阵（称为~\tbome{Jordan标准型}）。
+}
+\newcommand{\Jor}[1]{J_{n_#1}(\lambda_#1)}
+一般的Jordan标准型矩阵为$J=\begin{bmatrix}
+    \Jor{1}\\
+    & \Jor{2}\\
+    & & \ddots\\
+    & & & \Jor{r}
+\end{bmatrix}$\com 其中$\sum\limits_{i=1}^r n_i=n$\com $\Jor{i}=\begin{bmatrix}
+    \lambda_i & 1\\
+    & \lambda_i & \ddots\\
+    & & \ddots & 1\\
+    & & & \lambda_i
+\end{bmatrix}$。\tbome{每个$\mbome{\Jor{i}}$对$\mbome{J}$贡献$\mbome{\lambda_i}$的$\mbome{n_i}$个代数重数和1个几何重数。}
+\subsection{应用}
+\subsubsection{简化矩阵方幂的计算}
+\begin{example}
+    求证：$\begin{bmatrix}
+        3 & 2 \\ 1 & 4
+    \end{bmatrix}^{1024}$的最小元不小于$10^{700}$。
+\end{example}
+\begin{solution}
+    求得$\begin{bmatrix}
+        3 & 2 \\ 1 & 4
+    \end{bmatrix}=P \varLambda P^{-1}$\com 其中$P=\begin{bmatrix}
+        -2 & 1 \\ 1 & 1
+    \end{bmatrix}$\com $\varLambda=\begin{bmatrix}
+        2 \\ & 5
+    \end{bmatrix}$。则
+    $$\begin{bmatrix}
+        3 & 2 \\ 1 & 4
+    \end{bmatrix}^{1024} = P \varLambda^{1024} P^{-1} = \frac{1}{3} \begin{bmatrix}
+        2^{1025}+5^{1024} & -2^{1025} + 2 \times 5^{1024} \\
+        -2^{1024}+5^{1024} & 2^{1024} + 2 \times 5^{1024}
+    \end{bmatrix}$$
+    最小元为$\dfrac{5^{1024}-2^{1024}}{3}$\com 注意到
+    \begin{align*}
+        \frac{5^{1024}-2^{1024}}{3}
+        &= \frac{5^{1024}}{3} \left(1-\left(\frac{2}{5}\right)^{1024}\right) 
+        > \frac{5^{1024}}{3} \left(1-\frac{2}{5}\right) = 5^{1023}
+        = \frac{10^{1023}}{2^{1023}}
+        > \frac{10^{1023}}{2^{1030}} \\
+        &= \frac{10^{1023}}{(10^3 + 24)^{103}}
+        = \frac{10^{1023}}{10^{309}\left(1 + \dfrac{24}{10^3}\right)^{103}}\\
+        &= \frac{10^{714}}{\left(\left(1 + \dfrac{24}{10^3}\right)^{\frac{24}{10^3}}\right)^{\frac{10^3}{24}\cdot103}}
+        > \frac{10^{714}}{3^3} > 10^{712} \qedhere
+    \end{align*}
+\end{solution}
+\subsubsection{线性递推数列的通项公式}
+\begin{example}
+    求斐波那契数列的通项公式。
+\end{example}
+\begin{solution}
+    递推公式可以用矩阵表示为：
+    $$\begin{bmatrix}
+        a_{n+2} \\ a_{n+1}
+    \end{bmatrix}=\begin{bmatrix}
+        1 & 1 \\ 1 & 0
+    \end{bmatrix}\begin{bmatrix}
+        a_{n+1} \\ a_{n}
+    \end{bmatrix}$$
+    于是$\begin{bmatrix}
+        a_{n+1} \\ a_{n}
+    \end{bmatrix}=\begin{bmatrix}
+        1 & 1 \\ 1 & 0
+    \end{bmatrix}^{n-1}\begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$\com 问题即化为求$\begin{bmatrix}
+        1 & 1 \\ 1 & 0
+    \end{bmatrix}^{n-1}$。
+\end{solution}
+
+\newpage
+\section{正交相似与合同}
+\subsection{实对称矩阵的谱分解}
+\di[实对称矩阵的谱定理]{
+    若$A$为实对称矩阵\com 则存在正交矩阵$Q$\com 使得$Q^\mathrm{T}AQ=\varLambda$为实对角矩阵。
+}
+\begin{proofs}
+    （1）首先证明特征值全为实数。
+
+    设$A$有特征对$(\lambda\com \boldsymbol{v})$\com 则$A\boldsymbol{v}=\lambda\boldsymbol{v}$\com 
+    即有$\overline{\boldsymbol{v}}^\mathrm{T}A\boldsymbol{v}=\lambda\overline{\boldsymbol{v}}^\mathrm{T}\boldsymbol{v}$。
+
+    另一方面\com $A\boldsymbol{v}=\lambda\boldsymbol{v}$推出$\overline{A}\overline{\boldsymbol{v}}=\overline{\lambda}\overline{\boldsymbol{v}}$\com 
+    即有$\overline{\boldsymbol{v}}^\mathrm{T}\overline{A}^\mathrm{T}=\overline{\lambda}\overline{\boldsymbol{v}}^\mathrm{T}$\com 
+    亦即$\overline{\boldsymbol{v}}^\mathrm{T}\overline{A}=\overline{\lambda}\overline{\boldsymbol{v}}^\mathrm{T}$\com 
+    从而$\overline{\boldsymbol{v}}^\mathrm{T}\overline{A}\boldsymbol{v}=\overline{\lambda}\overline{\boldsymbol{v}}^\mathrm{T}\boldsymbol{v}$。
+
+    于是$\lambda\overline{\boldsymbol{v}}^\mathrm{T}\boldsymbol{v}=\overline{\lambda}\overline{\boldsymbol{v}}^\mathrm{T}\boldsymbol{v}$\com 而$\overline{\boldsymbol{v}}^\mathrm{T}\boldsymbol{v} \ge 0$\com 则$\lambda=\overline{\lambda}$\com 故$\lambda \in \R$。
+
+    （2）然后证明$A$总有谱分解。
+
+    用数学归纳法。显然1阶方阵满足（本身就是对角矩阵）\com 假设$1,~2,~\cdots,~n-1$阶方阵都满足上面定理\com 讨论$n$阶方阵的情形。假定$n$阶方阵$A$有特征对$(\lambda\com \boldsymbol{q}_1)$\com 其中$\| \boldsymbol{q}_1 \|=1$\com 将$\boldsymbol{q}_1$扩充为$\R^n$的一组标准正交基$\{\boldsymbol{q}_i\}$\com 并记$Q_1=\begin{bmatrix} \boldsymbol{q}_i \end{bmatrix}$。那么
+    \begin{align*}
+        AQ_1&=A\begin{bmatrix}
+            \boldsymbol{q}_1 & \boldsymbol{q}_2 & \cdots & \boldsymbol{q}_n
+        \end{bmatrix}
+        =\begin{bmatrix}
+            A\boldsymbol{q}_1 & A\boldsymbol{q}_2 & \cdots & A\boldsymbol{q}_n
+        \end{bmatrix}=\begin{bmatrix}
+            \lambda\boldsymbol{q}_1 & A\boldsymbol{q}_2 & \cdots & A\boldsymbol{q}_n
+        \end{bmatrix}\\
+        &=\begin{bmatrix}
+            \boldsymbol{q}_1 & \boldsymbol{q}_2 & \cdots & \boldsymbol{q}_n
+        \end{bmatrix}\begin{bmatrix}
+            \lambda & * & * & * \\
+            0 & * & * & * \\
+            \vdots & * & * & * \\
+            0 & * & * & *
+        \end{bmatrix} \triangleq Q_1\begin{bmatrix}
+            \lambda & \boldsymbol{u}^\mathrm{T} \\
+            \boldsymbol{0}_{n-1} & R
+        \end{bmatrix}  
+    \end{align*}
+    故
+    $$Q^{-1}_1AQ_1=\begin{bmatrix}
+            \lambda & \boldsymbol{u}^\mathrm{T} \\
+            \boldsymbol{0}_{n-1} & R
+        \end{bmatrix}$$
+    而$Q^{-1}_1=Q_1^\mathrm{T}$\com 即有$(Q^{-1}_1AQ_1)^\mathrm{T}=(Q^\mathrm{T}_1AQ_1)^\mathrm{T}=Q^\mathrm{T}_1A^\mathrm{T}Q_1=Q^{-1}_1AQ_1$\com 有对称性\com 于是$\boldsymbol{u}=\boldsymbol{0}$\com $R^\mathrm{T}=R$。
+
+    根据归纳假设\com 对$n-1$阶实对称方阵$R$\com 存在正交矩阵$P$使$P^\mathrm{T}RP$为对角矩阵\com 记之为$L_R=P^\mathrm{T}RP$。则
+    \begin{align*}
+        A &= Q_n \begin{bmatrix}
+            \lambda & \\
+            & PL_RP^\mathrm{T}
+        \end{bmatrix} Q_n^{-1}\\
+        &=  Q_n \begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix}\begin{bmatrix}
+            \lambda & \\
+            & PL_RP^\mathrm{T}
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix}\begin{bmatrix}
+            1 &  \\
+            & P^{-1}
+        \end{bmatrix} Q_n^{-1}\\
+        &= \left(Q_n \begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix} \right) \begin{bmatrix}
+            \lambda & \\
+            & L_R
+        \end{bmatrix}\left(Q_n\begin{bmatrix}
+            1 &  \\
+            & P
+        \end{bmatrix} \right)^\mathrm{T}
+    \end{align*}
+    故归纳知命题成立。
+\end{proofs}
+\zhu[在复矩阵上的形式]{
+    在复数域上\com 考虑~\textbf{\colors{qinglv} Hermite对称矩阵}~$A$（满足$\overline{A}^\mathrm{T}=A$）\com 存在\textbf{\colors{qinglv} 酉矩阵}~$U$（满足$\overline{U}^\mathrm{T}U=U\overline{U}^\mathrm{T}=I$）\com 使得$\overline{U}^\mathrm{T}AU=\varLambda$为对角矩阵。
+}
+\di[]{
+    实对称矩阵分属不同特征值的特征向量相互正交。
+}
+\zhu[求实对称矩阵（正交）谱分解的步骤]{
+    （1）求特征值\com 即求$\det (\lambda I -A)$；
+
+    （2）对每个特征值$\lambda_i$\com 求$\mathcal{N}(\lambda_i I -A)$的一组基；
+
+    （3）对所有特征子空间基进行Gram-Schmidt正交化；
+
+    （4）令$Q=\begin{bmatrix} \boldsymbol{q}_i \end{bmatrix}$\com $\varLambda=\mathrm{diag}(\lambda_i)$\com 则$A=Q\varLambda Q^\mathrm{T}$。
+}
+\de[正交相似]{
+    对方阵$A$与$B$\com 如果存在正交矩阵$Q$使得$Q^\mathrm{T}AQ=B$\com 则称$A$与$B$~\tboba{正交相似}。
+}
+\subsection{矩阵的合同与正定性}
+\de[合同]{
+    对方阵$A$\com 如果存在可逆矩阵$X$使得$X^\mathrm{T}AX=B$\com 则称$A$与$B$~\tboba{合同}。
+}
+正交相似是合同的一种特殊情况\com 而合同又是相抵的特殊情况。
+\zhu[复矩阵相抵、合同、正交相似的实矩阵适配性]{
+    若实矩阵$A$、$B$作为复矩阵相抵\com 则其作为实矩阵也相抵；但若实矩阵$A$、$B$作为复矩阵合同\com 其作为实矩阵不一定合同。
+    \begin{example}
+        考虑$A=\begin{bmatrix}
+            1 \\ & -1
+        \end{bmatrix}$与$I=\begin{bmatrix}
+            1 \\ & 1
+        \end{bmatrix}$\com 它们作为复矩阵或实矩阵都相抵\com 但仅在作为复矩阵时合同（$A=PIP^\mathrm{T}$\com $P=\begin{bmatrix}
+            1 \\ & \i
+        \end{bmatrix}$）及正交相似。
+    \end{example}
+}
+我们只在\textbf{实对称矩阵}的范围内讨论矩阵的正定性。
+\de[正定矩阵]{
+    对$n$阶实矩阵$A$\com 如果对任意非零向量$\boldsymbol{x}\in \R^n$\com 都有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}>0$\com 则称$A$~\tboba{正定}。
+}
+\begin{definition}
+    给定$n$阶实矩阵$A$\com 对任意非零向量$\boldsymbol{x}\in \R^n$\com 如果
+
+    （1）恒有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x} \ge 0$\com 称矩阵$A$~\tboba{半正定}；
+    
+    （2）恒有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x} < 0$\com 称矩阵$A$~\tboba{负定}；
+
+    （3）恒有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x} \le 0$\com 称矩阵$A$~\tboba{半负定}；
+
+    （4）$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}$符号不定\com 称矩阵$A$~\tboba{不定}。
+\end{definition}
+\begin{corollary}
+    合同变换不改变矩阵正定性。
+\end{corollary}
+\di[实对称矩阵正定的条件]{
+    若$A$为实对称矩阵\com 则
+    \begin{align*}
+        A~\text{正定}
+        &\Leftrightarrow A~\text{的特征值均为正数}\\
+        &\Leftrightarrow \text{存在可逆矩阵}~P\text{\com 使得}~A=PP^\mathrm{T}
+        \Leftrightarrow A~\text{合同于}~I\\
+        &\Leftrightarrow A~\text{的顺序主子阵都正定}\\
+        &\Leftrightarrow A~\text{的顺序主子式都为正数}\\
+        &\Leftrightarrow A~\text{有LDL}^\mathrm{T}~\text{分解\com 且}~D~\text{对角元素全为正数}\\
+        &\Leftrightarrow A~\text{有LU分解\com 且}~U~\text{主元全为正数}
+    \end{align*}
+}
+\di[实对称矩阵半正定的条件]{
+    若$A$为实对称矩阵\com 则
+    \begin{align*}
+        A~\text{半正定}
+        &\Leftrightarrow A~\text{的特征值非负}\\
+        &\Leftrightarrow \text{存在列满秩矩阵}~P\text{\com 使得}~A=PP^\mathrm{T}\\
+        &\Leftrightarrow A~\text{有LDL}^\mathrm{T}~\text{分解\com 且}~D~\text{对角元素非负}
+    \end{align*}
+}
+我们希望在合同的意义下化简矩阵。
+\di[Sylvester惯性定理]{
+    （1）若$A$为$n$阶实对称矩阵\com 则$A$合同于\tbome{合同标准型}~$H(r\com p)=\begin{bmatrix}
+        I_p \\ & -I_{r-p} \\ & & O
+    \end{bmatrix}_{n \times n}$\com 其中$r=\mathrm{rank}(A)$。
+
+    （2）$H(r\com p)$合同于$H(s\com q)$当且仅当$r=s$且$p=q$。
+}
+\begin{proofs}
+    （1）由谱定理
+    $$A \xlongrightarrow[\mathrm{rank}(\varLambda)=\mathrm{rank}(A)=r]{\text{合同}} \varLambda \xlongrightarrow{\text{合同}} \begin{bmatrix}
+        \varLambda_p^+ \\ & \varLambda_{r-p}^- \\ & & O
+    \end{bmatrix}_{n \times n} \xlongrightarrow{\text{合同}} \begin{bmatrix}
+        I_p \\ & -I_{r-p} \\ & & O
+    \end{bmatrix}_{n \times n}$$
+
+    （2）只需证$p=q$。设$A$合同于$H(r\com p)$和$H(r\com q)$\com 考虑\textbf{二次齐次多项式}$f_A(\boldsymbol{x})=\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}$。
+    
+    则存在可逆矩阵$X_1\com X_2$\com 使得$X_1^\mathrm{T}AX_1=H(r\com p)$\com $X_2^\mathrm{T}AX_2=H(r\com q)$。令$X_1=\begin{bmatrix}
+        \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_n
+    \end{bmatrix}$\com 则$X_1^\mathrm{T}AX_1=\begin{bmatrix}
+        \boldsymbol{v}_iA\boldsymbol{v}_j
+    \end{bmatrix}$\com 于是对应有
+    $$\boldsymbol{v}_iA\boldsymbol{v}_j
+    =\left\{\begin{NiceArray}{ll}
+        1\com &  1 \le i=j \le p\com \\
+        -1\com & p+1 \le i=j \le r\com \\
+        0\com &  i \neq j ~\text{或}~ r+1 \le i=j \le n\\
+    \end{NiceArray}\right.$$
+    设$\boldsymbol{x} = \sum\limits_{i=1}^n c_i\boldsymbol{v}_i$\com 则
+    \begin{align*}
+        f_A(\boldsymbol{x})&= \boldsymbol{x}^\mathrm{T}A\boldsymbol{x}
+        = \left(\sum\limits_{i=1}^n c_i\boldsymbol{v}_i\right)^\mathrm{T}A\left(\sum\limits_{j=1}^n c_j\boldsymbol{v}_j\right)
+        = \sum\limits_{1 \le i\com j \le n} (c_i\boldsymbol{v}_i)^\mathrm{T}A(c_j\boldsymbol{v}_j)\\
+        &= \sum\limits_{1 \le i\com j \le n} c_ic_j\boldsymbol{v}_i^\mathrm{T}A\boldsymbol{v}_j
+        = \sum\limits_{i=1}^p c_i^2 - \sum\limits_{i=p+1}^r c_i^2
+    \end{align*}
+    令$\boldsymbol{x} \in \mathrm{span}_{1 \le i \le p}(\boldsymbol{v}_i)\setminus \{\boldsymbol{0}\}$\com 则$f_A(\boldsymbol{x})>0$；令$\boldsymbol{x} \in \mathrm{span}_{p+1 \le i \le n}(\boldsymbol{v}_i)$\com 则$f_A(\boldsymbol{x})\le 0$。类似地\com 设$X_2=\begin{bmatrix}
+        \boldsymbol{w}_1 & \boldsymbol{w}_2 & \cdots & \boldsymbol{w}_n
+    \end{bmatrix}$\com 则令$\boldsymbol{x} \in \mathrm{span}_{1 \le i \le q}(\boldsymbol{w}_i)\setminus \{\boldsymbol{0}\}$\com 则$f_A(\boldsymbol{x})>0$；令$\boldsymbol{x} \in \mathrm{span}_{q+1 \le i \le n}(\boldsymbol{w}_i)$\com 则$f_A(\boldsymbol{x})\le 0$。
+    
+    于是\com 记$\mathcal{M}=\mathrm{span}_{1 \le i \le p}(\boldsymbol{v}_i)$\com $\mathcal{N}=\mathrm{span}_{q+1 \le i \le n}(\boldsymbol{w}_i)$\com 则$f_A \big|_{\mathcal{M} \setminus \{\boldsymbol{0}\}} > 0$\com $f_A \big|_\mathcal{N} \le 0$\com 故$\mathcal{M} \cap \mathcal{N} = \{\boldsymbol{0}\}$\com 则它们的基线性无关\com 即$\mathrm{dim}\mathcal{M} + \mathrm{dim}\mathcal{N} = p +(n-q)\le n$\com 即$p-q \le 0$。同理$q-p \le 0$\com 故$p=q$。
+\end{proofs}
+\di[Sylvester惯性原理]{
+    合同变换不改变矩阵正、负、零特征值的数目。
+}
+\zhu[坐标变换]{
+    设$\boldsymbol{x} \in \R^n$\com 对$n$阶矩阵$A$考虑\textbf{二次齐次多项式}$f_A(\boldsymbol{x})=\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}$。令$P$是$n$阶正交矩阵\com $\boldsymbol{x}'=P^\mathrm{T}\boldsymbol{x}$\com 则$\boldsymbol{x}'$是$\boldsymbol{x}$在做直角坐标系变换后的新坐标\com 而$f_A(\boldsymbol{x})=(P\boldsymbol{x}')^\mathrm{T}A(P\boldsymbol{x}')={\boldsymbol{x}'}^\mathrm{T}(P^\mathrm{T}AP)\boldsymbol{x}'$。
+}
+
+\subsection{奇异值分解}\label{奇异值分解}
+\renewcommand{\S}{\varSigma}
+\de[酉相抵]{
+    给定$m \times n$实矩阵$A$与$B$\com 如果存在$U$、$V$分别为$m$、$n$阶实正交矩阵\com 使得$A=UBV^\mathrm{T}=UBV^{-1}$\com 则称$A$与$B$~\tboba{酉相抵}。
+}
+\di[奇异值分解（SVD）]{
+    对任意$m \times n$实矩阵$A$\com 存在$U$、$V$分别为$m$、$n$阶实正交矩阵\com 使得$A=U\varSigma V^\mathrm{T}$\com 其中$\varSigma=\begin{bmatrix}
+        \mathrm{diag}(\sigma_i) & O \\ O & O
+    \end{bmatrix}$\com $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r > 0$。这些$\sigma_i$称为$A$的\tbome{奇异值}。
+}
+由此\com $A^\mathrm{T}A=V\varSigma^\mathrm{T} U^\mathrm{T}U\varSigma V^\mathrm{T}=V\varSigma^2 V^\mathrm{T}$\com 而$A^\mathrm{T}A$半正定\com 则$A$的奇异值是$A^\mathrm{T}A$的非零特征值的算术平方根。$V$的列是$A^\mathrm{T}A$的特征向量\com $U$的列是$AA^\mathrm{T}$的特征向量。
+
+由上\com 还可得到$AV=U\varSigma$\com $A^\mathrm{T}U=V\varSigma^\mathrm{T}=V\varSigma$。设出$V$、$U$的列向量为$V=\begin{bmatrix}
+    \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_n
+\end{bmatrix}$, ~$U=\begin{bmatrix}
+    \boldsymbol{u}_1 & \boldsymbol{u}_2 & \cdots & \boldsymbol{u}_m
+\end{bmatrix}$\com 
+则$A\boldsymbol{v}_i = \sigma_i \boldsymbol{u_i}$\com $A^\mathrm{T}\boldsymbol{u}_i = \sigma_i \boldsymbol{v_i}$。
+\begin{definition}
+    给定 $m\times n$ 矩阵 $A$\com 如果存在非零向量 $\boldsymbol{x}\in\mathbb{R}^n$\com $\boldsymbol{y}\in\mathbb{R}^m$\com $\sigma \ge 0$\com 使得 $A\boldsymbol{x}=\sigma \boldsymbol{y}$\com $A^\mathrm{T}\boldsymbol{y}=\sigma \boldsymbol{x}$\com 则 $\sigma$ 为 $A$ 的一个奇异值。称$\boldsymbol{x}$ 为 $A$ 的属于 $\sigma$ 的一个\textbf{右奇异向量}\com $\boldsymbol{y}$ 为 $A$ 的属于 $\sigma$ 的一个\textbf{左奇异向量}。
+\end{definition}
+\begin{theorem}
+    $A^\mathrm{T}A$属于非零特征值的特征向量$\boldsymbol{v}_i$ 为 $A$ 的属于 $\sigma$ 的一个右奇异向量\com $AA^\mathrm{T}$属于非零特征值的特征向量$\boldsymbol{u}_i$为 $A$ 的属于 $\sigma_i$ 的一个左奇异向量。
+\end{theorem}
+\zhu[求奇异值分解的一般步骤]{
+    给定 $m\times n$ 矩阵 $A$（不妨让$m>n$使$A^\mathrm{T}A$阶数小）\com 按如下步骤求其奇异值分解。
+
+    （1）求$A^\mathrm{T}A$的谱分解$A^\mathrm{T}A = VDV^\mathrm{T}$\com 其中$D=\begin{bmatrix}
+        \mathrm{diag}(\sigma_i^2) & O \\ O & O
+    \end{bmatrix}$\com 获得$V$和$\varSigma$；
+
+    （2）依$\boldsymbol{u}_i=\dfrac{A\boldsymbol{v}_i}{\sigma_i}$求出$\boldsymbol{u}_1\com \boldsymbol{u}_2\com \cdots\com \boldsymbol{u}_r$\com 将其扩充为$\R^m$的一组标准正交基\com 获得$U$。
+}
+
+\begin{example}
+    如果$n$阶方阵$A$的$n$个特征值是其$n$个奇异值\com 求证$A$是对称矩阵。
+\end{example}
+\begin{solution}
+    设$A$的奇异值分解为$A=U\varSigma V^\mathrm{T}$\com 要证$A$对称\com 即考虑证$V^\mathrm{T} \varSigma V = V^\mathrm{T} U \varSigma$对称；设$Q=V^\mathrm{T} U$\com 则由$U\com V$正交可知$Q$正交\com 即证$Q\varSigma$对称。
+
+    注意到
+    \begin{align*}
+        \boldsymbol{e}_i^\mathrm{T}(Q\S)\boldsymbol{e}_i
+        =  \boldsymbol{e}_i^\mathrm{T}Q(\S\boldsymbol{e}_i)
+        =   \boldsymbol{e}_i^\mathrm{T}Q(\sigma_i\boldsymbol{e}_i)
+        =   \sigma_i\bigl(\boldsymbol{e}_i^\mathrm{T}Q\boldsymbol{e}_i\bigr)
+        \le	\sigma_i
+    \end{align*}
+	即有 
+	$$\mathrm{trace}(Q\S) = \sum_{i=1}^{n} \boldsymbol{e}_i^\mathrm{T} Q\S \boldsymbol{e}_i \le \sum_{i=1}^{r} \sigma_i$$
+	而$A$的$n$个特征值是其$n$个奇异值\com 有
+	$$\sum\limits_{i=1}^{r} \sigma_i \ge \mathrm{trace}(A)=\sum\limits_{i=1}^{n} \lambda_i = \sum\limits_{i=1}^{r} \sigma_i$$
+	于是上面不等号全部取等\com 即$\forall i \le r$\com $\boldsymbol{e}_i^\mathrm{T}Q\boldsymbol{e}_i = 1$\com 又$Q$正定\com 则$Q=\begin{bmatrix}
+		I_r \\ & Q_1
+	\end{bmatrix}$\com 于是
+	\begin{equation*}
+		Q\S=\begin{bmatrix}
+			I_r \\ & Q_1
+		\end{bmatrix}\begin{bmatrix}
+			\S_r \\ & O
+		\end{bmatrix}=\begin{bmatrix}
+			\S_r \\ & O
+		\end{bmatrix}=\S \qedhere
+	\end{equation*}
+\end{solution}
+
+\zhu[耍流氓的简化计算方案——向量的叉积]{
+    若要求的$U$为$3 \times 3$矩阵\com 依$\boldsymbol{u}_i=\dfrac{A\boldsymbol{v}_i}{\sigma_i}$求出了$\boldsymbol{u}_1\com \boldsymbol{u}_2$\com 可用向量叉积求出$\boldsymbol{u}_3=\boldsymbol{u}_1 \times \boldsymbol{u}_2$。
+}
+
+\di[奇异值分解与矩阵生成的子空间的关系]{
+    对 $A$ 的奇异值分解 $A=U\Sigma V^{\mathrm{T}}$\com 记 $U=\begin{bmatrix}
+        \boldsymbol{u}_1 & \boldsymbol{u}_2 & \cdots & \boldsymbol{u}_m
+    \end{bmatrix}$\com $V=\begin{bmatrix}
+        \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_n
+    \end{bmatrix}$\com 则有
+
+    （1）$\boldsymbol{u}_1\com \boldsymbol{u}_2\com \cdots\com \boldsymbol{u}_r$是 $\mathcal{R}(A)$ 的一组标准正交基；
+    
+    （2）$\boldsymbol{u}_r\com \boldsymbol{u}_{r+1}\com \cdots\com \boldsymbol{u}_m$ 是 $\mathcal{N}(A^\mathrm{T})$ 的一组标准正交基；
+    
+    （3）$\boldsymbol{v}_1\com \boldsymbol{v}_2\com \cdots\com \boldsymbol{v}_r$ 是 $\mathcal{R}(A^{\mathrm{T}})$ 的一组标准正交基；
+
+    （4）$\boldsymbol{v}_r\com \boldsymbol{v}_{r+1}\com \cdots\com \boldsymbol{v}_n$ 是 $\mathcal{N}(A)$ 的一组标准正交基。
+}
+记$U_r=\begin{bmatrix}
+    \boldsymbol{u}_1 & \boldsymbol{u}_2 & \cdots & \boldsymbol{u}_r
+\end{bmatrix}$\com $V_r=\begin{bmatrix}
+    \boldsymbol{v}_1 & \boldsymbol{v}_2 & \cdots & \boldsymbol{v}_r
+\end{bmatrix}$\com $\varSigma_r=\mathrm{diag}(\sigma_i)$\com 则
+    $$
+    A=U_{r}\Sigma_{r}V_{r}^{\mathrm{T}}=\sigma_{1}\boldsymbol{u}_{1}\boldsymbol{v}_{1}^{\mathrm{T}}+\sigma_{2}\boldsymbol{u}_{2}\boldsymbol{v}_{2}^{\mathrm{T}}+\cdots+\sigma_{r}\boldsymbol{u}_{r}\boldsymbol{v}_{r}^{\mathrm{T}}
+    $$
+这称为 $A$ 的\tboba{简化奇异值分解}。
+考虑关于$A$的正交投影矩阵$P_A$\com 知$U_r$的列向量是$\mathcal{R}(A)$ 的一组标准正交基\com 则$P_A=U_rU_r^\mathrm{T}$。令矩阵 $A^+=V_r\varSigma_r^{-1}U_r^T$\com 则 $AA^+=U_rU_r^\mathrm{T}$ 是 $\mathcal{R}(A)$ 上的正交投影的表示矩阵\com 同理$A^+A=V_rV_r^T$ 是 $\mathcal{R}(A^T)$ 上的正交投影的表示矩阵。
+于是 $I-AA^+$ 是 $\mathcal{N}(A^T)$ 上的正交投影的表示矩阵\com $I-A^+A$ 是 $\mathcal{N}(A)$ 上的正交投影的表示矩阵。
+
+\de[广义逆]{
+矩阵 $A^+=V_r\Sigma_r^{-1}U_r^\mathrm{T}$ 称为 $A$ 的~\tboba{Moore-Penrose 广义逆}\com 简称\tboba{广义逆}。
+}
+这样\com 在图~\ref{矩阵生成的子空间之间的关系}~的基础上\com 矩阵生成的子空间之间有进一步的关系\com 如图~\ref{矩阵生成的子空间之间的关系2}~所示。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{矩阵生成的子空间的关系2.png}
+    \caption{矩阵生成的子空间之间的关系}\label{矩阵生成的子空间之间的关系2}
+\end{figure}
+
+考虑线性方程组$A\boldsymbol{x} = \boldsymbol{b}$。当$A$ 可逆时\com 线性方程组有唯一解 $A^{-1}b$。此时\com $A^+$ 就是 $A$ 的逆 $A^{-1}$。
+
+当$Ax=\boldsymbol{b}$有不只一个解时\com $A$不可逆\com 但注意到$b\in\mathcal{R}(A)$\com 就有$AA^+\boldsymbol{b}=\boldsymbol{b}$\com 即$A^+\boldsymbol{b}$是方程组的一个解。可以证明\com $A^+\boldsymbol{b}$ 还是方程组所有解中长度最小的解。
+\begin{proofs}
+    注意到$A^+AA^+ = V_r\Sigma_r^{-1}U_r^\mathrm{T} \cdot U_{r}\Sigma_{r}V_{r}^{\mathrm{T}} \cdot V_r\Sigma_r^{-1}U_r^\mathrm{T} = V_r\Sigma_r^{-1}U_r^\mathrm{T} = A^+$。
+    原方程组的解集是$\{A^+\boldsymbol{b}+\boldsymbol{x}_0 \mid \boldsymbol{x}_0\in\mathcal{N}(A)\}$\com 而
+    $$\boldsymbol{x}_0^\mathrm{T}A^+\boldsymbol{b}=((I-A^+A)\boldsymbol{x}_0)^\mathrm{T}A^+\boldsymbol{b}=\boldsymbol{x}_0^\mathrm{T}(I-A^+A)A^+\boldsymbol{b}=\boldsymbol{x}_0^\mathrm{T}(A^+ - A^+AA^+)\boldsymbol{b}=0$$
+    即$\boldsymbol{x}_0$与$A^+\boldsymbol{b}$正交。因此
+    $$\left\|A^+\boldsymbol{b}+\boldsymbol{x}_0\right\|^2=\left\|A^+\boldsymbol{b}\right\|^2+\left\|\boldsymbol{x}_0\right\|^2\ge\left\|A^+\boldsymbol{b}\right\|^2$$
+    这就说明它是长度最小的解。
+\end{proofs}
+
+再考虑线性方程组无解的情形\com 即最小二乘问题。由于 $AA^+\boldsymbol{b}$ 是 $\boldsymbol{b}$ 在 $\mathcal{R}(A)$ 上的正交投影\com 因此$A^+\boldsymbol{b}$ 是一个最小二乘解。事实上\com $A^+\boldsymbol{b}$ 也是 $A\boldsymbol{x}=\boldsymbol{b}$ 的最小二乘解中长度最小的解。
+\begin{proofs}
+    记$\boldsymbol{b}$在$\mathcal{R}(A)$上的正交投影为$\hat{\boldsymbol{b}}$（我们知道$\hat{\boldsymbol{b}}=AA^+\boldsymbol{b}$）\com 则求原方程组的最小二乘解即是求方程组$A\boldsymbol{x} = \hat{\boldsymbol{b}}$的解。由上面证明\com 长度最小的解为$A^+\hat{\boldsymbol{b}}=A^+ AA^+\boldsymbol{b}= A^+\boldsymbol{b}$。
+\end{proofs}
+
+\subsection{Rayleign商、范数与低秩逼近}
+\de[Rayleign商]{
+    给定实矩阵$A$与非零向量$\boldsymbol{x}\in \R^n$\com 实数$\dfrac{\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}$称为$\boldsymbol{x}$关于$A$的~\tboba{Rayleign商}。
+}
+\begin{theorem}
+    给定实矩阵$A$和$B$\com 若存在正交矩阵$Q$使得$Q^\mathrm{T}AQ=B$\com 则$Q\boldsymbol{x}$关于$A$的\textup{Rayleign}商等于$\boldsymbol{x}$关于$B$的\textup{Rayleign}商。
+\end{theorem}
+\begin{proofs}
+    $\dfrac{\boldsymbol{x}^\mathrm{T}B\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}
+    =\dfrac{\boldsymbol{x}^\mathrm{T}(Q^\mathrm{T}AQ)\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}(Q^\mathrm{T}Q)\boldsymbol{x}}
+    =\dfrac{(Q\boldsymbol{x})^\mathrm{T}A(Q\boldsymbol{x})}{(Q\boldsymbol{x})^\mathrm{T}(Q\boldsymbol{x})}$。
+\end{proofs}
+\dil{Rayleign商与特征值的关系}{
+    设实对称矩阵$A$的特征值为$\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_n$\com $\lambda_i$对应的特征向量为$\boldsymbol{q}_i$\com 则
+    $$
+    \lambda_1 = \max_{\boldsymbol{x} \neq \boldsymbol{0}} \dfrac{\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}
+    \qquad
+    \lambda_i = \max_{\boldsymbol{x} \neq \boldsymbol{0} \atop \boldsymbol{x}\perp\mathrm{span}(\boldsymbol{q}_1\com \cdots\com \boldsymbol{q}_{i-1})} \dfrac{\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}
+    ~\text{（}i=2\com \cdots\com n-1\com n\text{）}
+    $$
+    对称地\com 有
+    $$
+    \lambda_n = \min_{\boldsymbol{x} \neq \boldsymbol{0}} \dfrac{\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}
+    \qquad
+    \lambda_i = \min_{\boldsymbol{x} \neq \boldsymbol{0} \atop \boldsymbol{x}\perp\mathrm{span}(\boldsymbol{q}_{i+1}\com \cdots\com \boldsymbol{q}_n)} \dfrac{\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}}
+    ~\text{（}i=1,~2,~\cdots,~n-1\text{）}
+    $$
+}
+
+\de[矩阵的谱范数]{
+    对任意矩阵$A$\com 非负数$\| A \| := \max\limits_{\boldsymbol{x} \neq \boldsymbol{0}} \dfrac{\|A\boldsymbol{x}\|}{\|\boldsymbol{x}\|}$称为矩阵$A$的\tboba{谱范数}。
+}
+\di[谱范数的性质]{
+    （1）$\|A\| \ge 0$\com 且$\|A\|=0$当且仅当$A=O$；\\
+    （2）$\|kA\| = |k|\|A\|$；\\
+    （3）$\|A+B\| \le \|A\| + \|B\|$；\\
+    （4）$\|AB\| \le \|A\| \|B\|$；\\
+    （5）如果$U\com V$正交\com 则$\|UAV^\mathrm{T}\| = \|A\|$。
+}
+向量$\boldsymbol{a}\in \R^n$的长度$\|\boldsymbol{a}\|$即是$n \times 1$矩阵$\boldsymbol{a}$的谱范数。
+\di[谱范数与奇异值]{
+    矩阵的谱范数等于其最大的奇异值\com 即$\|A\| = \sigma_1(A)$。
+}
+\begin{proofs}
+    $\|A\|^2 
+    = \max\limits_{\boldsymbol{x} \neq \boldsymbol{0}} \dfrac{\|A\boldsymbol{x}\|^2}{\|\boldsymbol{x}\|^2} 
+    = \max\limits_{\boldsymbol{x} \neq \boldsymbol{0}} \dfrac{\boldsymbol{x}^\mathrm{T}A^\mathrm{T}A\boldsymbol{x}}{\boldsymbol{x}^\mathrm{T}\boldsymbol{x}} 
+    \xlongequal{\text{定理~\ref{Rayleign商与特征值的关系}}} \max \lambda_i(A^\mathrm{T}A) = \sigma_1(A)^2$。
+\end{proofs}
+
+\dil{低秩逼近}{
+    设 $m \times n$ 矩阵 $A$ 的简化奇异值分解为
+    $A = \sum\limits_{i=1}^r \sigma_i\boldsymbol{u}_i\boldsymbol{v}_i^\mathrm{T}$\com 则对任意正整数 $k<r$\com $A_k= \sum\limits_{i=1}^k \sigma_i\boldsymbol{u}_i\boldsymbol{v}_i^\mathrm{T}$ 是$A$的\tbome{最佳秩}~$\mbome{k}$~\tbome{逼近}\com 即对任意秩不超过 $k$ 的 $m \times n$ 矩阵 $B$\com 都有 $\|A-A_k\| \le \|A-B\|$\com 亦即
+    $    \|A-A_{k}\|=\min\limits_{\mathrm{rank}(B)\le k}\|A-B\|     $。
+    $A_k= \sum\limits_{i=1}^k \sigma_i\boldsymbol{u}_i\boldsymbol{v}_i^\mathrm{T}$常称为\tbome{截断SVD}。
+}
+
+\subsection{实反对称矩阵}
+\di[]{
+    奇数阶实反对称矩阵一定不可逆。
+}
+\di[]{
+    实反对称矩阵的非零特征值为纯虚数。
+}
+\di[]{
+    设$A$为$n$阶实反对称矩阵\com 则$\forall \boldsymbol{x} \in \R^n$\com 都有$\boldsymbol{x}^\mathrm{T}A\boldsymbol{x}=0$。
+}
+\di[]{
+    $n$阶实反对称矩阵的特征向量必然形如$\boldsymbol{\alpha}+\i\boldsymbol{\beta}$\com 其中$\boldsymbol{\alpha}\com \boldsymbol{\beta} \in \R^n$\com $\neiji{\alpha}{\beta}{}{}=0$\com $\|\boldsymbol{\alpha}\|=\|\boldsymbol{\beta}\|$。
+}
+
+\newpage
+\section[线性空间和线性映射]{线性空间和线性映射 \page{246}}
+\newcommand{\bF}{\mathbb{F}}
+\renewcommand{\a}[1]{\langle #1 \rangle}
+\subsection{线性空间}
+\de[域]{
+    \tboba{域}定义为满足以下性质的代数系统$\a{K,+,\cdot}$\com 其中$|K|\ge 2$\com $+$、$\cdot$为二元运算：
+
+    （1）$\a{K,+}$为一个Abel群\com 即$+$可交换、可结合、在$K$内封闭、存在加法幺元$0$\com 且$\forall a \in K$\com $\exists -a \in K$\com $a+(-a)=0$；
+
+    （2）$\a{K\setminus\{0\},\cdot}$为一个Abel群\com 即$\cdot$可交换、可结合、在$K\setminus\{0\}$内封闭、存在乘法幺元$1 \neq 0$\com 且$\forall a \in K\setminus\{0\}$\com $\exists a^{-1} \in K\setminus\{0\}$\com $a \cdot a^{-1} = 1$；
+
+    （3）$\cdot$对$+$可分配。
+}
+\newcommand{\0}{\boldsymbol{0}}
+\newcommand{\1}{\boldsymbol{1}}
+\begin{example}
+    考虑$\bF_2=\{\0,~\1\}$\com 在其上定义运算$+$、$\cdot$\com 运算表分别
+    为
+    \begin{tabular}{c|cc}
+        $+$ & $\0$ & $\1$ \\
+        \hline
+        $\0$ & $\0$ & $\1$ \\
+        $\1$ & $\1$ & $\0$
+    \end{tabular}
+    和
+    \begin{tabular}{c|cc}
+        $\cdot$ & $\0$ & $\1$ \\
+        \hline
+        $\0$ & $\0$ & $\0$ \\
+        $\1$ & $\0$ & $\1$
+    \end{tabular}
+    \com 则代数系统$\a{\bF_2,+,\cdot}$构成一个域。这个域常应用在奇偶分析中\com 其中$\0$代表偶数\com $\1$代表奇数。
+\end{example}
+
+如果域$\a{\bF,+,\cdot}$中$\bF \in \C$是数集\com $+$和$\cdot$是$\C$上普通的加法和乘法运算\com 则称域$\a{\bF,+,\cdot}$为一个\tboba{数域}\com 也简记为$\bF$是一个数域。简言之\com 给定$\C$的子集$\bF$\com 如果$\bF$中至少包含一个非零复数\com 且$\bF$对复数的加减乘除四则运算封闭\com 即$\forall a\com b \in \bF$\com 都有$a+b\in \bF$\com $a-b\in \bF$\com $ab\in \bF$\com 当$b\neq 0$时$\dfrac{a}{b} \in \bF$\com 则称$\bF$是一个数域。
+
+$\mathbb{Q}$、$\mathbb{R}$、$\mathbb{C}$是数域\com 而$\mathbb{N}$、$\mathbb{Z}$不是数域。
+
+\newcommand{\V}{\mathcal{V}}
+\den[线性空间]{
+	给定数域$\bF$和非空集合$\V$\com 并给定\tboba{零元素}~$\0 \in \V$、\tboba{单位数}~$1 \in \bF$、二元运算\tboba{加法}~$+:\V \times \V \to \V$和二元运算\tboba{数乘}~$\cdot:\bF \times \V \to \V$\com 如果
+
+	（1）$\a{\V,+}$是Abel群\com 其中$\0$是这个群的幺元\com 元素$\boldsymbol{a}\in \V$的逆元记为$-\boldsymbol{a}$；
+
+	（2）数乘$\cdot$满足交换律；
+
+	（3）$\forall \boldsymbol{a} \in \V$\com $1 \cdot \boldsymbol{a}=\boldsymbol{a}$；
+
+	（4）$\forall k,~l \in \bF$\com $\forall \boldsymbol{a} \in \V$\com $(kl)\boldsymbol{a}=k(l\boldsymbol{a})$；
+
+	（5）数乘对$\bF$和$\V$上的加法均有分配律\com 
+
+	则称$\a{\V,\boldsymbol{0},+,\cdot}$是$\bF$上的\tboba{线性空间}\com 简记为$\V$是$\bF$上的线性空间。
+}
+容易验证\com 先前研究的\tboba{数组向量空间}~$\bF^n$（类似于定义~\ref{线性运算}~和定义~\ref{线性空间}）与现在线性空间的定义仍然吻合。
+\begin{example}
+	\textbf{矩阵空间}\quad\label{矩阵空间}
+	设元素在$\bF$中的$m \times n$矩阵的全体为集合$\bF^{m \times n}$。其中\com 各元素全为$\bF$中加法幺元的矩阵称为\textbf{零矩阵}\com 类似定义矩阵的加法和数乘\com $\bF^{m \times n}$就构成一个线性空间。
+\end{example}
+\begin{example}
+	\textbf{函数空间}\quad\label{函数空间} 
+	设$[0,~1]$上的连续复值函数的全体为集合$\mathscr{C}[0,~1]$。其中\com $0(x) \equiv 0$称为\textbf{零函数}；定义函数的\textbf{加法}$+:\mathscr{C}[0,~1] \times \mathscr{C}[0,~1] \to \mathscr{C}[0,~1]$为$(f+g)(x)=f(x)+g(x)$；定义函数的\textbf{数乘}$\cdot:\C \times \mathscr{C}[0,~1] \to \mathscr{C}[0,~1]$为$(k \cdot f)(x)=kf(x)$。于是$\mathscr{C}[0,~1]$构成一个线性空间。类似地\com $\mathscr{C}^{(n)}(\R)$乃至$\mathscr{C}^{\infty}(\R)$都可定义为线性空间。
+\end{example}
+\begin{example}
+	\textbf{多项式空间}\quad\label{多项式空间} 
+	设实系数多项式的全体为集合$\R[x]$。其中\com $0(x) \equiv 0$称为\textbf{零多项式}；定义多项式的\textbf{加法}$+:\R[x] \times \R[x] \to \R[x]$为$(f+g)(x)=f(x)+g(x)$；定义多项式的\textbf{数乘}$\cdot:\R \times \R[x] \to \R[x]$为$(k \cdot f)(x)=kf(x)$。于是$\R[x]$构成一个线性空间。类似地\com 次数小于$n$的实系数多项式也可定义为线性空间$\R[x]_n$；系数取自$\bF$的多项式也可定义线性空间$\bF[x]$和$\bF[x]_n$。
+\end{example}
+\begin{example}
+	\textbf{无穷小量空间}\quad\label{无穷小量空间} 
+	设有实数列的集合$A=\left\{\{a_n\}\left|\lim\limits_{n\to \infty}a_n = 0\right.\right\}$。其中\com $0$称为\textbf{零数列}；定义这些数列的\textbf{加法}$+: A \times A \to A$为$\{a_n\}+\{b_n\}=\{a_n+b_n\}$；定义这些数列的\textbf{数乘}$\cdot:\R \times A \to A$为$k\{a_n\}=\{ka_n\}$。于是$A$构成一个线性空间。
+\end{example}
+
+\zhu[「$\bF$上的线性空间」的理解]{
+	$\V$是$\bF$上的线性空间\com 不代表$\V$中的元素一定与$\bF$有很直接的联系。如\com 上面例~\ref{函数空间}~中的$\mathscr{C}[0,~1]$是$\C$上的线性空间\com 但我们考虑的函数定义域仅是$[0\com 1]\subsetneqq \R \subsetneqq \C$。又如\com $\R^n$一般说是$\R$上的线性空间\com 但其也可以看作$\mathbb{Q}$上的线性空间。
+}
+
+以下\com 将把数组向量空间中讨论的概念搬到一般的线性空间中。
+\den[线性子空间]{
+	给定$\a{\V,\boldsymbol{0},+,\cdot}$是$\bF$上的线性空间\com $\mathcal{W} \subseteq \mathcal{V}$\com 若$\a{\mathcal{W},\boldsymbol{0},+,\cdot}$也是线性空间\com 则称其为$\a{\V,\boldsymbol{0},+,\cdot}$的\tboba{线性子空间}\com 简记为$\mathcal{W}$是$\V$的线性子空间。
+}
+
+\den[线性组合]{
+	设$\V$是$\bF$上的线性空间\com $\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_n,~\boldsymbol{w}\in \V$\com 若存在$\lambda_1,~\lambda_2,~\cdots,~\lambda_n \in \bF$\com 使得$\boldsymbol{w} = \lambda_1\boldsymbol{v}_1 + \lambda_2\boldsymbol{v}_2+\cdots+\lambda_n\boldsymbol{v}_n$\com 则称$\boldsymbol{w}$是$\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_n$的\tboba{线性组合}。
+}
+\den[线性相关、线性无关]{
+	设$\V$是$\bF$上的线性空间\com $\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_n \in \V$\com 若存在不全为$0$的$\lambda_1,~\lambda_2,~\cdots,~\lambda_n \in \bF$\com 使得$\lambda_1\boldsymbol{v}_1 + \lambda_2\boldsymbol{v}_2+\cdots+\lambda_n\boldsymbol{v}_n = \boldsymbol{0}$\com 则称$\boldsymbol{v}_1,~\boldsymbol{v}_2,~\cdots,~\boldsymbol{v}_n$~\tboba{线性相关}\com 否则称他们\tboba{线性无关}。
+}
+\begin{example}
+    求证：在$\R[x]_n$中\com $1,~x,~x^2,~\cdots,~x^{n-1}$线性无关。
+\end{example}
+\begin{proofs}
+    设$k_0+k_1x+\cdots+k_{n-1}x^{n-1}=0(x)$\com 则选取两两不同的一组数$\lambda_1,~\lambda_2,~\cdots,~\lambda_n$代入\com 得 
+    $$\begin{bmatrix}
+        1&\lambda_1&\lambda_1^2&\cdots&\lambda_1^{n-1}\\
+        1&\lambda_2&\lambda_2^2&\cdots&\lambda_2^{n-1}\\
+        1&\lambda_3&\lambda_3^2&\cdots&\lambda_3^{n-1}\\
+        \vdots&\vdots&\vdots&\ddots&\vdots\\
+        1&\lambda_n&\lambda_n^2&\cdots&\lambda_n^{n-1}     
+    \end{bmatrix}\begin{bmatrix}
+        k_0 \\ k_1 \\ \vdots \\ k_{n-1}
+    \end{bmatrix}=\begin{bmatrix}
+        0 \\ 0\\ \vdots \\0
+    \end{bmatrix}$$
+    系数矩阵是 Vandermonde矩阵\com 故可逆\com 只有零解\com 则$k_0=k_1=\cdots=k_{n-1}=0$。故$1,~x,~x^2,\cdots,~x^{n-1}$线性无关。
+\end{proofs}
+
+\den[基]{
+	设$\V$是$\bF$上的线性空间\com $\mathcal{B} \subseteq \V$\com 如果
+	
+	（1）任意$\boldsymbol{v} \in \V$都是$\mathcal{B}$中有限个向量的线性组合；
+
+	（2）任意$\mathcal{B}$中有限个向量都线性无关\com 
+
+	则称$\mathcal{B}$是$\V$的一组\tboba{基}。
+}
+\den[秩、维数]{
+	给定$\bF$上的线性空间 $\V$ 中的向量组 $S:\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s$\com 如果其部分组$\boldsymbol{a}_{i_1},~\boldsymbol{a}_{i_2},~\cdots,~\boldsymbol{a}_{i_r}$满足
+   
+	（1）$\boldsymbol{a}_{i_1},~\boldsymbol{a}_{i_2},~\cdots,~\boldsymbol{a}_{i_r}$线性无关；
+
+	（2）$\boldsymbol{a}_1,~\boldsymbol{a}_2,~\cdots,~\boldsymbol{a}_s$ 可以被 $\boldsymbol{a}_{i_1},~\boldsymbol{a}_{i_2},~\cdots,~\boldsymbol{a}_{i_r}$ 线性表示\com 
+
+	则称 $\boldsymbol{a}_{i_1},~\boldsymbol{a}_{i_2},~\cdots,~\boldsymbol{a}_{i_r}$ 是 $S$ 的一个\tboba{极大线性无关部分组}\com 其中向量的个数称为向量组$S$的\tboba{秩}。
+
+	如果$\V$在$\bF$上存在一组基$\mathcal{B}$\com 则将
+	$\mathcal{B}$中向量的个数称为$\V$在$\bF$上的\tboba{维数}\com 记作$\mathrm{dim}_\bF \V$。特别地\com 若$\V$在$\bF$上可以选出无限个向量线性相关\com 即$\V$在$\bF$上的基$\mathcal{B}$中有无限个向量\com 则称$\V$是$\bF$上的\tboba{无限维线性空间}。
+}
+
+\subsection{线性映射}
+\den[线性映射]{
+    给定域$\bF$上的线性空间$\mathcal{V}$、$\mathcal{W}$\com 若映射$\mathscr{A}:\mathcal{V}\to \mathcal{W}$满足 
+
+    （1）$\forall \boldsymbol{v},~\boldsymbol{w} \in \mathcal{V}$\com $\mathscr{A}(\boldsymbol{v}+\boldsymbol{w})=\mathscr{A}(\boldsymbol{v})+\mathscr{A}(\boldsymbol{w})$；
+
+    （2）$\forall \boldsymbol{v}\in \mathcal{V}$\com $c \in \bF$\com $\mathscr{A}(c\boldsymbol{v})=c\mathscr{A}(\boldsymbol{v})$\com 
+
+    则称$\mathscr{A}$为从$\mathcal{V}$到$\mathcal{W}$的\tboba{线性映射}。
+}
+
+\begin{example}
+    \textbf{求导算子}\quad 设$\R$上的连续实值函数的全体为集合$\mathscr{C}(\R)$\com $\R$上的一阶连续可导实值函数的全体\vskip 5pt \noindent 为集合$\mathscr{C}^{(1)}(\R)$,~则在$\R$上,~映射
+    $\begin{NiceMatrix}[baseline=1]
+        \mathscr{D}=\dfrac{\dif}{\dif x}: & \mathscr{C}^{(1)}(\R) & \to & \mathscr{C}(\R)\\
+        & f(x) & \mapsto & f'(x)
+    \end{NiceMatrix}$
+    是一个线性映射,~$\mathscr{D}$也称为求导算子。
+\end{example}
+
+\de[线性映射的运算]{
+    （1）\tboba{加法}\quad 给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}$和线性映射$\mathscr{A}\com \mathscr{B}:\mathcal{V}\to \mathcal{W}$\com 定义它们的\tboba{和}~$\mboba{\mathscr{A}+\mathscr{B}}:\mathcal{V}\to \mathcal{W}$为$(\mathscr{A}+\mathscr{B})(x):=\mathscr{A}(\boldsymbol{v})+\mathscr{B}(\boldsymbol{v})$；
+    
+    （2）\tboba{线性映射的线性运算}\quad 给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}$和线性映射$\mathscr{A}\com \mathscr{B}:\mathcal{V}\to \mathcal{W}$\com 定义$(a\mathscr{A}+b\mathscr{B})(x):=a\mathscr{A}(\boldsymbol{v})+b\mathscr{B}(\boldsymbol{v})$；
+
+    （3）给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}\com \mathcal{X}$和线性映射$\mathcal{V} \xlongrightarrow{\mathscr{A}} \mathcal{W} \xlongrightarrow{\mathscr{B}} \mathcal{W}$\com 定义$\mathscr{A}$和$\mathscr{B}$的\tboba{复合}~$\mboba{\mathscr{B} \circ \mathscr{A}}:\mathcal{V}\to \mathcal{X}$为$(\mathscr{B} \circ \mathscr{A})(\boldsymbol{v}) := \mathscr{B}\bigl( \mathscr{A}(\boldsymbol{v})\bigr)$。
+}
+\zhu[一般线性映射与先前的不同之处]{
+	在一般的线性映射的语境下\com 一些结论不再成立。
+	例如\com 对$\R^n$上的任意两个线性变换$\mathscr{A}\com \mathscr{B}$\com 总有$\mathscr{A}\mathscr{B}-\mathscr{B}\mathscr{A} \neq \mathrm{id}$。但是\com 如果在$\R[x]$上定义线性变换$\mathscr{D}:p(x) \mapsto p'(x)$和$\mathscr{X}:p(x) \mapsto xp(x)$\com 则$\bigl(xp(x)\bigr)'-xp'(x)=p(x)$\com 即$\mathscr{DX}-\mathscr{XD}=\mathrm{id}$。
+}
+\de[线性同构]{
+    给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}$和线性映射$\mathscr{A}:\mathcal{V}\to \mathcal{W}$\com 若$\mathscr{A}$是双射\com 则称$\mathscr{A}$是从$\mathcal{V}$到$\mathcal{W}$的一个\tboba{线性同构}\com 并称$\mathcal{V}$和$\mathcal{W}$是在$\mathscr{A}$下\tboba{线性同构}的。
+}
+\begin{example}
+    给定有限集$S$\com $|S|=n$\com 设从$S$到$\R$的一切映射的全体构成集合$\R^S$\com 其可以定义为一线性空间。$\forall f \in \R^S$\com 定义映射$\mathscr{A}:\R^S \to \R^n$为$\mathscr{A}(f)=\begin{bmatrix}
+        f(s_1) \\ f(s_2) \\ \vdots \\ f(s_n)
+    \end{bmatrix}$\com 则$\mathscr{A}$为一个线性同构。
+\end{example}
+\begin{example}
+    给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}$\com 设所有从$\mathcal{V}$到$\mathcal{W}$的线性映射的全体是线性空间$\mathrm{Hom}_\bF(\mathcal{V}\com \mathcal{W})$。记$v=\mathrm{dim}\mathcal{V}$\com $w=\mathrm{dim}\mathcal{W}$\com 设元素取自$\bF$的所有$w \times v$矩阵构成线性空间$\mathbb{M}^{w \times v}(\bF)$。可以构造函数\com 使得$\mathrm{Hom}_\bF(\mathcal{V}\com \mathcal{W})$与$\mathbb{M}^{w \times v}(\bF)$线性同构。
+\end{example}
+\de[线性映射的核、像集]{
+    给定域$\bF$上的线性空间$\mathcal{V}\com \mathcal{W}$\com 映射$f \in \mathrm{Hom}_\bF (\mathcal{V}\com \mathcal{W})$。集合$\mathrm{Ker}_f:=\mathcal{N}(f) := \{ \boldsymbol{a} \in \mathcal{V} \mid f(\boldsymbol{a})=\boldsymbol{0} \}$称为$f$的\tboba{核}\com $f(\mathcal{V}):=\mathcal{R}(f):=\{ \boldsymbol{b}\in \mathcal{W} \mid \exists \boldsymbol{a} \in \mathcal{R}\text{\com }f(\boldsymbol{a})=\boldsymbol{b} \}$称为$f$的\tboba{像集}。
+}
+\begin{example}
+    \textbf{常微分方程}\quad 设$\R$上的无穷连续可导实值函数的全体为集合$\mathscr{C}^{(\infty)}(\R)$\com 显然这是一个无限维线性空间。给出$\mathscr{C}^{(\infty)}(\R)$上的一个线性变换$\mathscr{F}=\mathscr{D}^2-7\mathscr{D}+12\mathrm{id}$\com 也即$\bigl(\mathscr{F}(f)\bigr)(x)=f''(x)-7f'(x)+12f(x)$。$\mathscr{F}$的核就是二阶线性常系数齐次方程$f''(x)-7f'(x)+12f(x)=0(x)$的通解\com 即
+    $$\mathcal{N}(\mathscr{F})=\{f(x) \in \mathscr{C}^{(\infty)}(\R) \mid f''(x)-7f'(x)+12f(x)=0(x)\}=\{A\e^{3x}+B\e^{4x} \mid A\com B \in \R \}$$
+    这是一个二维线性空间。
+\end{example}
+\begin{example}
+    给定实对称正定矩阵$A$和实对称矩阵$B$\com 求证：
+
+    （1）关于矩阵$X$的方程$AX + XA = O$只有平凡解$X = O$；
+
+    （2）关于矩阵$X$的方程$AX + XA = B$存在唯一的解$X_0$；
+
+    （3）$X_0$是对称矩阵。
+\end{example}
+\begin{proofs}
+    （1）设有谱分解$A=Q \varLambda Q^\mathrm{T}$\com 则$AX + XA = O \Leftrightarrow Q \varLambda Q^\mathrm{T}X + XQ \varLambda Q^\mathrm{T} = O \Leftrightarrow \varLambda Q^\mathrm{T}XQ + Q^\mathrm{T}XQ \varLambda = O \xLongleftrightarrow{Y=Q^\mathrm{T}XQ} \varLambda Y + Y \varLambda = O$\com 故只需证对对角矩阵$\varLambda$成立。由$A$正定\com $\varLambda$各对角元均为正数\com 直接计算即可验证。
+
+    （2）定义$M_{n \times n}(\R)$上的线性变换$\mathscr{L}_A:X \mapsto AX + XA$\com 由（1）知$\mathcal{N}(\mathscr{L}_A)=\{O\}$\com 故$\mathscr{L}_A$是单射。
+
+    （3）$AX + XA = B \Rightarrow X^\mathrm{T}A+AX^\mathrm{T}=B$\com 即$\mathscr{L}_A(X)=\mathscr{L}_A(X^\mathrm{T})=B$\com 故$\mathscr{L}_A(X-X^\mathrm{T})=O$\com 则$X=X^\mathrm{T}$。
+\end{proofs}
+\newpage
+\subsection{坐标化线性空间与基的变换}\label{基变换}
+以下讨论在\textbf{有限维线性空间}中进行。
+\subsubsection{向量的坐标表示}
+\de[向量的坐标表示]{
+    若$\V$是$\bF$上的$n$维线性空间\com $\V$的一组基为$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$\com 则$\forall \boldsymbol{v} \in \V$\com $\exists x_1,~x_2,~\cdots,~x_n \in \bF$\com 使得$\boldsymbol{v}=x_1\boldsymbol{e}_1+x_2\boldsymbol{e}_2+\cdots+x_n\boldsymbol{e}_n$\com 即可定义$\mathscr{A}:\V \to \bF^n$为$\mathscr{A}(\boldsymbol{v}):=\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}$\com 可以验证$\mathscr{A}$是$\V$到$\bF$的线性同构。此时\com 称$\mathscr{A}(\boldsymbol{v})$为向量$\boldsymbol{v}$在基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$下的\tboba{坐标表示}。
+}
+上面的坐标表示下面将形式地简记作
+$$\boldsymbol{v}=x_1\boldsymbol{e}_1+x_2\boldsymbol{e}_2+\cdots+x_n\boldsymbol{e}_n=\begin{pmatrix}
+    \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+\end{pmatrix}\begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}$$
+
+考虑$\V$的两组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$和$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_n$\com 则有表示
+$$\left\{\begin{NiceArray}{l}
+    \boldsymbol{f}_1=t_{11}\boldsymbol{e}_1+t_{21}\boldsymbol{e}_2+\cdots+t_{n1}\boldsymbol{e}_n\\
+    \boldsymbol{f}_2=t_{12}\boldsymbol{e}_1+t_{22}\boldsymbol{e}_2+\cdots+t_{n2}\boldsymbol{e}_n\\
+    \cdots\\
+    \boldsymbol{f}_n=t_{1n}\boldsymbol{e}_1+t_{2n}\boldsymbol{e}_2+\cdots+t_{nn}\boldsymbol{e}_n
+\end{NiceArray}\right.$$
+即可形式地写作
+$$\begin{pmatrix}
+    \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+\end{pmatrix}=\begin{pmatrix}
+    \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+\end{pmatrix}\begin{bmatrix}
+    t_{11} & t_{12} & \cdots & t_{1n} \\
+    t_{21} & t_{22} & \cdots & t_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    t_{n1} & t_{n2} & \cdots & t_{nn}
+\end{bmatrix}$$
+上式中这个矩阵$T=\begin{bmatrix}
+    t_{11} & t_{12} & \cdots & t_{1n} \\
+    t_{21} & t_{22} & \cdots & t_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    t_{n1} & t_{n2} & \cdots & t_{nn}
+\end{bmatrix}$显然应当可逆\com 称为从$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$到$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_n$的\tboba{过渡矩阵}或\tboba{基变换矩阵}。
+\zhu[]{注意下标的安排和矩阵所乘的位置。}
+\di[向量坐标的基变换公式]{
+    给定$n$维线性空间$\V$的两组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$和$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_n$,~从$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$到$\boldsymbol{f}_1,~\boldsymbol{f}_2,~$ $\cdots,~\boldsymbol{f}_n$的过渡矩阵为$T$。若任意的向量$\boldsymbol{v}\in \V$在两组基下的坐标表示为
+    $$\boldsymbol{v}=\begin{pmatrix}
+        \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+    \end{pmatrix}\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}=\begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}\begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n
+    \end{bmatrix}$$
+    则 
+    $$\begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n
+    \end{bmatrix}=T^{-1}\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix} \quad \text{或} \quad \begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}=T\begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n
+    \end{bmatrix}$$
+}
+\begin{proofs}
+    $\begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}=\begin{pmatrix}
+        \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+    \end{pmatrix}T$\com 
+    即$\begin{pmatrix}
+        \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+    \end{pmatrix}=\begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}T^{-1}$\com 
+    于是
+    $$\begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}\begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n
+    \end{bmatrix}=\boldsymbol{v}=\begin{pmatrix}
+        \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+    \end{pmatrix}\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}=\begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}T^{-1}\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}$$
+    故$\begin{bmatrix}
+            y_1 & y_2 & \cdots & y_n
+        \end{bmatrix}^\mathrm{T}=T^{-1}\begin{bmatrix}
+            x_1 & x_2 & \cdots & x_n
+        \end{bmatrix}^\mathrm{T}$。
+\end{proofs}
+特别注意\com 向量坐标的基变换中\com 基的「矩阵」和坐标向量上乘$T$的方向不同\com 如图~\ref{坐标的基变换}~所示。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7.2cm]{坐标的基变换.png}
+    \caption{坐标的基变换}\label{坐标的基变换}
+\end{figure}
+
+特别地\com 对于数组向量空间上的基变换\com 若$\V \subseteq \bF^n$的两组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_r$和$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_r$分别构成矩阵$E$和矩阵$F$\com 则从$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_r$到$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_r$的过渡矩阵$T$可由 Gauss-Jordan消元法 得到：
+$$\begin{bmatrix}
+    A & B
+\end{bmatrix}\xlongrightarrow{\text{Gauss-Jordan}}\begin{bmatrix}
+    I_r & T \\ O & O
+\end{bmatrix}$$
+\begin{theorem}
+    若数组向量空间$\V \subseteq \bF^n$的两组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_r$和$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_r$分别构成矩阵$E$和矩阵$F$\com 则从$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_r$到$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_r$的过渡矩阵$T=A^+B$。
+\end{theorem}
+
+\subsubsection{线性映射的矩阵表示}
+\de[线性映射的矩阵表示]{
+    给定域$\bF$上的线性空间$\mathcal{V}$、$\mathcal{W}$\com 分别有一组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$和$\boldsymbol{\varepsilon}_1,~\boldsymbol{\varepsilon}_2,~\cdots,~\boldsymbol{\varepsilon}_m$。对线性映射$\mathscr{A}:\mathcal{V}\to \mathcal{W}$\com 若满足
+    $$\left\{\begin{NiceArray}{l}
+        \mathscr{A}(\boldsymbol{e}_1)=a_{11}\boldsymbol{\varepsilon}_1+a_{21}\boldsymbol{\varepsilon}_2+\cdots+a_{m1}\boldsymbol{\varepsilon}_m\\
+        \mathscr{A}(\boldsymbol{e}_2)=a_{12}\boldsymbol{\varepsilon}_1+a_{22}\boldsymbol{\varepsilon}_2+\cdots+a_{m2}\boldsymbol{\varepsilon}_m\\
+        \cdots\\
+        \mathscr{A}(\boldsymbol{e}_n)=a_{1n}\boldsymbol{\varepsilon}_1+a_{2n}\boldsymbol{\varepsilon}_2+\cdots+a_{mn}\boldsymbol{\varepsilon}_m
+    \end{NiceArray}\right.$$    
+    则称矩阵$A=\begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}            
+    \end{bmatrix}$为线性映射$\mathscr{A}$（在两组给定基下）的\tboba{矩阵表示}\com 记作$A=\begin{bmatrix}    \mathscr{A}    \end{bmatrix}$。
+}
+类似于向量的坐标表示\com 线性映射的矩阵表示形式上可以简记为
+$$\mathscr{A}\begin{pmatrix}
+    \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+\end{pmatrix}=\begin{pmatrix}
+    \mathscr{A}(\boldsymbol{e}_1)&\mathscr{A}(\boldsymbol{e}_2)&\cdots&\mathscr{A}(\boldsymbol{e}_n)
+\end{pmatrix}=\begin{pmatrix}
+    \boldsymbol{\varepsilon}_1~\boldsymbol{\varepsilon}_2~\cdots~\boldsymbol{\varepsilon}_n
+\end{pmatrix}\begin{bmatrix} \mathscr{A} \end{bmatrix}$$
+各量的关系如图~\ref{抽象线性映射的矩阵表示}~所示。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{线性映射的矩阵表示.png}
+    \caption{线性映射的矩阵表示}\label{抽象线性映射的矩阵表示}
+\end{figure}
+
+\begin{example}
+    在$2 \times 2$矩阵空间$M_{2 \times 2}(\R)$中\com 对任意$2 \times 2$矩阵$A$\com 定义线性变换$\mathscr{L}_A:X \mapsto AX$\com 求$\mathscr{L}_A$的表示矩阵。
+\end{example}
+\begin{solution}
+    $M_{2 \times 2}(\R)$的基取为$e_1=\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$\com $e_2=\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}$\com $e_3=\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}$\com $e_4=\begin{bmatrix} 0 & 0 \\ 0 & 4 \end{bmatrix}$。
+
+    设$A=\begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$\com 则$Ae_1=\begin{bmatrix} a_{11} & 0 \\ a_{21} & 0 \end{bmatrix}$\com $Ae_2=\begin{bmatrix} 0 & a_{11} \\ 0 & a_{21} \end{bmatrix}$\com $Ae_3=\begin{bmatrix} a_{12} & 0 \\ a_{22} & 0 \end{bmatrix}$\com $Ae_4=\begin{bmatrix} 0 & a_{12} \\ 0 & a_{22} \end{bmatrix}$\com 
+    故$\begin{bmatrix} \mathscr{L}_A \end{bmatrix} = \begin{bmatrix} a_{11}I_2 & a_{12}I_2 \\ a_{21}I_2 & a_{22}I_2 \end{bmatrix}$。
+\end{solution}
+
+\di[线性映射表示矩阵的基变换公式]{
+    给定域$\bF$上的线性空间$\mathcal{V}$、$\mathcal{W}$\com $\V$有两组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$和$\boldsymbol{f}_1,~\boldsymbol{f}_2,~\cdots,~\boldsymbol{f}_n$\com 
+    $\mathcal{W}$有两组基$\boldsymbol{\varepsilon}_1,~\boldsymbol{\varepsilon}_2,~\cdots,~\boldsymbol{\varepsilon}_n$和$\boldsymbol{\phi}_1,~\boldsymbol{\phi}_2,~\cdots,~\boldsymbol{\phi}_n$\com 且 
+    $$
+    \begin{pmatrix}
+        \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+    \end{pmatrix}=\begin{pmatrix}
+        \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+    \end{pmatrix}X_V
+    \qquad
+    \begin{pmatrix}
+        \boldsymbol{\phi}_1~\boldsymbol{\phi}_2~\cdots~\boldsymbol{\phi}_n
+    \end{pmatrix}=\begin{pmatrix}
+        \boldsymbol{\varepsilon}_1~\boldsymbol{\varepsilon}_2~\cdots~\boldsymbol{\varepsilon}_n
+    \end{pmatrix}X_W
+    $$
+    若有线性映射$\mathscr{A}:\mathcal{V}\to \mathcal{W}$\com 对应的矩阵表示分别为
+    \begin{align*} 
+        &\mathscr{A}\begin{pmatrix}
+            \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+        \end{pmatrix}=\begin{pmatrix}
+            \boldsymbol{\varepsilon}_1~\boldsymbol{\varepsilon}_2~\cdots~\boldsymbol{\varepsilon}_n
+        \end{pmatrix}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{e\com \varepsilon}
+        \\
+        &\mathscr{A}\begin{pmatrix}
+            \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+        \end{pmatrix}=\begin{pmatrix}
+            \boldsymbol{\phi}_1~\boldsymbol{\phi}_2~\cdots~\boldsymbol{\phi}_n
+        \end{pmatrix}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{f\com \phi}
+    \end{align*}
+    则$$\begin{bmatrix} \mathscr{A} \end{bmatrix}_{f\com \phi}=X_W^{-1}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{e\com \varepsilon}X_V$$
+}
+\begin{proofs}
+    注意到
+    \begin{align*}
+        \mathscr{A}\begin{pmatrix}
+            \boldsymbol{f}_1~\boldsymbol{f}_2~\cdots~\boldsymbol{f}_n
+        \end{pmatrix}
+        &=\mathscr{A}\left(\begin{pmatrix}
+            \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+        \end{pmatrix}X_V\right) \xlongequal{\text{线性性}} \left(\mathscr{A}\begin{pmatrix}
+            \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+        \end{pmatrix}\right)X_V\\
+        &=\begin{pmatrix}
+            \boldsymbol{\varepsilon}_1~\boldsymbol{\varepsilon}_2~\cdots~\boldsymbol{\varepsilon}_n
+        \end{pmatrix}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{e\com \varepsilon}X_V=\begin{pmatrix}
+            \boldsymbol{\phi}_1~\boldsymbol{\phi}_2~\cdots~\boldsymbol{\phi}_n
+        \end{pmatrix}X_W^{-1}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{e\com \varepsilon}X_V
+    \end{align*}
+    故$\begin{bmatrix} \mathscr{A} \end{bmatrix}_{f\com \phi}=X_W^{-1}\begin{bmatrix} \mathscr{A} \end{bmatrix}_{e\com \varepsilon}X_V$。
+\end{proofs}
+在线性映射表示矩阵的基变换中\com 各量的关系如图~\ref{表示矩阵的基变换}~所示。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8.5cm]{表示矩阵的基变换.png}
+    \caption{线性映射表示矩阵的基变换}\label{表示矩阵的基变换}
+\end{figure}
+
+可以看出\com 对线性映射表示矩阵所做的基变换是相抵变换；因此\com 对任意的$\mathscr{A} \in \mathrm{Hom}(\V\com \mathcal{W})$\com 总能通过选取$\V\com \mathcal{W}$的合适的基\com 使得$\begin{bmatrix}
+    \mathscr{A}
+\end{bmatrix}$是相抵标准型$\begin{bmatrix}
+    I_r & O \\ O & O
+\end{bmatrix}$的形式\com 其中$r=\mathrm{dim}\mathcal{R}(\mathscr{A})$。
+
+\subsubsection{线性变换的矩阵表示与特征值}
+由定义~\ref{线性映射的矩阵表示}\com 对线性空间$\V$上的线性变换$\mathscr{A}$\com 取$\V$的一组基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$\com 则可以由
+$$\mathscr{A}\begin{pmatrix}
+    \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+\end{pmatrix}=\begin{pmatrix}
+    \boldsymbol{e}_1~\boldsymbol{e}_2~\cdots~\boldsymbol{e}_n
+\end{pmatrix}\begin{bmatrix} \mathscr{A} \end{bmatrix}$$
+给出$\mathscr{A}$在基$\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$下的矩阵表示。
+
+\de[线性映射的特征值]{
+    给定 $\bF$ 上的线性空间 $\mathcal{U}$\com 以及其上的线性变换 $\mathscr{A}$。如果对$\lambda\in\mathbb{F}$\com 存在非零向量 $\boldsymbol{x}\in\mathcal{U}$\com 使得 $\mathscr{A}(\boldsymbol{x})=\lambda\boldsymbol{x}$\com 则称 $\lambda$ 为线性变换 $\mathscr{A}$ 的一个\tboba{特征值}\com 而称非零向量$\boldsymbol{x}$为 $\mathscr{A}$ 的一个属于特征值$\lambda$的\tboba{特征向量}\com 二元组 $(\lambda\com \boldsymbol{x})$ 常称为线性变换 $\mathscr{A}$ 的一个\tboba{特征对}。
+    
+    非零向量 $\boldsymbol{x}$ 为 $\mathscr{A}$ 的属于特征值$\lambda$ 的特征向量\com 当且仅当 $\boldsymbol{x}\in\mathcal{N}(\lambda\,\mathrm{id}-\mathscr{A})$\com 子空间 $\mathcal{N}(\lambda\,\mathrm{id}-\mathscr{A})$ 称为 $\mathscr{A}$ 的属于特征值$\lambda$的\tboba{特征子空间}。
+}
+\begin{theorem}
+    线性变换属于不同特征值的子空间线性无关。
+\end{theorem}
+\di[线性变换的特征值与其表示矩阵的特征值的关系]{
+    给定 $\bF$ 上的线性空间 $\V$\com 以及其上的线性变换 $\mathscr{A}$。取定$\V$的一组基$\mathcal{B}:\boldsymbol{e}_1,~\boldsymbol{e}_2,~\cdots,~\boldsymbol{e}_n$\com 则$\forall \lambda \in \bF$\com $\forall \boldsymbol{x} \in \V$\com 有
+    $$\mathscr{A}(\boldsymbol{x})=\lambda\boldsymbol{x} \Leftrightarrow \begin{bmatrix}
+        \mathscr{A}
+    \end{bmatrix}\hat{\boldsymbol{x}}=\lambda\hat{\boldsymbol{x}}$$
+    其中$\begin{bmatrix}
+        \mathscr{A}
+    \end{bmatrix}$是$\mathscr{A}$在$\mathcal{B}$下的表示矩阵\com $\hat{\boldsymbol{x}}$是$\boldsymbol{x}$在$\mathcal{B}$下的坐标向量。
+}
+在对线性变换及其表示矩阵做基变换时\com 由于定义域和陪域需选用相同的基\com 则对矩阵做的变换成为相似变换；因此\com 若一个矩阵可以相似对角化\com 则其所表示的线性变换的特征向量能够构成这个线性空间的一组基。
+
+特别地\com 数域$\bF$上的方阵$A$可以相似对角化\com 一个充要条件是其在数组线性空间$\bF^n$中对应一个线性变换\com 这个线性变换在$\bF^n$的另一组基下的表示矩阵是对角矩阵。
+
+\end{document}
