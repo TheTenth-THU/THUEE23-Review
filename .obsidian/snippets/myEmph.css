@@ -8,11 +8,11 @@ body {
     --h5-weight:700;
     --h6-weight:700;
     --h1-color:var(--color-accent);
-    --h2-color:var(--color-accent);
-    --h3-color:var(--color-orange);
-    --h4-color:var(--color-purple);
-    --h5-color:var(--color-yellow);
-    --h6-color:var(--color-green);
+    --h2-color: color-mix(in srgb, var(--color-accent) 90%, var(--text-normal) 10%);
+    --h3-color: color-mix(in srgb, var(--color-accent) 75%, var(--text-normal) 25%);
+    --h4-color: color-mix(in srgb, var(--color-accent) 60%, var(--text-normal) 40%);
+    --h5-color: color-mix(in srgb, var(--color-accent) 50%, var(--text-normal) 50%);
+    --h6-color: color-mix(in srgb, var(--color-accent) 50%, var(--text-normal) 50%);
     --h1-line-height: 1.2;
     --h2-line-height: 1.2;
     --h3-line-height: 1.2;
@@ -213,21 +213,36 @@ tbody tr > td .table-cell-wrapper {
     margin: 0 !important;
 }
 
-.markdown-source-view ol > li, .markdown-preview-view ol > li, 
 .markdown-source-view ul > li, .markdown-preview-view ul > li {
+    margin-left: 2em !important;
+}
+.markdown-source-view ol > li, .markdown-preview-view ol > li {
     margin-left: 2em !important;
 }
 .markdown-source-view ol, .markdown-preview-view ol {
     list-style-position: inside;
 }
 .markdown-source-view ol > li, .markdown-preview-view ol > li {
-    list-style-type: decimal;
+    --list-numbered-style: decimal-leading-zero !important;
     text-indent: -1em;
 }
 .markdown-source-view ol > li::marker, .markdown-preview-view ol > li::marker {
     font-weight: var(--bold-weight);
     color: var(--bold-color);
 }
+.markdown-source-view ol ol > li, .markdown-preview-view ol ol > li {
+    --list-numbered-style: upper-latin;
+}
+.markdown-source-view ol ol ol > li, .markdown-preview-view ol ol ol > li {
+    --list-numbered-style: lower-latin;
+}
+.markdown-source-view ol ol ol ol > li, .markdown-preview-view ol ol ol ol > li {
+    --list-numbered-style: upper-roman;
+}
+.markdown-source-view ol ol ol ol ol > li, .markdown-preview-view ol ol ol ol ol > li {
+    --list-numbered-style: lower-roman;
+}
+
 
 a {
     text-underline-offset: 0.2em;
