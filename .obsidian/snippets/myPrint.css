@@ -1,5 +1,5 @@
 body {
-    --font-text-size: 10px !important;
+    --font-text-size: 14px !important;
     --color-accent: rgb(71, 0, 171) !important;
     --h1-color: var(--color-accent) !important;
     --h2-color: var(--color-accent) !important;
@@ -7,6 +7,8 @@ body {
     --h4-color: var(--color-accent) !important;
     --h5-color: var(--color-accent) !important;
     --h6-color: var(--color-accent) !important;
+    --p-spacing: 0.15rem !important;
+    --p-parskip: 0.15rem !important;
 }
 
 div.markdown-preview-view.markdown-rendered {

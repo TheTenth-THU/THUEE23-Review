@@ -3,4 +3,5 @@
 .obsidian/*
 !.obsidian/snippets/
 .template/
+scripts/
 */raw/

@@ -213,34 +213,37 @@ tbody tr > td .table-cell-wrapper {
     margin: 0 !important;
 }
 
-.markdown-source-view ul > li, .markdown-preview-view ul > li {
-    margin-left: 2em !important;
-}
+.markdown-source-view ul > li, .markdown-preview-view ul > li,
 .markdown-source-view ol > li, .markdown-preview-view ol > li {
-    margin-left: 2em !important;
+    margin-left: 2em;
 }
+
 .markdown-source-view ol, .markdown-preview-view ol {
     list-style-position: inside;
 }
 .markdown-source-view ol > li, .markdown-preview-view ol > li {
-    --list-numbered-style: decimal-leading-zero !important;
+    list-style-type: decimal;
     text-indent: -1em;
+    margin-left: 2em;
 }
 .markdown-source-view ol > li::marker, .markdown-preview-view ol > li::marker {
     font-weight: var(--bold-weight);
     color: var(--bold-color);
 }
+
 .markdown-source-view ol ol > li, .markdown-preview-view ol ol > li {
-    --list-numbered-style: upper-latin;
+    list-style-type: upper-latin;
+    text-indent: -1.35em;
+    margin-left: 2.35em;
 }
 .markdown-source-view ol ol ol > li, .markdown-preview-view ol ol ol > li {
-    --list-numbered-style: lower-latin;
+    list-style-type: lower-latin;
 }
 .markdown-source-view ol ol ol ol > li, .markdown-preview-view ol ol ol ol > li {
-    --list-numbered-style: upper-roman;
+    list-style-type: upper-roman;
 }
 .markdown-source-view ol ol ol ol ol > li, .markdown-preview-view ol ol ol ol ol > li {
-    --list-numbered-style: lower-roman;
+    list-style-type: lower-roman;
 }
 
 
