@@ -5,20 +5,22 @@ longform:
   workflow: Default Workflow
   sceneFolder: /
   scenes:
+    - 变换
+    - - Fourier 级数 (FS)
+      - Fourier 变换 (FT)
+      - Laplace 变换 (LT)
+      - z 变换
+      - 离散余弦变换 (DCT)
+      - 离散时间 Fourier 变换 (DTFT)
+    - 信号
+    - - 连续时间信号处理的 Fourier 分析
+      - 信号的相关性分析
     - 系统
-    - Fourier 级数 (FS)
-    - Fourier 变换 (FT)
-    - Laplace 变换 (LT)
-    - z 变换
-    - 离散余弦变换 (DCT)
-    - 离散时间 Fourier 变换 (DTFT)
-    - 连续时间系统时域分析
-    - 连续时间系统频域分析
-    - 连续时间信号处理的 Fourier 分析
-    - 离散时间系统频域分析
-    - 离散时间系统时域分析
-    - 信号的相关性分析
-    - 系统的状态变量分析
+    - - 连续时间系统时域分析
+      - 连续时间系统频域分析
+      - 离散时间系统频域分析
+      - 离散时间系统时域分析
+      - 系统的状态变量分析
   ignoredFiles:
     - CONTENT
     - EXPORT
