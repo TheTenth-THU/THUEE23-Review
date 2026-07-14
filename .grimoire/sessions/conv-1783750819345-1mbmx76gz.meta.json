@@ -1,0 +1,99 @@
+{
+  "id": "conv-1783750819345-1mbmx76gz",
+  "providerId": "opencode",
+  "title": "总结，说明可以从哪些方面延伸，或者有哪些信息应该提及",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1783750819345,
+  "updatedAt": 1783751751600,
+  "lastResponseAt": 1783751059030,
+  "sessionId": null,
+  "providerState": {
+    "databasePath": "C:\\Users\\16870\\AppData\\Roaming\\opencode\\opencode.db"
+  },
+  "messages": [
+    {
+      "id": "msg-1783750819339-mqid5x6",
+      "role": "user",
+      "content": "",
+      "displayContent": "总结，说明可以从哪些方面延伸，或者有哪些信息应该提及",
+      "timestamp": 1783750819339,
+      "currentNote": "信号/SS - 信号与系统/系统的状态变量分析.md"
+    },
+    {
+      "id": "msg-1783750819452-fu14idf",
+      "role": "assistant",
+      "content": "",
+      "timestamp": 1783750819452,
+      "toolCalls": [],
+      "contentBlocks": [
+        {
+          "type": "text",
+          "content": "\n\n❌ **Error:** Failed to start OpenCode. Check the CLI path and login state."
+        }
+      ],
+      "responseMetadata": {
+        "providerId": "opencode",
+        "providerLabel": "OpenCode",
+        "model": "opencode:deepseek/deepseek-v4-pro",
+        "modelLabel": "Pro",
+        "effort": "high",
+        "effortLabel": "High"
+      },
+      "durationSeconds": 39,
+      "durationFlavorWord": "Stirred"
+    },
+    {
+      "id": "msg-1783751058978-2hjksti",
+      "role": "user",
+      "content": "",
+      "displayContent": "总结，说明可以从哪些方面延伸，或者有哪些信息应该提及",
+      "timestamp": 1783751058978
+    },
+    {
+      "id": "msg-1783751058985-65bdorz",
+      "role": "assistant",
+      "content": "",
+      "timestamp": 1783751058985,
+      "toolCalls": [],
+      "contentBlocks": [
+        {
+          "type": "text",
+          "content": "\n\n**Error:** spawn EFTYPE"
+        }
+      ],
+      "responseMetadata": {
+        "providerId": "opencode",
+        "providerLabel": "OpenCode",
+        "model": "opencode:deepseek/deepseek-v4-pro",
+        "modelLabel": "Pro",
+        "effort": "high",
+        "effortLabel": "High"
+      }
+    }
+  ],
+  "currentNote": "信号/SS - 信号与系统/系统的状态变量分析.md",
+  "assistantResponseMetadata": [
+    {
+      "assistantMessageIndex": 0,
+      "metadata": {
+        "providerId": "opencode",
+        "providerLabel": "OpenCode",
+        "model": "opencode:deepseek/deepseek-v4-pro",
+        "modelLabel": "Pro",
+        "effort": "high",
+        "effortLabel": "High"
+      }
+    },
+    {
+      "assistantMessageIndex": 1,
+      "metadata": {
+        "providerId": "opencode",
+        "providerLabel": "OpenCode",
+        "model": "opencode:deepseek/deepseek-v4-pro",
+        "modelLabel": "Pro",
+        "effort": "high",
+        "effortLabel": "High"
+      }
+    }
+  ]
+}
