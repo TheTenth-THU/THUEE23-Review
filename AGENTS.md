@@ -1,6 +1,6 @@
 # AGENTS.md
 
-此文件为 opencode 在此仓库中工作时提供项目规范和行文指南。
+此文件为 Codex 在此仓库中工作时提供项目规范、内容格式和验证要求。
 
 ## 项目概述
 
@@ -9,16 +9,17 @@
 ## 目录结构
 
 ```
-<XX> - <课程名>/         # 每门课程一个目录，XX 为课程代码缩写
-├── raw/                 # 原始教材 PDF、老师讲义、试题等外部参考资料
-├── res/                 # 图片、绘图等附件
-├── Index.md             # 课程首页，可包含知识点结构导航的详细说明，**不应保留**课程教师、教材、考试信息等
-├── <章节名>.md          # 各章节知识点
-├─! CONTENT.md           # **应删除**的目录文件，已由 frontmatter 中的 scenes 定义章节顺序
-└─* EXPORT.md            # 可选的导出文件
+<学科分类>/                    # 如数学、物理、信号、电路、计算
+└── <XX> - <课程名>/           # 每门课程一个目录，XX 为课程代码缩写
+    ├── raw/                   # 原始教材 PDF、教师讲义、试题等外部参考资料
+    ├── res/                   # 图片、绘图等附件
+    ├── Index.md               # 课程首页与知识点导航，不保留教师、教材、考试信息
+    ├── <章节名>.md            # 各章节知识点
+    ├─! CONTENT.md             # 应删除，章节顺序已由 frontmatter 中的 scenes 定义
+    └─* EXPORT.md              # 可选的导出文件
 ```
 
-`raw/` 存放该课程的原始资料（教材 PDF、教师讲义、试卷等），可通过 pdf-mcp 工具直接阅读 PDF 文件。
+`raw/` 存放该课程的原始资料。需要读取 PDF 时使用 Codex 的 `pdf` skill；涉及版面、公式或图形时应渲染相关页面进行核对，不能只依赖文本提取。
 
 目前已完成 Markdown 化的参考范本：**SS - 信号与系统**、**EM - 电磁场与波**、**SP - 固体物理基础**。
 
@@ -29,9 +30,9 @@
 + 每章一个 `.md` 文件，文件名 = 章节标题（如 `Fourier 变换 (FT).md`）
 + `Index.md` 为课程首页，包含：
   + YAML frontmatter（`longform` 配置，列出所有 scene 即章节）
-  + 课程信息（可用 `![[]]` 嵌入图片）
+  + 课程知识地图或必要的引导图片（可用 `![[]]` 嵌入图片）
   + 知识点导航列表
-+ 附件（图片、SVG）放在 `res/` 子目录下，在 frontmatter 中通过 `attachmentFolderPath` 指定
++ 附件（图片、SVG）放在课程的 `res/` 子目录下；附件路径由 Obsidian 的仓库设置统一管理，不写入章节 frontmatter
 
 ### Frontmatter 格式（Index.md）
 
@@ -224,39 +225,25 @@ $$
 
 ## LaTeX → Markdown 转换
 
-转换流程与排版规则见 `latex-to-markdown` skill，宏处理速查表见 `latex-macros` skill。可通过 `/latex-macros` 和 `/latex-to-markdown` 命令加载相应规则。
+转换流程与排版规则见项目级 `latex-to-markdown` skill，宏处理速查表见 `latex-macros` skill。处理 `.tex` 转换任务时应同时使用这两个 skill；Codex 会根据任务描述自动加载，无需斜杠命令。
 
-## Obsidian 配置
+## Codex 工作约定
+
++ `.agents/skills/` 存放本仓库的项目级 skill。修改 skill 时保持 `SKILL.md` 的 YAML frontmatter 有效，并同步修正其中引用的相对路径。
++ 不根据本文件中的静态表格推断课程进度。开始任务前检查目标课程的 `Index.md`、章节文件和 `raw/` 资料，以仓库现状为准。
++ 不直接修改 `.obsidian/` 下的配置、插件数据、主题或缓存。涉及 Obsidian 使用方式时只检查现状并给出建议，除非用户明确要求修改该目录。
++ 不把 `raw/` 中的外部资料、导出文件或工具运行时状态当作正文整理结果提交。
+
+## Obsidian 使用约定
 
 + 附件目录：`res/`（在 `.obsidian/app.json` 的 `attachmentFolderPath` 中配置）
 + 需要安装的社区插件：Longform（用于长篇写作场景管理）
 + 需要开启：Settings > Files & Links > Automatically update internal links
 + 忽略文件：`EXPORT.*`、`README.*`、`scripts/`
 
-## 当前进度
-
-| 代码 | 课程 | 状态 |
-|------|------|------|
-| AC | 高等微积分 | 待转换 (tex) |
-| CM | 复变函数与数理方程 | 待创建 |
-| CN | 通信与网络 | 待创建 |
-| CP | 计算机程序设计基础 | 待创建 |
-| DA | 数据与算法 | 待创建 |
-| DL | 数字逻辑与处理器基础 | 待创建 |
-| DM | 离散数学 | 待创建 |
-| EC | 电子电路与系统基础 | 待创建 |
-| EM | 电磁场与波 | Markdown 待调整 |
-| LA | 线性代数 | 待创建 |
-| MC | 媒体与认知 | 待创建 |
-| PR | 概率论与随机过程 | 待创建 |
-| QS | 量子与统计 | 待创建 |
-| SP | 固体物理基础 | Markdown 待调整 |
-| SS | 信号与系统 | Markdown 待调整 |
-| UP | 大学物理A | 待创建 |
-
 ## 工具提示
 
-+ LaTeX 公式在 Markdown 中的正确性需在 Obsidian 中验证，不能仅靠源码检查
-+ 各课程的原始 PDF 教材、讲义等存放在 `raw/` 子目录下，可通过 pdf-mcp 工具直接阅读
-+ `.tex` 文件中的 tikz 绘图可直接转换为 Markdown `tikz` 代码块
-+ 在编辑 `.md` 文件时，避免使用 Obsidian 不支持的 LaTeX 包（如 `nicematrix`、`tcolorbox` 等）
++ LaTeX 公式在 Markdown 中的正确性需结合 Obsidian 渲染结果验证，不能仅靠源码检查。
++ 各课程的原始 PDF 教材、讲义等存放在 `raw/` 子目录下，使用 `pdf` skill 读取和渲染。
++ `.tex` 文件中的 tikz 绘图可转换为 Markdown `tikz` 代码块。
++ 编辑 `.md` 文件时，避免使用 Obsidian 不支持的 LaTeX 包，如 `nicematrix`、`tcolorbox`。
