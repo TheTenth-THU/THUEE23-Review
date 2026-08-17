@@ -22,6 +22,7 @@ longform:
       - Electromagnetic Waves at Boundaries
   ignoredFiles:
     - CONTENT
+    - QUESTIONS
 ---
 ## Course Info
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "课程知识整理"
+  short_description: "从原始资料提取、组织、撰写并审校 Obsidian 课程知识笔记"
+  default_prompt: "使用 $organize-course-knowledge 从课程资料中提取知识并整理为可复习的 Obsidian 笔记。"

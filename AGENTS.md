@@ -223,9 +223,13 @@ $$
 
 这一流程确保课程目录结构从始至终保持连贯，各层级之间的概要描述与实际内容一致。
 
+## 知识内容提取与整理
+
+从教材、讲义、PDF、LaTeX 或既有笔记中提取知识，新建或重构课程章节，判断章节拆分、合并与父子层级，或审核知识覆盖和组织质量时，使用项目级 `organize-course-knowledge` skill。该 skill 负责从来源盘点、知识地图、文件层级、正文撰写到回修和验证的完整流程；不得仅按教材目录、课件课次或源文件 section 机械分节。
+
 ## LaTeX → Markdown 转换
 
-转换流程与排版规则见项目级 `latex-to-markdown` skill，宏处理速查表见 `latex-macros` skill。处理 `.tex` 转换任务时应同时使用这两个 skill；Codex 会根据任务描述自动加载，无需斜杠命令。
+转换流程与排版规则见项目级 `latex-to-markdown` skill，宏处理速查表见 `latex-macros` skill。处理 `.tex` 转换任务时应同时使用这两个 skill；若目标是正式课程知识笔记，而非仅做语法转换，还应同时使用 `organize-course-knowledge`，先确定知识结构和内容取舍，再执行 LaTeX 语法与资源转换。
 
 ## Codex 工作约定
 

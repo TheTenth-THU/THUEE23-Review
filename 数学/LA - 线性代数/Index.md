@@ -8,6 +8,7 @@ longform:
   ignoredFiles:
     - CONTENT
     - EXPORT
+    - QUESTIONS
 attachmentFolderPath: res
 ---
 

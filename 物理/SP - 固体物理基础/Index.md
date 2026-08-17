@@ -17,7 +17,7 @@ longform:
     - 固体的热特性
     - 固体的磁特性
   ignoredFiles:
-    - 
+    - QUESTIONS
 ---
 
 ## 课程内容

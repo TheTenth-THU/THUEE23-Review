@@ -1,6 +1,12 @@
-### Fourier 级数
+## Fourier级数
 
-#### 形式 Fourier 级数
+Fourier级数把周期函数投影到三角函数系。系数来自函数内积，但形式展开并不自动保证逐点收敛，更不保证在间断点收敛到原函数值。
+
+本章先建立正交性与Fourier系数，再用Dirichlet-Jordan定理判断逐点收敛，并以最佳逼近、Bessel不等式和Parseval等式解释平方平均收敛。奇偶延拓是构造正弦或余弦级数的工具，应同时说明延拓后的周期与端点行为。
+
+本章依赖[[函数列与函数项级数|函数项级数的收敛]]与[[Riemann积分与可积性|积分内积]]，但其平方平均收敛不同于逐点或一致收敛。
+
+### 形式 Fourier 级数
 
 > [!definition] 函数的内积
 > $\forall f,g\in\mathscr{C}[a,b]$，$(f,g):=\dint_a^bf(x)g(x) \dif x$ 称之为 $f,g$ 的**内积**。如果 $(f,g)=0$，则称 $f$ 与 $g$ **正交**，记作 $f\perp g$。
@@ -11,17 +17,18 @@
 $f\equiv 0$ 当且仅当 $\|f\|=0$；$\forall f,g \in\mathscr{C}[a,b]$，均有 $\|f+g\|\le \|f\|+\|g\|$。
 
 > [!definition]
-> $\varLambda=\{1,\cos x,\sin x,\cdots,\cos nx,\sin nx,\cdots\}$ 称为**三角函数系**。
+> $\Lambda=\{1,\cos x,\sin x,\cdots,\cos nx,\sin nx,\cdots\}$ 称为**三角函数系**。
 
 三角函数系有如下的性质：
 
-> [!lemma] 正交性
-> 三角函数系 $\Lambda$ 在 $[a,a+2\pi]$ 上为非零的正交函数系，即 $\forall f,g \in \varLambda$，若 $f\neq g$，则
+> [!theorem] 引理：正交性
+> 三角函数系 $\Lambda$ 在 $[a,a+2\pi]$ 上为非零的正交函数系，即 $\forall f,g \in \Lambda$，若 $f\neq g$，则
 > $$
 > \dint_a^{a+2\pi}f(x)g(x) \dif x=0
 > $$
 
 事实上，$\forall n,m\ge 1$ 且 $n\neq m$ 有
+
 $$
 \begin{aligned}
 &\int_a^{a+2\pi}1\dif x=2\pi,\quad
@@ -31,15 +38,16 @@ $$
 \end{aligned}
 $$
 
-> [!lemma] 完全性
-> 如果 $f\in\mathscr{C}(\mathbb{R})$ 是以 $2\pi$ 为周期的周期函数使得 $\forall g\in \varLambda$，均有 $\dint_a^{a+2\pi}f(x)g(x)\dif x=0$，则我们有 $f\equiv 0$。
+> [!theorem] 引理：完全性
+> 如果 $f\in\mathscr{C}(\mathbb{R})$ 是以 $2\pi$ 为周期的周期函数使得 $\forall g\in \Lambda$，均有 $\dint_a^{a+2\pi}f(x)g(x)\dif x=0$，则我们有 $f\equiv 0$。
 
-由此可知，$\varLambda$ 当中的元素在 $\mathbb{R}$ 上线性无关，且 $\varLambda$ 就是 $\mathscr{C}(\mathbb{R})$ 中以 $2\pi$ 为周期的周期函数空间的一组基。
+由此可知，$\Lambda$ 中的元素在 $\mathbb{R}$ 上线性无关，并在上述周期函数空间中构成完备正交系。「完备」不表示每个函数都是三角函数系的有限线性组合，而是表示不存在与整个函数系正交的非零连续周期函数。
 
 > [!definition] 三角级数
 > 形如 $\dfrac{a_0}{2}+\sum\limits_{n=1}^{\infty}(a_n\cos nx+b_n\sin nx)$ 称为**三角级数**。
 
 假设 $f$ 是以 $2\pi$ 为周期的周期函数且 $f(x)=\dfrac{a_0}{2}+\sum\limits_{k=1}^{\infty}(a_k\cos kx+b_k\sin kx)$ 在 $[-\pi,\pi]$ 上一致收敛，则由积分与级数求和可交换性立刻可知
+
 $$
 a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\dif x\ (n\ge 0),\qquad
 b_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\dif x\ (n\ge 1)
@@ -66,20 +74,23 @@ $$
 >
 > **证明：**我们熟知如下引理：
 >
-> [!lemma]
+
+> [!theorem] 引理
 > 周期为 $2\pi$ 的 $n$ 次三角多项式 $T_n(x) = \sum\limits_{k=0}^n \left(a_k \cos kx + b_k \sin kx\right)$ 的 Fourier 级数就是其本身。
 
 由非负项级数 $\dfrac{|a_0|}2+\sum\limits_{k=1}^\infty\left(|a_k|+|b_k|\right)$ 有上界，知其收敛，则由 Weierstrass 判别法，
+
 $$
 \left|\dfrac{a_0}2\right|+\sum\limits_{k=1}^\infty\left|a_k\cos kx+b_k\sin kx\right|
 \le \dfrac{\left|a_0\right|}2+\sum\limits_{k=1}^\infty\left(\left|a_k\cos kx\right|+\left|b_k\sin kx\right|\right)
 \le \dfrac{|a_0|}2+\sum\limits_{k=1}^\infty\left(|a_k|+|b_k|\right)
 $$
+
 知 $\dfrac{a_0}2+\sum\limits_{k=1}^\infty\left(a_k\cos kx+b_k\sin kx\right)$ 绝对且一致收敛于某个函数 $S(x)$。对上述引理取 $n \to \infty$，即知 $S(x)$ 是所求的函数，即该级数是函数 $S(x)$ 的傅里叶级数。
 
-#### Fourier 级数的性质及收敛性
+### Fourier 级数的性质及收敛性
 
-> [!lemma] Riemann-Lebesgue 引理
+> [!theorem] 引理：Riemann-Lebesgue 引理
 > 若 $f$ 在 $[a,b]$ 上可积，则
 > $$
 > \lim\limits_{\lambda\rightarrow \infty}\int_a^b f(x)\sin (\lambda x)\dif x
@@ -140,6 +151,7 @@ $$
 > \sum\limits_{n=1}^{\infty}\frac{1}{1+n^2}=\frac{\pi}{2\tanh \pi}-\frac{1}{2}
 > $$
 >
+
 > [!note] 一般周期函数的 Fourier 级数
 > 假设 $\ell>0$ 而 $T=2\ell$。对周期为 $T$ 的周期函数，我们可以相应地引入在任何长度为 $T$ 的区间上均为正交的三角函数系
 > $$
@@ -160,22 +172,26 @@ $$
 
 若只给定 $f(x)$ 是定义在 $(0,L)$ 上的函数，为求其周期为 $2L$ 的 Fourier 级数，有两种延拓方式：
 
-- **奇延拓** $\quad \forall x\in (-L,L)$，定义
++ **奇延拓** $\quad \forall x\in (-L,L)$，定义
+
   $$
   F(x)=\begin{cases}
       f(x), & \text{若}\ x\in (0,L),\\
       -f(-x), & \text{若}\ x\in (-L,0),
   \end{cases}
   $$
+
   此时 $\forall n\ge 0$，$a_n=0$，而 $\forall n\ge 1$，我们则有 $b_n=\dfrac{2}{L}\dint_0^{L}f(x)\sin \dfrac{n\pi}{L}x\dif x$，相应的 Fourier 级数为正弦级数。
 
-- **偶延拓** $\quad \forall x\in (-L,L)$，定义
++ **偶延拓** $\quad \forall x\in (-L,L)$，定义
+
   $$
   F(x)=\begin{cases}
       f(x), & \text{若}\ x\in (0,L),\\
       f(-x), & \text{若}\ x\in (-L,0),
   \end{cases}
   $$
+
   此时 $\forall n\ge 0$，$b_n=0$，而 $\forall n\ge 1$，我们则有 $a_n=\dfrac{2}{L}\dint_0^{L}f(x)\cos \dfrac{n\pi}{L}x\dif x$，相应的 Fourier 级数为余弦级数。
 
 > [!example]+ $\forall x\in[0,2]$，令 $f(x)=2-x$。将 $f$ 在 $[0,2]$ 上展成以 $4$ 为周期的余弦级数并求和函数。
@@ -209,13 +225,16 @@ $$
 >
 > 特别地，在点 $x=0$ 处，我们有 $2=1+\sum\limits_{k=1}^{\infty}\dfrac{8}{(2k-1)^2\pi^2}$，由此立刻可得 $\sum\limits_{k=1}^{\infty}\dfrac{1}{(2k-1)^2}=\dfrac{\pi^2}{8}$。
 >
-#### Fourier 级数的平方平均收敛
+
+### Fourier 级数的平方平均收敛
 
 对任意的整数 $n\ge 1$，我们令
+
 $$
-\varLambda_n=\{1,\cos x,\sin x,\cdots,\cos (nx),\sin (nx)\}
+\Lambda_n=\{1,\cos x,\sin x,\cdots,\cos (nx),\sin (nx)\}
 $$
-如果将 $\varLambda_n$ 所张成的实线性空间记作 $\mathcal{W}_n$，那么 $\mathcal{W}_n$ 为 $\mathscr{R}[-\pi,\pi]$ 的 $2n+1$ 维子空间。
+
+如果将 $\Lambda_n$ 所张成的实线性空间记作 $\mathcal{W}_n$，那么 $\mathcal{W}_n$ 为 $\mathscr{R}[-\pi,\pi]$ 的 $2n+1$ 维子空间。
 
 > [!theorem] 最佳逼近定理
 > $\forall f\in\mathscr{R}[-\pi,\pi]$，令
@@ -225,6 +244,7 @@ $$
 > 则 $\|f-S_n(f)\|=\min\limits_{g\in \mathcal{W}_n}\|f-g\|$，且最小值仅在 $g=S_n(f)$ 处达到，此时有 $(f-S_n(f)) \perp \mathcal{W}_n$。
 
 **证明：**对任意的整数 $0\le k\le n$，我们有
+
 $$
 \begin{aligned}
 \bigl(f-S_n(f),\cos (kx)\bigr)
@@ -232,21 +252,26 @@ $$
 &=\pi a_k(f)-\pi a_k(f) =0
 \end{aligned}
 $$
-同样，$\forall 1\le k\le n$，均有 $\bigl(f - S_n(f),\sin (kx)\bigr) = 0$。于是 $f-S_n(f)$ 与 $\varLambda_n$ 中的任意元素正交，从而由线性性可知，$f-S_n(f)$ 与 $\mathcal{W}_n$ 中的任意元素正交，也就是说 $f-S_n(f) \perp \mathcal{W}_n$。
+
+同样，$\forall 1\le k\le n$，均有 $\bigl(f - S_n(f),\sin (kx)\bigr) = 0$。于是 $f-S_n(f)$ 与 $\Lambda_n$ 中的任意元素正交，从而由线性性可知，$f-S_n(f)$ 与 $\mathcal{W}_n$ 中的任意元素正交，也就是说 $f-S_n(f) \perp \mathcal{W}_n$。
 
 $\forall g\in \mathcal{W}_n$，定义 $F_n=f-S_n(f)$，$G_n=g-S_n(f)$，则 $G_n\in \mathcal{W}_n$，从而 $(F_n,G_n)=0$，且我们有
+
 $$
 \|f-g\|^2=\|(f-S_n(f))-(g-S_n(f))\|^2
 =\|F_n-G_n\|^2
 =\|F_n\|^2+\|G_n\|^2 \ge \|F_n\|^2
 $$
+
 上式恰好表明我们有
+
 $$
 \min\limits_{g\in \mathcal{W}_n}\|f-g\|=\|F_n\| =\|f-S_n(f)\|
 $$
+
 并且仅当 $\|G_n\|^2 = 0$，即 $g=S_n(f)$ 时取到最小值。
 
-> [!lemma] Bessel 不等式
+> [!theorem] 引理：Bessel 不等式
 > $\forall f\in\mathscr{R}[-\pi,\pi]$，均有
 > $$
 > \frac{1}{2}\left(a_0(f)\right)^2+\sum_{k=1}^{\infty}\left(\left(a_k(f)\right)^2+\left(b_k(f)\right)^2\right)
@@ -254,26 +279,31 @@ $$
 > $$
 
 **证明：**对任意整数 $n\ge 1$，我们有
+
 $$
 \begin{aligned}
 0&\le \|f-S_n(f)\|^2
 =\|f\|^2+\|S_n(f)\|^2-2(f,S_n(f)) \\
 &=\int_{-\pi}^{\pi}\left(f(x)\right)^2\dif x
 + \pi\left(\frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2)\right)
-- \pi \left(a_0^2+2\sum_{k=1}^{n}\left(a_k^2+b_k^2\right)\right) \\
++ \pi \left(a_0^2+2\sum_{k=1}^{n}\left(a_k^2+b_k^2\right)\right) \\
 &=\int_{-\pi}^{\pi}\left(f(x)\right)^2\dif x-\pi\left(\frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2)\right)
 \end{aligned}
 $$
+
 由此立得
+
 $$
 \frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2)\le \frac{1}{\pi}\int_{-\pi}^{\pi}\left(f(x)\right)^2\dif x
 $$
+
 随后让 $n\rightarrow\infty$，可知
+
 $$
 \frac{a_0^2}{2}+\sum_{k=1}^{\infty}(a_k^2+b_k^2)\le \frac{1}{\pi}\int_{-\pi}^{\pi}\left(f(x)\right)^2\dif x
 $$
 
-> [!corollary]
+> [!theorem] 推论
 > $\forall f\in\mathscr{R}[-\pi,\pi]$，级数 $\dfrac{1}{2}\left(a_0(f)\right)^2+\sum\limits_{k=1}^{\infty}\left(\left(a_k(f)\right)^2+\left(b_k(f)\right)^2\right)$ 收敛。
 
 > [!theorem] Parseval 等式
@@ -283,7 +313,7 @@ $$
 > =\frac{1}{\pi}\int_{-\pi}^{\pi}\left(f(x)\right)^2\dif x
 > $$
 
-> [!corollary] 唯一性
+> [!theorem] 推论：唯一性
 > 若 $f,g\in\mathscr{R}[-\pi,\pi]$ 有相同的 Fourier 级数，则 $f,g$ 几乎处处相等；若 $f,g\in\mathscr{C}[-\pi,\pi]$ 有相同的 Fourier 级数，则 $f \equiv g$。
 
 **证明：**由于 $a_0(f-g)=a_0(f)-a_0(g)=0$，而且 $\forall n\ge 1$，同样也有 $a_n(f-g)=0$，$b_n(f-g)=0$，于是由 Parseval 等式可知 $\dint_{-\pi}^{\pi}\left(f(x)-g(x)\right)^2\dif x=0$。
@@ -293,13 +323,14 @@ $$
 
 **证明：**$\|f-S_n(f)\|^2=\dint_{-\pi}^{\pi}\left(f(x)\right)^2\dif x-\pi\left(\dfrac{a_0^2}{2}+\sum\limits_{k=1}^n(a_k^2+b_k^2)\right)$，再让 $n\rightarrow\infty$。
 
-> [!corollary] 广义 Parseval 等式
+> [!theorem] 推论：广义 Parseval 等式
 > $\forall f,g\in\mathscr{R}[-\pi,\pi]$，均有
 > $$
 > \frac{1}{2}a_0(f)a_0(g)+\sum_{k=1}^{\infty}\left(a_k(f)a_k(g)+b_k(f)b_k(g)\right)=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)g(x)\dif x
 > $$
 
 **证明：**对任意的整数 $n\ge 1$，我们有
+
 $$
 \begin{aligned}
 \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)g(x)\dif x
@@ -312,7 +343,9 @@ $$
 &=\frac{1}{\pi}\int_{-\pi}^{\pi}\left(f(x)-S_n(f)\right)g(x)\dif x+\frac{1}{2}a_0(f)a_0(g)+\sum_{k=1}^{n}\left(a_k(f)a_k(g)+b_k(f)b_k(g)\right)
 \end{aligned}
 $$
+
 由 Cauchy 不等式，我们立刻有
+
 $$
 \begin{aligned}
 \left|\int_{-\pi}^{\pi}\left(f(x)-S_n(f)\right)g(x)\dif x\right|
@@ -322,6 +355,7 @@ $$
 = \|f-S_n(f)\| \cdot \|g\|
 \end{aligned}
 $$
+
 又 $\lim\limits_{n\rightarrow\infty}\|f-S_n(f)\|=0$，于是由夹逼原理可知所证结论成立。
 
 > [!theorem] Fourier 级数求和与积分的可交换性
@@ -334,13 +368,16 @@ $$
 > 也即 Fourier 级数求和（即便它**不是点态收敛**时也成立）总是可以与积分交换次序。
 
 **证明：**固定 $a,x\in [-\pi,\pi]$。不失一般性，我们可假设 $a<x$。$\forall t\in [-\pi,\pi]$，令
+
 $$
 g(t)=\begin{cases}
     1, & \text{若}\ t\in [a,x],\\
     0, & \text{若}\ t\notin [a,x],
 \end{cases}
 $$
+
 则 $g$ 在 $[-\pi,\pi]$ 上可积。于是我们有
+
 $$
 \begin{aligned}
 \int_{a}^{x}f(t)\dif t=\int_{-\pi}^{\pi}f(t)g(t)\dif t

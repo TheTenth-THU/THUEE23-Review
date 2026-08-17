@@ -19,6 +19,7 @@ longform:
   ignoredFiles:
     - CONTENT
     - EXPORT
+    - QUESTIONS
     - 操作系统_课程笔记
 ---
 

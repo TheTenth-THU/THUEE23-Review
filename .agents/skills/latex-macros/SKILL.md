@@ -1,11 +1,18 @@
 ---
 name: latex-macros
-description: Use when converting .tex LaTeX source files to Obsidian Markdown. Provides a lookup table of LaTeX macros — which ones can be preserved (defined in preamble.sty) and which must be expanded to native LaTeX/MathJax syntax. Also covers theorem environment → callout mappings, section commands → heading mappings, and coloring/font commands → bold/italic conversions.
+description: Use alongside latex-to-markdown when converting .tex LaTeX source files to Obsidian Markdown. Provides the syntax-only lookup for macros that can be preserved or must be expanded, plus mappings for theorem environments, headings, colors and fonts. When producing formal course notes or reorganizing content, also load organize-course-knowledge; let it decide what knowledge to retain, where to place it and whether a formal result merits a Callout.
 ---
 
 # LaTeX 宏在 Markdown 中的处理规则
 
-此文件记录从 `.tex` 源文件向 Obsidian Markdown 转换时，各 LaTeX 宏的处理方式。
+此文件记录从 `.tex` 源文件向 Obsidian Markdown 转换时，各 LaTeX 宏的处理方式。本 skill 只决定已选内容的语法表示，不决定课程知识结构和内容取舍。
+
+## 与知识整理技能协作
+
++ 使用 `organize-course-knowledge` 确定知识单元、文件边界、保留范围和解释层次。
++ 使用本 skill 展开局部宏、保留项目宏并转换 LaTeX 排版命令。
++ 仅当形式化定义、定理、例题等内容被保留时应用下方 Callout 映射；不要因源文件存在环境就机械保留或制造高密度 Callout。
++ 宏转换完成后检查符号在同章和跨章节中的含义是否一致。
 
 ## 判断依据
 
@@ -115,6 +122,8 @@ Obsidian 中已加载 `preamble.sty` 作为 MathJax 宏定义片段（位于 `.o
 | `\zhu{标题}{内容}` | `> [!note] 标题` |
 
 > `\de` vs `\den`/`\dep`、`\di` vs `\din`/`\dip` 的区别仅在于是否有 label/page 参数，在 Markdown 中一律简化为 `> [!definition]` / `> [!theorem]`。
+
+上述规则只描述语法映射。若同时使用 `organize-course-knowledge`，由其判断某段内容应保留为形式化 Callout、改写为解释性正文，还是作为重复或非核心内容省略。
 
 ### 章节命令 → Markdown 标题
 
