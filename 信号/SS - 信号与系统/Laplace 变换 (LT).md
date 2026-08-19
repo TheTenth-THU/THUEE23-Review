@@ -162,7 +162,7 @@ $$
 
 ## Laplace 逆变换
 
-Laplace 变换像函数 $F(s)$ [[#用 Laplace 变换解系统微分方程的一般步骤|一般]]形如
+Laplace 变换像函数 $F(s)$ 在[[连续时间系统频域分析#用 Laplace 变换解系统微分方程的一般步骤|系统求解中]]一般写成
 $$
 \begin{align}
 F(s) &= \dfrac{B(s)}{A(s)} = \dfrac{b_{m}s^m + b_{m-1}s^{m-1} + \cdots + b_{1}s + b_{0}}{a_{n}s^n + a_{n-1}s^{n-1} + \cdots + a_{1}s + a_{0}} \\

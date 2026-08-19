@@ -2,7 +2,7 @@
 
 ### Dipole moment of continuous charge distributions, 连续电荷分布的电偶极矩
 
-We have **electric dipole moment** $\v{p}=q\v{d}$ for a pair of point charges $q$ and $-q$ separated by a distance $d$ when analyzing the [[Electric Fields#Electric Dipole|electric dipole]]. Given the two point charges are placed at $\v{r}'_{1}$ and $\v{r}'_{2}$, the electric dipole moment can be written as 
+We have **electric dipole moment** $\v{p}=q\v{d}$ for a pair of point charges $q$ and $-q$ separated by a distance $d$ when analyzing the [[Electrostatics#Electric Dipole, 电偶极子|electric dipole]]. Given the two point charges are placed at $\v{r}'_{1}$ and $\v{r}'_{2}$, the electric dipole moment can be written as
 $$
 \v{p} = q(\v{r}'_{1} - \v{r}'_{2}) = q\v{r}'_{1} + (-q)\v{r}'_{2}
 $$
@@ -71,7 +71,7 @@ $$
 
 ### Electric Displacement, 电位移 
 
-With dielectric materials, we can invoke the [[Electric Fields#Gauss's Law for E Field 电场高斯定理|Gauss's Law]] and get
+With dielectric materials, we can invoke the [[Electric Fields#Gauss's Law for E Field  电场高斯定理|Gauss's Law]] and get
 $$
 \nabla \cdot \v{E} = \dfrac{\rho}{\varepsilon_{0}} = \dfrac{1}{\varepsilon_{0}} \left( \rho_{\text{f}} + \rho_{\text{b}} \right) = \dfrac{1}{\varepsilon_{0}} \left( \rho_{\text{f}} - \nabla \cdot \v{P} \right)
 $$
@@ -119,7 +119,7 @@ $$
 
 ### Linear, Isotropic and Homogeneous Dielectrics, 线性各向同性均匀电介质 
 
-[[#Gauss's Law for D Field  电位移的高斯定理|Gauss's Law]] for $\v{D}$ field provides a a convenient way to analyze the electric field in dielectric materials. However, the relationship between $\v{D}$ and $\v{E}$ is not simple because of the presence of polarization, which is a function of $\v{E}$ but _not directly proportional_ to it.
+[[#Gauss's Law for D Field, 电位移的高斯定理|Gauss's Law]] for $\v{D}$ field provides a convenient way to analyze the electric field in dielectric materials. However, the relationship between $\v{D}$ and $\v{E}$ is not simple because of the presence of polarization, which is a function of $\v{E}$ but _not directly proportional_ to it.
 
 We hope to **simplify the relationship between $\v{P}$ and $\v{E}$**, so that we consider the following special cases:
 
@@ -265,7 +265,5 @@ where $C_{0} = \dfrac{\varepsilon_{0}A}{d}$ is [[#^9bb28d|the capacitance of the
 > \sigma_{\mathrm{b}} = -\left( 1 - \dfrac{1}{\varepsilon_{\mathrm{r}}} \right) \sigma_{\mathrm{f}}
 > $$
 > where $\sigma_{\mathrm{f}}$ and $\sigma_{\mathrm{b}}$ are on the same side of the dielectric.
-
-
 
 

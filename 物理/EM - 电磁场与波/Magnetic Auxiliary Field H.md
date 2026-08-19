@@ -20,7 +20,7 @@ $$
 &= \dfrac{\mu_{0}}{4\pi} \int_{V} \dfrac{\overbrace{ \nabla' \times \v{M}(\v{r}') }^{ \v{J}_{\mathrm{b}} }}{\sr} \dif \tau' - \dfrac{\mu_{0}}{4\pi} \oint_{\partial V} \dfrac{\overbrace{ \v{M}(\v{r}') \times \hat{n} }^{ \v{K}_{\mathrm{b}} }}{\sr} \dif a'
 \end{align}
 $$
-where the last equality is due to [[Math Basement#Curl version of the Divergence Theorem|the curl version of the Divergence Theorem]].
+where the last equality is due to [[Math Basement#Curl version of the Divergence Theorem, 旋度版本的散度定理|the curl version of the Divergence Theorem]].
 
 Inspired by the above equation, and imitating the definition of **[[Electric Displacement#Surface Bound Charges, 面束缚电荷|Surface Bound Charges, 面束缚电荷]]**, and **[[Electric Displacement#Volume Bound Charges, 体束缚电荷|Volume Bound Charges, 体束缚电荷]]**, we can define the **volume bound current density** as
 $$
@@ -174,6 +174,5 @@ Assume $B = \mu_{0} \dfrac{N}{l} I$ and $A$ keeps constant, then $L = \mu_{0} A 
 > where $B$ is the magnitude of the magnetic field.
 
 ^0c6e4c
-
 
 

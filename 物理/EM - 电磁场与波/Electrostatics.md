@@ -30,7 +30,7 @@ $$
 
 ##### Superposition Principle  叠加原理
 
-**[[Electric Fields#Superposition Principle 叠加原理|The superposition principle]]** states that the total electric field is the **sum of the fields** due to each charge, like
+**[[Electric Fields#Superposition Principle  叠加原理|The superposition principle]]** states that the total electric field is the **sum of the fields** due to each charge, like
 $$
 \v{E}(\v{r}) = \sum\limits_{i} \dfrac{q_{i}}{4\pi\varepsilon_{0}\mathscr{r}_{i}^2} \vu{\mathscr{r}_{i}}
 $$
@@ -54,7 +54,7 @@ $$
 
 #### Gauss's Law for E Field  电场高斯定理
 
-**[[Electric Fields#Gauss's Law for E Field 电场高斯定理|Gauss's Law]]** states that **the total electric flux** through a closed surface is equal to **the total charge** enclosed by the surface, divided by the vacuum permittivity.
+**[[Electric Fields#Gauss's Law for E Field  电场高斯定理|Gauss's Law]]** states that **the total electric flux** through a closed surface is equal to **the total charge** enclosed by the surface, divided by the vacuum permittivity.
 
 > [!theorem] Gauss's Law (integral form)
 > Integration of the electric field $\v{E}$ over a closed surface $S$, or **the total electric flux through $S$**, is given by
@@ -68,7 +68,7 @@ $$
 
 #### Circuital Law for Static E Field  静电场的环路定理
 
-**[[Electric Fields#Circuital Law for Static $ boldsymbol{E}$ Field 静电场的环路定理|Circuital Law]]** states that the line integral of the **static electric field $\v{E}$** along a closed path is zero.
+**[[Electric Fields#Circuital Law for Static $\boldsymbol{E}$ Field  静电场的环路定理|Circuital Law]]** states that the line integral of the **static electric field $\v{E}$** along a closed path is zero.
 
 > [!theorem] Circuital Law for Static $\v{E}$ Field (integral form)
 > The line integral of the electric field $\v{E}$ along a closed path $\varGamma$ is zero, i.e.
@@ -189,7 +189,7 @@ For a perfect conductor in a **stable state** (i.e., supporting an electrostatic
 > $$ \int_{\varOmega} \left( \phi \nabla^2 \psi + \nabla \phi \cdot \nabla \psi \right) \dif V = \oint_{\partial \varOmega} \phi \dfrac{\partial \psi}{\partial \vu{n}} \dif a$$
 > where $\vu{n}$ is the outward unit normal vector of the boundary $\partial \varOmega$.
 > > [!note]- Proof
-> > Let $\v{F} = \phi \nabla \psi$, then $\nabla \cdot \v{F} = \nabla \phi \cdot \nabla \psi + \phi \nabla^2 \psi$. By [[Math Basement#Gauss' Theorem|the divergence theorem]], the left-hand side of the equation equals the right-hand side.
+> > Let $\v{F} = \phi \nabla \psi$, then $\nabla \cdot \v{F} = \nabla \phi \cdot \nabla \psi + \phi \nabla^2 \psi$. By [[Math Basement#Gauss' Theorem, 高斯定理|the divergence theorem]], the left-hand side of the equation equals the right-hand side.
 
 ^055d9b
 
@@ -214,7 +214,7 @@ Uniqueness theorem is a powerful tool in solving electrostatic problems, especia
 
 ### The Method of Images  镜像法
 
-The **method of images** is a powerful technique based on [[#The Uniqueness Theorem 唯一性定理|the uniqueness theorem]] to solve electrostatic problems with **boundary conditions**. 
+The **method of images** is a powerful technique based on [[#The Uniqueness Theorem  唯一性定理|the uniqueness theorem]] to solve electrostatic problems with **boundary conditions**.
 
 > [!example]
 > 

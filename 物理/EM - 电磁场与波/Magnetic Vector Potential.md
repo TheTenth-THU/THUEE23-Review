@@ -4,7 +4,7 @@ Noticing for volume current distribution,
 $$
 \v{B}(\v{r}) = \dfrac{\mu_{0}}{4\pi} \int_{V} \dfrac{\v{J}(\v{r}') \times \hat{\sr }}{\sr ^2} \dif \tau' = \dfrac{\mu_{0}}{4\pi} \int_{V} \v{J}(\v{r}') \times \dfrac{\hat{\sr }}{\sr ^2} \dif \tau' = -\dfrac{\mu_{0}}{4\pi} \int_{V} \v{J}(\v{r}') \times \nabla\dfrac{1}{\sr } \dif \tau' 
 $$
-and we have the [[Math Basement#Product Rules of Special Derivatives|product rule]] $\nabla \times (f\v{F}) = f \nabla \times \v{F} - \v{F} \times \nabla f$, so
+and we have the [[Math Basement#Product Rules of Special Derivatives, 乘积法则|product rule]] $\nabla \times (f\v{F}) = f \nabla \times \v{F} - \v{F} \times \nabla f$, so
 $$
 -\v{J}(\v{r}') \times \nabla\dfrac{1}{\sr } = \nabla \times \dfrac{\v{J}(\v{r}')}{\sr } - \dfrac{1}{\sr } \underbrace{\nabla \times \v{J}(\v{r}')}_{\nabla \text{ is for } \v{r}} = \nabla \times \dfrac{\v{J}(\v{r}')}{\sr }
 $$
@@ -121,6 +121,5 @@ $$
 
 > [!note] The more FUNDAMENTAL quantity in magnetism
 > A-B effect shows that the **magnetic vector potential $\v{A}$** is more **fundamental** than the magnetic field $\v{B}$, as it can affect the phase of a charged particle even in a region where the magnetic field is zero.
-
 
 

@@ -111,7 +111,7 @@ $$
 > The **divergence** of the magnetic field $\v{B}$ at any point $\v{r}$ is zero, i.e.
 > $$\nabla \cdot \v{B}(\v{r}) = 0$$
 
-By applying [[Math Basement#Gauss' Theorem|the divergence theorem]], we can convert it into the integral form.
+By applying [[Math Basement#Gauss' Theorem, 高斯定理|the divergence theorem]], we can convert it into the integral form.
 
 > [!theorem] Gauss's Law for B Field (integral form)
 > The **total magnetic flux** through any closed surface $S$ is zero, i.e.
@@ -125,7 +125,7 @@ Consider the curl of $\v{B}$, we have
 > The **curl** of the magnetic field $\v{B}$ at any point $\v{r}$ is
 > $$\nabla \times \v{B}(\v{r}) = \mu_{0} \v{J}(\v{r})$$
 
-By applying [[Math Basement#Stokes' Theorem|Stokes' Theorem]], we can convert it into the integral form.
+By applying [[Math Basement#Stokes' Theorem, 斯托克斯定理|Stokes' Theorem]], we can convert it into the integral form.
 
 > [!theorem] Ampère's Circuital Law (integral form)
 > For any closed loop $C$, the **line integral** of the magnetic field $\v{B}$ around the loop is
@@ -365,4 +365,3 @@ More specifically, the **superconductors** are the **perfect diamagnetic materia
 ![[Pasted image 20250423021108.png]]
 
 Also, ferromagnetic materials exhibit very **high magnetic susceptibility $\chi_{\mathrm{m}}$**, typically in the range of $10^3$ to $10^6$. Ferromagnetic materials exhibit strong magnetization **only below the Curie temperature** ($770 \rmu{{}^\circ C}$ for iron). 
-

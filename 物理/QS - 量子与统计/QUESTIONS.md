@@ -31,7 +31,8 @@
 
 **关联知识点**
 
-+ [[物理/QS - 量子与统计/QUESTIONS#Q01 波函数及其物理意义|波函数及其物理意义]]。
++ [[波函数#物质波的波函数|波函数的统计解释]]。
++ [[量子力学的基本假设#量子态假设|量子态假设]]。
 
 ### Q02 Schrödinger 方程与 Maxwell 方程
 
@@ -66,4 +67,5 @@ $$
 
 **关联知识点**
 
-+ [[物理/QS - 量子与统计/QUESTIONS#Q02 Schrödinger 方程与 Maxwell 方程|Schrödinger 方程与 Maxwell 方程]]。
++ [[Schrödinger 方程#含时 Schrödinger 方程|含时 Schrödinger 方程]]。
++ [[Schrödinger 方程#概率守恒|概率守恒]]。

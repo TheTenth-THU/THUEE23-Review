@@ -82,7 +82,7 @@ $$
 
 ## Gauss's Law for E Field  电场高斯定理
 
-According to **[[Math Basement#Gauss' Theorem|Gauss' Theorem]]**, denote $S$ a **closed surface** enclosing a volume $V$, we have
+According to **[[Math Basement#Gauss' Theorem, 高斯定理|Gauss' Theorem]]**, denote $S$ a **closed surface** enclosing a volume $V$, we have
 $$
 \oint_{S} \v{E}(\v{r}) \cdot \dif \v{a} = \int_{V} \nabla \cdot \v{E}(\v{r}) \dif \tau = \dfrac{1}{\varepsilon_{0}} \int_{V} \sum\limits_{i} q_{i} \delta^{3}(\v{\mathscr{r}_{i}}) \dif \tau = \dfrac{1}{\varepsilon_{0}} \sum\limits_{i} q_{i} = \dfrac{Q_{\text{enc}}}{\varepsilon_{0}}
 $$
@@ -130,7 +130,7 @@ $$
 > \oint_{\varGamma} \v{E}(\v{r}) \cdot \dif \v{l} = 0
 > $$
 
-According to **[[Math Basement#Stokes' Theorem|Stokes' Theorem]]**, denote $\varGamma$ a **closed path** enclosing a surface $A$, we have
+According to **[[Math Basement#Stokes' Theorem, 斯托克斯定理|Stokes' Theorem]]**, denote $\varGamma$ a **closed path** enclosing a surface $A$, we have
 $$
 \oint_{\varGamma} \v{E}(\v{r}) \cdot \dif \v{l} = \int_{A} \nabla \times \v{E}(\v{r}) \cdot \dif \v{a} = 0
 $$
@@ -141,4 +141,3 @@ Since the path $\varGamma$ is arbitrary, we have
 > $$
 > \nabla \times \v{E}(\v{r}) = \v{0}
 > $$
-

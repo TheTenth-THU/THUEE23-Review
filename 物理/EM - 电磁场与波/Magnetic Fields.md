@@ -15,7 +15,7 @@ Consider a volume $V$ bounded by its surface $\partial V$. The total current flo
 $$
 \dfrac{\dif Q}{\dif t} = \dfrac{\dif}{\dif t} \int_{V} \rho\dif\tau = - \int_{\partial V} \v{J} \cdot \dif \v{a}
 $$
-where $\dif \v{a}$ is the vector area element pointing out of the volume. Thus, apply [[Math Basement#Gauss' Theorem|Gauss' Theorem]] to get
+where $\dif \v{a}$ is the vector area element pointing out of the volume. Thus, apply [[Math Basement#Gauss' Theorem, 高斯定理|Gauss' Theorem]] to get
 $$
 \int_{V} \nabla \cdot \v{J} \dif\tau = - \int_{\partial V} \v{J} \cdot \dif \v{a} = \int_{V} \dfrac{\dif Q}{\dif t} \dif\tau
 $$
@@ -139,7 +139,7 @@ $$
 
 ^1da827
 
-By applying [[Math Basement#Gauss' Theorem|the divergence theorem]], we can convert it into the integral form.
+By applying [[Math Basement#Gauss' Theorem, 高斯定理|the divergence theorem]], we can convert it into the integral form.
 
 > [!theorem] Gauss's Law for B Field (integral form)
 > The **total magnetic flux** through any closed surface $S$ is zero, i.e.
@@ -182,7 +182,7 @@ Therefore, we have
 
 ^7ae464
 
-By applying [[Math Basement#Stokes' Theorem|Stokes' Theorem]], we can convert it into the integral form.
+By applying [[Math Basement#Stokes' Theorem, 斯托克斯定理|Stokes' Theorem]], we can convert it into the integral form.
 
 > [!theorem] Ampère's Circuital Law (integral form)
 > For any closed loop $C$, the **line integral** of the magnetic field $\v{B}$ around the loop is
@@ -250,4 +250,3 @@ By applying [[Math Basement#Stokes' Theorem|Stokes' Theorem]], we can convert it
 > ```
 
 ^287a4f
-

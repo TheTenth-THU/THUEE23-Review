@@ -234,7 +234,7 @@ Gaussian 脉冲的 Fourier 变换也是 Gaussian 函数，且**宽度与时域�
 
 ### 周期信号的 Fourier 变换
 
-**复指数函数**的 Fourier 变换可基于 $\mathscr{F} \{ 1 \} = 2\pi \delta(\omega)$ 由[[#$ omega$ 域平移|频移特性]]直接得到：
+**复指数函数**的 Fourier 变换可基于 $\mathscr{F} \{ 1 \} = 2\pi \delta(\omega)$ 由[[#$\omega$ 域平移|频移特性]]直接得到：
 $$
 \mathscr{F} \{ \e^{\I\omega_{0} t} \} = 2\pi \delta(\omega - \omega_{0})
 $$
