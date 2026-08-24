@@ -22,6 +22,7 @@ longform:
   ignoredFiles:
     - CONTENT
     - EXPORT
+    - QUESTIONS
 ---
 
 ## 知识主线

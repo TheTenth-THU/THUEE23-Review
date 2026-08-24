@@ -19,7 +19,8 @@ longform:
     - 事务与并发控制
     - 数据库恢复
     - 数据库新技术
-  ignoredFiles: []
+  ignoredFiles:
+    - QUESTIONS
 ---
 ## 课程知识地图
 

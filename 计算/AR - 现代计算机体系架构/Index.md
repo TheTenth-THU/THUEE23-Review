@@ -18,7 +18,8 @@ longform:
     - 多处理器与缓存一致性
     - GPU
     - Cloud Computation
-  ignoredFiles: []
+  ignoredFiles:
+    - QUESTIONS
 ---
 ## 课程知识地图
 

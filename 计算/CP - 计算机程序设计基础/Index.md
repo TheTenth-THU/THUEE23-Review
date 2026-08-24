@@ -26,10 +26,6 @@ longform:
     - CONTENT
     - EXPORT
     - QUESTIONS
-    - QUESTIONS - 程序构建与数据表示
-    - QUESTIONS - 指针函数与文件
-    - QUESTIONS - 面向对象机制
-    - QUESTIONS - Python 对照
 ---
 
 ## 知识地图

@@ -18,9 +18,6 @@ longform:
     - 存储器与总线
   ignoredFiles:
     - QUESTIONS
-    - QUESTIONS - 数制组合逻辑与器件
-    - QUESTIONS - 时序逻辑与系统设计
-    - QUESTIONS - 处理器与存储
     - EXPORT
 ---
 

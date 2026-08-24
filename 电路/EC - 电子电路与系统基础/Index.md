@@ -19,11 +19,6 @@ longform:
     - 振荡器与信号发生
   ignoredFiles:
     - QUESTIONS
-    - QUESTIONS - 电路定律与分析
-    - QUESTIONS - 动态与频率响应
-    - QUESTIONS - 放大器与反馈
-    - QUESTIONS - 器件与振荡
-    - QUESTIONS - 数字与测试接口
 ---
 ## 课程知识地图
 

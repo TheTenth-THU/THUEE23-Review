@@ -18,9 +18,6 @@ longform:
     - 多用户通信
   ignoredFiles:
     - QUESTIONS
-    - QUESTIONS - 信源信道与传输基础
-    - QUESTIONS - 调制与接收
-    - QUESTIONS - 网络与多址
     - EXPORT
 ---
 

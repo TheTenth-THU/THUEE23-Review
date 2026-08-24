@@ -26,9 +26,6 @@ longform:
       - 模型压缩与高效推理
   ignoredFiles:
     - QUESTIONS
-    - QUESTIONS - 学习与优化
-    - QUESTIONS - 视觉任务
-    - QUESTIONS - 序列生成与多模态
     - CONTENT
     - EXPORT
 ---
@@ -68,4 +65,4 @@ flowchart LR
 
 ## 辅助材料
 
-+ [[QUESTIONS|推免问答题库]]按学习优化、视觉任务、序列生成与多模态三组组织。
++ [[QUESTIONS|推免问答题库]]按学习范式、泛化评价、视觉任务、序列与生成模型四组组织。

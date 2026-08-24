@@ -20,8 +20,6 @@ longform:
     - 算法设计思想
   ignoredFiles:
     - QUESTIONS
-    - QUESTIONS - 数据结构与图
-    - QUESTIONS - 算法与数值
 ---
 ## 课程知识地图
 
