@@ -5,6 +5,7 @@ longform:
   workflow: Default Workflow
   sceneFolder: /
   scenes:
+    - QUESTIONS
     - Math Basement
     - Electrostatics
     - - Electric Fields
@@ -22,14 +23,13 @@ longform:
       - Electromagnetic Waves at Boundaries
   ignoredFiles:
     - CONTENT
-    - QUESTIONS
 ---
 
-## Course Knowledge Map, 课程知识地图
+## Knowledge Mainline, 知识主线
 
 Electromagnetism connects sources, fields, forces, energy, and waves. The course begins with vector analysis, builds electrostatic and magnetostatic field laws from charge and current, introduces polarization and magnetization in matter, and then combines induction with Maxwell's addition to obtain the full time-varying theory. Wave equations, radiation, propagation in media, and boundary phenomena follow from that unified framework.
 
-## Knowledge Navigation, 知识点导航
+## Key Structure, 重点结构
 
 + **[[Math Basement]]**: vector algebra, gradient, divergence, curl, line and surface integrals, Stokes' theorem, and Gauss' theorem used throughout the field equations.
 + **[[Electrostatics]]**: the electrostatic problem chain from Coulomb's law and superposition to Gauss' law, potential, uniqueness, conductors, dielectrics, and the method of images.
@@ -46,3 +46,15 @@ Electromagnetism connects sources, fields, forces, energy, and waves. The course
     + **[[Electromagnetic Radiation]]**: retarded potentials, dipole radiation, angular distribution, and near- and far-field limits.
     + **[[Electromagnetic Waves in Media]]**: refractive index, dispersion, group velocity, loss, and material response.
     + **[[Electromagnetic Waves at Boundaries]]**: Snell and Fresnel relations, polarization, Brewster angle, total internal reflection, and guided modes.
+
+## Review Guide, 复习指引
+
+Start with [[QUESTIONS|the interview recall questions]] and identify whether the missing link lies in sources, constitutive relations, boundary conditions, wave propagation, or radiation. Then return to the corresponding formal note and rebuild the chain from assumptions and governing equations to field geometry and measurable consequences. In every oral answer, state the medium model, coordinate and sign conventions, units, boundary conditions, and limiting case before extending the result.
+
+### Sprint Schedule, 08/24—09/03
+
+See the [[推免复习总览#08/24—09/03 冲刺计划|master schedule]] for the shared timeline.
+
++ **First pass**: Complete Q01—Q31 on 08/26 and draw Maxwell's equations, boundary conditions, plane-wave geometry, standing waves, the dominant waveguide mode, and dipole radiation.
++ **Focused retest**: Retest every red or yellow item on 08/31; on 09/02, use only random oral questions and remaining high-impact errors.
++ **Minimum completion standard**: State the source and medium model, coordinate and sign conventions, boundary conditions, field geometry, units, and one measurable or limiting consequence.
