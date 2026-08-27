@@ -1,0 +1,40 @@
+// Python和工具环境。
+(?d).venv
+(?d)__pycache__
+(?d).pytest_cache
+(?d).mypy_cache
+(?d).ruff_cache
+(?d)*.pyc
+
+// Git与Codex运行配置。
+(?d).git
+(?d).agents
+(?d).codex
+(?d).claude
+(?d).claudian
+(?d).template
+
+// Obsidian设备状态。
+(?d).obsidian/cache
+(?d)workspace.json
+(?d)workspace-mobile.json
+(?d)community-plugins.json
+(?d)appearance.json
+(?d)core-plugins-migration.json
+(?d).obsidian/plugins/better-export-pdf
+(?d).obsidian/plugins/execute-code
+(?d).obsidian/plugins/github-copilot
+(?d).obsidian/plugins/obsidian-git
+(?d).obsidian/plugins/realclaudian/
+
+// 临时文件。
+(?d).trash
+(?d).DS_Store
+(?d)Thumbs.db
+
+// 非正文内容。
+(?d)scripts
+(?d)EXPORT.*
+(?d)raw
+(?d)test
+(?d)tmp
