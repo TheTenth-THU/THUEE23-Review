@@ -21,11 +21,15 @@
 (?d)community-plugins.json
 (?d)appearance.json
 (?d)core-plugins-migration.json
+(?d).obsidian/themes
 (?d).obsidian/plugins/better-export-pdf
 (?d).obsidian/plugins/execute-code
 (?d).obsidian/plugins/github-copilot
 (?d).obsidian/plugins/obsidian-git
-(?d).obsidian/plugins/realclaudian/
+(?d).obsidian/plugins/realclaudian
+(?d).obsidian/plugins/obsidian-chat
+(?d).obsidian/plugins/obsidian42-brat
+(?d).obsidian/plugins/longform/data.json
 
 // 临时文件。
 (?d).trash

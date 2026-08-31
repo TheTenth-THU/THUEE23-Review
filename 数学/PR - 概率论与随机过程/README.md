@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 概率论与随机过程
+  title: 数学 - 概率论与随机过程
   workflow: Default Workflow
   sceneFolder: /
   scenes:

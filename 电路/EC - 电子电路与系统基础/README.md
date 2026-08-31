@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 电子电路与系统基础
+  title: 电路 - 电子电路与系统基础
   workflow: Default Workflow
   sceneFolder: /
   scenes:

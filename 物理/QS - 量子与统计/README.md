@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 量子与统计
+  title: 物理 - 量子与统计
   workflow: Default Workflow
   sceneFolder: /
   scenes:

@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 信号与系统
+  title: 信号 - 信号与系统
   workflow: Default Workflow
   sceneFolder: /
   scenes:

@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 数字信号处理
+  title: 信号 - 数字信号处理
   workflow: Default Workflow
   sceneFolder: /
   scenes:

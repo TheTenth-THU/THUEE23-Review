@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 电磁场与波
+  title: 物理 - 电磁场与波
   workflow: Default Workflow
   sceneFolder: /
   scenes:

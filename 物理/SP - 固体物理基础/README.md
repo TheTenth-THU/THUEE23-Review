@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 固体物理基础
+  title: 物理 - 固体物理基础
   workflow: Default Workflow
   sceneFolder: /
   scenes:

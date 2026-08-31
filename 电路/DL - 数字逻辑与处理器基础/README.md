@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 数字逻辑与处理器基础
+  title: 电路 - 数字逻辑与处理器基础
   workflow: Default Workflow
   sceneFolder: /
   scenes:

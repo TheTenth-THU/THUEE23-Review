@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 计算机程序设计基础
+  title: 计算 - 计算机程序设计基础
   workflow: Default Workflow
   sceneFolder: /
   scenes:

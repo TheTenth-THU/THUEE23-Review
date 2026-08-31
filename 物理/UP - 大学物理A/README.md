@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 大学物理A
+  title: 物理 - 大学物理A
   workflow: Default Workflow
   sceneFolder: /
   scenes:

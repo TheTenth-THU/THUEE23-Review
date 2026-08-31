@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 线性代数
+  title: 数学 - 线性代数
   workflow: Default Workflow
   sceneFolder: /
   scenes:

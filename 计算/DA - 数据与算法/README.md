@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 数据与算法
+  title: 计算 - 数据与算法
   workflow: Default Workflow
   sceneFolder: /
   scenes:

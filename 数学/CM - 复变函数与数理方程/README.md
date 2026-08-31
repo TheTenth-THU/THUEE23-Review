@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 复变函数与数理方程
+  title: 数学 - 复变函数与数理方程
   workflow: Default Workflow
   sceneFolder: /
   scenes:

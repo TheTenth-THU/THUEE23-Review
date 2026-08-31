@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 离散数学
+  title: 数学 - 离散数学
   workflow: Default Workflow
   sceneFolder: /
   scenes:

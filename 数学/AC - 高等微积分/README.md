@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 高等微积分
+  title: 数学 - 高等微积分
   workflow: Default Workflow
   sceneFolder: /
   scenes:

@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 现代计算机体系架构
+  title: 计算 - 现代计算机体系架构
   workflow: Default Workflow
   sceneFolder: /
   scenes:

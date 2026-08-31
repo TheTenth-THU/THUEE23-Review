@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 媒体与认知
+  title: 计算 - 媒体与认知
   workflow: Default Workflow
   sceneFolder: /
   scenes:

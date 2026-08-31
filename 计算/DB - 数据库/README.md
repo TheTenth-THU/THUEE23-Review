@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 数据库
+  title: 计算 - 数据库
   workflow: Default Workflow
   sceneFolder: /
   scenes:

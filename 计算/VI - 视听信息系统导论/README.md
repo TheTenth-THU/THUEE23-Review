@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: 视听信息系统导论
+  title: 计算 - 视听信息系统导论
   workflow: Default Workflow
   sceneFolder: /
   scenes:
