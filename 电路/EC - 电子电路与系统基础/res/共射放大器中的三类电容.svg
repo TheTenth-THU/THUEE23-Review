@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+  <defs>
+    <style>
+      .wire { fill: none; stroke: #243447; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #64748b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .node { fill: #243447; }
+      .cap { fill: none; stroke: #2563eb; stroke-width: 5; }
+      .res { fill: none; stroke: #243447; stroke-width: 4; stroke-linejoin: round; }
+      .title { font: 700 34px "Noto Sans SC", sans-serif; fill: #172033; }
+      .label { font: 600 25px "Noto Sans SC", sans-serif; fill: #172033; }
+      .small { font: 22px "Noto Sans SC", sans-serif; fill: #334155; }
+      .tiny { font: 19px "Noto Sans SC", sans-serif; fill: #475569; }
+      .blue { fill: #1d4ed8; }
+      .orange { fill: #c2410c; }
+      .purple { fill: #7e22ce; }
+      .box1 { fill: #eff6ff; stroke: #60a5fa; stroke-width: 2.5; rx: 18; }
+      .box2 { fill: #fff7ed; stroke: #fb923c; stroke-width: 2.5; rx: 18; }
+      .box3 { fill: #faf5ff; stroke: #c084fc; stroke-width: 2.5; rx: 18; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="850" fill="#ffffff"/>
+  <text x="700" y="54" text-anchor="middle" class="title">共射放大器中三类电容的位置与作用</text>
+  <text x="700" y="87" text-anchor="middle" class="small">蓝色为电容；直流偏置支路从简，重点观察电容接在「哪里」</text>
+
+  <!-- Main amplifier -->
+  <text x="680" y="140" text-anchor="middle" class="label">共射放大级（输出反相）</text>
+  <line x1="650" y1="175" x2="650" y2="220" class="wire"/>
+  <text x="650" y="164" text-anchor="middle" class="label">VCC</text>
+  <!-- Rc -->
+  <polyline points="650,220 625,235 675,255 625,275 675,295 625,315 650,330" class="res"/>
+  <text x="700" y="278" class="label">R_C</text>
+  <line x1="650" y1="330" x2="650" y2="380" class="wire"/>
+  <circle cx="650" cy="360" r="7" class="node"/>
+  <text x="665" y="350" class="small">集电极 / v_o′</text>
+
+  <!-- NPN stylized -->
+  <line x1="540" y1="440" x2="595" y2="440" class="wire"/>
+  <line x1="595" y1="395" x2="595" y2="500" class="wire"/>
+  <line x1="595" y1="415" x2="650" y2="380" class="wire"/>
+  <line x1="595" y1="480" x2="650" y2="520" class="wire"/>
+  <path d="M631 495 L650 520 L620 511" fill="#243447"/>
+  <text x="675" y="462" class="label">Q₁</text>
+  <circle cx="540" cy="440" r="7" class="node"/>
+  <text x="515" y="425" text-anchor="end" class="small">基极 / v_i′</text>
+
+  <!-- Re and ground -->
+  <line x1="650" y1="520" x2="650" y2="555" class="wire"/>
+  <polyline points="650,555 625,570 675,590 625,610 675,630 625,650 650,665" class="res"/>
+  <text x="695" y="617" class="label">R_E</text>
+  <line x1="650" y1="665" x2="650" y2="705" class="wire"/>
+  <line x1="620" y1="705" x2="680" y2="705" class="wire"/>
+  <line x1="630" y1="717" x2="670" y2="717" class="wire"/>
+  <line x1="640" y1="729" x2="660" y2="729" class="wire"/>
+
+  <!-- Input coupling capacitor -->
+  <text x="65" y="425" class="label">信号源</text>
+  <text x="82" y="458" class="small">v_s + 直流偏置差</text>
+  <line x1="230" y1="440" x2="330" y2="440" class="wire"/>
+  <line x1="330" y1="408" x2="330" y2="472" class="cap"/>
+  <line x1="354" y1="408" x2="354" y2="472" class="cap"/>
+  <line x1="354" y1="440" x2="540" y2="440" class="wire"/>
+  <text x="342" y="392" text-anchor="middle" class="label blue">C_in：输入耦合</text>
+
+  <!-- Output coupling capacitor and load -->
+  <line x1="650" y1="360" x2="875" y2="360" class="wire"/>
+  <line x1="875" y1="328" x2="875" y2="392" class="cap"/>
+  <line x1="899" y1="328" x2="899" y2="392" class="cap"/>
+  <line x1="899" y1="360" x2="1050" y2="360" class="wire"/>
+  <circle cx="1050" cy="360" r="7" class="node"/>
+  <text x="887" y="312" text-anchor="middle" class="label blue">C_out：输出耦合</text>
+  <text x="1068" y="350" class="small">v_o</text>
+  <polyline points="1050,360 1030,382 1070,402 1030,422 1070,442 1030,462 1050,480" class="res"/>
+  <text x="1090" y="430" class="label">R_L</text>
+  <line x1="1050" y1="480" x2="1050" y2="705" class="wire"/>
+  <line x1="1020" y1="705" x2="1080" y2="705" class="wire"/>
+  <line x1="1030" y1="717" x2="1070" y2="717" class="wire"/>
+  <line x1="1040" y1="729" x2="1060" y2="729" class="wire"/>
+
+  <!-- Emitter bypass -->
+  <line x1="650" y1="540" x2="800" y2="540" class="wire"/>
+  <line x1="768" y1="575" x2="832" y2="575" class="cap"/>
+  <line x1="768" y1="599" x2="832" y2="599" class="cap"/>
+  <line x1="800" y1="540" x2="800" y2="575" class="wire"/>
+  <line x1="800" y1="599" x2="800" y2="705" class="wire"/>
+  <line x1="770" y1="705" x2="830" y2="705" class="wire"/>
+  <line x1="780" y1="717" x2="820" y2="717" class="wire"/>
+  <line x1="790" y1="729" x2="810" y2="729" class="wire"/>
+  <text x="846" y="592" class="label orange">C_E：旁路</text>
+  <text x="846" y="623" class="tiny">与 R_E 并联</text>
+
+  <!-- Bridging/Miller capacitor -->
+  <path d="M540 440 C540 360, 548 330, 573 313" class="wire"/>
+  <path d="M600 250 C635 262, 650 305, 650 360" class="wire"/>
+  <line x1="555" y1="295" x2="600" y2="250" class="cap"/>
+  <line x1="573" y1="313" x2="618" y2="268" class="cap"/>
+  <text x="465" y="245" class="label purple">C_μ：跨接电容</text>
+  <text x="420" y="278" class="tiny">跨在输入与反相输出之间</text>
+
+  <!-- Explanation cards -->
+  <rect x="40" y="760" width="410" height="70" class="box1"/>
+  <text x="60" y="788" class="small blue">耦合：串在信号通路中</text>
+  <text x="60" y="817" class="tiny">隔直通交；低频容抗大 → 低频衰减</text>
+
+  <rect x="490" y="760" width="410" height="70" class="box2"/>
+  <text x="510" y="788" class="small orange">旁路：与退化电阻并联</text>
+  <text x="510" y="817" class="tiny">直流保留负反馈；交流旁路 → 中频增益增大</text>
+
+  <rect x="940" y="760" width="420" height="70" class="box3"/>
+  <text x="960" y="788" class="small purple">跨接：跨在输入—输出之间</text>
+  <text x="960" y="817" class="tiny">高频反馈增强；Miller 效应 → 上限频率降低</text>
+</svg>
