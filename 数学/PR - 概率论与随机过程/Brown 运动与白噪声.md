@@ -1,4 +1,6 @@
-## Brown运动
+## 对象、定义与基本结构
+
+### Brown运动
 
 > [!definition] 标准Brown运动
 > 随机过程 $\{B(t),t\geq 0\}$ 称为**标准Brown运动 (standard Brownian motion)**，若满足：
@@ -25,7 +27,7 @@ $$
 
 带尺度参数 $\sigma^2$ 的Brown运动可写成 $X(t)=\sigma B(t)$，其增量方差为 $\sigma^2(t-s)$。
 
-## Brown运动与白噪声
+### Brown运动与白噪声
 
 考察差商
 
@@ -64,7 +66,9 @@ $$
 B(t)=\int_0^t W(\tau)\dif\tau.
 $$
 
-## Itô微积分
+## 性质、方法与应用
+
+### Itô微积分
 
 对小时间增量 $\Delta t$，有
 
@@ -101,7 +105,7 @@ $$
 
 与普通链式法则相比，额外的二阶导数项来自 $(\dif B)^2=\dif t$。
 
-## 几何Brown运动
+### 几何Brown运动
 
 **几何Brown运动 (geometric Brownian motion)**满足
 

@@ -6,25 +6,25 @@ longform:
   sceneFolder: /
   scenes:
     - QUESTIONS
-    - - 复变函数
-      - 复数与复变函数
+    - 复变函数
+    - - 复数与复变函数
       - 解析函数
       - 复积分与 Cauchy 理论
       - 复级数与 Laurent 展开
       - 留数定理
-    - - 积分变换
-      - Fourier 变换
+    - 积分变换
+    - - Fourier 变换
       - Dirac delta 函数
       - Laplace 变换
-    - - 数理方程
-      - 偏微分方程的分类
+    - 数理方程
+    - - 偏微分方程的分类
       - 数理方程与定解问题
       - 特征线法
       - 热传导方程
       - 位势方程与 Green 函数
       - 分离变量法
-    - - 特殊函数
-      - Bessel 函数
+    - 特殊函数
+    - - Bessel 函数
       - Legendre 多项式
   ignoredFiles:
     - CONTENT

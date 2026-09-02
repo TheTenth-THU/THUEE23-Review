@@ -1,4 +1,6 @@
-## Laplace 与 Poisson 方程
+## 对象、定义与基本结构
+
+### Laplace 与 Poisson 方程
 
 位势问题的基本形式为
 
@@ -8,7 +10,7 @@ $$
 
 $f=0$ 时得到 Laplace 方程，解称为**调和函数**。调和函数满足平均值性质和最大值原理，因此内部值受边界值强烈约束。
 
-## 全空间基本解
+### 全空间基本解
 
 基本解 $\varPhi$ 满足
 
@@ -31,7 +33,7 @@ u(\v x)=\int_{\mathbb R^n}
 \varPhi(\v x-\v y)f(\v y)\dif\v y.
 $$
 
-## Green 恒等式
+### Green 恒等式
 
 对足够光滑的 $u,v$，Green 第二恒等式为
 
@@ -44,7 +46,9 @@ $$
 
 它把区域内的微分方程与边界上的函数值、法向导数连接起来，是构造 Green 函数的基础。
 
-## Dirichlet Green 函数
+## 性质、方法与应用
+
+### Dirichlet Green 函数
 
 对固定场点 $\v x\in\Omega$，Dirichlet Green 函数满足
 
@@ -65,7 +69,7 @@ $$
 
 Green 函数等于自由空间基本解加上一个关于 $\v y$ 的调和修正，使边界条件得到满足。
 
-## 对称性与唯一性
+### 对称性与唯一性
 
 对自伴的 Laplace 算子和齐次 Dirichlet 边界条件，Green 函数满足
 

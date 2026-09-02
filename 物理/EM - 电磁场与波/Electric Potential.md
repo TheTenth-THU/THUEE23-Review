@@ -1,4 +1,6 @@
-## Electric Potential of Point Charges  点电荷的电势
+## 知识框架
+
+### Electric Potential of Point Charges  点电荷的电势
 
 Noticing that
 $$
@@ -20,7 +22,7 @@ $$
 
 ^98645c
 
-## Conservative Property of Static Electric Fields  静电场的保守性
+### Conservative Property of Static Electric Fields  静电场的保守性
 
 The integration of the electric field $\v{E}$ along a path $\varGamma$ from $\v{r}_{1}$ to $\v{r}_{2}$ is given by
 $$
@@ -36,7 +38,7 @@ V(\v{r}) &= - \int_{\infty}^{\v{r}} \v{E}(\v{r}') \cdot \dif \v{l}'
 \end{align}
 $$
 
-## Poisson's Equation  泊松方程
+### Poisson's Equation  泊松方程
 
 For a **charge distribution** $\rho(\v{r})$, the electric field $\v{E}$ and the electric potential $V$ are related by
 $$
@@ -57,6 +59,3 @@ Especially, at the point with zero charge density, the electric potential satisf
 > $$\nabla^2 V(\v{r}) = 0$$
 
 ^127adf
-
-
-

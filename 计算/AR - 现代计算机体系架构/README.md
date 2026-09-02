@@ -6,19 +6,22 @@ longform:
   sceneFolder: /
   scenes:
     - QUESTIONS
-    - Overview
-    - Evaluation of Computer
-    - MIPS Architecture
-    - Multiple Issue
-    - Memory
-    - - Cache
-      - Virtual Memory
-      - 存算一体
-      - Disk
-    - Interconnection
-    - 多处理器与缓存一致性
-    - GPU
-    - Cloud Computation
+    - 处理器组织与性能
+    - - Overview
+      - Evaluation of Computer
+      - MIPS Architecture
+      - Multiple Issue
+    - 存储与互连
+    - - Memory
+      - - Cache
+        - Virtual Memory
+        - 存算一体
+        - Disk
+      - Interconnection
+    - 并行与规模化系统
+    - - 多处理器与缓存一致性
+      - GPU
+      - Cloud Computation
   ignoredFiles: []
 ---
 ## 知识主线
@@ -39,14 +42,14 @@ longform:
 
 ## 重点结构
 
-### 处理器组织
+### [[处理器组织与性能]]
 
 + [[Overview|体系结构概览]]：从状态机、指令执行和并行层次建立全局视角。
 + [[Evaluation of Computer|性能评估]]：用执行时间、CPI、加速比、功耗和可靠性评价设计。
 + [[MIPS Architecture|MIPS 处理器]]：比较单周期、多周期与流水线数据通路及其控制。
 + [[Multiple Issue|多发射处理器]]：讨论 VLIW、超标量、动态调度和控制预测。
 
-### 存储与互连
+### [[存储与互连]]
 
 + [[Memory|存储器与存储层次]]：说明存储介质、局部性和层次化设计的共同规律。
     + [[Cache|缓存]]：地址映射、替换、写策略和平均访存时间。
@@ -55,7 +58,7 @@ longform:
     + [[Disk|磁盘与 RAID]]：外存访问时间、阵列组织与可靠性。
 + [[Interconnection|互连与 I/O]]：总线仲裁、同步方式、中断和 DMA。
 
-### 并行与规模化系统
+### [[并行与规模化系统]]
 
 + [[多处理器与缓存一致性]]：共享存储多处理器、侦听／目录协议、MESI 和内存一致性。
 + [[GPU|GPU 架构]]：SIMT 执行、线程层次、访存合并和占用率。

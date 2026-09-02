@@ -1,4 +1,6 @@
-## BLUE的含义
+## 知识框架
+
+### BLUE的含义
 
 > [!definition] 最佳线性无偏估计 (BLUE)
 > **最佳线性无偏估计 (best linear unbiased estimation, BLUE)** 是指在所有**线性无偏估计量**中，具有最小方差的估计量。
@@ -15,7 +17,7 @@
     $$
     其中 $\boldsymbol{C}$ 是观测数据 $\v{x}$ 的协方差矩阵，即要求 $\v{a}$ 使 **$\v{a}^{\mathrm{T}} \boldsymbol{C} \v{a}$ 最小**。
 
-## BLUE的求解
+### BLUE的求解
 
 综上，BLUE的求解问题可以转化为**约束优化问题**
 $$
@@ -44,7 +46,7 @@ $$
 \mathrm{var} (\hat{\theta}) = \v{a}_{\mathrm{opt}}^{\mathrm{T}} \boldsymbol{C} \v{a}_{\mathrm{opt}} = \frac{1}{\v{s}^{\mathrm{T}} \boldsymbol{C}^{-1} \v{s}}
 $$
 
-## 矢量参数BLUE
+### 矢量参数BLUE
 
 将上述结果推广到矢量参数 $\v{\theta}$ 的情况，限定每个估计量与观测数据呈线性关系
 $$
@@ -78,4 +80,3 @@ $$
 > 
 
 特别地，若 $\v{w}$ 为Gauss噪声，则上述 **BLUE估计量也是 $\v{\theta}$ 的MVU估计量**。
-

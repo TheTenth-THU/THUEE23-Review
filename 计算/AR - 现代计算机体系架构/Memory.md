@@ -51,16 +51,16 @@
 一次访问的平均代价可抽象为
 
 $$
-\mark{\text{AMAT} = \text{Hit time} + \text{Miss rate} \times \text{Miss penalty}}
+\mark{\mathrm{AMAT} = \text{Hit time} + \text{Miss rate} \times \text{Miss penalty}}
 $$
 
 多级缓存则逐级展开。例如两级缓存的平均访存时间为
 
 $$
-\text{AMAT} = T_{L1} + m_{L1}\left(T_{L2} + m_{L2}T_{\mathrm{mem}}\right)
+\mathrm{AMAT} = T_{\mathrm{L1}} + m_{\mathrm{L1}}\left(T_{\mathrm{L2}} + m_{\mathrm{L2}}T_{\mathrm{mem}}\right)
 $$
 
-其中 $m_{L1}$ 和 $m_{L2}$ 分别为对应层次的局部缺失率。
+其中 $m_{\mathrm{L1}}$ 和 $m_{\mathrm{L2}}$ 分别为对应层次的局部缺失率。
 
 ## 存储系统导航
 

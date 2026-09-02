@@ -1,4 +1,6 @@
-## Introduction of Magnetic Vector Potential, 磁矢势的引入
+## 知识框架
+
+### Introduction of Magnetic Vector Potential, 磁矢势的引入
 
 Noticing for volume current distribution, 
 $$
@@ -34,7 +36,7 @@ $$
 > Therefore,
 > $$\v{A}(\v{r}) = \dfrac{\mu_{0}}{4\pi} \int_{V} \dfrac{\v{K}(\v{r}')}{\sr } \dif a' = \dfrac{\mu_{0}}{4\pi} \int_{S} \dfrac{\sigma \v{\omega} \times \v{r}'}{\sr } \dif a' = \dfrac{\mu_{0} \sigma \v{\omega} }{4\pi} \times \int_{S} \dfrac{\v{r}'}{\sr } \dif a'$$
 
-## Typical Distributions of Magnetic Vector Potential, 磁矢势的典型分布
+### Typical Distributions of Magnetic Vector Potential, 磁矢势的典型分布
 
 The relationship between $\v{A}$ and $\v{B}$ **mirrors that between $\v{B}$ and $\v{J}$**.
 
@@ -71,7 +73,7 @@ The relationship between $\v{A}$ and $\v{B}$ **mirrors that between $\v{B}$ and 
 > \end{document}
 > ```
 
-## The Aharonov-Bohm Effect, A-B 效应
+### The Aharonov-Bohm Effect, A-B 效应
 
 In the original _Young's double-slit experiment_, the **first dark fringe, 第 1 暗纹**, occurs at
 $$

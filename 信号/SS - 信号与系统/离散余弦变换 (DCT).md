@@ -1,4 +1,6 @@
-## 一维离散余弦变换
+## 知识框架
+
+### 一维离散余弦变换
 
 > [!definition] 离散余弦变换 (DCT)
 > 矢量 $\v{x} = \begin{pmatrix} x_{0} \\ x_{1} \\ \cdots \\ x_{N-1} \end{pmatrix}$ 的**离散余弦变换 (DCT)** 定义为 $\v{y} = \begin{pmatrix} y_{0} \\ y_{1} \\ \cdots \\ y_{N-1} \end{pmatrix}$，其中
@@ -27,7 +29,7 @@ $$
 \end{pmatrix}
 $$
 
-## 二维离散余弦变换
+### 二维离散余弦变换
 
 > [!definition] 二维离散余弦变换 (2D-DCT)
 > **二维离散余弦变换 (2D-DCT)** 是对二维矩阵 $\boldsymbol{X}$ 的每一行和每一列分别进行一维离散余弦变换 (DCT)，即得到
@@ -42,4 +44,3 @@ $$
 > $$
 > \boldsymbol{D}_{\mathrm{II},i,j}(m,n) = \boldsymbol{D}_{N,i,m} \boldsymbol{D}_{M,j,n}
 > $$
-

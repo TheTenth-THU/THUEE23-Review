@@ -49,7 +49,7 @@ $$
 对单级缓存，平均访存时间为
 
 $$
-\text{AMAT}=T_{\mathrm{hit}}+r_{\mathrm{miss}}P_{\mathrm{miss}}
+\mathrm{AMAT}=T_{\mathrm{hit}}+r_{\mathrm{miss}}P_{\mathrm{miss}}
 $$
 
 若一次缺失额外产生 $N$ 个停顿周期，则缓存导致的平均 CPI 增量可近似写成
